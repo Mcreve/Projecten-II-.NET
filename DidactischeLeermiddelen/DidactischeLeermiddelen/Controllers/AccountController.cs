@@ -168,16 +168,17 @@ namespace DidactischeLeermiddelen.Controllers
                 };
                 var role = user.GetRole(user.Email);
 
+                if (role == null)
+                {
+                    ModelState.AddModelError("Email", "Enkel e-mail adressen van HoGent zijn toegelaten.");
+                    return View(model);
+                }
 
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    //Assign user to role customer
-                    if (role != null)
-                    {
-                        await UserManager.AddToRoleAsync(user.Id, role);
-                    }
+                    await UserManager.AddToRoleAsync(user.Id, role);
                     //Creation of customer
                     var c = new Customer
                     {
