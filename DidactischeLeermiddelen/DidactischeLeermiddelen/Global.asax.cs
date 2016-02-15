@@ -8,7 +8,6 @@ using System.Web.Routing;
 using DidactischeLeermiddelen.Infrastructure;
 using DidactischeLeermiddelen.Models.DAL;
 using DidactischeLeermiddelen.Models.Domain;
-using DidactischeLeermiddelen.Models.Domain.Users;
 
 namespace DidactischeLeermiddelen
 {

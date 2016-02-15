@@ -1,10 +1,13 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Data.Entity;
+using System.Diagnostics;
+using System.Security.Claims;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace DidactischeLeermiddelen.Models.Domain.Users
+namespace DidactischeLeermiddelen.Models.Domain
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser

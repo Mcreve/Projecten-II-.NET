@@ -7,8 +7,6 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using DidactischeLeermiddelen.Models.Domain;
-using DidactischeLeermiddelen.Models.Domain.Products;
-using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DidactischeLeermiddelen.Models.DAL
@@ -24,9 +22,6 @@ namespace DidactischeLeermiddelen.Models.DAL
 
         #region Properties | DbSets
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<ProductGroup> ProductGroups { get; set; }
-        public DbSet<Product> Products { get; set; }
 
         #endregion
 

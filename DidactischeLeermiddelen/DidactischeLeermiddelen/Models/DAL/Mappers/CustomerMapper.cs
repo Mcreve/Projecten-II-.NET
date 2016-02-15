@@ -1,6 +1,5 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using DidactischeLeermiddelen.Models.Domain;
-using DidactischeLeermiddelen.Models.Domain.Users;
 
 namespace DidactischeLeermiddelen.Models.DAL.Mappers
 {
@@ -12,13 +11,10 @@ namespace DidactischeLeermiddelen.Models.DAL.Mappers
         #region Constructor
         public CustomerMapper()
         {
-            ToTable("Customer");
-            HasKey(customer => customer.CustomerId);
-
             Property(c => c.Name).IsRequired().HasMaxLength(100);
             Property(c => c.FirstName).IsRequired().HasMaxLength(100);
             Property(c => c.Email).IsRequired().HasMaxLength(100);
-
+            ToTable("Customer");
         } 
         #endregion
     }

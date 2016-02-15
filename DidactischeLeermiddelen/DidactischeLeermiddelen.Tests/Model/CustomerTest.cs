@@ -1,6 +1,5 @@
 ﻿using System;
 using DidactischeLeermiddelen.Models.Domain;
-using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DidactischeLeermiddelen.Tests.Model

@@ -4,7 +4,6 @@ using System.Web;
 using System.Web.Mvc;
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.Interfaces;
-using DidactischeLeermiddelen.Models.Domain.Users;
 using DidactischeLeermiddelen.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
