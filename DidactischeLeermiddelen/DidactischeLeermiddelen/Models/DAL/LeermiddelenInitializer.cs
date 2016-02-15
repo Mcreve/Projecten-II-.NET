@@ -71,13 +71,6 @@ namespace DidactischeLeermiddelen.Models.DAL
             };
             customers.Add(customer);
 
-            customer = new Customer
-            {
-                Name = "Tisch",
-                FirstName = "Zoe",
-                Email = "Zoe.Tisch@student.hoent.be",
-            };
-            customers.Add(customer);
 
             customer = new Customer
             {
@@ -103,27 +96,12 @@ namespace DidactischeLeermiddelen.Models.DAL
             };
             customers.Add(customer);
 
-            customer = new Customer
-            {
-                Name = "Augustus",
-                FirstName = "Hisako",
-                Email = "Hisako.Augustus@GMAIL.com",
-            };
-            customers.Add(customer);
 
             customer = new Customer
             {
                 Name = "Voegele",
                 FirstName = "Zack",
                 Email = "Zack.Voegele@student.Hogent.be",
-            };
-            customers.Add(customer);
-
-            customer = new Customer
-            {
-                Name = "Bennefield",
-                FirstName = "Ramon",
-                Email = "Ramon.Bennefield@Gmail.com",
             };
             customers.Add(customer);
 

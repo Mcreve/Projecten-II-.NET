@@ -193,7 +193,7 @@
     <Compile Include="Infrastructure\CustomerModelBinder.cs" />
     <Compile Include="Models\DAL\LeermiddelenContext.cs" />
     <Compile Include="Models\DAL\LeermiddelenInitializer.cs" />
-    <Compile Include="Models\DAL\Mapper\CustomerMapper.cs" />
+    <Compile Include="Models\DAL\Mappers\CustomerMapper.cs" />
     <Compile Include="Models\DAL\Repositories\CustomerRepository.cs" />
     <Compile Include="Models\Domain\Customer.cs" />
     <Compile Include="Models\Domain\Interfaces\ICustomerRepository.cs" />
