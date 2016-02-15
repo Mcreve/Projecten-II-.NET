@@ -1,0 +1,34 @@
+﻿@using DidactischeLeermiddelen.ViewModels
+@model IEnumerable<ProductGroupViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Leermiddelen catalogus</h2>
+@foreach (ProductGroupViewModel productGroup in Model)
+{
+
+        <div class="product" style="overflow:hidden;">
+            <img src="/Content/Images/placeholder.gif" alt="productphoto" class="img-rounded pull-left" />
+            <h3>
+                <strong>@Html.DisplayFor(b => productGroup.Name)</strong>
+                <span class="col-md-2 control-label"><strong>@Html.DisplayFor(b => productGroup.Price)</strong></span>
+            </h3>
+            @using (Html.BeginForm("AddToCart", "Cart", new { id = productGroup.ProductGroupId }))
+                {
+                    <div class="form-group pull-left">
+                        @Html.DisplayFor(b => productGroup.Description)
+
+                    </div>
+                <div class="form-group pull-right">
+                    <input type="number" name="quantity" value="1" min="1" class=""form-control" />
+                    <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-shopping-cart"></span> In het mandje
+                    </button>
+                </div>
+            }
+
+        </div>
+
+}

@@ -1,0 +1,43 @@
+﻿@using DidactischeLeermiddelen.ViewModels
+@model IEnumerable<ProductGroupViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Leermiddelen catalogus</h2>
+<div id="search-form">
+    @Html.Action("Search", "Catalog")
+</div>
+<div id="search-results">
+            @foreach (ProductGroupViewModel productGroup in Model)
+            {
+
+                    <div class="col-md-4 product" style="overflow:hidden;">>
+                        <h4>
+                            <strong class="pull-left">@Html.DisplayFor(prop => productGroup.Name)</strong><br/>
+                            <img src="/Content/Images/placeholder.gif" alt="productphoto" class="img-rounded pull-left" />
+                        </h4>
+                        <p>
+                            @Html.DisplayFor(prop => productGroup.Description)
+                        </p>
+                        <h4><strong class="pull-right">@Html.DisplayFor(b => productGroup.Price)</strong><br /></h4>
+                        
+                            <div class="form-group pull-right">
+
+                            <button type="submit" class="btn btn-default">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> In het mandje
+                            </button>
+                            <div class="form-group pull-left">
+                                <input type="number" name="quantity" value="1" class="form-control" style="width: 3em"/>
+                            </div>
+                            <input type="number" name="quantity" value=@Html.DisplayFor(b => productGroup.Amount) class="form-control pull-left" style="width: 3em" disabled="disabled" />
+
+                            </div>
+                    </div>
+                }
+</div>
+<div class="clearfix"></div>
+
+
+

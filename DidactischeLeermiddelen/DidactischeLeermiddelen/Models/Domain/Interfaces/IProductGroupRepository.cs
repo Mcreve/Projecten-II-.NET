@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.UI.WebControls.Expressions;
 using DidactischeLeermiddelen.Models.Domain.Products;
 
 namespace DidactischeLeermiddelen.Models.Domain.Interfaces
@@ -10,5 +12,8 @@ namespace DidactischeLeermiddelen.Models.Domain.Interfaces
         void Add(ProductGroup productGroup);
         void Delete(ProductGroup productGroup);
         void SaveChanges();
+        List<ProductGroup> Search(string query);
+
+
     }
 }

@@ -66,7 +66,10 @@ namespace DidactischeLeermiddelen.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<ICustomerRepository>().To<CustomerRepository>().InRequestScope();
+            kernel.Bind<IProductGroupRepository>().To<ProductGroupRepository>().InRequestScope();
+
             kernel.Bind<LeermiddelenContext>().ToSelf().InRequestScope();
+
         }        
     }
 }

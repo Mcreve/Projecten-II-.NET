@@ -1,0 +1,13 @@
+﻿@using (Ajax.BeginForm("Index", "Catalog", FormMethod.Post,
+                            new AjaxOptions
+                            {
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "POST",
+                                UpdateTargetId = "search-results"
+                            }))
+{
+    <div>
+        @Html.TextBox("query")
+        <input type="submit" value="Search" class="btn btn-default"  />
+    </div>
+}

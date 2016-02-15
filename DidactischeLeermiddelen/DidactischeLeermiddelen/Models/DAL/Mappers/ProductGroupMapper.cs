@@ -17,7 +17,7 @@ namespace DidactischeLeermiddelen.Models.DAL.Mappers
             Property(productGroup => productGroup.Name).IsRequired()
                                                        .HasMaxLength(100);
             Property(productGroup => productGroup.Loanable).IsRequired();
-            Property(productGroup => productGroup.Description).HasMaxLength(1000);
+            Property(productGroup => productGroup.Description).HasMaxLength(200);
 
 
 
