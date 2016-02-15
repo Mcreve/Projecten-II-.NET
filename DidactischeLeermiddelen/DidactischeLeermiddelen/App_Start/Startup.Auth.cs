@@ -8,6 +8,7 @@ using Owin;
 using DidactischeLeermiddelen.Models;
 using DidactischeLeermiddelen.Models.DAL;
 using DidactischeLeermiddelen.Models.Domain;
+using DidactischeLeermiddelen.Models.Domain.Users;
 
 namespace DidactischeLeermiddelen
 {
