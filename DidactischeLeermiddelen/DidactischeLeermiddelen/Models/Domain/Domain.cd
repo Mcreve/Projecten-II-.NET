@@ -17,7 +17,7 @@
   <Class Name="DidactischeLeermiddelen.Models.Domain.Products.Category">
     <Position X="3.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAgAAAAAAAAQAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAQAAAAAAgAAAIAAAAQAAAAAAgAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Products\Category.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -25,36 +25,35 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.Products.Product">
-    <Position X="3.75" Y="5.5" Width="1.5" />
+    <Position X="3.75" Y="6.5" Width="1.5" />
     <AssociationLine Name="ProductGroup" Type="DidactischeLeermiddelen.Models.Domain.Products.ProductGroup">
       <MemberNameLabel ManuallyPlaced="true">
         <Position X="-1.182" Y="0.425" />
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>EAAAAAAAAAQAAAAAAAIBAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>EAAAAAAAAAQAAAAAgAIBAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Products\Product.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Availability" />
       <Property Name="Location" />
       <Property Name="ProductGroup" />
     </ShowAsAssociation>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.Products.ProductGroup">
-    <Position X="3.75" Y="2.75" Width="1.5" />
-    <AssociationLine Name="Products" Type="DidactischeLeermiddelen.Models.Domain.Products.Product">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="0.068" Y="0.247" />
-      </MemberNameLabel>
-    </AssociationLine>
+    <Position X="3.75" Y="3" Width="1.5" />
     <AssociationLine Name="Category" Type="DidactischeLeermiddelen.Models.Domain.Products.Category">
       <MemberNameLabel ManuallyPlaced="true">
         <Position X="-0.869" Y="0.404" />
       </MemberNameLabel>
     </AssociationLine>
+    <AssociationLine Name="Products" Type="DidactischeLeermiddelen.Models.Domain.Products.Product">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.068" Y="0.247" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAQAgACAAAAAAAAQAAAAAAAAAAAACAAAACAQ=</HashCode>
+      <HashCode>AAAAAIAAAQAgACAAgAAAQASAAAAAAIAAAAACAAAACAQ=</HashCode>
       <FileName>Models\Domain\Products\ProductGroup.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -68,28 +67,25 @@
   <Class Name="DidactischeLeermiddelen.Models.Domain.Locations.Location">
     <Position X="6.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAAAAAAAAAAAIAAAAAAwAAEAAAAAAAAIAAAAAAAA=</HashCode>
+      <HashCode>AAAIAAAACEAAAAAIAAAACAQAAEAEAgBJAAIBAAAAAAA=</HashCode>
       <FileName>Models\Domain\Locations\Location.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="City" />
     </ShowAsAssociation>
-    <ShowAsCollectionAssociation>
-      <Property Name="Classroom" />
-    </ShowAsCollectionAssociation>
-  </Class>
-  <Class Name="DidactischeLeermiddelen.Models.Domain.Locations.Classroom">
-    <Position X="8.75" Y="6.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAEAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Domain\Locations\Classroom.cs</FileName>
-    </TypeIdentifier>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.Locations.City">
-    <Position X="8.75" Y="4.5" Width="1.5" />
+    <Position X="8.75" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAIAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAACAAAAAAAIAAAACQAAAAEAAABAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Locations\City.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.Locations.Classroom">
+    <Position X="8.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAEAAAQAAAAEAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\Locations\Classroom.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="DidactischeLeermiddelen.Models.Domain.Enums.Availability">

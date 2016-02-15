@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using DidactischeLeermiddelen.Models.Domain;
+using DidactischeLeermiddelen.Models.Domain.Enums;
+using DidactischeLeermiddelen.Models.Domain.Locations;
+using DidactischeLeermiddelen.Models.Domain.Products;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,12 +18,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         /// Email       :  'Cody.Didonato@HoGent.Be'
         /// </summary>
         public Customer Didonato { get; private set; }
-        /// <summary>
-        /// Name        :  'Tisch'
-        /// Firstname   :  'Zoe'
-        /// Email       :  'Zoe.Tisch@student.hognt.be'
-        /// </summary>
-        public Customer Tisch { get; private set; }
+  
         /// <summary>
         /// Name        :  'Fortenberry'
         /// Firstname   :  'Bailey'
@@ -40,69 +38,54 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         /// </summary>
         public Customer Piland { get; private set; }
         /// <summary>
-        /// Name        :  'Augustus'
-        /// Firstname   :  'String.empty'
-        /// Email       :  'Hisako.Augustus@Gmail.com'
-        /// </summary>
-        public Customer Augustus { get; private set; }
-        /// <summary>
         /// Name        :  'Voegele'
         /// Firstname   :  'Zack'
         /// Email       :  'Zack.Voegele@student.Hogent.be'
         /// </summary>
         public Customer Voegele { get; private set; }
         /// <summary>
-        /// Name        :  'NULL'
-        /// Firstname   :  'Ramon'
-        /// Email       :  'Ramon@Student.Hogent.be'
-        /// </summary>
-        public Customer Bennefield { get; private set; }
-        /// <summary>
-        /// Name        :  'Keirn'
-        /// Firstname   :  'Tu'
-        /// Email       :  'String.empty'
-        /// </summary>
-        public Customer Keirn { get; private set; }
-        /// <summary>
         /// Name        :  'Vertonghen'
         /// Firstname   :  'Benjamin'
         /// Email       :  'Benjamin.vertonghen@student.hogent.be'
         /// </summary>
         public Customer Vertonghen { get; private set; }
-        /// <summary>
-        /// Name        :  'De bruyn'
-        /// Firstname   :  'Helleni'
-        /// Email       :  'String.empty'
-        /// </summary>
-        public Customer DeBruyn { get; private set; }
-        /// <summary>
-        ///     Name        : 'String.empty'
-        ///  |  Firstname   : 'Kevin'
-        ///  |  Email       : 'Kevin@hogent.be'
-        /// </summary>
-        public Customer VanLeuven { get; private set; }
-        /// <summary>
-        ///     Name        : 'De Ridder'
-        ///  |  Firstname   : 'Ingrid'
-        ///  |  Email       : 'Ingrid.DeRidder@ogent.be'
-        /// </summary>
-        public Customer DeRidder { get; private set; }
+
+        public Product Product1 { get; set; }
+        public Product Product2 { get; set; }
+        public Product Product3 { get; set; }
+        public Product Product4 { get; set; }
+        public Location CampusSchoonmeersen { get; set; }
+        public Location CampusAalst { get; set; }
+        public City Gent { get; set; }
+        public City Aalst { get; set; }
+        public Category Category1 { get; set; }
+        public Category Category2 { get; set; }
+        public Category Category3 { get; set; }
+        public ProductGroup ProductGroup1 { get; set; }
+        public ProductGroup ProductGroup2 { get; set; }
+        public ProductGroup ProductGroup3 { get; set; }
+
         public DummyDataContext()
         {
-            
+            CreateCustomers();
+            CreateCities();
+            CreateLocations();
+            CreateProducts();
+            CreateProductGroups();
+            CreateCategories();
+
+
+        }
+
+        private void CreateCustomers()
+        {
             #region Creating a collection of customers
+
             Didonato = new Customer
             {
                 Name = "Didonato",
                 FirstName = "Cody",
                 Email = "Cody.Didonato@HoGent.Be",
-            };
-
-            Tisch = new Customer
-            {
-                Name = "Tisch",
-                FirstName = "Zoe",
-                Email = "Zoe.Tisch@student.hognt.be",
             };
 
             Fortenberry = new Customer
@@ -126,32 +109,12 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 Email = "Rusty.Piland@HOGENT.be",
             };
 
-            Augustus = new Customer
-            {
-                Name = "Augustus",
-                FirstName = string.Empty,
-                Email = "Hisako.Augustus@Gmail.com",
-            };
 
             Voegele = new Customer
             {
                 Name = "Voegele",
                 FirstName = "Zack",
                 Email = "Zack.Voegele@student.Hogent.be",
-            };
-
-            Bennefield = new Customer
-            {
-                Name = null,
-                FirstName = "Ramon",
-                Email = "Ramon@Student.Hogent.be",
-            };
-
-            Keirn = new Customer
-            {
-                Name = "Keirn",
-                FirstName = "Tu",
-                Email = string.Empty,
             };
 
             Vertonghen = new Customer
@@ -161,29 +124,58 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 Email = "benjamin.vertonghen@student.hogent.be",
             };
 
-            DeBruyn = new Customer
-            {
-                Name = "De Bruyn",
-                FirstName = "Helleni",
-                Email = null,
-            };
-
-            VanLeuven = new Customer
-            {
-                Name = string.Empty,
-                FirstName = "Kevin",
-                Email = "Kevin@hogent.be",
-            };
-
-            DeRidder = new Customer
-            {
-                Name = "De Ridder",
-                FirstName = "Ingrid",
-                Email = "Ingrid.DeRidder@ogent.be",
-            };
-
             #endregion
+        }
+        private void CreateCities()
+        {
+            Aalst = new City("Aalst","9300");
+            Gent = new City("Gent","9000");
+        }
+        private void CreateLocations()
+        {
+            CampusAalst = new Location("Campus Aalst","Nieuwstraat","3",Aalst);
+            CampusSchoonmeersen = new Location("Campus Schoonmeersen", "Groenstraat", "4563", Gent);
 
+
+
+        }
+        private void CreateProducts()
+        {
+            Product1 = new Product {Location = CampusAalst};
+            Product2 = new Product { Location = CampusSchoonmeersen,Availability = Availability.Blocked};
+            Product3 = new Product { Location = CampusSchoonmeersen, Availability = Availability.Reserved };
+            Product4 = new Product { Location = CampusAalst, Availability = Availability.Unavailable };
+        }
+
+        private void CreateProductGroups()
+        {
+            ProductGroup1 = new ProductGroup("Skelet Aap", "Een skelet van een Aap", 255M, Loanable.Loanable,
+                string.Empty);
+            ProductGroup1.AddProduct(Product1);
+            ProductGroup1.AddProduct(Product2);
+            
+            ProductGroup2 = new ProductGroup("Wereldkaart", "Een wereldkaart", 25.5M, Loanable.Loanable, string.Empty);
+            ProductGroup2.AddProduct(Product1);
+            ProductGroup2.AddProduct(Product1);
+            ProductGroup2.AddProduct(Product1);
+            ProductGroup2.AddProduct(Product1);
+            ProductGroup3 = new ProductGroup("Film van geschiedenis", "Een film over...", 25M, Loanable.UnLoanable,
+                string.Empty);
+            ProductGroup3.AddProduct(Product2);
+            ProductGroup3.AddProduct(Product4);
+            ProductGroup3.AddProduct(Product2);
+            ProductGroup3.AddProduct(Product1);
+        }
+        private void CreateCategories()
+        {
+            Category1 = new Category("Biologie");
+            Category1.AddProductGroup(ProductGroup1);
+
+            Category2 = new Category("Geografie");
+            Category2.AddProductGroup(ProductGroup2);
+            
+            Category3 = new Category("Geschiedenis");
+            Category3.AddProductGroup(ProductGroup3);
         }
     }
 }
