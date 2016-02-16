@@ -190,6 +190,7 @@ namespace DidactischeLeermiddelen.Controllers
                     CustomerRepository.Add(c);
                     CustomerRepository.SaveChanges();
                     await SignInManager.SignInAsync(user, false, false);
+
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
