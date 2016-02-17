@@ -5,13 +5,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
-using DidactischeLeermiddelen.Models.DAL;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using DidactischeLeermiddelen.Models.Domain;
+using DidactischeLeermiddelen.Models;
 
 namespace DidactischeLeermiddelen
 {
@@ -43,20 +42,19 @@ namespace DidactischeLeermiddelen
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<LeermiddelenContext>()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
-
             };
 
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-            //    RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = true,
                 RequireDigit = true,
                 RequireLowercase = true,
                 RequireUppercase = true,
@@ -87,22 +85,6 @@ namespace DidactischeLeermiddelen
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
-        }
-    }
-    public class ApplicationRoleManager : RoleManager<IdentityRole>, IDisposable
-    {
-        public ApplicationRoleManager(RoleStore<IdentityRole> store)
-            : base(store)
-        {
-        }
-
-
-        public static ApplicationRoleManager Create(
-        IdentityFactoryOptions<ApplicationRoleManager> options,
-        IOwinContext context)
-        {
-            return new ApplicationRoleManager(new
-            RoleStore<IdentityRole>(context.Get<LeermiddelenContext>()));
         }
     }
 

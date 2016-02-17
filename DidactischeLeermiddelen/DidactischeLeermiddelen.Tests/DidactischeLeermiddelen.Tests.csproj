@@ -104,9 +104,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\DummyDataContext.cs" />
-    <Compile Include="Model\ApplicationUserTest.cs" />
-    <Compile Include="Model\CustomerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
@@ -121,6 +118,9 @@
       <Project>{6CD5BF23-EDBF-4F7F-A897-D979F6F93C45}</Project>
       <Name>DidactischeLeermiddelen</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
