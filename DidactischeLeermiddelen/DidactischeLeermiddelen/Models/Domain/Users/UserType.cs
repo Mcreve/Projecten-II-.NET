@@ -7,7 +7,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 {
     public enum UserType
     {
-        Student = 0,
-        Lector = 1
+        Student,
+        Lector
     }
 }

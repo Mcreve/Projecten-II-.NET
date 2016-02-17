@@ -16,7 +16,9 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
                 case UserType.Lector:
                     return new Lector();
                 default:
-                    return null;
+                    throw new IndexOutOfRangeException("Class: UserFactory \n" +
+                                                       "Function: CreateUser \n " + 
+                                                       "Error: Parameter is not a type of the UserType Enum" );
             }
         }
     }
