@@ -1,2 +1,163 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DidactischeLeermiddelen.Models.Domain.Wishlist">
+    <Position X="1.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\Wishlist.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="WishlistLines" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.WishlistLine">
+    <Position X="1.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\Domain\WishlistLine.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LearningUtility" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.Location" Collapsed="true">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\LearningUtilities\Location.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityDetails">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACgAAAAQAgAAAAAAIAAAQAAAAAAAAAAAACAAAACAA=</HashCode>
+      <FileName>Models\Domain\LearningUtilities\LearningUtilityDetails.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Location" />
+      <Property Name="Category" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="LearningUtilities" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.Category" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\LearningUtilities\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Unavailable" Collapsed="true">
+    <Position X="8.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\Unavailable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.StateFactory">
+    <Position X="7" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\StateFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.LearningUtilityState">
+    <Position X="12.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAQAAAAABAAAAAAAAAAAAAABAQAAQACAAAAAAA=</HashCode>
+      <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\LearningUtilityState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Available" Collapsed="true">
+    <Position X="10" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAABAAAAAACAAAAAAA=</HashCode>
+      <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\Available.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Blocked" Collapsed="true">
+    <Position X="13.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\Blocked.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.HandedOut" Collapsed="true">
+    <Position X="6.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAQAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\HandedOut.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Late" Collapsed="true">
+    <Position X="11.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\Late.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.LearningUtility">
+    <Position X="10.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAQAAAAAAAAIAIAAAAAAAAABAQAAQACAAAAAAA=</HashCode>
+      <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\LearningUtility.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="currentState" />
+      <Property Name="LendTo" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.Users.Lector" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAgAAAAg=</HashCode>
+      <FileName>Models\Domain\Users\Lector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.Users.Student" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAgAAAAg=</HashCode>
+      <FileName>Models\Domain\Users\Student.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.Users.UserFactory">
+    <Position X="4.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\Users\UserFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Reserved" Collapsed="true">
+    <Position X="15.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\Reserved.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="DidactischeLeermiddelen.Models.Domain.Users.IUser">
+    <Position X="1.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAgAAAAg=</HashCode>
+      <FileName>Models\Domain\Users\IUser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.StateType">
+    <Position X="8.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAABAAABAAAAAAAAAAQQAAAACAAA=</HashCode>
+      <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\StateType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DidactischeLeermiddelen.Models.Domain.Users.UserType">
+    <Position X="4.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\Users\UserType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

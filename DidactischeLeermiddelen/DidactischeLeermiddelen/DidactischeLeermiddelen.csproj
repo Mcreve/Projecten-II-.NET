@@ -173,8 +173,28 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Domain\LearningUtilities\Category.cs" />
+    <Compile Include="Models\Domain\LearningUtilities\LearningUtilityDetails.cs" />
+    <Compile Include="Models\Domain\LearningUtilities\LearningUtilityStates\Available.cs" />
+    <Compile Include="Models\Domain\LearningUtilities\LearningUtilityStates\Blocked.cs" />
+    <Compile Include="Models\Domain\LearningUtilities\LearningUtilityStates\HandedOut.cs" />
+    <Compile Include="Models\Domain\LearningUtilities\LearningUtilityStates\Late.cs" />
+    <Compile Include="Models\Domain\LearningUtilities\LearningUtilityStates\LearningUtility.cs" />
     <Compile Include="Models\DAL\LeermiddelenContext.cs" />
     <Compile Include="Models\DAL\LeermiddelenInitializer.cs" />
+    <Compile Include="Models\Domain\LearningUtilities\LearningUtilityStates\LearningUtilityState.cs" />
+    <Compile Include="Models\Domain\LearningUtilities\LearningUtilityStates\Reserved.cs" />
+    <Compile Include="Models\Domain\LearningUtilities\LearningUtilityStates\StateFactory.cs" />
+    <Compile Include="Models\Domain\LearningUtilities\LearningUtilityStates\StateType.cs" />
+    <Compile Include="Models\Domain\LearningUtilities\LearningUtilityStates\Unavailable.cs" />
+    <Compile Include="Models\Domain\LearningUtilities\Location.cs" />
+    <Compile Include="Models\Domain\Users\IUser.cs" />
+    <Compile Include="Models\Domain\Users\Lector.cs" />
+    <Compile Include="Models\Domain\Users\Student.cs" />
+    <Compile Include="Models\Domain\Users\UserFactory.cs" />
+    <Compile Include="Models\Domain\Users\UserType.cs" />
+    <Compile Include="Models\Domain\Wishlist.cs" />
+    <Compile Include="Models\Domain\WishlistLine.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
