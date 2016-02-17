@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.Interfaces;
 using DidactischeLeermiddelen.Models.Domain.Products;
@@ -40,15 +39,6 @@ namespace DidactischeLeermiddelen.Models.DAL.Repositories
         public void SaveChanges()
         {
             this.context.SaveChanges();
-        }
-
-        public List<ProductGroup> Search(string query)
-        {
-            List<ProductGroup> resultName =
-             productGroups.Where(prod => prod.Name.Contains(query)).ToList();
-            List<ProductGroup> resultDescription = productGroups.Where(prod => prod.Description.Contains(query)).ToList();
-            resultName.AddRange(resultDescription);
-            return resultName;
         }
     }
 }
