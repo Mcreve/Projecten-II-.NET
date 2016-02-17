@@ -33,7 +33,7 @@ namespace DidactischeLeermiddelen.ViewModels
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Herinner deze browser?")]
+        [Display(Name = "Remember this browser?")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
@@ -55,10 +55,10 @@ namespace DidactischeLeermiddelen.ViewModels
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Wachtwoord")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Herinner me?")]
+        [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
 
@@ -98,14 +98,14 @@ namespace DidactischeLeermiddelen.ViewModels
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Het {0} moet minimum {2} karakters lang zijn.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "wachtwoord")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Bevestig wachtwoord")]
-        [Compare("Password", ErrorMessage = "Het wachtwoord en de bevestiging komen niet overeen.")]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

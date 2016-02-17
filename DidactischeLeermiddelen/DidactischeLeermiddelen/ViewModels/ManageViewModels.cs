@@ -28,14 +28,14 @@ namespace DidactischeLeermiddelen.ViewModels
     public class SetPasswordViewModel
     {
         [Required]
-        [StringLength(100, ErrorMessage = "Het {0} moet minstens {2} karakters lang zijn.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Nieuw wachtwoord")]
+        [Display(Name = "New password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Bevestig wachtwoord")]
-        [Compare("NewPassword", ErrorMessage = "Het wachtwoord en de bevestiging komen niet overeen.")]
+        [Display(Name = "Confirm new password")]
+        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -43,18 +43,18 @@ namespace DidactischeLeermiddelen.ViewModels
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Huidig wachtwoord")]
+        [Display(Name = "Current password")]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Het {0} moet minstens {2} karakters lang zijn.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Nieuw wachtwoord")]
+        [Display(Name = "New password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Bevestig wachtwoord")]
-        [Compare("NewPassword", ErrorMessage = "Het wachtwoord en de bevestiging komen niet overeen.")]
+        [Display(Name = "Confirm new password")]
+        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -62,7 +62,7 @@ namespace DidactischeLeermiddelen.ViewModels
     {
         [Required]
         [Phone]
-        [Display(Name = "Telefoon Nummer")]
+        [Display(Name = "Phone Number")]
         public string Number { get; set; }
     }
 
@@ -74,7 +74,7 @@ namespace DidactischeLeermiddelen.ViewModels
 
         [Required]
         [Phone]
-        [Display(Name = "Telefoon Number")]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
     }
 
