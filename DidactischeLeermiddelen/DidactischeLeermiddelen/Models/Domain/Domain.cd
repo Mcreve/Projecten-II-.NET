@@ -20,7 +20,7 @@
       <Property Name="LearningUtility" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.Location" Collapsed="true">
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.Location">
     <Position X="7.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -34,21 +34,21 @@
       <FileName>Models\Domain\LearningUtilities\LearningUtilityDetails.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Location" />
       <Property Name="Category" />
+      <Property Name="Location" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="LearningUtilities" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.Category" Collapsed="true">
-    <Position X="7.25" Y="1.75" Width="1.5" />
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.Category">
+    <Position X="7.25" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\Category.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Unavailable" Collapsed="true">
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Unavailable">
     <Position X="8.25" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
@@ -69,28 +69,28 @@
       <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\LearningUtilityState.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Available" Collapsed="true">
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Available">
     <Position X="10" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAABAAAAAACAAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\Available.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Blocked" Collapsed="true">
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Blocked">
     <Position X="13.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\Blocked.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.HandedOut" Collapsed="true">
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.HandedOut">
     <Position X="6.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAQAAQAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\HandedOut.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Late" Collapsed="true">
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Late">
     <Position X="11.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAQAAAAAAAAAAAA=</HashCode>
@@ -131,7 +131,7 @@
       <FileName>Models\Domain\Users\UserFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Reserved" Collapsed="true">
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Reserved">
     <Position X="15.25" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
