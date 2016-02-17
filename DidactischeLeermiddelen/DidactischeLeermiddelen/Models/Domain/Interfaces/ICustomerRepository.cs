@@ -1,13 +1,8 @@
-﻿using System.Linq;
-using DidactischeLeermiddelen.Models.Domain.Users;
-
-namespace DidactischeLeermiddelen.Models.Domain.Interfaces
+﻿namespace DidactischeLeermiddelen.Models.Domain.Interfaces
 {
     public interface ICustomerRepository
     {
-        Customer FindById(string id);
-        Customer FindByEmail(string email);
-        IQueryable<Customer> FindAll();
+        Customer FindBy(string customerName);
         void SaveChanges();
         void Add(Customer customer);
     }
