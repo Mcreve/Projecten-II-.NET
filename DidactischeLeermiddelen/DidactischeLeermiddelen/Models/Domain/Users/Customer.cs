@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 namespace DidactischeLeermiddelen.Models.Domain.Users
@@ -15,7 +14,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 
         #region Properties
         public int CustomerId { get; set; }
-        [Display(Name = "E-mail")]
         public string Email
         {
             get { return email; }
@@ -27,8 +25,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
                 email = value.ToLower();
             }
         }
-        [Display(Name = "Naam")]
-
         public string Name
         { get { return name; }
             set
@@ -38,8 +34,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
                 name = value.ToLower();
             }
         }
-        [Display(Name = "Voornaam")]
-
         public string FirstName {
             get { return firstName; }
             set

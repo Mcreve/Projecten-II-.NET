@@ -107,11 +107,6 @@
     <Compile Include="Controllers\DummyDataContext.cs" />
     <Compile Include="Model\ApplicationUserTest.cs" />
     <Compile Include="Model\CustomerTest.cs" />
-    <Compile Include="Model\CategoryTest.cs" />
-    <Compile Include="Model\CityTest.cs" />
-    <Compile Include="Model\LocationTest.cs" />
-    <Compile Include="Model\ClassroomTest.cs" />
-    <Compile Include="Model\ProductTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>

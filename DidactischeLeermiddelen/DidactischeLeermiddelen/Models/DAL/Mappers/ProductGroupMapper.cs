@@ -19,8 +19,6 @@ namespace DidactischeLeermiddelen.Models.DAL.Mappers
             Property(productGroup => productGroup.Loanable).IsRequired();
             Property(productGroup => productGroup.Description).HasMaxLength(1000);
 
-
-
         }
         #endregion
     }

@@ -13,12 +13,11 @@ namespace DidactischeLeermiddelen.Models.DAL.Mappers
                                             .WithMany()
                                             .Map(m => m.MapKey("PostalCode"))
                                             .WillCascadeOnDelete(false);
-    /*        HasRequired(location => location)
+            HasRequired(location => location.Classroom)
                                             .WithMany()
                                             .Map(m => m.MapKey("ClassroomId"))
                                             .WillCascadeOnDelete(false);
-            Property(loc => loc.HouseNumber).HasMaxLength(5);
-            */
+
         }
         #endregion
     }
