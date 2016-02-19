@@ -14,6 +14,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         string FirstName { get; set; }
         string LastName { get; set; }
         string EmailAddress { get; set; }
-        IList<LearningUtilityDetails> GetLearningUtilities();
+        IList<LearningUtilityDetails> GetLearningUtilities(ILearningUtilityDetailsRepository learningUtilityDetailsRepository);
     }
 }

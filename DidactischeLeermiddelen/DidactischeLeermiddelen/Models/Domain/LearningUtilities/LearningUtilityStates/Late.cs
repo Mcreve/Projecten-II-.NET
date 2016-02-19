@@ -5,18 +5,9 @@ using System.Web;
 
 namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates
 {
-    internal class Late : LearningUtilityState
+    public class Late : LearningUtilityState
     {
-        internal Late(LearningUtility learningUtility) : base(learningUtility) { }
+        public Late(LearningUtility learningUtility) : base(learningUtility) { }
 
-        internal override void MakeAvailable()
-        {
-            base.LearningUtility.ToState(StateFactory.CreateState(StateType.Available, base.LearningUtility));
-        }
-
-        internal override void MakeUnavailable()
-        {
-            base.LearningUtility.ToState(StateFactory.CreateState(StateType.Unavailable, base.LearningUtility));
-        }
     }
 }

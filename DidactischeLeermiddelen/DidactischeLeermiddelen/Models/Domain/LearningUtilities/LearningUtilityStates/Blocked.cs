@@ -5,16 +5,11 @@ using System.Web;
 
 namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates
 {
-    internal class Blocked : LearningUtilityState
+    public class Blocked : LearningUtilityState
     {
-        internal Blocked(LearningUtility learningUtility) : base(learningUtility) { }
+        public Blocked(LearningUtility learningUtility) : base(learningUtility) { }
 
-        internal override void HandOut()
-        {
-            base.LearningUtility.ToState(StateFactory.CreateState(StateType.HandedOut, base.LearningUtility));
-        }
-
-        internal override void MakeAvailable()
+        public override void MakeAvailable()
         {
             base.LearningUtility.ToState(StateFactory.CreateState(StateType.Available, base.LearningUtility));
         }

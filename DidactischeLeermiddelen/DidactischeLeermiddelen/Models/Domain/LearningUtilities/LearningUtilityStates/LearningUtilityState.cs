@@ -2,46 +2,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using DidactischeLeermiddelen.Models.Domain.Users;
 
 namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates
 {
-    internal class LearningUtilityState
+    public class LearningUtilityState
     {
         protected LearningUtility LearningUtility { get; set; }
 
-        internal LearningUtilityState(LearningUtility learningUtility)
+        public LearningUtilityState(LearningUtility learningUtility)
         {
             this.LearningUtility = learningUtility;
         }
 
-        internal virtual void Reserve()
+        public virtual void Reserve(IUser user)
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException();
         }
 
-        internal virtual void Block()
+        public virtual void Block(IUser user)
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException();
         }
 
-        internal virtual void HandOut()
+        public virtual void Late()
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException();
         }
 
-        internal virtual void Late()
+        public virtual void MakeAvailable()
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException();
         }
 
-        internal virtual void MakeAvailable()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal virtual void MakeUnavailable()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

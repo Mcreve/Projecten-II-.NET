@@ -60,7 +60,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
             }
         }
 
-        public IList<LearningUtilityDetails> GetLearningUtilities()
+        public IList<LearningUtilityDetails> GetLearningUtilities(ILearningUtilityDetailsRepository learningUtilityDetailsRepository)
         {
             throw new NotImplementedException();
         }

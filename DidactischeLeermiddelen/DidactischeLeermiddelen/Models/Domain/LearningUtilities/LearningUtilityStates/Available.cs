@@ -1,27 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
+using DidactischeLeermiddelen.Models.Domain.Users;
 
 namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates
 {
-    internal class Available : LearningUtilityState
+    public class Available : LearningUtilityState
     {
-        internal Available(LearningUtility learningUtility) : base(learningUtility) { }
+        public Available(LearningUtility learningUtility) : base(learningUtility) { }
 
-        internal override void Block()
+        public override void Block(IUser user)
         {
             base.LearningUtility.ToState(StateFactory.CreateState(StateType.Blocked, base.LearningUtility));
         }
 
-        internal override void Reserve()
+        public override void Reserve(IUser user)
         {
-            base.LearningUtility.ToState(StateFactory.CreateState(StateType.Reserverd, base.LearningUtility));
-        }
-
-        internal override void MakeUnavailable()
-        {
-            base.LearningUtility.ToState(StateFactory.CreateState(StateType.Unavailable, base.LearningUtility));
+            base.LearningUtility.ToState(StateFactory.CreateState(StateType.Reserved, base.LearningUtility));
         }
     }
 }
