@@ -9,20 +9,16 @@ namespace DidactischeLeermiddelen.Models.DAL
 {
     public class LeermiddelenInitializer : DropCreateDatabaseAlways<LeermiddelenContext>
     {
-        private LeermiddelenContext context;
-        private UserRepository userList;
+        #region Methods
 
-        private UserStore<ApplicationUser> userStore;
-        private UserManager<ApplicationUser> userManager; 
-
-        private RoleStore<IdentityRole> roleStore;
-        private RoleManager<IdentityRole> roleManager;
-
-
+        /// <summary>
+        ///     Initial seed of the database
+        /// </summary>
+        /// <param name="context"></param>
         protected override void Seed(LeermiddelenContext context)
         {
             this.context = context;
-            this.userList = new UserRepository(context);
+            userList = new UserRepository(context);
             //Accounts
             userStore = new UserStore<ApplicationUser>(context);
             userManager = new UserManager<ApplicationUser>(userStore);
@@ -34,37 +30,63 @@ namespace DidactischeLeermiddelen.Models.DAL
             {
                 CreateRoles();
                 CreateUsers();
-
             }
             catch (DbEntityValidationException e)
             {
-                string s = "Fout creatie database ";
+                var s = "Fout creatie database ";
                 foreach (var eve in e.EntityValidationErrors)
                 {
-                    s += String.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                         eve.Entry.Entity.GetType().Name, eve.Entry.GetValidationResult());
+                    s += string.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.GetValidationResult());
                     foreach (var ve in eve.ValidationErrors)
                     {
-                        s += String.Format("- Property: \"{0}\", Error: \"{1}\"",
+                        s += string.Format("- Property: \"{0}\", Error: \"{1}\"",
                             ve.PropertyName, ve.ErrorMessage);
                     }
                 }
                 throw new Exception(s);
             }
-
         }
 
+        #endregion
+
+        #region Properties
+
+        private LeermiddelenContext context;
+        private UserRepository userList;
+
+        private UserStore<ApplicationUser> userStore;
+        private UserManager<ApplicationUser> userManager;
+
+        private RoleStore<IdentityRole> roleStore;
+        private RoleManager<IdentityRole> roleManager;
+
+        #endregion
+
+        #region Private methods
+
+        /// <summary>
+        ///     Creates 5 Student users and accounts, Creates 5 Lector users and accounts
+        /// </summary>
         private void CreateUsers()
         {
-            string[] initialFirstNames = new string[] { "Benjamin", "Jan", "Maxim", "Ward", "Ingeborg","Sonja","Mark","Petra","Els","Carl" };
-            string[] initialLastNames = new string[] {"Vertonghen", "Marien", "Hupeldepup", "Vanlerberghe", "Vermassen","Brouwer", "Verstraten","Schoeikens","Verhoeven","Merkx"};
-            //create 5 students and 5 lectors
-            for (int i = 0; i <9 ; i++)
+            string[] initialFirstNames =
             {
-                string suffix = i > 5 ? "@hogent.be" : "@student.hogent.be";
-                string email = initialFirstNames[i] + "." + initialLastNames[i] + suffix;
-                UserType userType = UserFactory.DetermineUserTypeByEmailAddress(email);
-                User user = UserFactory.CreateUser(userType);
+                "Benjamin", "Jan", "Maxim", "Ward", "Ingeborg", "Sonja", "Mark", "Petra",
+                "Els", "Carl"
+            };
+            string[] initialLastNames =
+            {
+                "Vertonghen", "Marien", "Hupeldepup", "Vanlerberghe", "Vermassen", "Brouwer",
+                "Verstraten", "Schoeikens", "Verhoeven", "Merkx"
+            };
+            //create 5 students and 5 lectors
+            for (var i = 0; i < 10; i++)
+            {
+                var suffix = i > 5 ? "@hogent.be" : "@student.hogent.be";
+                var email = initialFirstNames[i] + "." + initialLastNames[i] + suffix;
+                var userType = UserFactory.DetermineUserTypeByEmailAddress(email);
+                var user = UserFactory.CreateUser(userType);
                 user.EmailAddress = email;
                 user.FirstName = initialFirstNames[i];
                 user.LastName = initialLastNames[i];
@@ -75,14 +97,18 @@ namespace DidactischeLeermiddelen.Models.DAL
             }
         }
 
+        /// <summary>
+        ///     Creates the account for the user
+        /// </summary>
+        /// <param name="user"></param>
         private void CreateAccount(User user)
         {
-            ApplicationUser account = new ApplicationUser()
+            var account = new ApplicationUser
             {
                 UserName = user.EmailAddress,
                 Email = user.EmailAddress
             };
-            UserType userType = UserFactory.DetermineUserTypeByEmailAddress(user.EmailAddress);
+            var userType = UserFactory.DetermineUserTypeByEmailAddress(user.EmailAddress);
 
             var role = roleManager.FindByName(userType.ToString());
 
@@ -91,6 +117,11 @@ namespace DidactischeLeermiddelen.Models.DAL
             userManager.AddToRole(account.Id, role.Name);
         }
 
+        /// <summary>
+        ///     Creates the roles of the application
+        ///     - Student
+        ///     - Lector
+        /// </summary>
         private void CreateRoles()
         {
             //Create the role for students
@@ -102,5 +133,7 @@ namespace DidactischeLeermiddelen.Models.DAL
             roleManager.Create(lectorRole);
             context.SaveChanges();
         }
+
+        #endregion
     }
 }

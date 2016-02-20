@@ -17,8 +17,8 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities.LearningU
         {
             learningUtility = new LearningUtility();
             learningUtility.ToState(StateFactory.CreateState(StateType.Unavailable, learningUtility));
-            student = new Student();
-            lector = new Lector();
+            student = UserFactory.CreateUser(UserType.Student);
+            lector = UserFactory.CreateUser(UserType.Lector);
         }
 
         [TestMethod]

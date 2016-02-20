@@ -217,9 +217,9 @@
     <Compile Include="Models\Domain\LearningUtilities\LearningUtilityStates\Unavailable.cs" />
     <Compile Include="Models\Domain\LearningUtilities\Location.cs" />
     <Compile Include="Models\Domain\LearningUtilities\TargetGroup.cs" />
-    <Compile Include="Models\Domain\Users\User.cs" />
     <Compile Include="Models\Domain\Users\Lector.cs" />
     <Compile Include="Models\Domain\Users\Student.cs" />
+    <Compile Include="Models\Domain\Users\User.cs" />
     <Compile Include="Models\Domain\Users\UserFactory.cs" />
     <Compile Include="Models\Domain\Users\UserType.cs" />
     <Compile Include="Models\Domain\Wishlist.cs" />
