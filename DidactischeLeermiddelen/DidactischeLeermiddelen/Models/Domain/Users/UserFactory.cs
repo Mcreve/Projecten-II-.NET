@@ -8,12 +8,14 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         #region Methods
 
         /// <summary>
-        ///     Creates a user based on the user type
+        /// Creates a user based on the e-mailadress
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns>User object (Student/Lector)</returns>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="emailAddress"></param>
         /// <exception cref="IndexOutOfRangeException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
         public static User CreateUserWithParameters(string firstName,string lastName, string emailAddress)
         {
             UserType userType = DetermineUserTypeByEmailAddress(emailAddress);
