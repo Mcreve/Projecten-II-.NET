@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
@@ -21,18 +22,8 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
             }
         }
 
-        public string FirstName
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        [StringLength(5)]
+        public string FirstName { get; set; }
 
         public int Id
         {
