@@ -109,7 +109,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
         public void UserThrowsErrorWhenEmailDoesNotEndWithHogent()
         {
             #region Arrange
-            const string email = "benjamin.hogent@hogent.be";
+            const string email = "benjamin.hogent@victory.be";
             #endregion
 
             #region Act
@@ -120,7 +120,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
         public void UserSetsEmailAddressForStudent()
         {
             #region Arrange
-            const string email = "student.hogent.be";
+            const string email = "benjamin.vertonghen@student.hogent.be";
             #endregion
 
             #region Act
@@ -138,7 +138,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
         {
             #region Arrange
             User tesUser = new Lector();
-            const string email = "benjamin@hogent.be";
+            const string email = "Lector.WeetIkVeel@hogent.be";
             #endregion
 
             #region Act

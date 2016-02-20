@@ -22,7 +22,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
                                                        "Error: Parameter is not a type of the UserType Enum" );
             }
         }
-
         public static UserType DetermineUserTypeByEmailAddress(string emailAddress)
         {
             //Match Student
