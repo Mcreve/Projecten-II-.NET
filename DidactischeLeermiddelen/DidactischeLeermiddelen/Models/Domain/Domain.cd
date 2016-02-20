@@ -128,23 +128,23 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.Users.Lector" BaseTypeListCollapsed="true">
-    <Position X="0.5" Y="6.25" Width="1.5" />
+    <Position X="0.5" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Users\Lector.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.Users.Student" BaseTypeListCollapsed="true">
-    <Position X="2.5" Y="6.25" Width="1.5" />
+    <Position X="2.5" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Users\Student.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.Users.UserFactory">
     <Position X="4.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Users\UserFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -176,6 +176,13 @@
       <FileName>Models\Domain\LearningUtilities\Company.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="DidactischeLeermiddelen.Models.Domain.Users.User">
+    <Position X="1.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAABAEAAAAAAAAAAAAAAAAAACAAAACgAAAAg=</HashCode>
+      <FileName>Models\Domain\Users\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Enum Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.StateType">
     <Position X="8.75" Y="5" Width="1.5" />
     <TypeIdentifier>
@@ -186,7 +193,7 @@
   <Enum Name="DidactischeLeermiddelen.Models.Domain.Users.UserType">
     <Position X="4.25" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAUAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Users\UserType.cs</FileName>
     </TypeIdentifier>
   </Enum>

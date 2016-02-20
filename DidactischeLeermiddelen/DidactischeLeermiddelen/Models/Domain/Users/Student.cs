@@ -11,7 +11,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 {
     public class Student : User
     {
-        public IList<LearningUtilityDetails> GetLearningUtilities(ILearningUtilityDetailsRepository leanringUtilityDetailsRepository)
+        public override IList<LearningUtilityDetails> GetLearningUtilities(ILearningUtilityDetailsRepository leanringUtilityDetailsRepository)
         {
             throw new NotImplementedException();
         }

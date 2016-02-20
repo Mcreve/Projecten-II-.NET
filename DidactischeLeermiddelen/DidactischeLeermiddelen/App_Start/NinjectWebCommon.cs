@@ -65,6 +65,9 @@ namespace DidactischeLeermiddelen.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<ILearningUtilityDetailsRepository>().To<LearningUtilityDetailsRepository>().InRequestScope();
-        }        
+            kernel.Bind<IUserRepository>().To<UserRepository>().InRequestScope();
+            kernel.Bind<LeermiddelenContext>().ToSelf().InRequestScope();
+
+        }
     }
 }

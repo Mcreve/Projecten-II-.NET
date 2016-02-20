@@ -22,7 +22,7 @@ namespace DidactischeLeermiddelen.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace DidactischeLeermiddelen.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DidactischeLeermiddelen.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace DidactischeLeermiddelen.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace DidactischeLeermiddelen.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Het e-mail adres moet eindigen op &apos;hogent.be&apos; en moet tussen de 1-100 karakters lang zijn..
         /// </summary>
-        internal static string LectorEmailRegex {
+        public static string LectorEmailRegex {
             get {
                 return ResourceManager.GetString("LectorEmailRegex", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace DidactischeLeermiddelen.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Het e-mail adres moet eindigen op &apos;student.hogent.be&apos; en moet tussen de 1-100 karakters lang zijn..
         /// </summary>
-        internal static string StudentEmailRegex {
+        public static string StudentEmailRegex {
             get {
                 return ResourceManager.GetString("StudentEmailRegex", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace DidactischeLeermiddelen.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Het e-mail adres moet eindigen op &apos;hogent.be&apos; en moet tussen de 1-100 karakters lang zijn..
         /// </summary>
-        internal static string UserEmailRegex {
+        public static string UserEmailRegex {
             get {
                 return ResourceManager.GetString("UserEmailRegex", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace DidactischeLeermiddelen.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Voornaam moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn..
         /// </summary>
-        internal static string UserFirstNameRegex {
+        public static string UserFirstNameRegex {
             get {
                 return ResourceManager.GetString("UserFirstNameRegex", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace DidactischeLeermiddelen.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Achternaam moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn..
         /// </summary>
-        internal static string UserLastNameRegex {
+        public static string UserLastNameRegex {
             get {
                 return ResourceManager.GetString("UserLastNameRegex", resourceCulture);
             }

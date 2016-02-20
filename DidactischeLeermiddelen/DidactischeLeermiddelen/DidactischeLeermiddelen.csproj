@@ -194,8 +194,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\UserModelBinder.cs" />
     <Compile Include="Models\DAL\LearningUtilityDetailsRepository.cs" />
+    <Compile Include="Models\DAL\UserRepository.cs" />
     <Compile Include="Models\Domain\ILearningUtilityDetailsRepository.cs" />
+    <Compile Include="Models\Domain\IUserRepository.cs" />
     <Compile Include="Models\Domain\LearningUtilities\Category.cs" />
     <Compile Include="Models\Domain\LearningUtilities\Company.cs" />
     <Compile Include="Models\Domain\LearningUtilities\FieldOfStudy.cs" />
@@ -239,7 +242,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <None Include="Resources\TextFile1.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Models\Domain\Domain.cd" />
@@ -294,6 +296,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\DAL\Mapper\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -305,7 +308,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

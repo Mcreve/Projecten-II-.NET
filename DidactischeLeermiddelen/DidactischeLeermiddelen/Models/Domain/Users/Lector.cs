@@ -8,7 +8,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 {
     public class Lector : User
     {
-        public IList<LearningUtilityDetails> GetLearningUtilities(ILearningUtilityDetailsRepository learningUtilityDetailsRepository)
+        public override IList<LearningUtilityDetails> GetLearningUtilities(ILearningUtilityDetailsRepository learningUtilityDetailsRepository)
         {
             throw new NotImplementedException();
         }
