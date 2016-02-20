@@ -5,11 +5,11 @@ using System.Web;
 
 namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates
 {
-    internal enum StateType
+    public enum StateType
     {
         Available = 0,
         Unavailable = 1,
-        Reserverd = 2,
+        Reserved = 2,
         Blocked = 3,
         HandedOut = 4,
         Late = 5

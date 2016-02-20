@@ -104,8 +104,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Users\UserTest.cs" />
-    <Compile Include="Model\Users\UserFactoryTest.cs" />
+    <Compile Include="Model\Domain\LearningUtilities\LearningUtilityStates\LearningUtilityAvailableStateTests.cs" />
+    <Compile Include="Model\Domain\LearningUtilities\LearningUtilityStates\LearningUtilityBlockedStateTests.cs" />
+    <Compile Include="Model\Domain\LearningUtilities\LearningUtilityStates\LearningUtilityHandedOutStateTests.cs" />
+    <Compile Include="Model\Domain\LearningUtilities\LearningUtilityStates\LearningUtilityLateStateTests.cs" />
+    <Compile Include="Model\Domain\LearningUtilities\LearningUtilityStates\LearningUtilityReservedStateTests.cs" />
+    <Compile Include="Model\Domain\LearningUtilities\LearningUtilityStates\LearningUtilityTests.cs" />
+    <Compile Include="Model\Domain\LearningUtilities\LearningUtilityStates\LearningUtilityUnavailableStateTests.cs" />
+    <Compile Include="Model\Domain\Users\UserFactoryTest.cs" />
+    <Compile Include="Model\Domain\Users\UserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>

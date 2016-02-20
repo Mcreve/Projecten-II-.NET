@@ -5,7 +5,7 @@ using System.Web;
 
 namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates
 {
-    internal class StateFactory
+    public class StateFactory
     {
         public static LearningUtilityState CreateState(StateType type, LearningUtility learningUtility)
         {
@@ -13,7 +13,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
             {
                 case StateType.Available:
                     return new Available(learningUtility);
-                case StateType.Reserverd:
+                case StateType.Reserved:
                     return new Reserved(learningUtility);
                 case StateType.Blocked:
                     return new Blocked(learningUtility);

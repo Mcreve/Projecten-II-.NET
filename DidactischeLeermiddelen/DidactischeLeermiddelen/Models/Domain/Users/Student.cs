@@ -1,57 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
+using DidactischeLeermiddelen.Properties;
 
 namespace DidactischeLeermiddelen.Models.Domain.Users
 {
-    public class Student : IUser
+    public class Student : User
     {
-        public string EmailAddress
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        [StringLength(5)]
-        public string FirstName { get; set; }
-
-        public int Id
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string LastName
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public IList<LearningUtilityDetails> GetLearningUtilities()
+        public IList<LearningUtilityDetails> GetLearningUtilities(ILearningUtilityDetailsRepository leanringUtilityDetailsRepository)
         {
             throw new NotImplementedException();
         }

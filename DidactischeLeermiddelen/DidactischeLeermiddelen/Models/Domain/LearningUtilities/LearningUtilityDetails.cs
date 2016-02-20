@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates;
 
@@ -15,6 +16,9 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public string Description { get; set; }
         public decimal Price { get; set; }
         public bool Loanable { get; set; }
+        public virtual FieldOfStudy FieldOfStudy { get; set; }
+        public virtual TargetGroup TargetGroup { get; set; }
+        public virtual Company Company { get; set; }
         public virtual Category Category { get; set; }
         public virtual Location Location { get; set; }
         public virtual ICollection<LearningUtility> LearningUtilities { get; set; }
