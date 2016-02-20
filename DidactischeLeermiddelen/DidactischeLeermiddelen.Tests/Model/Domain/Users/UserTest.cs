@@ -11,8 +11,8 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
         [TestInitialize]
         public void UserTestInitialize()
         {
-            student = UserFactory.CreateUser(UserType.Student);
-            lector = UserFactory.CreateUser(UserType.Lector);
+            student = UserFactory.CreateUserWithUserType(UserType.Student);
+            lector = UserFactory.CreateUserWithUserType(UserType.Lector);
         }
 
         [TestMethod]
@@ -222,7 +222,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
             #region Act
 
             var userType = UserFactory.DetermineUserTypeByEmailAddress(email);
-            var user = UserFactory.CreateUser(userType);
+            var user = UserFactory.CreateUserWithUserType(userType);
             user.EmailAddress = email;
 
             #endregion

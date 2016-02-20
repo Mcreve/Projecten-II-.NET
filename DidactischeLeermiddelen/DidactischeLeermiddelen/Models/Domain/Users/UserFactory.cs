@@ -13,9 +13,33 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         /// <param name="type"></param>
         /// <returns>User object (Student/Lector)</returns>
         /// <exception cref="IndexOutOfRangeException"></exception>
-        public static User CreateUser(UserType type)
+        /// <exception cref="ArgumentNullException"></exception>
+        public static User CreateUserWithParameters(string firstName,string lastName, string emailAddress)
         {
-            switch (type)
+            UserType userType = DetermineUserTypeByEmailAddress(emailAddress);
+
+            switch (userType)
+            {
+                case UserType.Student:
+                    return new Student(firstName,lastName,emailAddress);
+                case UserType.Lector:
+                    return new Lector(firstName, lastName, emailAddress);
+                default:
+                    throw new IndexOutOfRangeException("Class: UserFactory \n" +
+                                                       "Function: CreateUser \n " +
+                                                       "Error: Parameter is not in the range of the UserType Enum");
+            }
+        }
+        /// <summary>
+        /// Creates a user based on the user type
+        /// </summary>
+        /// <param name="userType"></param>
+        /// <returns>User Object (Student/Lector)</returns>
+        /// <exception cref="IndexOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static User CreateUserWithUserType(UserType userType)
+        {
+            switch (userType)
             {
                 case UserType.Student:
                     return new Student();
@@ -27,6 +51,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
                                                        "Error: Parameter is not a type of the UserType Enum");
             }
         }
+    
 
         /// <summary>
         ///     Determines the type of the user based on his/hers e-mailaddress

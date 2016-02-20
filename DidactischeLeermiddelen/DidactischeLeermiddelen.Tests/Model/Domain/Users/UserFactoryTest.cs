@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,33 +9,159 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
     public class UserFactoryTest
     {
         [TestMethod]
-        public void UserFactoryCreatesStudent()
+        public void UserFactoryWithParametersCreatesStudent()
+        {
+            #region Arrange
+            string firstName = "Benjamin";
+            string lastName = "Vertonghen";
+            string emailAddress = "Benjamin.vertonghen@student.hogent.be";
+            #endregion
+
+            #region Act
+            student = UserFactory.CreateUserWithParameters(firstName, lastName, emailAddress);
+            #endregion
+
+            #region Assert
+            Assert.IsInstanceOfType(student, typeof (Student));
+            Assert.AreEqual(firstName,student.FirstName);
+            Assert.AreEqual(lastName,student.LastName);
+            Assert.AreEqual(emailAddress,student.EmailAddress);
+            #endregion
+
+        }
+        [TestMethod]
+        public void UserFactoryWithUserTypeCreatesStudent()
         {
             #region Act
 
-            student = UserFactory.CreateUser(UserType.Student);
+            student = UserFactory.CreateUserWithUserType(UserType.Student);
 
             #endregion
 
             #region Assert
 
-            Assert.IsInstanceOfType(student, typeof (Student));
+            Assert.IsInstanceOfType(student, typeof(Student));
+
 
             #endregion
         }
 
         [TestMethod]
-        public void UserFactoryCreatesLector()
+        public void UserFactoryWithParametersCreatesLector()
+        {
+            #region Arrange
+            string firstName = "Benjamin";
+            string lastName = "Vertonghen";
+            string emailAddress = "Benjamin.vertonghen@hogent.be";
+            #endregion
+
+            #region Act
+            lector = UserFactory.CreateUserWithParameters(firstName, lastName, emailAddress);
+            #endregion
+
+            #region Assert
+            Assert.IsInstanceOfType(lector, typeof(Lector));
+            Assert.AreEqual(firstName, lector.FirstName);
+            Assert.AreEqual(lastName, lector.LastName);
+            Assert.AreEqual(emailAddress, lector.EmailAddress);
+            #endregion
+        }
+        [ExpectedException(typeof(ValidationException))]
+        [TestMethod]
+        public void UserFactoryWithParametersButFirstNameIsEmptyThrowsError()
+        {
+            #region Arrange
+            string firstName = "";
+            string lastName = "Vertonghen";
+            string emailAddress = "Benjamin.vertonghen@hogent.be";
+            #endregion
+
+            #region Act
+            lector = UserFactory.CreateUserWithParameters(firstName, lastName, emailAddress);
+            #endregion
+        }
+        [ExpectedException(typeof(ValidationException))]
+        [TestMethod]
+        public void UserFactoryWithParametersButLastNameIsEmptyThrowsError()
+        {
+            #region Arrange
+            string firstName = "Benjamin";
+            string lastName = string.Empty;
+            string emailAddress = "Benjamin.vertonghen@hogent.be";
+            #endregion
+
+            #region Act
+            lector = UserFactory.CreateUserWithParameters(firstName, lastName, emailAddress);
+            #endregion
+        }
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [TestMethod]
+        public void UserFactoryWithParametersButEmailAddressIsEmptyThrowsError()
+        {
+            #region Arrange
+            string firstName = "Benjamin";
+            string lastName = "Vertonghen";
+            string emailAddress = string.Empty;
+            #endregion
+
+            #region Act
+            lector = UserFactory.CreateUserWithParameters(firstName, lastName, emailAddress);
+            #endregion
+        }
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod]
+        public void UserFactoryWithParametersButEmailAddressIsNullThrowsError()
+        {
+            #region Arrange
+            string firstName = "Benjamin";
+            string lastName = "Vertonghen";
+            string emailAddress = null;
+            #endregion
+
+            #region Act
+            lector = UserFactory.CreateUserWithParameters(firstName, lastName, emailAddress);
+            #endregion
+        }
+        [ExpectedException(typeof(ValidationException))]
+        [TestMethod]
+        public void UserFactoryWithParametersButFirstNameIsNullThrowsError()
+        {
+            #region Arrange
+            string firstName = null;
+            string lastName = "Vertonghen";
+            string emailAddress = "Benjamin.vertonghen@hogent.be";
+            #endregion
+
+            #region Act
+            lector = UserFactory.CreateUserWithParameters(firstName, lastName, emailAddress);
+            #endregion
+        }
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        [TestMethod]
+        public void UserFactoryWithParametersButEmailIsNotFromHoGent()
+        {
+            #region Arrange
+            string firstName = "Benjamin";
+            string lastName = "Vertonghen";
+            string emailAddress = "Benjamin.vertonghen@victory.be";
+            #endregion
+
+            #region Act
+            lector = UserFactory.CreateUserWithParameters(firstName, lastName, emailAddress);
+            #endregion
+        }
+        [TestMethod]
+        public void UserFactoryWithUserTypeCreatesLector()
         {
             #region Act
 
-            lector = UserFactory.CreateUser(UserType.Lector);
+            lector = UserFactory.CreateUserWithUserType(UserType.Lector);
 
             #endregion
 
             #region Assert
 
-            Assert.IsInstanceOfType(lector, typeof (Lector));
+            Assert.IsInstanceOfType(lector, typeof(Lector));
 
             #endregion
         }
@@ -52,7 +179,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
 
             #region Act
 
-            var notAUserType = UserFactory.CreateUser((UserType) amountOfItemsInEnum);
+            var notAUserType = UserFactory.CreateUserWithUserType((UserType)amountOfItemsInEnum);
 
             #endregion
         }
@@ -63,7 +190,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
         {
             #region Act
 
-            invalid = UserFactory.CreateUser(UserType.Invalid);
+            invalid = UserFactory.CreateUserWithUserType(UserType.Invalid);
 
             #endregion
         }

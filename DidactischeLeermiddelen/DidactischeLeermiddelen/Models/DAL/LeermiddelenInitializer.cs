@@ -83,13 +83,12 @@ namespace DidactischeLeermiddelen.Models.DAL
             //create 5 students and 5 lectors
             for (var i = 0; i < 10; i++)
             {
-                var suffix = i > 5 ? "@hogent.be" : "@student.hogent.be";
-                var email = initialFirstNames[i] + "." + initialLastNames[i] + suffix;
-                var userType = UserFactory.DetermineUserTypeByEmailAddress(email);
-                var user = UserFactory.CreateUser(userType);
-                user.EmailAddress = email;
-                user.FirstName = initialFirstNames[i];
-                user.LastName = initialLastNames[i];
+                string suffix = i > 5 ? "@hogent.be" : "@student.hogent.be";
+                string firstName = initialFirstNames[i];
+                string lastName = initialLastNames[i];
+                string email = initialFirstNames[i] + "." + initialLastNames[i] + suffix;
+        
+                var user = UserFactory.CreateUserWithParameters(firstName,lastName,email);
                 userList.Add(user);
 
                 CreateAccount(user);

@@ -196,6 +196,7 @@
     </Compile>
     <Compile Include="Infrastructure\UserModelBinder.cs" />
     <Compile Include="Models\DAL\LearningUtilityDetailsRepository.cs" />
+    <Compile Include="Models\DAL\Mapper\UserMapper.cs" />
     <Compile Include="Models\DAL\UserRepository.cs" />
     <Compile Include="Models\Domain\ILearningUtilityDetailsRepository.cs" />
     <Compile Include="Models\Domain\IUserRepository.cs" />
@@ -295,7 +296,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\DAL\Mapper\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>

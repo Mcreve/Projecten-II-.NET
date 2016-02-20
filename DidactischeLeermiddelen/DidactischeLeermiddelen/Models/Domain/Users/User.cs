@@ -8,6 +8,19 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 {
     public abstract class User
     {
+        #region Constructor
+
+        protected User()
+        {
+            
+        }
+        protected User(string firstName, string lastName, string emailAddress)
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.EmailAddress = emailAddress;
+        }
+        #endregion
         #region Methods
 
         public abstract IList<LearningUtilityDetails> GetLearningUtilities(
