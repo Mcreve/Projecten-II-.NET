@@ -120,6 +120,9 @@
   <data name="LectorEmailRegex" xml:space="preserve">
     <value>Het e-mail adres moet eindigen op 'hogent.be' en moet tussen de 1-100 karakters lang zijn.</value>
   </data>
+  <data name="LocationNameRegex" xml:space="preserve">
+    <value>Locatie moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn.</value>
+  </data>
   <data name="StudentEmailRegex" xml:space="preserve">
     <value>Het e-mail adres moet eindigen op 'student.hogent.be' en moet tussen de 1-100 karakters lang zijn.</value>
   </data>

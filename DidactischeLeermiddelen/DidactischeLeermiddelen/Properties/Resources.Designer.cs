@@ -70,6 +70,15 @@ namespace DidactischeLeermiddelen.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Locatie moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn..
+        /// </summary>
+        public static string LocationNameRegex {
+            get {
+                return ResourceManager.GetString("LocationNameRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Het e-mail adres moet eindigen op &apos;student.hogent.be&apos; en moet tussen de 1-100 karakters lang zijn..
         /// </summary>
         public static string StudentEmailRegex {

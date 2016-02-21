@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -31,6 +34,7 @@ namespace DidactischeLeermiddelen.Models.DAL
             {
                 CreateRoles();
                 CreateUsers();
+                CreateLocations();
             }
             catch (DbEntityValidationException e)
             {
@@ -49,7 +53,6 @@ namespace DidactischeLeermiddelen.Models.DAL
             }
         }
 
-
         #endregion
 
         #region Properties
@@ -57,6 +60,7 @@ namespace DidactischeLeermiddelen.Models.DAL
         private LeermiddelenContext context;
         private UserRepository userList;
         private LearningUtilityDetailsRepository learningUtilityDetailsList;
+        private ICollection<Location> locations;
 
         private UserStore<ApplicationUser> userStore;
         private UserManager<ApplicationUser> userManager;
@@ -135,7 +139,18 @@ namespace DidactischeLeermiddelen.Models.DAL
             roleManager.Create(lectorRole);
             context.SaveChanges();
         }
-
+        /// <summary>
+        /// Creates the initial locations and adds them to a list.
+        /// </summary>
+        private void CreateLocations()
+        {
+            string[] initialLocationNames = { "GLEDE 1.011", "Biolabo kast 1 &2 ", "Preparatie ", "Biolabo kast 3 ", "Biolabo kast 5 ", "Biolabo kast 2 " };
+            foreach (var initialLocationName in initialLocationNames)
+            {
+                var location = new Location(initialLocationName);
+                locations.Add(location);
+            }
+        }
         #endregion
     }
 }

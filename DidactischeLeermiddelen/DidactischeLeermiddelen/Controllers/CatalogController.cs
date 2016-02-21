@@ -9,12 +9,13 @@ using System.Web.Mvc;
 using DidactischeLeermiddelen.Models.DAL;
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
+using DidactischeLeermiddelen.Models.Domain.Users;
 
 namespace DidactischeLeermiddelen.Controllers
 {
     public class CatalogController : Controller
     {
-        private ILearningUtilityDetailsRepository learningUtilityDetailsRepository;
+        private readonly ILearningUtilityDetailsRepository learningUtilityDetailsRepository;
 
         public CatalogController(ILearningUtilityDetailsRepository learningUtilityDetailsRepository)
         {
@@ -26,8 +27,13 @@ namespace DidactischeLeermiddelen.Controllers
         // GET: Catalog
         public ActionResult Index()
         {
-            IEnumerable<LearningUtilityDetails> catalog = learningUtilityDetailsRepository.FindAll();
-            return View(catalog);
+            if (User.IsInRole(UserType.Student.ToString()))
+            {
+                IEnumerable<LearningUtilityDetails> catalog = learningUtilityDetailsRepository.FindAll();
+                return View(catalog);
+            }
+            return null;
+
         }
 
         // GET: Catalog/Details/5
