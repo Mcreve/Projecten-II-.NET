@@ -61,6 +61,24 @@ namespace DidactischeLeermiddelen.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bedrijf moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn..
+        /// </summary>
+        public static string CompanyNameRegex {
+            get {
+                return ResourceManager.GetString("CompanyNameRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leergebied moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn..
+        /// </summary>
+        public static string FieldOfStudyNameRegex {
+            get {
+                return ResourceManager.GetString("FieldOfStudyNameRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Het e-mail adres moet eindigen op &apos;hogent.be&apos; en moet tussen de 1-100 karakters lang zijn..
         /// </summary>
         public static string LectorEmailRegex {
@@ -84,6 +102,15 @@ namespace DidactischeLeermiddelen.Properties {
         public static string StudentEmailRegex {
             get {
                 return ResourceManager.GetString("StudentEmailRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doelgroep moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn..
+        /// </summary>
+        public static string TargetGroupNameRegex {
+            get {
+                return ResourceManager.GetString("TargetGroupNameRegex", resourceCulture);
             }
         }
         

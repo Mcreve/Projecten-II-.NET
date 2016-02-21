@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CompanyNameRegex" xml:space="preserve">
+    <value>Bedrijf moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn.</value>
+  </data>
+  <data name="FieldOfStudyNameRegex" xml:space="preserve">
+    <value>Leergebied moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn.</value>
+  </data>
   <data name="LectorEmailRegex" xml:space="preserve">
     <value>Het e-mail adres moet eindigen op 'hogent.be' en moet tussen de 1-100 karakters lang zijn.</value>
   </data>
@@ -125,6 +131,9 @@
   </data>
   <data name="StudentEmailRegex" xml:space="preserve">
     <value>Het e-mail adres moet eindigen op 'student.hogent.be' en moet tussen de 1-100 karakters lang zijn.</value>
+  </data>
+  <data name="TargetGroupNameRegex" xml:space="preserve">
+    <value>Doelgroep moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn.</value>
   </data>
   <data name="UserEmailRegex" xml:space="preserve">
     <value>Het e-mail adres moet eindigen op 'hogent.be' en moet tussen de 1-100 karakters lang zijn.</value>

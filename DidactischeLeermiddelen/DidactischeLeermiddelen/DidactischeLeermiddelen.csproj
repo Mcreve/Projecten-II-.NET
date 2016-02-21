@@ -197,6 +197,9 @@
     </Compile>
     <Compile Include="Infrastructure\UserModelBinder.cs" />
     <Compile Include="Models\DAL\LearningUtilityDetailsRepository.cs" />
+    <Compile Include="Models\DAL\Mapper\TargetGroupMapper.cs" />
+    <Compile Include="Models\DAL\Mapper\CompanyMapper.cs" />
+    <Compile Include="Models\DAL\Mapper\FieldOfStudyMapper.cs" />
     <Compile Include="Models\DAL\Mapper\LocationMapper.cs" />
     <Compile Include="Models\DAL\Mapper\UserMapper.cs" />
     <Compile Include="Models\DAL\UserRepository.cs" />
