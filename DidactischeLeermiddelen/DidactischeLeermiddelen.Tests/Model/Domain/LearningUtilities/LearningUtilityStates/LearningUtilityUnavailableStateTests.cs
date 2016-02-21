@@ -9,16 +9,16 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities.LearningU
     public class LearningUtilityUnavailableStateTests
     {
         private LearningUtility learningUtility;
-        private IUser student;
-        private IUser lector;
+        private User student;
+        private User lector;
 
         [TestInitialize]
         public void InitializeTest()
         {
             learningUtility = new LearningUtility();
             learningUtility.ToState(StateFactory.CreateState(StateType.Unavailable, learningUtility));
-            student = new Student();
-            lector = new Lector();
+            student = UserFactory.CreateUserWithParameters("Benjamin","Vertonghen","benjamin.vertonghen@student.hogent.be");
+            lector = UserFactory.CreateUserWithParameters("Benjamin", "Vertonghen", "benjamin.vertonghen@hogent.be");
         }
 
         [TestMethod]

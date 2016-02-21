@@ -1,68 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 
 namespace DidactischeLeermiddelen.Models.Domain.Users
 {
-    public class Student : IUser
+    public class Student : User
     {
-        public string EmailAddress
+        #region Constructor
+
+        public Student() : base()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            
         }
-
-        public string FirstName
+        public Student(string firstName, string lastName, string emailAddress) : base(firstName, lastName, emailAddress)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        } 
+        #endregion
+        #region Methods
 
-        public int Id
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string LastName
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public IList<LearningUtilityDetails> GetLearningUtilities(ILearningUtilityDetailsRepository leanringUtilityDetailsRepository)
+        public override IList<LearningUtilityDetails> GetLearningUtilities(
+            ILearningUtilityDetailsRepository leanringUtilityDetailsRepository)
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

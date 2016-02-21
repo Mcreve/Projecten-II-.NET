@@ -47,7 +47,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         {
             base.LearningUtility.ReservedBy = user;
             base.LearningUtility.ToState(StateFactory.CreateState(StateType.Reserved, base.LearningUtility));
-        } 
+        }
         #endregion
     }
 }

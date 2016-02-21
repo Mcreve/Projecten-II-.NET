@@ -189,14 +189,22 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\UserModelBinder.cs" />
     <Compile Include="Models\DAL\LearningUtilityDetailsRepository.cs" />
+    <Compile Include="Models\DAL\Mapper\TargetGroupMapper.cs" />
+    <Compile Include="Models\DAL\Mapper\CompanyMapper.cs" />
+    <Compile Include="Models\DAL\Mapper\FieldOfStudyMapper.cs" />
+    <Compile Include="Models\DAL\Mapper\LocationMapper.cs" />
+    <Compile Include="Models\DAL\Mapper\UserMapper.cs" />
+    <Compile Include="Models\DAL\UserRepository.cs" />
     <Compile Include="Models\Domain\ILearningUtilityDetailsRepository.cs" />
-    <Compile Include="Models\Domain\LearningUtilities\Category.cs" />
+    <Compile Include="Models\Domain\IUserRepository.cs" />
     <Compile Include="Models\Domain\LearningUtilities\Company.cs" />
     <Compile Include="Models\Domain\LearningUtilities\FieldOfStudy.cs" />
     <Compile Include="Models\Domain\LearningUtilities\LearningUtilityDetails.cs" />
@@ -214,13 +222,18 @@
     <Compile Include="Models\Domain\LearningUtilities\LearningUtilityStates\Unavailable.cs" />
     <Compile Include="Models\Domain\LearningUtilities\Location.cs" />
     <Compile Include="Models\Domain\LearningUtilities\TargetGroup.cs" />
-    <Compile Include="Models\Domain\Users\IUser.cs" />
     <Compile Include="Models\Domain\Users\Lector.cs" />
     <Compile Include="Models\Domain\Users\Student.cs" />
+    <Compile Include="Models\Domain\Users\User.cs" />
     <Compile Include="Models\Domain\Users\UserFactory.cs" />
     <Compile Include="Models\Domain\Users\UserType.cs" />
     <Compile Include="Models\Domain\Wishlist.cs" />
     <Compile Include="Models\Domain\WishlistLine.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
@@ -284,10 +297,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Catalog\Details.cshtml" />
+    <Content Include="Views\Catalog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\DAL\Mapper\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -296,6 +311,12 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -9,8 +9,8 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities.LearningU
     public class LearningUtilityAvailableStateTests
     {
         private LearningUtility learningUtility;
-        private IUser student;
-        private IUser lector;
+        private User student;
+        private User lector;
 
         [TestInitialize]
         public void InitializeTest()
