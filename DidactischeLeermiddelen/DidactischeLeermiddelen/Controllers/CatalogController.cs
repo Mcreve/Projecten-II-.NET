@@ -27,13 +27,17 @@ namespace DidactischeLeermiddelen.Controllers
         // GET: Catalog
         public ActionResult Index()
         {
-            if (User.IsInRole(UserType.Student.ToString()))
-            {
-                IEnumerable<LearningUtilityDetails> catalog = learningUtilityDetailsRepository.FindAll();
-                return View(catalog);
-            }
-            return null;
+            IEnumerable<LearningUtilityDetails> catalog;
 
+            if (User.IsInRole(UserType.Lector.ToString()))
+            {
+                catalog = learningUtilityDetailsRepository.FindAll();
+            }
+            else
+            {
+                catalog = learningUtilityDetailsRepository.FindAllLoanable();
+            }
+            return View(catalog);
         }
 
         // GET: Catalog/Details/5
