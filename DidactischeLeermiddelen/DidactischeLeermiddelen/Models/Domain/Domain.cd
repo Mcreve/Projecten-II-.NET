@@ -23,7 +23,7 @@
   <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.Location">
     <Position X="7.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\Location.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -31,42 +31,28 @@
     <Position X="4.75" Y="0.5" Width="1.5" />
     <AssociationLine Name="FieldOfStudy" Type="DidactischeLeermiddelen.Models.Domain.LearningUtilities.FieldOfStudy" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="6.062" Y="3.017" />
-        <Point X="6.062" Y="3.11" />
-        <Point X="7.031" Y="3.11" />
-        <Point X="7.031" Y="3.5" />
+        <Point X="5.875" Y="3.209" />
+        <Point X="5.875" Y="3.346" />
+        <Point X="7.5" Y="3.346" />
+        <Point X="7.5" Y="3.5" />
       </Path>
-    </AssociationLine>
-    <AssociationLine Name="LearningUtilities" Type="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.LearningUtility" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="5.875" Y="3.017" />
-        <Point X="5.875" Y="4.946" />
-        <Point X="8.357" Y="4.946" />
-        <Point X="8.357" Y="4.267" />
-        <Point X="10.5" Y="4.267" />
-      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.502" Y="-0.057" Height="0.182" Width="1.01" />
+      </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAACgAAAAQAgAIAAAAIIAAQAAAAAAAAAAAACBAAACAA=</HashCode>
+      <HashCode>AAACgAAAAQAggIAAAAIIAAQAAAAAAAAAAAACBAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\LearningUtilityDetails.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="FieldOfStudy" />
       <Property Name="TargetGroup" />
       <Property Name="Company" />
-      <Property Name="Category" />
       <Property Name="Location" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="LearningUtilities" />
     </ShowAsCollectionAssociation>
-  </Class>
-  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.Category">
-    <Position X="7.25" Y="2" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Domain\LearningUtilities\Category.cs</FileName>
-    </TypeIdentifier>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Unavailable">
     <Position X="8.25" Y="7.5" Width="1.5" />
@@ -76,14 +62,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.StateFactory">
-    <Position X="7" Y="5.75" Width="1.5" />
+    <Position X="7" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\StateFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.LearningUtilityState">
-    <Position X="12.5" Y="4" Width="1.5" />
+    <Position X="13.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAABAAAAAAAAAAAAAAAAQAAQACAAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\LearningUtilityState.cs</FileName>
@@ -106,19 +92,19 @@
   <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.HandedOut">
     <Position X="6.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAQACAAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\HandedOut.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.Late">
     <Position X="11.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAACAAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\Late.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.LearningUtility">
-    <Position X="10.5" Y="4" Width="1.5" />
+    <Position X="10.75" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAGAAAAABAAAAAAIAIAACAAAAAAAAQAAQACAAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\LearningUtility.cs</FileName>
@@ -144,7 +130,7 @@
   <Class Name="DidactischeLeermiddelen.Models.Domain.Users.UserFactory">
     <Position X="4.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAIAAAAAAAAACAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Users\UserFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -158,21 +144,21 @@
   <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.TargetGroup">
     <Position X="4.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\TargetGroup.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.FieldOfStudy">
-    <Position X="6.25" Y="3.5" Width="1.5" />
+    <Position X="7" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\FieldOfStudy.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.Company">
-    <Position X="9.75" Y="1.75" Width="1.5" />
+    <Position X="9.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\Company.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -184,14 +170,14 @@
     </TypeIdentifier>
   </Class>
   <Enum Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates.StateType">
-    <Position X="8.75" Y="5" Width="1.5" />
+    <Position X="8.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAQAAgAAAAAAABAAABAAAAAAAAAAQQAAAAAAAA=</HashCode>
       <FileName>Models\Domain\LearningUtilities\LearningUtilityStates\StateType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="DidactischeLeermiddelen.Models.Domain.Users.UserType">
-    <Position X="4.25" Y="7.5" Width="1.5" />
+    <Position X="4.25" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAUAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Users\UserType.cs</FileName>
