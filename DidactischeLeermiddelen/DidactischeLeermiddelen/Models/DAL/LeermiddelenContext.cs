@@ -2,6 +2,7 @@
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Reflection;
 using System.Web.Mvc;
+using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -20,6 +21,7 @@ namespace DidactischeLeermiddelen.Models.DAL
         #region Properties
 
         public DbSet<User> UserList { get; set; }
+        public DbSet<LearningUtilityDetails> LearningUtilityDetailsList { get; set; }
 
         #endregion
 

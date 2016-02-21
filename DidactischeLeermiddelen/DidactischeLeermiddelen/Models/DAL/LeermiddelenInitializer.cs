@@ -19,6 +19,7 @@ namespace DidactischeLeermiddelen.Models.DAL
         {
             this.context = context;
             userList = new UserRepository(context);
+            learningUtilityDetailsList = new LearningUtilityDetailsRepository(context);
             //Accounts
             userStore = new UserStore<ApplicationUser>(context);
             userManager = new UserManager<ApplicationUser>(userStore);
@@ -48,12 +49,14 @@ namespace DidactischeLeermiddelen.Models.DAL
             }
         }
 
+
         #endregion
 
         #region Properties
 
         private LeermiddelenContext context;
         private UserRepository userList;
+        private LearningUtilityDetailsRepository learningUtilityDetailsList;
 
         private UserStore<ApplicationUser> userStore;
         private UserManager<ApplicationUser> userManager;
