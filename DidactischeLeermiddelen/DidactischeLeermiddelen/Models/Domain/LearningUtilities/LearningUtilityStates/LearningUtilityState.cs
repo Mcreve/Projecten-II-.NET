@@ -42,7 +42,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// Default implementation of this method throws an InvalidOperationException.
         /// </summary>
         /// <param name="user">A user instance that will reserve the LearningUtility</param>
-        public virtual void Reserve(IUser user)
+        public virtual void Reserve(User user)
         {
             throw new InvalidOperationException();
         }
@@ -51,7 +51,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// Default implemention of this method throws an InvalidOperationException.
         /// </summary>
         /// <param name="user">A user instance that will block the LearningUtility</param>
-        public virtual void Block(IUser user)
+        public virtual void Block(User user)
         {
             throw new InvalidOperationException();
         }

@@ -32,7 +32,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// When this method is called the state will change to Blocked.
         /// </summary>
         /// <param name="user">The user that tries to block the item</param>
-        public override void Block(IUser user)
+        public override void Block(User user)
         {
             base.LearningUtility.ReservedBy = user;
             base.LearningUtility.ToState(StateFactory.CreateState(StateType.Blocked, base.LearningUtility));

@@ -33,7 +33,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// set to the user passed by the parameter. This method doesn't change the state of the object.
         /// </summary>
         /// <param name="user">The user that tries to reserve the LearningUtility</param>
-        public override void Reserve(IUser user)
+        public override void Reserve(User user)
         {
             if (base.LearningUtility.ReservedBy != null)
                 throw new InvalidOperationException();
@@ -47,7 +47,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// set to the user passed by the parameter. This method doesn't change the state of the object.
         /// </summary>
         /// <param name="user">The user that tries to block the LearningUtility</param>
-        public override void Block(IUser user)
+        public override void Block(User user)
         {
             if (base.LearningUtility.ReservedBy != null && base.LearningUtility.ReservedBy.GetType() == typeof(Lector))
                 throw new InvalidOperationException();

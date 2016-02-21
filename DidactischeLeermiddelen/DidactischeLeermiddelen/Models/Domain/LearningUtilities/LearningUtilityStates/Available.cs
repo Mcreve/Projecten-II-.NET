@@ -32,7 +32,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// the ReservedBy property with the passed parameter and changes the object's state to Blocked.
         /// </summary>
         /// <param name="user">The user that wants to block the object</param>
-        public override void Block(IUser user)
+        public override void Block(User user)
         {
             base.LearningUtility.ReservedBy = user;
             base.LearningUtility.ToState(StateFactory.CreateState(StateType.Blocked, base.LearningUtility));
@@ -43,7 +43,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// the ReservedBy property with the passed paramter and changes the object's state to Reserved.
         /// </summary>
         /// <param name="user">The user that wants to reserve the object</param>
-        public override void Reserve(IUser user)
+        public override void Reserve(User user)
         {
             base.LearningUtility.ReservedBy = user;
             base.LearningUtility.ToState(StateFactory.CreateState(StateType.Reserved, base.LearningUtility));

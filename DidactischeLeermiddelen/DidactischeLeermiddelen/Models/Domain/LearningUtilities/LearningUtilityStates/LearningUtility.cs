@@ -30,11 +30,11 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// <summary>
         /// The user the object is currently lend to
         /// </summary>
-        public virtual IUser LendTo { get; set; }
+        public virtual User LendTo { get; set; }
         /// <summary>
         /// The user that has reserved this object
         /// </summary>
-        public virtual IUser ReservedBy { get; set; }
+        public virtual User ReservedBy { get; set; }
         #endregion
 
         #region Constructors
@@ -54,7 +54,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// Reserve method of the current state.
         /// </summary>
         /// <param name="user">The user that tries to reserve the object</param>
-        public void Reserve(IUser user)
+        public void Reserve(User user)
         {
             if(user.GetType() != typeof(Student))
                 throw new ArgumentException();
@@ -68,7 +68,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// Block method of the current state.
         /// </summary>
         /// <param name="user">The user that tries to block the object</param>
-        public void Block(IUser user)
+        public void Block(User user)
         {
             if(user.GetType() != typeof(Lector))
                 throw new ArgumentException();
