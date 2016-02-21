@@ -29,6 +29,8 @@ namespace DidactischeLeermiddelen.Models.DAL
             //roles
             roleStore = new RoleStore<IdentityRole>(context);
             roleManager = new RoleManager<IdentityRole>(roleStore);
+            //Locations
+            locations = new List<Location>();
 
             try
             {
