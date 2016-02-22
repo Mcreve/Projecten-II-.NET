@@ -13,9 +13,6 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         [TestMethod]
         public void TargetGroupDefaultConstructorCreatesATargetGroup()
         {
-            #region Arrange
-            const string targetGroupName = "GLEDE 1.011";
-            #endregion
 
             #region Act
             targetGroup = new TargetGroup();

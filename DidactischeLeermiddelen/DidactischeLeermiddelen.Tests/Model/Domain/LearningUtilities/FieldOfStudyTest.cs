@@ -13,9 +13,6 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         [TestMethod]
         public void FieldOfStudyDefaultConstructorCreatesAFieldOfStudy()
         {
-            #region Arrange
-            const string fieldOfStudyName = "GLEDE 1.011";
-            #endregion
 
             #region Act
             fieldOfStudy = new FieldOfStudy();

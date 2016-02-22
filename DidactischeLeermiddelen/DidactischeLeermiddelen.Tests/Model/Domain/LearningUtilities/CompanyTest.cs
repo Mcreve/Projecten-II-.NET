@@ -13,9 +13,6 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         [TestMethod]
         public void CompanyDefaultConstructorCreatesACompany()
         {
-            #region Arrange
-            const string companyName = "GLEDE 1.011";
-            #endregion
 
             #region Act
             company = new Company();

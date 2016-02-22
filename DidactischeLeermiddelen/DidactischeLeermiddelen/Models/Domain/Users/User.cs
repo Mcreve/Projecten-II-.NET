@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Properties;
 
@@ -23,7 +24,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         #endregion
         #region Methods
 
-        public abstract IList<LearningUtilityDetails> GetLearningUtilities(
+        public abstract IQueryable<LearningUtilityDetails> GetLearningUtilities(
             ILearningUtilityDetailsRepository learningUtilityDetailsRepository);
 
         #endregion

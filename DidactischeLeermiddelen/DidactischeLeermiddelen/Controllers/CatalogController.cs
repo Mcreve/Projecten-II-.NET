@@ -25,18 +25,19 @@ namespace DidactischeLeermiddelen.Controllers
 
 
         // GET: Catalog
-        public ActionResult Index()
+        public ActionResult Index(User user)
         {
-            IEnumerable<LearningUtilityDetails> catalog;
+            IEnumerable<LearningUtilityDetails> catalog = null;
 
-            if (User.IsInRole(UserType.Lector.ToString()))
+            if (User.Identity.IsAuthenticated)
             {
-                catalog = learningUtilityDetailsRepository.FindAll();
+                catalog = user.GetLearningUtilities(learningUtilityDetailsRepository);
             }
             else
             {
-                catalog = learningUtilityDetailsRepository.FindAllLoanable();
+                catalog = learningUtilityDetailsRepository.FindAll().Where(learningUtilityDetails => learningUtilityDetails.Loanable == true);
             }
+
             return View(catalog);
         }
 

@@ -13,9 +13,6 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         [TestMethod]
         public void LocationDefaultConstructorCreatesALocation()
         {
-            #region Arrange
-            const string locationName = "GLEDE 1.011";
-            #endregion
 
             #region Act
             location = new Location();

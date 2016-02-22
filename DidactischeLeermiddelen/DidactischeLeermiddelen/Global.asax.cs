@@ -20,11 +20,11 @@ namespace DidactischeLeermiddelen
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            ModelBinders.Binders.Add(typeof(User), new UserModelBinder());
-
-
             LeermiddelenContext db = new LeermiddelenContext();
             db.Database.Initialize(true);
+
+            ModelBinders.Binders.Add(typeof(User), new UserModelBinder());
+
         }
     }
 }

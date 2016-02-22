@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 
 namespace DidactischeLeermiddelen.Models.Domain.Users
@@ -19,10 +20,10 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         #endregion
         #region Methods
 
-        public override IList<LearningUtilityDetails> GetLearningUtilities(
+        public override IQueryable<LearningUtilityDetails> GetLearningUtilities(
             ILearningUtilityDetailsRepository leanringUtilityDetailsRepository)
         {
-            throw new NotImplementedException();
+            return leanringUtilityDetailsRepository.FindAll().Where(learningUtilityDetails => learningUtilityDetails.Loanable == true);
         }
 
         #endregion
