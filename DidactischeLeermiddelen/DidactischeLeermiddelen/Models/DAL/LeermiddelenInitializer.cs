@@ -7,11 +7,28 @@ using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates;
 
 namespace DidactischeLeermiddelen.Models.DAL
 {
     public class LeermiddelenInitializer : DropCreateDatabaseAlways<LeermiddelenContext>
-    {
+    {        
+        #region Properties
+
+        private LeermiddelenContext context;
+        private UserRepository userList;
+        private LearningUtilityDetailsRepository learningUtilityDetailsList;
+        private ICollection<Location> locations;
+
+        private UserStore<ApplicationUser> userStore;
+        private UserManager<ApplicationUser> userManager;
+
+        private RoleStore<IdentityRole> roleStore;
+        private RoleManager<IdentityRole> roleManager;
+        private ICollection<User> users;
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -31,12 +48,14 @@ namespace DidactischeLeermiddelen.Models.DAL
             roleManager = new RoleManager<IdentityRole>(roleStore);
             //Locations
             locations = new List<Location>();
+            users = new List<User>();
 
             try
             {
                 CreateRoles();
                 CreateUsers();
                 CreateLocations();
+                CreateLearningUtilities();
             }
             catch (DbEntityValidationException e)
             {
@@ -57,20 +76,7 @@ namespace DidactischeLeermiddelen.Models.DAL
 
         #endregion
 
-        #region Properties
 
-        private LeermiddelenContext context;
-        private UserRepository userList;
-        private LearningUtilityDetailsRepository learningUtilityDetailsList;
-        private ICollection<Location> locations;
-
-        private UserStore<ApplicationUser> userStore;
-        private UserManager<ApplicationUser> userManager;
-
-        private RoleStore<IdentityRole> roleStore;
-        private RoleManager<IdentityRole> roleManager;
-
-        #endregion
 
         #region Private methods
 
@@ -79,6 +85,7 @@ namespace DidactischeLeermiddelen.Models.DAL
         /// </summary>
         private void CreateUsers()
         {
+            
             string[] initialFirstNames =
             {
                 "Benjamin", "Jan", "Maxim", "Ward", "Ingeborg", "Sonja", "Mark", "Petra",
@@ -99,7 +106,7 @@ namespace DidactischeLeermiddelen.Models.DAL
         
                 var user = UserFactory.CreateUserWithParameters(firstName,lastName,email);
                 userList.Add(user);
-
+                users.Add(user);
                 CreateAccount(user);
                 context.SaveChanges();
             }
@@ -152,6 +159,47 @@ namespace DidactischeLeermiddelen.Models.DAL
                 var location = new Location(initialLocationName);
                 locations.Add(location);
             }
+        }
+
+        private void CreateLearningUtilities()
+        {
+            LearningUtility learningUtility;
+            Boolean flag = true;
+            int count = 0;
+            foreach(User user in users)
+            {
+                learningUtility = new LearningUtility();
+                if (flag)
+                {
+                    learningUtility.LendTo = user;
+                    learningUtility.ReservedBy = user;
+                    learningUtility.ToState(StateFactory.CreateState(StateType.HandedOut, learningUtility));
+                    flag = false;
+                } else
+                {
+                    learningUtility.ToState(StateFactory.CreateState(StateType.Available, learningUtility));
+                    flag = true;
+                }
+                CreateLearningUtilityDetails(learningUtility, ++count);
+            }
+        }
+
+        private void CreateLearningUtilityDetails(LearningUtility learningUtility, int suffix)
+        {
+            LearningUtilityDetails learningUtilityDetails = new LearningUtilityDetails
+            {
+                Name = "Wereldbol" + suffix,
+                Description = "Wereldbol " + suffix,
+                Company = new Company { Name = "Company" + suffix },
+                FieldOfStudy = new FieldOfStudy { Name = "FieldOfStudy" + suffix },
+                ArticleNumber = "Art100" + suffix,
+                Loanable = suffix % 2 == 0 ? true : false,
+                Location = locations.GetEnumerator().Current,
+                TargetGroup = new TargetGroup { Name = "Leerjaar " + suffix }
+            };
+            learningUtilityDetails.LearningUtilities.Add(learningUtility);
+            context.LearningUtilityDetailsList.Add(learningUtilityDetails);
+            context.SaveChanges();
         }
         #endregion
     }

@@ -17,7 +17,14 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
     public class LearningUtilityState
     {
         #region Properties
-        protected virtual LearningUtility LearningUtility { get; set; } 
+        /// <summary>
+        /// The LearningUtility object to wich the state belongs
+        /// </summary>
+        protected virtual LearningUtility LearningUtility { get; set; }
+        /// <summary>
+        /// Property for EntityFramework functionality
+        /// </summary>
+        public int Id { get; set; } 
         #endregion
 
         #region Constructors

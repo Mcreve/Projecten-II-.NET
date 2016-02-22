@@ -14,15 +14,11 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
     /// </summary>
     public class LearningUtility
     {
-        #region Fields
-        private LearningUtilityState currentState;
-        #endregion
-
         #region Properties
         /// <summary>
         /// The state this instance is currently in
         /// </summary>
-        public virtual LearningUtilityState CurrentState { get { return currentState; } }
+        public virtual LearningUtilityState CurrentState { get; set; }
         /// <summary>
         /// Property for EntityFramework functionality
         /// </summary>
@@ -58,7 +54,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         {
             if(user.GetType() != typeof(Student))
                 throw new ArgumentException();
-            currentState.Reserve(user);
+            CurrentState.Reserve(user);
         }
 
         /// <summary>
@@ -72,7 +68,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         {
             if(user.GetType() != typeof(Lector))
                 throw new ArgumentException();
-            currentState.Block(user);
+            CurrentState.Block(user);
         }
 
         /// <summary>
@@ -81,7 +77,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// </summary>
         public void MakeAvailable()
         {
-            currentState.MakeAvailable();
+            CurrentState.MakeAvailable();
         }
 
         /// <summary>
@@ -90,7 +86,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// </summary>
         public void Late()
         {
-            currentState.Late();
+            CurrentState.Late();
         }
 
         /// <summary>
@@ -101,7 +97,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// <param name="state">The state this object needs to change to</param>
         public void ToState(LearningUtilityState state)
         {
-            this.currentState = state;
+            this.CurrentState = state;
         }
         #endregion
     }
