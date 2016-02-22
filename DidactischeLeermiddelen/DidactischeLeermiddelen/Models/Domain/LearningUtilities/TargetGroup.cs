@@ -16,6 +16,11 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 
         #region Properties
         public int Id { get; set; }
+        /// <summary>
+        /// Sets the name of the TargetGroup 
+        /// Required: Min 1 Character, Max 100 Characters
+        /// <exception cref="ValidationException"></exception>
+        /// </summary>
         [DisplayName(@"Doelgroep")]
         [Required(ErrorMessageResourceType = typeof(Resources),
                   ErrorMessageResourceName = "TargetGroupNameRegex")]
@@ -33,12 +38,18 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             }
         }
         #endregion
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
         #region Constructors
         public TargetGroup()
         {
 
         }
-
+        /// <summary>
+        /// Constructor with 1 parameter, calls default constructor
+        /// </summary>
+        /// <param name="name"></param>
         public TargetGroup(string name) : this()
         {
             this.Name = name;

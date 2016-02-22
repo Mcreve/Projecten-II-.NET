@@ -7,15 +7,17 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
     public class Company
     {
         #region Fields
-
         private string name;
-
         #endregion
 
         #region Propterties
 
         public int Id { get; set; }
-
+        /// <summary>
+        /// Sets the name of the Company 
+        /// Required: Min 1 Character, Max 100 Characters
+        /// <exception cref="ValidationException"></exception>
+        /// </summary>
         [DisplayName(@"Bedrijf")]
         [Required(ErrorMessageResourceType = typeof (Resources),
             ErrorMessageResourceName = "CompanyNameRegex")]
@@ -36,11 +38,16 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         #endregion
 
         #region Constructors
-
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
         public Company()
         {
         }
-
+        /// <summary>
+        /// Constructor with 1 parameter, calls default constructor
+        /// </summary>
+        /// <param name="name"></param>
         public Company(string name) : this()
         {
             Name = name;

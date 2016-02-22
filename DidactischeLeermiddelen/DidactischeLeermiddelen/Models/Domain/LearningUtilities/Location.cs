@@ -11,11 +11,17 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         #endregion
 
         #region Constructors
-
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
         public Location()
         {
             
         }
+        /// <summary>
+        /// Constructor with 1 parameter, calls default constructor
+        /// </summary>
+        /// <param name="name"></param>
         public Location(string name):this()
         {
             Name = name;
@@ -26,7 +32,11 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         #region Properties
 
         public int Id { get; set; }
-
+        /// <summary>
+        /// Sets the name of the Location 
+        /// Required: Min 1 Character, Max 100 Characters
+        /// <exception cref="ValidationException"></exception>
+        /// </summary>
         [DisplayName(@"Locatie")]
         [Required(ErrorMessageResourceType = typeof (Resources),
             ErrorMessageResourceName = "LocationNameRegex")]

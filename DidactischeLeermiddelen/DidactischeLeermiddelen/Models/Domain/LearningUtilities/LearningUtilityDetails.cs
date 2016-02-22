@@ -26,7 +26,12 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         #endregion
 
         #region Constructors
-        public LearningUtilityDetails() { }
+
+        public LearningUtilityDetails()
+        {
+            LearningUtilities = new List<LearningUtility>();
+        }
+
         #endregion
     }
 }

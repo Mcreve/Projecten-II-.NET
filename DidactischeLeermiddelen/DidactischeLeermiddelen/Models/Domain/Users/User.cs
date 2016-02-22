@@ -10,12 +10,22 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
     public abstract class User
     {
         #region Constructor
-
+        /// <summary>
+        /// Default Constructor
+        /// Creates a subclass Student or Lector
+        /// </summary>
         protected User()
         {
             
         }
-        protected User(string firstName, string lastName, string emailAddress)
+        /// <summary>
+        /// Constructor with 3 parameter, calls default constructor
+        /// Creates a subclass Student or Lector
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="emailAddress"></param>
+        protected User(string firstName, string lastName, string emailAddress):this()
         {
             this.FirstName = firstName;
             this.LastName = lastName;
@@ -24,6 +34,13 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         #endregion
         #region Methods
 
+        /// <summary>
+        /// Returns the LearningUtilityDetails in a IQueryable which a specific user can see
+        /// <seealso cref="Student"/>
+        /// <seealso cref="Lector"/>
+        /// </summary>
+        /// <param name="learningUtilityDetailsRepository"></param>
+        /// <returns>Student or Lector object</returns>
         public abstract IQueryable<LearningUtilityDetails> GetLearningUtilities(
             ILearningUtilityDetailsRepository learningUtilityDetailsRepository);
 
@@ -40,7 +57,11 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         #region Properties
 
         public int Id { get; set; }
-
+        /// <summary>
+        /// Sets the first name of the User 
+        /// Required: Min 1 Character, Max 100 Characters
+        /// <exception cref="ValidationException"></exception>
+        /// </summary>
         [DisplayName(@"Voornaam")]
         [Required(ErrorMessageResourceType = typeof(Resources),
             ErrorMessageResourceName = "UserFirstNameRegex")]
@@ -57,7 +78,11 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
                 firstName = value;
             }
         }
-
+        /// <summary>
+        /// Sets the last name of the User 
+        /// Required: Min 1 Character, Max 100 Characters
+        /// <exception cref="ValidationException"></exception>
+        /// </summary>
         [DisplayName(@"Achternaam")]
         [Required(ErrorMessageResourceType = typeof(Resources),
             ErrorMessageResourceName = "UserLastNameRegex")]
@@ -74,7 +99,12 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
                 lastName = value;
             }
         }
-
+        /// <summary>
+        /// Sets the Email Address of the User 
+        /// Required: Min 1 Character, Max 100 Characters before hogent.be
+        /// Has to end with "hogent.be"
+        /// <exception cref="ValidationException"></exception>
+        /// </summary>
         [DisplayName(@"E-mail")]
         [Required(ErrorMessageResourceType = typeof(Resources),
             ErrorMessageResourceName = "UserEmailRegex")]

@@ -22,11 +22,6 @@ namespace DidactischeLeermiddelen.Models.DAL
             return learningUtilityDetailsList;
         }
 
-        public IQueryable<LearningUtilityDetails> FindAllLoanable()
-        {
-            return learningUtilityDetailsList.Where(learningUtilityDetails => learningUtilityDetails.Loanable == true);
-        }
-
         public LearningUtilityDetails FindBy(int id)
         {
             return learningUtilityDetailsList.Find(id);

@@ -15,7 +15,11 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         #region Properties
 
         public int Id { get; set; }
-
+        /// <summary>
+        /// Sets the name of the FieldOfStudy 
+        /// Required: Min 1 Character, Max 100 Characters
+        /// <exception cref="ValidationException"></exception>
+        /// </summary>
         [DisplayName(@"Leergebied")]
         [Required(ErrorMessageResourceType = typeof (Resources),
             ErrorMessageResourceName = "FieldOfStudyNameRegex")]
@@ -36,11 +40,16 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         #endregion
 
         #region Constructors
-
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
         public FieldOfStudy()
         {
         }
-
+        /// <summary>
+        /// Constructor with 1 parameter, calls default constructor
+        /// </summary>
+        /// <param name="name"></param>
         public FieldOfStudy(string name) : this()
         {
             Name = name;

@@ -10,7 +10,6 @@ namespace DidactischeLeermiddelen.Models.Domain
     public interface ILearningUtilityDetailsRepository
     {
         IQueryable<LearningUtilityDetails> FindAll();
-        IQueryable<LearningUtilityDetails> FindAllLoanable();
         LearningUtilityDetails FindBy(int id);
     }
 }
