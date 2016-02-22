@@ -115,6 +115,7 @@
     <Compile Include="Model\Domain\LearningUtilities\LearningUtilityStates\LearningUtilityUnavailableStateTests.cs" />
     <Compile Include="Model\Domain\LearningUtilities\CompanyTest.cs" />
     <Compile Include="Model\Domain\LearningUtilities\LocationTest.cs" />
+    <Compile Include="Model\Domain\LearningUtilities\LearningUtilityDetailsTest.cs" />
     <Compile Include="Model\Domain\Users\UserFactoryTest.cs" />
     <Compile Include="Model\Domain\Users\UserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -93,7 +93,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         [TestMethod]
-        public void LocationNameHasAlphaNumericNameCreatesIt()
+        public void LocationNameHasAlphaNumericNameSetsIt()
         {
             #region Arrange
             const string locationName = "GLEDE 1.011";
