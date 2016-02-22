@@ -14,18 +14,19 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
 
         private User student;
         private User lector;
-        private Mock<ILearningUtilityDetailsRepository> mockLearningUtilityDetailsRepository;
-        private DummyDataContext context;
+      /*  private Mock<ILearningUtilityDetailsRepository> mockLearningUtilityDetailsRepository;
+        private DummyDataContext context;*/
         #endregion
 
         [TestInitialize]
         public void UserTestInitialize()
         {
+          /*
             //Mocking the LearningUtilityDetailsRepository with DummyDataContext
             context = new DummyDataContext();
             mockLearningUtilityDetailsRepository = new Mock<ILearningUtilityDetailsRepository>();
             mockLearningUtilityDetailsRepository.Setup(repo => repo.FindAll()).Returns(context.LearningUtilityDetailsList);
-
+            */
             student = UserFactory.CreateUserWithUserType(UserType.Student);
             lector = UserFactory.CreateUserWithUserType(UserType.Lector);
         }
@@ -272,7 +273,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
             #endregion
         }
 
-        [TestMethod]
+       /* [TestMethod]
         public void LectorGetLearningUtilityDetails()
         {
 
@@ -310,7 +311,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
             mockGemeenteRepository.Verify(m => m.FindAll(), Times.Once);
 
             #endregion
-        }
+        }*/
 
     }
 }
