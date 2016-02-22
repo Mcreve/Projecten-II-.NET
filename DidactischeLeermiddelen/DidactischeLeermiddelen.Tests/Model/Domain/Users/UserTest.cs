@@ -1,16 +1,31 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace DidactischeLeermiddelen.Tests.Model.Users
 {
     [TestClass]
     public class UserTest
     {
+        #region Arrange
+
+        private User student;
+        private User lector;
+        private Mock<ILearningUtilityDetailsRepository> mockLearningUtilityDetailsRepository;
+        private DummyDataContext context;
+        #endregion
+
         [TestInitialize]
         public void UserTestInitialize()
         {
+            //Mocking the LearningUtilityDetailsRepository with DummyDataContext
+            context = new DummyDataContext();
+            mockLearningUtilityDetailsRepository = new Mock<ILearningUtilityDetailsRepository>();
+            mockLearningUtilityDetailsRepository.Setup(repo => repo.FindAll()).Returns(context.LearningUtilityDetailsList);
+
             student = UserFactory.CreateUserWithUserType(UserType.Student);
             lector = UserFactory.CreateUserWithUserType(UserType.Lector);
         }
@@ -257,11 +272,45 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
             #endregion
         }
 
-        #region Arrange
+        [TestMethod]
+        public void LectorGetLearningUtilityDetails()
+        {
 
-        private User student;
-        private User lector;
+            #region Act
 
-        #endregion
+            var expectedList =
+                context.LearningUtilityDetailsList;
+            var actualList = lector.GetLearningUtilities(mockLearningUtilityDetailsRepository);
+
+            #endregion
+
+            #region Assert
+
+            Assert.AreEqual(expectedList, actualList);
+            mockGemeenteRepository.Verify(m => m.FindAll(), Times.Once);
+
+            #endregion
+        }
+        [TestMethod]
+        public void StudentGetLearningUtilityDetails()
+        {
+
+            #region Act
+
+            var expectedList =
+                context.LearningUtilityDetailsList.Where(
+                    learningUtilityDetails => learningUtilityDetails.Loanable == true);
+            var actualList = student.GetLearningUtilities(mockLearningUtilityDetailsRepository);
+
+            #endregion
+
+            #region Assert
+
+            Assert.AreEqual(expectedList, actualList);
+            mockGemeenteRepository.Verify(m => m.FindAll(), Times.Once);
+
+            #endregion
+        }
+
     }
 }
