@@ -40,7 +40,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         /// <seealso cref="Lector"/>
         /// </summary>
         /// <param name="learningUtilityDetailsRepository"></param>
-        /// <returns>Student or Lector object</returns>
+        /// <returns>Returns the LearningUtilityDetails in a IQueryable which a specific user can see</returns>
         public abstract IQueryable<LearningUtilityDetails> GetLearningUtilities(
             ILearningUtilityDetailsRepository learningUtilityDetailsRepository);
 
@@ -55,8 +55,10 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         #endregion
 
         #region Properties
-
-        public int Id { get; set; }
+        /// <summary>
+        /// Used in identity / EF => String
+        /// </summary>
+        public string Id { get; set; }
         /// <summary>
         /// Sets the first name of the User 
         /// Required: Min 1 Character, Max 100 Characters

@@ -10,12 +10,21 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
     {
         #region Arrange
         private LearningUtilityDetails initiaLearningUtilityDetails;
+        private Location initialLocation;
+        private FieldOfStudy initialFieldOfStudy;
+        private TargetGroup initialTargetGroup;
+        private Company initialCompany;
+
         #endregion
 
         [TestInitialize]
         public void LearningUtilityDetailsTestInitialize()
         {
             initiaLearningUtilityDetails = new LearningUtilityDetails();
+            initialLocation = new Location("GELDE 1.001");
+            initialFieldOfStudy = new FieldOfStudy("Geschiedenis");
+            initialTargetGroup = new TargetGroup("1e leerjaar");
+            initialCompany = new Company("Verbe");
         }
 
         #region ConstructorTests
@@ -30,6 +39,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             Assert.IsInstanceOfType(learningUtilityDetail, typeof(LearningUtilityDetails));
             Assert.IsNotNull(learningUtilityDetail.LearningUtilities);
             Assert.IsTrue(learningUtilityDetail.Loanable);
+            Assert.AreEqual(0,learningUtilityDetail.Price);
             #endregion
         }
 
@@ -54,9 +64,10 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             Assert.AreEqual(name, learningUtilityDetail.Name);
             Assert.AreEqual(description, learningUtilityDetail.Description);
             Assert.AreEqual(location.Name, learningUtilityDetail.Location.Name);
+            Assert.AreEqual(0, learningUtilityDetail.Price);
             #endregion
 
-        } 
+        }
         #endregion
 
         #region NameTests
@@ -143,14 +154,20 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         #endregion
         #region DescriptionTests
         [TestMethod]
-        public void LearningUtilityDetailsDescriptionIs500CharactersLongSetsTheDescription()
+        public void LearningUtilityDetailsDescriptionIs101CharactersLongSetsTheDescription()
         {
+            #region Arrange
+            const string description = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
+            #endregion
+
             #region Act
 
+            initiaLearningUtilityDetails.Description = description;
             #endregion
 
             #region Assert
-
+            Assert.AreEqual(101, description.Length);
+            Assert.AreEqual(description, initiaLearningUtilityDetails.Description);
             #endregion
         }
 
@@ -160,21 +177,43 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         {
             #region Act
 
+            const string description =
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+
+            #endregion
+
+            #region Act
+
+            initiaLearningUtilityDetails.Description = description;
             #endregion
 
             #region Assert
-
+            Assert.AreEqual(1001, description.Length);
             #endregion
         }
         [TestMethod]
         public void LearningUtilityDetailsDescriptionHasAlphaNumericDescriptionSetsIt()
         {
+            #region Arrange
+            const string description = "Wereldkaart 1 die ...";
+            #endregion
+
             #region Act
 
+            initiaLearningUtilityDetails.Description = description;
             #endregion
 
             #region Assert
-
+            Assert.AreEqual(description, initiaLearningUtilityDetails.Description);
             #endregion
         }
         [TestMethod]
@@ -183,11 +222,9 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         {
             #region Act
 
+            initiaLearningUtilityDetails.Description = null;
             #endregion
 
-            #region Assert
-
-            #endregion
         }
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
@@ -195,10 +232,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         {
             #region Act
 
-            #endregion
-
-            #region Assert
-
+            initiaLearningUtilityDetails.Description = String.Empty;
             #endregion
         }
         #endregion
@@ -208,10 +242,12 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         {
             #region Act
 
+            initiaLearningUtilityDetails.Location = initialLocation;
+
             #endregion
 
             #region Assert
-
+            Assert.AreEqual(initialLocation.Name,initiaLearningUtilityDetails.Location.Name);
             #endregion
         }
 
@@ -221,21 +257,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         {
             #region Act
 
-            #endregion
-
-            #region Assert
-
-            #endregion
-        }
-        [TestMethod]
-        [ExpectedException(typeof(ValidationException))]
-        public void LearningUtilityDetailsLocationIsEmptyThrowsError()
-        {
-            #region Act
-
-            #endregion
-
-            #region Assert
+            initiaLearningUtilityDetails.Location = null;
 
             #endregion
         }
@@ -244,45 +266,101 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         [TestMethod]
         public void LearningUtilityDetailsPriceIs50SetsIt()
         {
-            #region Act
+            #region Arrange
+
+            var price = 50M;
 
             #endregion
 
-            #region Assert
+            #region Act
+            initiaLearningUtilityDetails.Price = price;
+            #endregion
 
+            #region Assert
+            Assert.AreEqual((decimal)price,initiaLearningUtilityDetails.Price);
             #endregion
         }
         [TestMethod]
-        public void LearningUtilityDetailsPriceIsNegativeThrowsError()
+        public void LearningUtilityDetailsPriceIsInt50SetsIt()
         {
-            #region Act
+            #region Arrange
 
+            int price = 50;
+
+            #endregion
+
+            #region Act
+            initiaLearningUtilityDetails.Price = price;
             #endregion
 
             #region Assert
+            Assert.AreEqual((decimal)price, initiaLearningUtilityDetails.Price);
+            #endregion
+        }
+        [TestMethod]
+        public void LearningUtilityDetailsPriceIsDecimalSetsIt()
+        {
+            #region Arrange
+
+            decimal price = 0.87M;
 
             #endregion
+
+            #region Act
+            initiaLearningUtilityDetails.Price = price;
+            #endregion
+
+            #region Assert
+            Assert.AreEqual((decimal)price, initiaLearningUtilityDetails.Price);
+            #endregion
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ValidationException))]
+        public void LearningUtilityDetailsPriceIsNegativeThrowsError()
+        {
+            #region Arrange
+
+            var price = Decimal.MinValue;
+
+            #endregion
+
+            #region Act
+            initiaLearningUtilityDetails.Price = price;
+            #endregion
+
         }
         [TestMethod]
         public void LearningUtilityDetailsPriceIsNullSetsIt()
         {
-            #region Act
+            #region Arrange
+
+            decimal? price = null;
 
             #endregion
 
-            #region Assert
+            #region Act
+            initiaLearningUtilityDetails.Price = price;
+            #endregion
 
+            #region Assert
+            Assert.AreEqual((decimal)price, initiaLearningUtilityDetails.Price);
             #endregion
         }
         [TestMethod]
         public void LearningUtilityDetailsPriceIsZeroSetsIt()
         {
-            #region Act
+            #region Arrange
+
+            decimal? price = Decimal.Zero;
 
             #endregion
 
-            #region Assert
+            #region Act
+            initiaLearningUtilityDetails.Price = price;
+            #endregion
 
+            #region Assert
+            Assert.AreEqual((decimal)price, initiaLearningUtilityDetails.Price);
             #endregion
         }
         #endregion
@@ -290,12 +368,18 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         [TestMethod]
         public void LearningUtilityDetailsArticleNumberIs50CharactersLongSetsTheArticleNumber()
         {
+            #region Arrange
+            const string articleNr = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            #endregion
+
             #region Act
 
+            initiaLearningUtilityDetails.ArticleNumber = articleNr;
             #endregion
 
             #region Assert
-
+            Assert.AreEqual(50, articleNr.Length);
+            Assert.AreEqual(articleNr, initiaLearningUtilityDetails.ArticleNumber);
             #endregion
         }
 
@@ -303,47 +387,68 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         [ExpectedException(typeof(ValidationException))]
         public void LearningUtilityDetailsArticleNumberIs101CharactersLongThrowsError()
         {
+            #region Arrange
+            const string articleNr = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
+            #endregion
+
             #region Act
 
+            initiaLearningUtilityDetails.ArticleNumber = articleNr;
             #endregion
 
             #region Assert
-
+            Assert.AreEqual(101, articleNr.Length);
+            Assert.AreEqual(articleNr, initiaLearningUtilityDetails.ArticleNumber);
             #endregion
         }
         [TestMethod]
         public void LearningUtilityDetailsArticleNumberHasAlphaNumericArticleNumberSetsIt()
         {
+            #region Arrange
+            const string articleNr = "FHZ.123";
+            #endregion
+
             #region Act
 
+            initiaLearningUtilityDetails.ArticleNumber = articleNr;
             #endregion
 
             #region Assert
-
+            Assert.AreEqual(articleNr, initiaLearningUtilityDetails.ArticleNumber);
             #endregion
         }
         [TestMethod]
-        [ExpectedException(typeof(ValidationException))]
-        public void LearningUtilityDetailsArticleNumberHasIsNullThrowsError()
+        public void LearningUtilityDetailsArticleNumberHasIsNullSetsIt()
         {
+            #region Arrange
+            const string articleNr = null;
+            #endregion
+
             #region Act
+
+            initiaLearningUtilityDetails.ArticleNumber = articleNr;
 
             #endregion
 
             #region Assert
-
+            Assert.AreEqual(articleNr, initiaLearningUtilityDetails.ArticleNumber);
             #endregion
         }
         [TestMethod]
-        [ExpectedException(typeof(ValidationException))]
-        public void LearningUtilityDetailsArticleNumberHasIsEmptyThrowsError()
+        public void LearningUtilityDetailsArticleNumberHasIsEmptySetsIt()
         {
+            #region Arrange
+            string articleNr = String.Empty;
+            #endregion
+
             #region Act
+
+            initiaLearningUtilityDetails.ArticleNumber = articleNr;
 
             #endregion
 
             #region Assert
-
+            Assert.AreEqual(articleNr, initiaLearningUtilityDetails.ArticleNumber);
             #endregion
         }
         #endregion
@@ -353,10 +458,12 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         {
             #region Act
 
+            initiaLearningUtilityDetails.FieldOfStudy = initialFieldOfStudy;
+
             #endregion
 
             #region Assert
-
+            Assert.AreEqual(initialFieldOfStudy.Name,initiaLearningUtilityDetails.FieldOfStudy.Name);
             #endregion
         }
 
@@ -367,10 +474,12 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         {
             #region Act
 
+            initiaLearningUtilityDetails.TargetGroup = initialTargetGroup;
+
             #endregion
 
             #region Assert
-
+            Assert.AreEqual(initialTargetGroup.Name,initiaLearningUtilityDetails.TargetGroup.Name);
             #endregion
         }
         #endregion
@@ -380,10 +489,12 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         {
             #region Act
 
+            initiaLearningUtilityDetails.Company = initialCompany;
+
             #endregion
 
             #region Assert
-
+            Assert.AreEqual(initialCompany.Name, initiaLearningUtilityDetails.Company.Name);
             #endregion
         }
         #endregion

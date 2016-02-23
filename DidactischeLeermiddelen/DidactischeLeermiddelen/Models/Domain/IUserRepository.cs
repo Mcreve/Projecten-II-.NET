@@ -5,7 +5,7 @@ namespace DidactischeLeermiddelen.Models.Domain
     public interface IUserRepository
     {
         #region Methods
-        User FindBy(string emailAdress);
+        User FindBy(string id);
         void SaveChanges();
         void Add(User user); 
         #endregion

@@ -29,11 +29,12 @@ namespace DidactischeLeermiddelen.Models.DAL
         /// <summary>
         ///     Finds a user based on e-mail address
         /// </summary>
+        /// <param name="id"></param>
         /// <param name="emailAdress"></param>
         /// <returns></returns>
-        public User FindBy(string emailAdress)
+        public User FindBy(string id)
         {
-            return userList.FirstOrDefault(u => u.EmailAddress == emailAdress);
+            return userList.FirstOrDefault(u => u.Id == id);
         }
 
         /// <summary>
