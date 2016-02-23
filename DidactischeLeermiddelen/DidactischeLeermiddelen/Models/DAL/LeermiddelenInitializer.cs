@@ -19,7 +19,7 @@ namespace DidactischeLeermiddelen.Models.DAL
         private LeermiddelenContext context;
         private UserRepository userList;
         private LearningUtilityDetailsRepository learningUtilityDetailsList;
-        private ICollection<Location> locations;
+        private IList<Location> locations;
 
         private UserStore<ApplicationUser> userStore;
         private UserManager<ApplicationUser> userManager;
