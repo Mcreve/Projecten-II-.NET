@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
@@ -15,32 +14,23 @@ namespace DidactischeLeermiddelen.Models.DAL
     public class LeermiddelenInitializer : DropCreateDatabaseAlways<LeermiddelenContext>
     {        
         #region Properties
-
         private LeermiddelenContext context;
-        private UserRepository userList;
-        private LearningUtilityDetailsRepository learningUtilityDetailsList;
-        private IList<Location> locations;
-
+        private ICollection<Location> locations;
         private UserStore<ApplicationUser> userStore;
         private UserManager<ApplicationUser> userManager;
-
         private RoleStore<IdentityRole> roleStore;
         private RoleManager<IdentityRole> roleManager;
         private ICollection<User> users;
-
         #endregion
 
         #region Methods
-
         /// <summary>
-        ///     Initial seed of the database
+        /// Initial seed of the database. Add a private method in the "try - catch" block to add additional data to the database.
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">The context instance that should be seeded</param>
         protected override void Seed(LeermiddelenContext context)
         {
             this.context = context;
-            userList = new UserRepository(context);
-            learningUtilityDetailsList = new LearningUtilityDetailsRepository(context);
             //Accounts
             userStore = new UserStore<ApplicationUser>(context);
             userManager = new UserManager<ApplicationUser>(userStore);
@@ -56,7 +46,7 @@ namespace DidactischeLeermiddelen.Models.DAL
                 CreateRoles();
                 CreateUsers();
                 CreateLocations();
-                CreateLearningUtilities();
+                CreateLearningUtilityDetails();
             }
             catch (DbEntityValidationException e)
             {
@@ -74,19 +64,17 @@ namespace DidactischeLeermiddelen.Models.DAL
                 throw new Exception(s);
             }
         }
-
         #endregion
-
-
 
         #region Private methods
 
+        #region Users creation
         /// <summary>
-        ///     Creates 5 Student users and accounts, Creates 5 Lector users and accounts
+        /// Creates 5 Student users and accounts, Creates 5 Lector users and accounts
         /// </summary>
         private void CreateUsers()
         {
-            
+
             string[] initialFirstNames =
             {
                 "Benjamin", "Jan", "Maxim", "Ward", "Ingeborg", "Sonja", "Mark", "Petra",
@@ -104,9 +92,9 @@ namespace DidactischeLeermiddelen.Models.DAL
                 string firstName = initialFirstNames[i];
                 string lastName = initialLastNames[i];
                 string email = initialFirstNames[i] + "." + initialLastNames[i] + suffix;
-        
-                var user = UserFactory.CreateUserWithParameters(firstName,lastName,email);
-                userList.Add(user);
+
+                var user = UserFactory.CreateUserWithParameters(firstName, lastName, email);
+                context.UserList.Add(user);
                 users.Add(user);
                 CreateAccount(user);
                 context.SaveChanges();
@@ -114,9 +102,10 @@ namespace DidactischeLeermiddelen.Models.DAL
         }
 
         /// <summary>
-        ///     Creates the account for the user
+        /// Creates the account for the user and sets the role for the user depending on
+        /// it's emailaddres suffix.
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="user">The user for wich the account should be created in the database</param>
         private void CreateAccount(User user)
         {
             var account = new ApplicationUser
@@ -134,9 +123,7 @@ namespace DidactischeLeermiddelen.Models.DAL
         }
 
         /// <summary>
-        ///     Creates the roles of the application
-        ///     - Student
-        ///     - Lector
+        /// Creates the roles of the application: Student and Lector
         /// </summary>
         private void CreateRoles()
         {
@@ -148,7 +135,10 @@ namespace DidactischeLeermiddelen.Models.DAL
             var lectorRole = new IdentityRole(UserType.Lector.ToString());
             roleManager.Create(lectorRole);
             context.SaveChanges();
-        }
+        } 
+        #endregion
+        
+        #region LearningUtility creation
         /// <summary>
         /// Creates the initial locations and adds them to a list.
         /// </summary>
@@ -162,46 +152,88 @@ namespace DidactischeLeermiddelen.Models.DAL
             }
         }
 
-        private void CreateLearningUtilities()
+        /// <summary>
+        /// This method creates a new LearningUtility to be added to a learningUtilityDetails object. This method sets
+        /// the initial state and the properties ReservedBy and LendTo of the new instance.
+        /// </summary>
+        /// <param name="stateType">The initial state the learningUtility should be in</param>
+        /// <param name="reservedBy">The user that the item is reserved to</param>
+        /// <param name="lendTo">The user that the item is lend to</param>
+        /// <returns>A LearningUtility instance</returns>
+        private LearningUtility CreateLearningUtility(StateType stateType, User reservedBy, User lendTo)
         {
-            LearningUtility learningUtility;
-            Boolean flag = true;
-            int count = 0;
-            foreach(User user in users)
+            LearningUtility learningUtility = new LearningUtility
             {
-                learningUtility = new LearningUtility();
-                if (flag)
-                {
-                    learningUtility.LendTo = user;
-                    learningUtility.ReservedBy = user;
-                    learningUtility.ToState(StateFactory.CreateState(StateType.HandedOut, learningUtility));
-                    flag = false;
-                } else
-                {
-                    learningUtility.ToState(StateFactory.CreateState(StateType.Available, learningUtility));
-                    flag = true;
-                }
-                CreateLearningUtilityDetails(learningUtility, ++count);
-            }
+                ReservedBy = stateType == StateType.Unavailable || stateType == StateType.Available ? null : reservedBy,
+                LendTo = stateType == StateType.Late || stateType == StateType.HandedOut ? lendTo : null
+            };
+            learningUtility.ToState(StateFactory.CreateState(stateType, learningUtility));
+            return learningUtility;
         }
 
-        private void CreateLearningUtilityDetails(LearningUtility learningUtility, int suffix)
+
+        /// <summary>
+        /// This method creates some LearningUtilityDetails objects to seed the database
+        /// </summary>
+        private void CreateLearningUtilityDetails()
         {
+            //Create worldglobe object
             LearningUtilityDetails learningUtilityDetails = new LearningUtilityDetails
             {
-                Name = "Wereldbol" + suffix,
-                Description = "Wereldbol " + suffix,
-                Company = new Company { Name = "Company" + suffix },
-                FieldOfStudy = new FieldOfStudy { Name = "FieldOfStudy" + suffix },
-                ArticleNumber = "Art100" + suffix,
-                Loanable = suffix % 2 == 0 ? true : false,
+                Name = "Wereldbol",
+                Description = "Wereldbol",
+                Company = new Company { Name = "Wolters" },
+                FieldOfStudy = new FieldOfStudy { Name = "Aarderijkskunde" },
+                ArticleNumber = "Art1001",
+                Loanable = true,
                 Location = locations.First(),
-                TargetGroup = new TargetGroup { Name = "Leerjaar " + suffix }
+                TargetGroup = new TargetGroup { Name = "Leerjaar 1 - 6" },
+                Picture = @"\items\pictures\wereldbol.jpg",
+                Price = 75m
             };
-            learningUtilityDetails.LearningUtilities.Add(learningUtility);
+            learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Available, null, null));
+            learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Reserved, users.First(), null));
             context.LearningUtilityDetailsList.Add(learningUtilityDetails);
+
+            //Create dobbelsteenschatkist object
+            learningUtilityDetails = new LearningUtilityDetails
+            {
+                Name = "Dobbelsteen schatkist 162-delig",
+                ArticleNumber = "MH1447",
+                Company = new Company { Name = "Hasbro" },
+                Description = "Koffertje met verschillende soorten dobbelstenen: blanco, met cijfers,...",
+                FieldOfStudy = new FieldOfStudy { Name = "Ontspanning" },
+                Loanable = true,
+                Location = locations.First(),
+                Picture = @"\items\pictures\dobbelsteen_schatkist_162-delig.jpg",
+                Price = 35m,
+                TargetGroup = new TargetGroup { Name = "Eerste leerjaar" }
+            };
+            learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.HandedOut, null, users.ElementAtOrDefault(1)));
+            learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Unavailable, null, null));
+            context.LearningUtilityDetailsList.Add(learningUtilityDetails);
+
+            //Create rekenspelletjes object
+            learningUtilityDetails = new LearningUtilityDetails
+            {
+                Name = "Rekenspelletjes optellen en aftrekken",
+                ArticleNumber = "MX203510",
+                Company = new Company { Name = "Texas-Instruments" },
+                Description = "Spelbord op het opdrachtenboekje leggen > opdracht oplossen door het juiste cijfer van het spelbord op het juiste antwoord in het boekje te leggen > controle door het spelbord dicht te klappen en om te draaien > de patronen moeten overeen komen.",
+                FieldOfStudy = new FieldOfStudy { Name = "Wiskunde" },
+                Loanable = false,
+                Location = locations.ElementAtOrDefault(1),
+                Picture = @"\items\pictures\rekenspelletjes_optellen_en_aftrekken.jpg",
+                Price = 10.9m,
+                TargetGroup = new TargetGroup { Name = "Tweede leerjaar" }
+            };
+            learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Blocked, users.ElementAtOrDefault(5), null));
+            context.LearningUtilityDetailsList.Add(learningUtilityDetails);
+
             context.SaveChanges();
-        }
+        } 
+        #endregion
+
         #endregion
     }
 }
