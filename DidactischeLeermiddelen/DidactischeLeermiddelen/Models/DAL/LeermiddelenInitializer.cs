@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.AspNet.Identity;
@@ -18,7 +19,7 @@ namespace DidactischeLeermiddelen.Models.DAL
         private LeermiddelenContext context;
         private UserRepository userList;
         private LearningUtilityDetailsRepository learningUtilityDetailsList;
-        private ICollection<Location> locations;
+        private IList<Location> locations;
 
         private UserStore<ApplicationUser> userStore;
         private UserManager<ApplicationUser> userManager;
@@ -194,7 +195,7 @@ namespace DidactischeLeermiddelen.Models.DAL
                 FieldOfStudy = new FieldOfStudy { Name = "FieldOfStudy" + suffix },
                 ArticleNumber = "Art100" + suffix,
                 Loanable = suffix % 2 == 0 ? true : false,
-                Location = locations.GetEnumerator().Current,
+                Location = locations.First(),
                 TargetGroup = new TargetGroup { Name = "Leerjaar " + suffix }
             };
             learningUtilityDetails.LearningUtilities.Add(learningUtility);
