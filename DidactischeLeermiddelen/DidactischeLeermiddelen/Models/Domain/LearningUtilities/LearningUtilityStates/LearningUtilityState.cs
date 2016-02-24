@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using DidactischeLeermiddelen.Models.Domain.Users;
 
 namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates
@@ -20,11 +17,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// <summary>
         /// The LearningUtility object to wich the state belongs
         /// </summary>
-        protected virtual LearningUtility LearningUtility { get; set; }
-        /// <summary>
-        /// Property for EntityFramework functionality
-        /// </summary>
-        public int Id { get; set; } 
+        public LearningUtility LearningUtility { get; set; }
         #endregion
 
         #region Constructors

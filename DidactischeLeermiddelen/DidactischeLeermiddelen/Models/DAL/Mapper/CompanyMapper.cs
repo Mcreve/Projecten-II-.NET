@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity.ModelConfiguration;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 
 namespace DidactischeLeermiddelen.Models.DAL.Mapper
@@ -14,7 +10,6 @@ namespace DidactischeLeermiddelen.Models.DAL.Mapper
         {
             #region Properties
             Property(company => company.Name).IsRequired().HasMaxLength(100);
-
             #endregion
         }
 

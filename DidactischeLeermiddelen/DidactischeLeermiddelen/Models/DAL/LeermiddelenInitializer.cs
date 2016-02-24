@@ -42,13 +42,23 @@ namespace DidactischeLeermiddelen.Models.DAL
             roleManager = new RoleManager<IdentityRole>(roleStore);
             //Locations
             locations = new List<Location>();
+            //Users
             users = new List<User>();
+            //Companies
+            companies = new List<Company>();
+            //TargetGroups
+            targetGroups = new List<TargetGroup>();
+            //FieldsOfStudy
+            fieldsOfStudy = new List<FieldOfStudy>();
 
             try
             {
                 CreateRoles();
                 CreateUsers();
                 CreateLocations();
+                CreateCompanies();
+                CreateFieldsOfStudy();
+                CreateTargetGroups();
                 CreateLearningUtilityDetails();
             }
             catch (DbEntityValidationException e)
@@ -210,9 +220,6 @@ namespace DidactischeLeermiddelen.Models.DAL
         /// </summary>
         private void CreateLearningUtilityDetails()
         {
-            CreateCompanies();
-            CreateFieldsOfStudy();
-            CreateTargetGroups();
             //Create worldglobe object
             LearningUtilityDetails learningUtilityDetails = new LearningUtilityDetails
             {

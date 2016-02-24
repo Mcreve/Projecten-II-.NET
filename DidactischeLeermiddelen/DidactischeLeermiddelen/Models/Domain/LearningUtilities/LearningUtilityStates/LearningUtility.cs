@@ -1,7 +1,4 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using DidactischeLeermiddelen.Models.Domain.Users;
 
 namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates
@@ -14,15 +11,40 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
     /// </summary>
     public class LearningUtility
     {
+        #region Fields
+        private StateType stateType;
+        #endregion
         #region Properties
         /// <summary>
         /// The state this instance is currently in
         /// </summary>
-        public virtual LearningUtilityState CurrentState { get; set; }
+        public LearningUtilityState CurrentState { get; set; }
         /// <summary>
         /// Property for EntityFramework functionality
         /// </summary>
         public int Id { get; set; }
+        /// <summary>
+        /// This property is for persisting the state of the object.
+        /// The getter wich is called by EF for persisting purposes returns the field stateType.
+        /// The setter wich is called by EF for loading the item into memory will create a new
+        /// state object depending on the StateType stored in the database if it's not allready initialized.
+        /// When initialized it will just set the stateType to the StateType passed.
+        /// </summary>
+        public StateType StateType
+        {
+            get { return stateType; }
+            set {
+                if (stateType.Equals(StateType.NotInitialized))
+                {
+                    stateType = value;
+                    this.ToState(StateFactory.CreateState(value, this));
+                }
+                else
+                {
+                    stateType = value;
+                }
+            } 
+        } 
         /// <summary>
         /// The user the object is currently lend to
         /// </summary>
