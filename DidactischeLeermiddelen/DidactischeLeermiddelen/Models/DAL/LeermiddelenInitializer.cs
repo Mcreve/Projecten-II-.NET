@@ -21,6 +21,9 @@ namespace DidactischeLeermiddelen.Models.DAL
         private RoleStore<IdentityRole> roleStore;
         private RoleManager<IdentityRole> roleManager;
         private ICollection<User> users;
+        private ICollection<Company> companies;
+        private ICollection<FieldOfStudy> fieldsOfStudy;
+        private ICollection<TargetGroup> targetGroups;
         #endregion
 
         #region Methods
@@ -153,6 +156,36 @@ namespace DidactischeLeermiddelen.Models.DAL
         }
 
         /// <summary>
+        /// This method creates some FieldOfStudy objects and adds them to the fieldsOfStudy field.
+        /// </summary>
+        private void CreateFieldsOfStudy()
+        {
+            fieldsOfStudy.Add(new FieldOfStudy("Aarderijkskunde"));
+            fieldsOfStudy.Add(new FieldOfStudy("Ontspanning"));
+            fieldsOfStudy.Add(new FieldOfStudy("Wiskunde"));
+        }
+
+        /// <summary>
+        /// This method creates some Company objects and adds them to the companies field.
+        /// </summary>
+        private void CreateCompanies()
+        {
+            companies.Add(new Company("Wolters"));
+            companies.Add(new Company("Hasbro"));
+            companies.Add(new Company("Texas Instruments"));
+        }
+
+        /// <summary>
+        /// This method creates some TargetGroup objects and adds them to the targetGroups field.
+        /// </summary>
+        private void CreateTargetGroups()
+        {
+            targetGroups.Add(new TargetGroup("6-12 jaar"));
+            targetGroups.Add(new TargetGroup("7-9 jaar"));
+            targetGroups.Add(new TargetGroup("Tweede leerjaar"));
+        }
+
+        /// <summary>
         /// This method creates a new LearningUtility to be added to a learningUtilityDetails object. This method sets
         /// the initial state and the properties ReservedBy and LendTo of the new instance.
         /// </summary>
@@ -177,17 +210,20 @@ namespace DidactischeLeermiddelen.Models.DAL
         /// </summary>
         private void CreateLearningUtilityDetails()
         {
+            CreateCompanies();
+            CreateFieldsOfStudy();
+            CreateTargetGroups();
             //Create worldglobe object
             LearningUtilityDetails learningUtilityDetails = new LearningUtilityDetails
             {
                 Name = "Wereldbol",
                 Description = "Wereldbol",
-                Company = new Company { Name = "Wolters" },
-                FieldOfStudy = new FieldOfStudy { Name = "Aarderijkskunde" },
+                Company = companies.First(c => c.Name.Equals("Wolters")),
+                FieldOfStudy = fieldsOfStudy.First(f => f.Name.Equals("Aarderijkskunde")),
                 ArticleNumber = "Art1001",
                 Loanable = true,
                 Location = locations.First(),
-                TargetGroup = new TargetGroup { Name = "Leerjaar 1 - 6" },
+                TargetGroup = targetGroups.First(t => t.Name.Equals("6-12 jaar")),
                 Picture = @"\items\pictures\wereldbol.jpg",
                 Price = 75m
             };
@@ -200,14 +236,14 @@ namespace DidactischeLeermiddelen.Models.DAL
             {
                 Name = "Dobbelsteen schatkist 162-delig",
                 ArticleNumber = "MH1447",
-                Company = new Company { Name = "Hasbro" },
+                Company = companies.First(c => c.Name.Equals("Hasbro")),
                 Description = "Koffertje met verschillende soorten dobbelstenen: blanco, met cijfers,...",
-                FieldOfStudy = new FieldOfStudy { Name = "Ontspanning" },
+                FieldOfStudy = fieldsOfStudy.First(f => f.Name.Equals("Ontspanning")),
                 Loanable = true,
                 Location = locations.First(),
                 Picture = @"\items\pictures\dobbelsteen_schatkist_162-delig.jpg",
                 Price = 35m,
-                TargetGroup = new TargetGroup { Name = "Eerste leerjaar" }
+                TargetGroup = targetGroups.First(t => t.Name.Equals("7-9 jaar"))
             };
             learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.HandedOut, null, users.ElementAtOrDefault(1)));
             learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Unavailable, null, null));
@@ -218,14 +254,14 @@ namespace DidactischeLeermiddelen.Models.DAL
             {
                 Name = "Rekenspelletjes optellen en aftrekken",
                 ArticleNumber = "MX203510",
-                Company = new Company { Name = "Texas-Instruments" },
+                Company = companies.First(c => c.Name.Contains("Texas")),
                 Description = "Spelbord op het opdrachtenboekje leggen > opdracht oplossen door het juiste cijfer van het spelbord op het juiste antwoord in het boekje te leggen > controle door het spelbord dicht te klappen en om te draaien > de patronen moeten overeen komen.",
-                FieldOfStudy = new FieldOfStudy { Name = "Wiskunde" },
+                FieldOfStudy = fieldsOfStudy.First(f => f.Name.Equals("Wiskunde")),
                 Loanable = false,
                 Location = locations.ElementAtOrDefault(1),
                 Picture = @"\items\pictures\rekenspelletjes_optellen_en_aftrekken.jpg",
                 Price = 10.9m,
-                TargetGroup = new TargetGroup { Name = "Tweede leerjaar" }
+                TargetGroup = targetGroups.First(t => t.Name.Contains("leerjaar"))
             };
             learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Blocked, users.ElementAtOrDefault(5), null));
             context.LearningUtilityDetailsList.Add(learningUtilityDetails);
