@@ -10,8 +10,8 @@ namespace DidactischeLeermiddelen.Infrastructure
         {
             if (controllerContext.HttpContext.User.Identity.IsAuthenticated)
             {
-                var userList = (IUserRepository) DependencyResolver.Current.GetService(typeof (IUserRepository));
-                return userList.FindBy(controllerContext.HttpContext.User.Identity.GetUserId());
+                var userList = (IUserRepository)DependencyResolver.Current.GetService(typeof(IUserRepository));
+                return userList.FindBy(controllerContext.HttpContext.User.Identity.Name);
             }
             return null;
         }

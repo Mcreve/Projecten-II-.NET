@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -55,10 +56,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         #endregion
 
         #region Properties
-        /// <summary>
-        /// Used in identity / EF => String
-        /// </summary>
-        public string Id { get; set; }
         /// <summary>
         /// Sets the first name of the User 
         /// Required: Min 1 Character, Max 100 Characters

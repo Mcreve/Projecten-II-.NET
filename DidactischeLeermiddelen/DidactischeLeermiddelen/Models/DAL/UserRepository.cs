@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.Users;
@@ -32,9 +33,9 @@ namespace DidactischeLeermiddelen.Models.DAL
         /// <param name="id"></param>
         /// <param name="emailAdress"></param>
         /// <returns></returns>
-        public User FindBy(string id)
+        public User FindBy(string emailAddress)
         {
-            return userList.FirstOrDefault(u => u.Id == id);
+            return userList.FirstOrDefault(u => u.EmailAddress == emailAddress);
         }
 
         /// <summary>
