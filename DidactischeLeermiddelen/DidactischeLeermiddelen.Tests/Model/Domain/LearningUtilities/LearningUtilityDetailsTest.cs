@@ -1,6 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
+using DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates;
+using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
@@ -69,7 +72,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
         }
         #endregion
-
+        #region Properties
         #region NameTests
         [TestMethod]
         public void LearningUtilityDetailsNameIs50CharactersLongSetsTheName()
@@ -104,7 +107,6 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Assert
             Assert.AreEqual(101, name.Length);
-            Assert.AreEqual(name, initiaLearningUtilityDetails.Name);
             #endregion
         }
         [TestMethod]
@@ -330,7 +332,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
         }
         [TestMethod]
-        public void LearningUtilityDetailsPriceIsNullSetsIt()
+        public void LearningUtilityDetailsPriceIsNullSetsItToZero()
         {
             #region Arrange
 
@@ -343,7 +345,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
 
             #region Assert
-            Assert.AreEqual((decimal)price, initiaLearningUtilityDetails.Price);
+            Assert.AreEqual(Decimal.Zero, initiaLearningUtilityDetails.Price);
             #endregion
         }
         [TestMethod]
@@ -498,5 +500,129 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         #endregion
+        #region Loanable
+        [TestMethod]
+        public void LearningUtilityDetailsLoanableSetsIt()
+        {
+            #region Act
+
+            initiaLearningUtilityDetails.Loanable = true;
+
+            #endregion
+
+            #region Assert
+            Assert.AreEqual(true, initiaLearningUtilityDetails.Loanable);
+            #endregion
+        }
+        [TestMethod]
+        public void LearningUtilityDetailsUnloanableSetsIt()
+        {
+            #region Act
+
+            initiaLearningUtilityDetails.Loanable = false;
+
+            #endregion
+
+            #region Assert
+            Assert.AreEqual(false, initiaLearningUtilityDetails.Loanable);
+            #endregion
+        }
+        #endregion
+        #region PictureTests
+        [TestMethod]
+        public void LearningUtilityDetailsPictureUrlSetsIt()
+        {
+            #region Arrange
+            const string pictureUrl = "/items/pictures/wereldbol.jpg";
+            #endregion
+
+            #region Act
+            initiaLearningUtilityDetails.Picture = pictureUrl;
+            #endregion
+
+            #region Assert
+            Assert.AreEqual(pictureUrl, initiaLearningUtilityDetails.Picture);
+            #endregion
+        }
+        [TestMethod]
+        public void LearningUtilityDetailsPictureUrlIsEmptySetsIt()
+        {
+            #region Arrange
+            string pictureUrl = string.Empty;
+            #endregion
+
+            #region Act
+            initiaLearningUtilityDetails.Picture = pictureUrl;
+            #endregion
+
+            #region Assert
+            Assert.AreEqual(pictureUrl, initiaLearningUtilityDetails.Picture);
+            #endregion
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ValidationException))]
+        public void LearningUtilityDetailsPictureURLIs251CharactersLongThrowsError()
+        {
+            #region Arrange
+
+            const string url =
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + //100
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + //100
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab"; //51
+            #endregion
+
+            #region Act
+
+            initiaLearningUtilityDetails.Picture = url;
+            #endregion
+
+            #region Assert
+            Assert.AreEqual(251, url.Length);
+            #endregion
+        }
+        [TestMethod]
+        public void LearningUtilityDetailsPictureURLIs250CharactersLongSetsIt()
+        {
+            #region Arrange
+
+            const string url =
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + //100
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + //100
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"; //50
+            #endregion
+
+            #region Act
+
+            initiaLearningUtilityDetails.Picture = url;
+            #endregion
+
+            #region Assert
+            Assert.AreEqual(251, url.Length);
+            Assert.AreEqual(url, initiaLearningUtilityDetails.Picture);
+            #endregion
+        }
+        #endregion
+        #endregion
+    #region Methods
+        #region AddLearningUtility
+
+        [TestMethod]
+        public void AddLearningUtilityWithStateAddsItToTheList()
+        {
+            #region Arrange
+            StateType stateType = StateType.Available;
+            #endregion
+
+            #region Act
+            initiaLearningUtilityDetails.AddLearningUtilty(stateType,null,null);
+            #endregion
+
+            #region Assert
+            Assert.AreEqual(1,initiaLearningUtilityDetails.LearningUtilities.Count);
+            Assert.IsInstanceOfType(initiaLearningUtilityDetails.LearningUtilities.First(),typeof(LearningUtility));
+            #endregion
+        }
+        #endregion
+    #endregion
     }
 }

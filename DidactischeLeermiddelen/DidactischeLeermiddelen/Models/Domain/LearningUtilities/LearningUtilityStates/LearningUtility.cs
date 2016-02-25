@@ -16,10 +16,6 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         #endregion
         #region Properties
         /// <summary>
-        /// The state this instance is currently in
-        /// </summary>
-        public LearningUtilityState CurrentState { get; set; }
-        /// <summary>
         /// Property for EntityFramework functionality
         /// </summary>
         public int Id { get; set; }
@@ -30,6 +26,10 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// state object depending on the StateType stored in the database if it's not allready initialized.
         /// When initialized it will just set the stateType to the StateType passed.
         /// </summary>
+        /// <summary>
+        /// The state this instance is currently in
+        /// </summary>
+        public LearningUtilityState CurrentState { get; set; }
         public StateType StateType
         {
             get { return stateType; }

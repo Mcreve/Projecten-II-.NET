@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates;
+using DidactischeLeermiddelen.Models.Domain.Users;
 
 namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 {
@@ -12,31 +13,153 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
     {
         #region Properties
         public int Id { get; set; }
-        [Display(Name = "Foto")]
-        public string Picture { get; set; }
-        [Display(Name = "Leermiddel")]
+
         [Required]
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                throw new NotImplementedException();
+
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
         [Display(Name = "Omschrijving")]
         [Required]
-        public string Description { get; set; }
+        public string Description
+        {
+            get
+            {
+                throw new NotImplementedException();
+
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
         [Display(Name = "Prijs")]
         [DisplayFormat(DataFormatString = "{0:c}", NullDisplayText = "Onbekend")]
-        public decimal? Price { get; set; }
+        public decimal? Price
+        {
+            get
+            {
+                throw new NotImplementedException();
+
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
         [Display(Name = "Uitleenbaar")]
-        public bool Loanable { get; set; }
+        public bool Loanable
+        {
+            get
+            {
+                throw new NotImplementedException();
+
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
         [Display(Name = "Artikel Nr.")]
-        public string ArticleNumber { get; set; }
+        public string ArticleNumber
+        {
+            get
+            {
+                throw new NotImplementedException();
+
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
         [Display(Name = "Leergebied")]
-        public virtual FieldOfStudy FieldOfStudy { get; set; }
+        public virtual FieldOfStudy FieldOfStudy
+        {
+            get
+            {
+                throw new NotImplementedException();
+
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
         [Display(Name = "Doelgroep")]
-        public virtual TargetGroup TargetGroup { get; set; }
+        public virtual TargetGroup TargetGroup
+        {
+            get
+            {
+                throw new NotImplementedException();
+
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
         [Display(Name = "Bedrijf")]
-        public virtual Company Company { get; set; }
+        public virtual Company Company
+        {
+            get
+            {
+                throw new NotImplementedException();
+
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
         [Display(Name = "Locatie")]
         [Required]
-        public virtual Location Location { get; set; }
-        public virtual ICollection<LearningUtility> LearningUtilities { get; set; }
+        public virtual Location Location
+        {
+            get
+            {
+                throw new NotImplementedException();
+
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+        [Display(Name = "Foto")]
+        public string Picture
+        {
+            get
+            {
+                throw new NotImplementedException();
+
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+        [Display(Name = "Leermiddel")]
+        public virtual ICollection<LearningUtility> LearningUtilities
+        {
+            get
+            {
+                throw new NotImplementedException();
+
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
         #endregion
 
         #region Constructors
@@ -54,6 +177,19 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             Location = location;
         }
 
+        #endregion
+        #region Methods
+
+        /// <summary>
+        /// Adds a new LearningUtility to the collection LearningUtilities
+        /// </summary>
+        /// <param name="stateType"></param>
+        /// <param name="reservedBy"></param>
+        /// <param name="lendTo"></param>
+        public void AddLearningUtilty(StateType stateType, User reservedBy, User lendTo)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

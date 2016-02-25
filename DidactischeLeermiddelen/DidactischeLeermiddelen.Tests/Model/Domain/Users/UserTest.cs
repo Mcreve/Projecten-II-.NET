@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.Users;
+using DidactischeLeermiddelen.Tests.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -14,19 +15,12 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
 
         private User student;
         private User lector;
-      /*  private Mock<ILearningUtilityDetailsRepository> mockLearningUtilityDetailsRepository;
-        private DummyDataContext context;*/
         #endregion
 
         [TestInitialize]
         public void UserTestInitialize()
         {
-          /*
-            //Mocking the LearningUtilityDetailsRepository with DummyDataContext
-            context = new DummyDataContext();
-            mockLearningUtilityDetailsRepository = new Mock<ILearningUtilityDetailsRepository>();
-            mockLearningUtilityDetailsRepository.Setup(repo => repo.FindAll()).Returns(context.LearningUtilityDetailsList);
-            */
+          
             student = UserFactory.CreateUserWithUserType(UserType.Student);
             lector = UserFactory.CreateUserWithUserType(UserType.Lector);
         }
@@ -272,15 +266,13 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
 
             #endregion
         }
-
-       /* [TestMethod]
+        /*
+        [TestMethod]
         public void LectorGetLearningUtilityDetails()
         {
 
             #region Act
-
-            var expectedList =
-                context.LearningUtilityDetailsList;
+            var expectedList = mockLearningUtilityDetailsRepository
             var actualList = lector.GetLearningUtilities(mockLearningUtilityDetailsRepository);
 
             #endregion
@@ -292,6 +284,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
 
             #endregion
         }
+        /*
         [TestMethod]
         public void StudentGetLearningUtilityDetails()
         {
