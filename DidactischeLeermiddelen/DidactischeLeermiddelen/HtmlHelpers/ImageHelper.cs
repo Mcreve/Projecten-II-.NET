@@ -8,6 +8,16 @@ namespace DidactischeLeermiddelen.HtmlHelpers
 {
     public static class ImageHelper
     {
+        /// <summary>
+        /// Convert to <img></img> in html with Razor.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="src"></param>
+        /// <param name="altText"></param>
+        /// <param name="cssClass"></param>
+        /// <param name="height"></param>
+        /// <param name="width"></param>
+        /// <returns></returns>
         public static MvcHtmlString Image(this HtmlHelper helper, string src, string altText, string cssClass = null, string height = null, string width = null)
         {
             var builder = new TagBuilder("img");
