@@ -224,14 +224,17 @@ namespace DidactischeLeermiddelen.Models.DAL
             LearningUtilityDetails learningUtilityDetails = new LearningUtilityDetails
             {
                 Name = "Wereldbol",
-                Description = "Wereldbol",
+                Description = "De Colombo wereldbol van Nova Rico is een prachtige geografische globe met een beige/antiek bruine kleur." +
+                              " Daardoor heeft de bol een mooie, antieke uitstraling, terwijl de kaart de huidige politieke indeling van de wereld laat zien." +
+                              " De voet is van massief hout en heeft een walnoothouten kleur, de kunststof meridiaan is koperkleurig. De bol zelf is van plexiglas." +
+                              " De Nova Rico Colombo is voorzien van verlichting en wanneer u de lamp aanzet, lichten de landen in diverse kleuren prachtig op.",
                 Company = companies.FirstOrDefault(c => c.Name.Equals("Wolters")),
                 FieldOfStudy = fieldsOfStudy.FirstOrDefault(f => f.Name.Equals("Aardrijkskunde")),
                 ArticleNumber = "Art1001",
                 Loanable = true,
                 Location = locations.FirstOrDefault(),
                 TargetGroup = targetGroups.FirstOrDefault(t => t.Name.Equals("Lager")),
-                Picture = @"\items\pictures\wereldbol",
+                Picture = @"http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png",
                 Price = 75m
             };
             learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Available, null, null));
@@ -244,11 +247,16 @@ namespace DidactischeLeermiddelen.Models.DAL
                 Name = "Dobbelsteen schatkist 162-delig",
                 ArticleNumber = "MH1447",
                 Company = companies.FirstOrDefault(c => c.Name.Equals("Hasbro")),
-                Description = "Koffertje met verschillende soorten dobbelstenen: blanco, met cijfers,...",
+                Description = "Een dobbelsteen (ook wel: teerling) is in de gebruikelijke uitvoering een kubusvormig" +
+                              " voorwerp met op elk van de zijden een van de ogenaantallen 1 tot en met 6." +
+                              " Het woord dobbelsteen verwijst naar het oude spel dobbelen. Door werpen van de dobbelsteen" +
+                              " zal een van de zijden min of meer toevallig boven komen. Het aantal ogen op deze zijde wordt " +
+                              "als uitkomst van de worp beschouwd. De dobbelsteen fungeert daarmee als toevalsgenerator die met " +
+                              "gelijke kansen van 1/6 de getallen 1 t/m 6 voortbrengt.",
                 FieldOfStudy = fieldsOfStudy.FirstOrDefault(f => f.Name.Equals("Ontspanning")),
                 Loanable = true,
                 Location = locations.FirstOrDefault(),
-                Picture = @"\items\pictures\dobbelsteen_schatkist_162-delig",
+                Picture = @"http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png",
                 Price = 35m,
                 TargetGroup = targetGroups.FirstOrDefault(t => t.Name.Equals("Kleuter"))
             };
@@ -266,7 +274,7 @@ namespace DidactischeLeermiddelen.Models.DAL
                 FieldOfStudy = fieldsOfStudy.FirstOrDefault(f => f.Name.Equals("Wiskunde")),
                 Loanable = false,
                 Location = locations.ElementAtOrDefault(1),
-                Picture = @"\items\pictures\rekenspelletjes_optellen_en_aftrekken",
+                Picture = @"http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png",
                 Price = 10.9m,
                 TargetGroup = targetGroups.FirstOrDefault(t => t.Name.Contains("Middelbaar"))
             };

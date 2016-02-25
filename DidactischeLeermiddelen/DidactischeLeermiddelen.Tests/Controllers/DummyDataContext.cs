@@ -69,7 +69,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 Loanable = true,
                 Location = Location1,
                 TargetGroup = TargetGroup1,
-                Picture = @"\items\pictures\wereldbol",
+                Picture = @"\items\pictures\wereldbol.png",
                 Price = 75m
             };
             LearningUtilityDetails2 = new LearningUtilityDetails
@@ -81,7 +81,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 FieldOfStudy = FieldOfStudy1,
                 Loanable = true,
                 Location = Location1,
-                Picture = @"\items\pictures\dobbelsteen_schatkist_162-delig",
+                Picture = @"\items\pictures\dobbelsteen_schatkist_162-delig.jpg",
                 Price = 35m,
                 TargetGroup = TargetGroup1
             };
@@ -94,7 +94,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 FieldOfStudy = FieldOfStudy1,
                 Loanable = false,
                 Location = Location1,
-                Picture = @"\items\pictures\rekenspelletjes_optellen_en_aftrekken",
+                Picture = @"\items\pictures\rekenspelletjes_optellen_en_aftrekken.gif",
                 Price = 10.9m,
                 TargetGroup = TargetGroup1
             };

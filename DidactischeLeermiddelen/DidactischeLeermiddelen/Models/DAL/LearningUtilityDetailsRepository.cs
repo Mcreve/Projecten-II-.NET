@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 
@@ -25,6 +26,13 @@ namespace DidactischeLeermiddelen.Models.DAL
         public LearningUtilityDetails FindBy(int id)
         {
             return learningUtilityDetailsList.Find(id);
+        }
+
+        public List<LearningUtilityDetails> Search(string query)
+        {
+            List<LearningUtilityDetails> resultName =
+             learningUtilityDetailsList.Where(learningUtilityDetails => learningUtilityDetails.Name.Contains(query)).ToList();
+            return resultName;
         }
     }
 }

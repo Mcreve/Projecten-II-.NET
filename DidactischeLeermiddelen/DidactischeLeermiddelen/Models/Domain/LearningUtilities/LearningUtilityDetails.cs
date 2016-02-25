@@ -35,7 +35,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         [Display(Name = "Locatie")]
         [Required]
         public virtual Location Location { get; set; }
-        [Display(Name = "Foto")]
+        [Display(Name = "Afbeelding")]
         public string Picture { get; set; }
 
         [Display(Name = "Leermiddel")]

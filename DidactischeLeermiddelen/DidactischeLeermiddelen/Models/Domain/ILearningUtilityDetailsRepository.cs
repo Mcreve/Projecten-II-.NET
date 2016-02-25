@@ -11,5 +11,7 @@ namespace DidactischeLeermiddelen.Models.Domain
     {
         IQueryable<LearningUtilityDetails> FindAll();
         LearningUtilityDetails FindBy(int id);
+        List<LearningUtilityDetails> Search(string query);
+
     }
 }

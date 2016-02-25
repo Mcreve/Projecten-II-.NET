@@ -6,10 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using DidactischeLeermiddelen.Models;
 using DidactischeLeermiddelen.Models.DAL;
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.Users;
+using Microsoft.Ajax.Utilities;
 
 namespace DidactischeLeermiddelen.Controllers
 {
@@ -27,6 +29,7 @@ namespace DidactischeLeermiddelen.Controllers
         // GET: Catalog
         public ActionResult Index(User user)
         {
+            
             IEnumerable<LearningUtilityDetails> catalog = null;
 
             if (User.Identity.IsAuthenticated)
@@ -38,7 +41,10 @@ namespace DidactischeLeermiddelen.Controllers
                 catalog = learningUtilityDetailsRepository.FindAll().Where(learningUtilityDetails => learningUtilityDetails.Loanable == true);
             }
 
-            return View(catalog);
+            IEnumerable<CatalogViewModel> catalogViewModels =
+                catalog.Select(learningUtilityDetails => new CatalogViewModel(learningUtilityDetails)).ToList();
+
+            return View(catalogViewModels);
         }
 
         // GET: Catalog/Details/5
@@ -56,4 +62,5 @@ namespace DidactischeLeermiddelen.Controllers
             return View(learningUtilityDetails);
         }
     }
+
 }
