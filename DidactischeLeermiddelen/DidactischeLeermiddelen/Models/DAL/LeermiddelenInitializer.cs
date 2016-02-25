@@ -170,7 +170,7 @@ namespace DidactischeLeermiddelen.Models.DAL
         /// </summary>
         private void CreateFieldsOfStudy()
         {
-            fieldsOfStudy.Add(new FieldOfStudy("Aarderijkskunde"));
+            fieldsOfStudy.Add(new FieldOfStudy("Aardrijkskunde"));
             fieldsOfStudy.Add(new FieldOfStudy("Ontspanning"));
             fieldsOfStudy.Add(new FieldOfStudy("Wiskunde"));
         }
@@ -190,9 +190,9 @@ namespace DidactischeLeermiddelen.Models.DAL
         /// </summary>
         private void CreateTargetGroups()
         {
-            targetGroups.Add(new TargetGroup("6-12 jaar"));
-            targetGroups.Add(new TargetGroup("7-9 jaar"));
-            targetGroups.Add(new TargetGroup("Tweede leerjaar"));
+            targetGroups.Add(new TargetGroup("Kleuter"));
+            targetGroups.Add(new TargetGroup("Lager"));
+            targetGroups.Add(new TargetGroup("Middelbaar"));
         }
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace DidactischeLeermiddelen.Models.DAL
                 Loanable = true,
                 Location = locations.First(),
                 TargetGroup = targetGroups.First(t => t.Name.Equals("6-12 jaar")),
-                Picture = @"\items\pictures\wereldbol.jpg",
+                Picture = @"\items\pictures\wereldbol",
                 Price = 75m
             };
             learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Available, null, null));
@@ -248,7 +248,7 @@ namespace DidactischeLeermiddelen.Models.DAL
                 FieldOfStudy = fieldsOfStudy.First(f => f.Name.Equals("Ontspanning")),
                 Loanable = true,
                 Location = locations.First(),
-                Picture = @"\items\pictures\dobbelsteen_schatkist_162-delig.jpg",
+                Picture = @"\items\pictures\dobbelsteen_schatkist_162-delig",
                 Price = 35m,
                 TargetGroup = targetGroups.First(t => t.Name.Equals("7-9 jaar"))
             };
@@ -266,7 +266,7 @@ namespace DidactischeLeermiddelen.Models.DAL
                 FieldOfStudy = fieldsOfStudy.First(f => f.Name.Equals("Wiskunde")),
                 Loanable = false,
                 Location = locations.ElementAtOrDefault(1),
-                Picture = @"\items\pictures\rekenspelletjes_optellen_en_aftrekken.jpg",
+                Picture = @"\items\pictures\rekenspelletjes_optellen_en_aftrekken",
                 Price = 10.9m,
                 TargetGroup = targetGroups.First(t => t.Name.Contains("leerjaar"))
             };
