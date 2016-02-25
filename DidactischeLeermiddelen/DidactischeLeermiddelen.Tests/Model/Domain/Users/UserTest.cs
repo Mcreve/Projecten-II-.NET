@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using DidactischeLeermiddelen.Tests.Controllers;
@@ -15,14 +16,20 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
 
         private User student;
         private User lector;
+        private Mock<ILearningUtilityDetailsRepository> mockLearningUtilityDetailsRepository;
+        private DummyDataContext context;
         #endregion
 
         [TestInitialize]
         public void UserTestInitialize()
         {
-          
             student = UserFactory.CreateUserWithUserType(UserType.Student);
             lector = UserFactory.CreateUserWithUserType(UserType.Lector);
+
+            context = new DummyDataContext();
+            mockLearningUtilityDetailsRepository = new Mock<ILearningUtilityDetailsRepository>();
+            mockLearningUtilityDetailsRepository.Setup(repo => repo.FindAll())
+                .Returns(context.LearningUtilityDetailsList);
         }
 
         [TestMethod]
@@ -266,45 +273,49 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
 
             #endregion
         }
-        /*
+        
         [TestMethod]
         public void LectorGetLearningUtilityDetails()
         {
+            #region Arrange
+            var expectedList = context.LearningUtilityDetailsList;
+            var expectedAmountFound = expectedList.Count();
+            #endregion
 
             #region Act
-            var expectedList = mockLearningUtilityDetailsRepository
-            var actualList = lector.GetLearningUtilities(mockLearningUtilityDetailsRepository);
-
+            var actualList = lector.GetLearningUtilities(mockLearningUtilityDetailsRepository.Object);
+            var actualAmountFound = actualList.Count();
             #endregion
 
             #region Assert
-
-            Assert.AreEqual(expectedList, actualList);
-            mockGemeenteRepository.Verify(m => m.FindAll(), Times.Once);
-
+            Assert.AreEqual(expectedAmountFound, actualAmountFound);
+            mockLearningUtilityDetailsRepository.Verify(m => m.FindAll(), Times.Once);
             #endregion
         }
-        /*
+        
         [TestMethod]
         public void StudentGetLearningUtilityDetails()
         {
 
-            #region Act
+            #region Arrange
 
             var expectedList =
-                context.LearningUtilityDetailsList.Where(
-                    learningUtilityDetails => learningUtilityDetails.Loanable == true);
-            var actualList = student.GetLearningUtilities(mockLearningUtilityDetailsRepository);
+                context.LearningUtilityDetailsList.Where(utilityDetails => utilityDetails.Loanable);
+            var expectedAmountFound = expectedList.Count();
+            #endregion
+
+            #region Act
+            var actualList = student.GetLearningUtilities(mockLearningUtilityDetailsRepository.Object);
+            var actualAmountFound = actualList.Count();
 
             #endregion
 
             #region Assert
-
-            Assert.AreEqual(expectedList, actualList);
-            mockGemeenteRepository.Verify(m => m.FindAll(), Times.Once);
+            Assert.AreEqual(expectedAmountFound, actualAmountFound);
+            mockLearningUtilityDetailsRepository.Verify(m => m.FindAll(), Times.Once);
 
             #endregion
-        }*/
+        }
 
     }
 }

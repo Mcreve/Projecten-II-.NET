@@ -11,7 +11,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 {
     class DummyDataContext
     {
-        public ICollection<LearningUtilityDetails> LearningUtilityDetailsList { get; set; }
+        public IQueryable<LearningUtilityDetails> LearningUtilityDetailsList { get; set; }
         public User Lector1 { get; set; }
         public User Student1 { get; set; }
         public User Anonymous { get; set; }
@@ -37,10 +37,12 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
         private void CreateLists()
         {
-            LearningUtilityDetailsList = new List<LearningUtilityDetails>();
-            LearningUtilityDetailsList.Add(LearningUtilityDetails1);
-            LearningUtilityDetailsList.Add(LearningUtilityDetails2);
-            LearningUtilityDetailsList.Add(LearningUtilityDetails3);
+            LearningUtilityDetailsList = (new LearningUtilityDetails[]
+            {
+                LearningUtilityDetails1,
+                LearningUtilityDetails2,
+                LearningUtilityDetails3
+            }).ToList().AsQueryable();
         }
 
         private void CreateTargetGroups()
