@@ -23,7 +23,9 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         public LearningUtilityDetails LearningUtilityDetails2 { get; set; }
         public LearningUtilityDetails LearningUtilityDetails3 { get; set; }
 
-
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
         public DummyDataContext()
         {
             CreateUsers();

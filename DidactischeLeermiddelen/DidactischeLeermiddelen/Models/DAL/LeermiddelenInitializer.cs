@@ -225,12 +225,12 @@ namespace DidactischeLeermiddelen.Models.DAL
             {
                 Name = "Wereldbol",
                 Description = "Wereldbol",
-                Company = companies.First(c => c.Name.Equals("Wolters")),
-                FieldOfStudy = fieldsOfStudy.First(f => f.Name.Equals("Aarderijkskunde")),
+                Company = companies.FirstOrDefault(c => c.Name.Equals("Wolters")),
+                FieldOfStudy = fieldsOfStudy.FirstOrDefault(f => f.Name.Equals("Aardrijkskunde")),
                 ArticleNumber = "Art1001",
                 Loanable = true,
-                Location = locations.First(),
-                TargetGroup = targetGroups.First(t => t.Name.Equals("6-12 jaar")),
+                Location = locations.FirstOrDefault(),
+                TargetGroup = targetGroups.FirstOrDefault(t => t.Name.Equals("Lager")),
                 Picture = @"\items\pictures\wereldbol",
                 Price = 75m
             };
@@ -243,14 +243,14 @@ namespace DidactischeLeermiddelen.Models.DAL
             {
                 Name = "Dobbelsteen schatkist 162-delig",
                 ArticleNumber = "MH1447",
-                Company = companies.First(c => c.Name.Equals("Hasbro")),
+                Company = companies.FirstOrDefault(c => c.Name.Equals("Hasbro")),
                 Description = "Koffertje met verschillende soorten dobbelstenen: blanco, met cijfers,...",
-                FieldOfStudy = fieldsOfStudy.First(f => f.Name.Equals("Ontspanning")),
+                FieldOfStudy = fieldsOfStudy.FirstOrDefault(f => f.Name.Equals("Ontspanning")),
                 Loanable = true,
-                Location = locations.First(),
+                Location = locations.FirstOrDefault(),
                 Picture = @"\items\pictures\dobbelsteen_schatkist_162-delig",
                 Price = 35m,
-                TargetGroup = targetGroups.First(t => t.Name.Equals("7-9 jaar"))
+                TargetGroup = targetGroups.FirstOrDefault(t => t.Name.Equals("Kleuter"))
             };
             learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.HandedOut, null, users.ElementAtOrDefault(1)));
             learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Unavailable, null, null));
@@ -261,14 +261,14 @@ namespace DidactischeLeermiddelen.Models.DAL
             {
                 Name = "Rekenspelletjes optellen en aftrekken",
                 ArticleNumber = "MX203510",
-                Company = companies.First(c => c.Name.Contains("Texas")),
+                Company = companies.FirstOrDefault(c => c.Name.Contains("Texas")),
                 Description = "Spelbord op het opdrachtenboekje leggen > opdracht oplossen door het juiste cijfer van het spelbord op het juiste antwoord in het boekje te leggen > controle door het spelbord dicht te klappen en om te draaien > de patronen moeten overeen komen.",
-                FieldOfStudy = fieldsOfStudy.First(f => f.Name.Equals("Wiskunde")),
+                FieldOfStudy = fieldsOfStudy.FirstOrDefault(f => f.Name.Equals("Wiskunde")),
                 Loanable = false,
                 Location = locations.ElementAtOrDefault(1),
                 Picture = @"\items\pictures\rekenspelletjes_optellen_en_aftrekken",
                 Price = 10.9m,
-                TargetGroup = targetGroups.First(t => t.Name.Contains("leerjaar"))
+                TargetGroup = targetGroups.FirstOrDefault(t => t.Name.Contains("Middelbaar"))
             };
             learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Blocked, users.ElementAtOrDefault(5), null));
             context.LearningUtilityDetailsList.Add(learningUtilityDetails);
