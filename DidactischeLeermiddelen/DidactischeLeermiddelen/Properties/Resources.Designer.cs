@@ -79,6 +79,42 @@ namespace DidactischeLeermiddelen.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Het nummer mag maximaal uit 100 karakters bestaan..
+        /// </summary>
+        public static string LearningUtilityArticleNumberRegex {
+            get {
+                return ResourceManager.GetString("LearningUtilityArticleNumberRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to De beschrijving moet ingevuld zijn en tussen de 1-1000 karakters lang zijn.
+        /// </summary>
+        public static string LearningUtilityDescriptionRegex {
+            get {
+                return ResourceManager.GetString("LearningUtilityDescriptionRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Naam moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn..
+        /// </summary>
+        public static string LearningUtilityNameRegex {
+            get {
+                return ResourceManager.GetString("LearningUtilityNameRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to De prijs moet een positief getal zijn.
+        /// </summary>
+        public static string LearningUtilityPriceRegex {
+            get {
+                return ResourceManager.GetString("LearningUtilityPriceRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Het e-mail adres moet eindigen op &apos;hogent.be&apos; en moet tussen de 1-100 karakters lang zijn..
         /// </summary>
         public static string LectorEmailRegex {

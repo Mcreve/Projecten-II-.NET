@@ -123,6 +123,18 @@
   <data name="FieldOfStudyNameRegex" xml:space="preserve">
     <value>Leergebied moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn.</value>
   </data>
+  <data name="LearningUtilityArticleNumberRegex" xml:space="preserve">
+    <value>Het nummer mag maximaal uit 100 karakters bestaan.</value>
+  </data>
+  <data name="LearningUtilityDescriptionRegex" xml:space="preserve">
+    <value>De beschrijving moet ingevuld zijn en tussen de 1-1000 karakters lang zijn</value>
+  </data>
+  <data name="LearningUtilityNameRegex" xml:space="preserve">
+    <value>Naam moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn.</value>
+  </data>
+  <data name="LearningUtilityPriceRegex" xml:space="preserve">
+    <value>De prijs moet een positief getal zijn</value>
+  </data>
   <data name="LectorEmailRegex" xml:space="preserve">
     <value>Het e-mail adres moet eindigen op 'hogent.be' en moet tussen de 1-100 karakters lang zijn.</value>
   </data>
