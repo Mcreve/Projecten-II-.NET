@@ -53,6 +53,10 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// The user that has reserved this object
         /// </summary>
         public virtual User ReservedBy { get; set; }
+        /// <summary>
+        /// Property for database, optimistic concurrency
+        /// </summary>
+        public Byte[] Timestamp { get; set; }
         #endregion
 
         #region Constructors
