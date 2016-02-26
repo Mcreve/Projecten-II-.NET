@@ -49,13 +49,13 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 
         }
 
-        [Display(Name = "Omschrijving")]
+        
         /// <summary>
         /// Sets the description of the LearningUtility
         /// Required, Min 1 Character, Max 1000 Characters, allows alphanumeric
         /// <exception cref="ValidationException"></exception>
         /// </summary>
-        
+        [Display(Name = "Omschrijving")]
         [Required(ErrorMessageResourceType = typeof(Resources),
             ErrorMessageResourceName = "LearningUtilityDescriptionRegex")]
         [RegularExpression(@"(?i).{1,1000}",
