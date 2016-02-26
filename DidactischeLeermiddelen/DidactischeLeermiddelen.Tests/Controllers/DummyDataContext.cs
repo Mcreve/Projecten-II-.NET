@@ -61,6 +61,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         {
             LearningUtilityDetails1 = new LearningUtilityDetails
             {
+                Id = 1,
                 Name = "Wereldbol",
                 Description = "Wereldbol met tectonische platen",
                 Company = Company1,
@@ -74,6 +75,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             };
             LearningUtilityDetails2 = new LearningUtilityDetails
             {
+                Id = 2,
                 Name = "Dobbelsteen schatkist 162-delig",
                 ArticleNumber = "MH1447",
                 Company = Company1,
@@ -87,6 +89,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             };
             LearningUtilityDetails3 = new LearningUtilityDetails
             {
+                Id = 3,
                 Name = "Rekenspelletjes optellen en aftrekken",
                 ArticleNumber = "MX203510",
                 Company = Company1,
