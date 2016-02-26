@@ -72,6 +72,7 @@ namespace DidactischeLeermiddelen.Models.Domain
 
         /// <summary>
         /// This method decreases the item in the lines list with 1. If the item is not found in the list an exception is thrown.
+        /// Should the items quantity drop below 1, the line is removed.
         /// </summary>
         /// <param name="learningUtilityDetailsId">The Id from the item to be decreased</param>
         /// <exception cref="InvalidOperationException"></exception>
