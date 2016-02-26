@@ -198,6 +198,7 @@
     </Compile>
     <Compile Include="HtmlHelpers\ImageHelper.cs" />
     <Compile Include="Infrastructure\UserModelBinder.cs" />
+    <Compile Include="Infrastructure\WishlistModelBinder.cs" />
     <Compile Include="Models\DAL\LearningUtilityDetailsRepository.cs" />
     <Compile Include="Models\DAL\Mapper\LearningUtilityDetailsMapper.cs" />
     <Compile Include="Models\DAL\Mapper\LearningUtilityMapper.cs" />
@@ -306,11 +307,12 @@
     <Content Include="Views\Catalog\Index.cshtml" />
     <Content Include="Views\Catalog\_SearchCatalogPartial.cshtml" />
     <Content Include="Views\Catalog\_SearchCatalogAdvancedPartial.cshtml" />
+    <Content Include="Views\Wishlist\Index.cshtml" />
+    <Content Include="Views\Wishlist\EmptyWishlist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Resources\" />
-    <Folder Include="Views\Wishlist\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

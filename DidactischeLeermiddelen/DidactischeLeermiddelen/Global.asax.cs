@@ -3,6 +3,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using DidactischeLeermiddelen.Infrastructure;
 using DidactischeLeermiddelen.Models.DAL;
+using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.Users;
 
 namespace DidactischeLeermiddelen
@@ -20,7 +21,7 @@ namespace DidactischeLeermiddelen
             db.Database.Initialize(true);
 
             ModelBinders.Binders.Add(typeof(User), new UserModelBinder());
-
+            ModelBinders.Binders.Add(typeof(Wishlist), new WishlistModelBinder());
         }
     }
 }

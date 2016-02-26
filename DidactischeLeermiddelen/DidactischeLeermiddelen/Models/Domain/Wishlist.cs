@@ -22,6 +22,8 @@ namespace DidactischeLeermiddelen.Models.Domain
             WishlistLine line = GetWishlistLine(item.Id);
             if(line == null)
                 lines.Add(new WishlistLine {LearningUtility = item, Quantity = 1});
+            else
+                throw new InvalidOperationException("Item werd reeds aan uw verlanglijstje toegevoegd.");
         }
 
         public void RemoveLine(LearningUtilityDetails item)
@@ -29,6 +31,8 @@ namespace DidactischeLeermiddelen.Models.Domain
             WishlistLine line = GetWishlistLine(item.Id);
             if (line != null)
                 lines.Remove(line);
+            else
+                throw new InvalidOperationException("Item werd niet in uw verlanglijstje terug gevonden.");
         }
 
         public void IncreaseQuantity(int learningUtilityDetailsId)
@@ -36,6 +40,8 @@ namespace DidactischeLeermiddelen.Models.Domain
             WishlistLine line = GetWishlistLine(learningUtilityDetailsId);
             if (line != null)
                 line.Quantity++;
+            else
+                throw new InvalidOperationException("Item werd niet in uw verlanglijstje terug gevonden.");
         }
 
         public void DecreaseQuantity(int learningUtilityDetailsId)
@@ -47,6 +53,8 @@ namespace DidactischeLeermiddelen.Models.Domain
                 if (line.Quantity < 1)
                     lines.Remove(line);
             }
+            else
+                throw new InvalidOperationException("Item werd niet in uw verlanglijstje terug gevonden.");
         }
 
         private WishlistLine GetWishlistLine(int itemId)
