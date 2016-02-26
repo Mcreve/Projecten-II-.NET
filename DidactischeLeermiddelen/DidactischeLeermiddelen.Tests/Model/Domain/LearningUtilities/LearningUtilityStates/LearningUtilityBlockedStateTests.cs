@@ -29,6 +29,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities.LearningU
             learningUtility.MakeAvailable();
 
             //Assert
+            Assert.IsNull(learningUtility.TimeReserved);
             Assert.IsNull(learningUtility.ReservedBy);
             Assert.IsNull(learningUtility.LendTo);
         }

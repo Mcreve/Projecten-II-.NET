@@ -13,6 +13,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
     {
         #region Fields
         private StateType stateType;
+        private DateTime? timeHandedOut;
         #endregion
         #region Properties
         /// <summary>
@@ -57,6 +58,26 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// Property for database, optimistic concurrency
         /// </summary>
         public Byte[] Timestamp { get; set; }
+        /// <summary>
+        /// The time this item is reserved
+        /// </summary>
+        public DateTime? TimeReserved { get; set; }
+        /// <summary>
+        /// The time this item is handedOut
+        /// </summary>
+        public DateTime? TimeHandedOut
+        {
+            get {return timeHandedOut;}
+            set
+            {
+                if (DateTime.Now.DayOfWeek.Equals(DayOfWeek.Friday) && DateTime.Now.Hour >= 17)
+                {
+                    if(value.Value.AddDays(5) < DateTime.Now)
+                        Late();
+                }
+                timeHandedOut = value;
+            }
+        }
         #endregion
 
         #region Constructors

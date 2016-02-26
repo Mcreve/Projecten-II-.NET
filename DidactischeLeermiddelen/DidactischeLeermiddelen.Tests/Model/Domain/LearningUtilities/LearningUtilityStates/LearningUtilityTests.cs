@@ -37,5 +37,31 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities.LearningU
             //Act
             learningUtility.Block(student);
         }
+
+        [TestMethod]
+        public void SettingTimeHandedOutNotLateDoesntChangeState()
+        {
+            //Arrange
+            learningUtility.ToState(StateFactory.CreateState(StateType.HandedOut, learningUtility));
+
+            //Act
+            learningUtility.TimeHandedOut = DateTime.Now;
+
+            //Assert
+            Assert.AreEqual(StateType.HandedOut, learningUtility.StateType);
+        }
+
+        [TestMethod]
+        public void SettingTimeHandedOutLateSetsStateToLate()
+        {
+            //Arrange
+            learningUtility.ToState(StateFactory.CreateState(StateType.HandedOut, learningUtility));
+
+            //Act
+            learningUtility.TimeHandedOut = DateTime.Now.AddDays(-8);
+
+            //Assert
+            Assert.AreEqual(StateType.Late, learningUtility.StateType);
+        }
     }
 }

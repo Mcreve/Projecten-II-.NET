@@ -37,6 +37,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         {
             if (base.LearningUtility.ReservedBy != null)
                 throw new InvalidOperationException();
+            base.LearningUtility.TimeReserved = DateTime.Now;
             base.LearningUtility.ReservedBy = user;
         }
 
@@ -51,6 +52,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         {
             if (base.LearningUtility.ReservedBy != null && base.LearningUtility.ReservedBy.GetType() == typeof(Lector))
                 throw new InvalidOperationException();
+            base.LearningUtility.TimeReserved = null;
             base.LearningUtility.ReservedBy = user;
         }
 
@@ -64,6 +66,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         {
             if (base.LearningUtility.ReservedBy == null)
                 throw new InvalidOperationException();
+            base.LearningUtility.TimeReserved = null;
             base.LearningUtility.ReservedBy = null;
         } 
         #endregion

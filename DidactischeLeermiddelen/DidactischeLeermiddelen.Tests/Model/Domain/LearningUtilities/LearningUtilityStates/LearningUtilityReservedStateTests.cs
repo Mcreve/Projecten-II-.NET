@@ -31,6 +31,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities.LearningU
             //Assert
             Assert.AreEqual(lector, learningUtility.ReservedBy);
             Assert.IsNull(learningUtility.LendTo);
+            Assert.IsNull(learningUtility.TimeReserved);
             Assert.IsInstanceOfType(learningUtility.CurrentState, typeof(Blocked));
         }
 
@@ -43,6 +44,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities.LearningU
             //Assert
             Assert.IsNull(learningUtility.ReservedBy);
             Assert.IsNull(learningUtility.LendTo);
+            Assert.IsNull(learningUtility.TimeReserved);
             Assert.IsInstanceOfType(learningUtility.CurrentState, typeof(Available));
         }
 

@@ -34,6 +34,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// <param name="user">The user that tries to block the item</param>
         public override void Block(User user)
         {
+            base.LearningUtility.TimeReserved = null;
             base.LearningUtility.ReservedBy = user;
             base.LearningUtility.ToState(StateFactory.CreateState(StateType.Blocked, base.LearningUtility));
         }

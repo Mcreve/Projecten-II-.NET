@@ -30,13 +30,14 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         /// When in this state a user can reserve the object when it's not allready reserved.
         /// This is checked by looking if the ReservedBy parameter contains a reference to a user object.
         /// When a reference is found the method throws an InvalidOperationException, else it sets the
-        /// ReservedBy property of the LearningUtility to the user passed to the method.
+        /// ReservedBy property of the LearningUtility to the user passed to the method and the TimeReserved property to now.
         /// </summary>
         /// <param name="user">The user who tries to reserve the object</param>
         public override void Reserve(User user)
         {
             if (base.LearningUtility.ReservedBy != null)
                 throw new InvalidOperationException();
+            base.LearningUtility.TimeReserved = DateTime.Now;
             base.LearningUtility.ReservedBy = user;
         }
 
@@ -51,6 +52,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         {
             if (base.LearningUtility.ReservedBy != null && base.LearningUtility.ReservedBy.GetType() == typeof(Lector))
                 throw new InvalidOperationException();
+            base.LearningUtility.TimeReserved = null;
             base.LearningUtility.ReservedBy = user;
         }
 
@@ -64,6 +66,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
         {
             if (base.LearningUtility.ReservedBy == null)
                 throw new InvalidOperationException();
+            base.LearningUtility.TimeReserved = null;
             base.LearningUtility.ReservedBy = null;
         }
 

@@ -16,8 +16,7 @@ namespace DidactischeLeermiddelen.Controllers
         {
             this.learningUtilityDetailsRepository = learningUtilityDetailsRepository;
         }
-
-        // GET: Wishlist
+        
         public ActionResult Index(Wishlist wishlist)
         {
             if (wishlist.NumberOfItems == 0)
@@ -96,6 +95,7 @@ namespace DidactischeLeermiddelen.Controllers
             }
             return RedirectToAction("Index");
         }
+
         private LearningUtilityDetails GetLearningUtilityDetails(int id)
         {
             return learningUtilityDetailsRepository.FindBy(id);

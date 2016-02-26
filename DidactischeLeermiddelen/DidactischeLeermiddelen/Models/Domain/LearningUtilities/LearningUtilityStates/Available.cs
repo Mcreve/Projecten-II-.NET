@@ -40,11 +40,12 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
 
         /// <summary>
         /// When in this state a user can block the object. This method sets
-        /// the ReservedBy property with the passed paramter and changes the object's state to Reserved.
+        /// the ReservedBy property with the passed paramter, the TimeReserved property to Now and changes the object's state to Reserved.
         /// </summary>
         /// <param name="user">The user that wants to reserve the object</param>
         public override void Reserve(User user)
         {
+            base.LearningUtility.TimeReserved = DateTime.Now;
             base.LearningUtility.ReservedBy = user;
             base.LearningUtility.ToState(StateFactory.CreateState(StateType.Reserved, base.LearningUtility));
         }
