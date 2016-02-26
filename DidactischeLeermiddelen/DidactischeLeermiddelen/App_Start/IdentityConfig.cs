@@ -12,6 +12,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using DidactischeLeermiddelen.Models;
 using DidactischeLeermiddelen.Models.DAL;
+using DidactischeLeermiddelen.Models.Domain;
 
 namespace DidactischeLeermiddelen
 {

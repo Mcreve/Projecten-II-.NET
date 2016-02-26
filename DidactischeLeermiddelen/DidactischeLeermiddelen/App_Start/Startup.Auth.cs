@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using DidactischeLeermiddelen.Models;
 using DidactischeLeermiddelen.Models.DAL;
+using DidactischeLeermiddelen.Models.Domain;
 
 namespace DidactischeLeermiddelen
 {

@@ -2,6 +2,7 @@
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Reflection;
 using System.Web.Mvc;
+using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates;
 using DidactischeLeermiddelen.Models.Domain.Users;
