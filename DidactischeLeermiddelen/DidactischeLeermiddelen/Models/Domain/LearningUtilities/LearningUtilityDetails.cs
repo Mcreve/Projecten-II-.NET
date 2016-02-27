@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using Microsoft.Ajax.Utilities;
 
 namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 {
@@ -76,23 +77,28 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         /// Optional, if set allows Decimal.Zero has to be postive.
         /// Null values is converted to Decimal.Zero
         /// <exception cref="ValidationException"></exception>
+        /// ^           # Start of string.
+        /// [0-9]+      # Must have one or more numbers.
+        /// (           # Begin optional group.
+        /// \.          # The decimal point, . must be escaped, # or it is treated as "any character".
+        /// [0-9]{1,2}  # One or two numbers.
+        /// )?          # End group, signify it's optional with ?
+        /// $           # End of string.
         /// </summary>
-
         [Display(Name = "Prijs")]
         [DisplayFormat(DataFormatString = "{0:c}")]
-       // [RegularExpression(@"^[+]?\d*\.?\d*$",
-       //  ErrorMessageResourceType = typeof(Resources),
-       //  ErrorMessageResourceName = "LearningUtilityPriceRegex")]
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$",
+           ErrorMessageResourceType = typeof(Resources),
+         ErrorMessageResourceName = "LearningUtilityPriceRegex")]
         public decimal? Price
         {
             get { return price; }
             set
             {
-                
-               //  Validator.ValidateProperty(value,
-               //  new ValidationContext(this, null, null) { MemberName = "Price" });
-               
-                    price =  value;
+                 Validator.ValidateProperty(value,
+                 new ValidationContext(this, null, null) { MemberName = "Price" });
+
+                price = value ?? decimal.Zero;
                 }
             
 
