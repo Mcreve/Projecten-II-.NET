@@ -7,9 +7,6 @@ namespace DidactischeLeermiddelen.Models
 {
     public class CatalogViewModel
     {
-        #region Fields
-        private string shortDescription; 
-        #endregion
 
         [Display(Name = "Omschrijving")]
         public string ShortDescription { get; set; }

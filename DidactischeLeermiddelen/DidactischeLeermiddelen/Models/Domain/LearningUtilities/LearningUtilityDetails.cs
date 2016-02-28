@@ -19,7 +19,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 
         private string name;
         private string description;
-        private decimal? price;
+        private decimal price;
         private string articleNumber;
         private string picture;
         private Location location;
@@ -89,16 +89,18 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         /// </summary>
         [Display(Name = "Prijs")]
         [DisplayFormat(DataFormatString = "{0:c}")]
-       // [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$",
-       //  ErrorMessageResourceType = typeof(Resources),
-       //ErrorMessageResourceName = "LearningUtilityPriceRegex")]
-        public decimal? Price
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$",
+         ErrorMessageResourceType = typeof(Resources),
+         ErrorMessageResourceName = "LearningUtilityPriceRegex")]
+        public decimal Price
         {
 
                 get { return price; }
                 set
                 {
-                price = value;
+                Validator.ValidateProperty(value,
+                new ValidationContext(this, null, null) { MemberName = "Price" });
+                    price = value;
                 }
             
             

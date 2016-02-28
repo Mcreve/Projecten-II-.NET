@@ -332,28 +332,11 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
         }
         [TestMethod]
-        public void LearningUtilityDetailsPriceIsNullSetsItToZero()
-        {
-            #region Arrange
-
-            decimal? price = null;
-
-            #endregion
-
-            #region Act
-            initiaLearningUtilityDetails.Price = price;
-            #endregion
-
-            #region Assert
-            Assert.AreEqual(Decimal.Zero, initiaLearningUtilityDetails.Price);
-            #endregion
-        }
-        [TestMethod]
         public void LearningUtilityDetailsPriceIsZeroSetsIt()
         {
             #region Arrange
 
-            decimal? price = Decimal.Zero;
+            decimal price = Decimal.Zero;
 
             #endregion
 
