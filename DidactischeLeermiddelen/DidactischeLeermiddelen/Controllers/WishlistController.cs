@@ -21,7 +21,7 @@ namespace DidactischeLeermiddelen.Controllers
         {
             if (wishlist.NumberOfItems == 0)
                 return View("EmptyWishlist");
-            return View(wishlist.WishlistLines);
+            return View(wishlist.LearningUtilities);
         }
 
         public ActionResult Add(int id, Wishlist wishlist)
@@ -31,7 +31,7 @@ namespace DidactischeLeermiddelen.Controllers
             {
                 try
                 {
-                    wishlist.AddLine(item);
+                    wishlist.AddItem(item);
                     TempData["Info"] = item.Name + " werd toegevoegd aan uw verlanglijst.";
                 }
                 catch (InvalidOperationException e)
@@ -49,44 +49,8 @@ namespace DidactischeLeermiddelen.Controllers
             {
                 try
                 {
-                    wishlist.RemoveLine(item);
+                    wishlist.RemoveItem(item);
                     TempData["Info"] = item.Name + " werd van uw verlanglijstje verwijderd";
-                }
-                catch (InvalidOperationException e)
-                {
-                    TempData["Error"] = e.Message;
-                }
-            }
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult Plus(int id, Wishlist wishlist)
-        {
-            LearningUtilityDetails item = GetLearningUtilityDetails(id);
-            if (item != null)
-            {
-                try
-                {
-                    wishlist.IncreaseQuantity(item.Id);
-                    TempData["Info"] = "Het aantal van " + item.Name + " werd succesvol verhoogd";
-                }
-                catch (InvalidOperationException e)
-                {
-                    TempData["Error"] = e.Message;
-                }
-            }
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult Min(int id, Wishlist wishlist)
-        {
-            LearningUtilityDetails item = GetLearningUtilityDetails(id);
-            if (item != null)
-            {
-                try
-                {
-                    wishlist.DecreaseQuantity(item.Id);
-                    TempData["Info"] = "Het aantal van " + item.Name + " werd succesvol verlaagd";
                 }
                 catch (InvalidOperationException e)
                 {

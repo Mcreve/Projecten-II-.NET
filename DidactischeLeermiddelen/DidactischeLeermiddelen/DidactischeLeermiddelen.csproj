@@ -234,7 +234,6 @@
     <Compile Include="Models\Domain\Users\UserFactory.cs" />
     <Compile Include="Models\Domain\Users\UserType.cs" />
     <Compile Include="Models\Domain\Wishlist.cs" />
-    <Compile Include="Models\Domain\WishlistLine.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DidactischeLeermiddelen.Models.Domain.WishlistLine>
+﻿@model IEnumerable<DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityDetails>
 
 @{
     ViewBag.Title = "Index";
@@ -9,7 +9,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Quantity)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th></th>
     </tr>
@@ -17,12 +17,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("+", "Plus", new { id = item.LearningUtility.Id }) |
-            @Html.ActionLink("-", "Min", new { id = item.LearningUtility.Id }) |
-            @Html.ActionLink("Delete", "Remove", new { id = item.LearningUtility.Id })
+            @Html.ActionLink("Delete", "Remove", new { id = item.Id })
         </td>
     </tr>
 }

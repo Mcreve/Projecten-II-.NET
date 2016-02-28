@@ -70,9 +70,9 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilit
             get {return timeHandedOut;}
             set
             {
-                if (DateTime.Now.DayOfWeek.Equals(DayOfWeek.Friday) && DateTime.Now.Hour >= 17)
+                if (DateTime.Now.DayOfWeek > DayOfWeek.Friday || DateTime.Now.DayOfWeek.Equals(DayOfWeek.Friday) && DateTime.Now.Hour >= 17)
                 {
-                    if(value.Value.AddDays(5) < DateTime.Now)
+                    if(value.Value < DateTime.Now)
                         Late();
                 }
                 timeHandedOut = value;
