@@ -129,8 +129,14 @@
   <data name="LearningUtilityDescriptionRegex" xml:space="preserve">
     <value>De beschrijving moet ingevuld zijn en tussen de 1-1000 karakters lang zijn</value>
   </data>
+  <data name="LearningUtilityLocationRegex" xml:space="preserve">
+    <value>De locatie moet ingevuld zijn.</value>
+  </data>
   <data name="LearningUtilityNameRegex" xml:space="preserve">
     <value>Naam moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn.</value>
+  </data>
+  <data name="LearningUtilityPictureRegex" xml:space="preserve">
+    <value>De picture link moet tussen 0 en 250 karakters lang zijn.</value>
   </data>
   <data name="LearningUtilityPriceRegex" xml:space="preserve">
     <value>De prijs moet een positief getal zijn</value>

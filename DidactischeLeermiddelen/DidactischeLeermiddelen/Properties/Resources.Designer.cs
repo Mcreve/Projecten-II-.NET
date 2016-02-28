@@ -97,11 +97,29 @@ namespace DidactischeLeermiddelen.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to De locatie moet ingevuld zijn..
+        /// </summary>
+        public static string LearningUtilityLocationRegex {
+            get {
+                return ResourceManager.GetString("LearningUtilityLocationRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Naam moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn..
         /// </summary>
         public static string LearningUtilityNameRegex {
             get {
                 return ResourceManager.GetString("LearningUtilityNameRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to De picture link moet tussen 0 en 250 karakters lang zijn..
+        /// </summary>
+        public static string LearningUtilityPictureRegex {
+            get {
+                return ResourceManager.GetString("LearningUtilityPictureRegex", resourceCulture);
             }
         }
         

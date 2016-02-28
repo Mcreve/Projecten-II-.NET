@@ -1,6 +1,7 @@
 ﻿using DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using DidactischeLeermiddelen.Properties;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +9,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Web;
-using Microsoft.Ajax.Utilities;
 
 namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 {
@@ -22,6 +22,8 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         private decimal? price;
         private string articleNumber;
         private string picture;
+        private Location location;
+      
         #endregion
 
 
@@ -87,25 +89,33 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         /// </summary>
         [Display(Name = "Prijs")]
         [DisplayFormat(DataFormatString = "{0:c}")]
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$",
-           ErrorMessageResourceType = typeof(Resources),
-         ErrorMessageResourceName = "LearningUtilityPriceRegex")]
+       // [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$",
+       //  ErrorMessageResourceType = typeof(Resources),
+       //ErrorMessageResourceName = "LearningUtilityPriceRegex")]
         public decimal? Price
         {
-            get { return price; }
-            set
-            {
-                 Validator.ValidateProperty(value,
-                 new ValidationContext(this, null, null) { MemberName = "Price" });
 
-                price = value ?? decimal.Zero;
+                get { return price; }
+                set
+                {
+                price = value;
                 }
+            
             
 
         }
-        
+        /// <summary>
+        /// Sets the loanable status of the LearningUtility
+        /// Initialized to True, by default in the constructor
+        /// </summary>
         [Display(Name = "Uitleenbaar")]
         public bool Loanable { get; set; }
+
+        /// <summary>
+        /// Sets the articleNumber of the LearningUtility
+        /// Optional, Min 1 Character, Max 100 Characters, allows alphanumeric and null
+        /// <exception cref="ValidationException"></exception>
+        /// </summary>
         [Display(Name = "Artikel Nr.")]
         [RegularExpression(@"(?i).{1,100}",
             ErrorMessageResourceType = typeof(Resources),
@@ -127,11 +137,38 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         [Display(Name = "Bedrijf")]
         public virtual Company Company { get; set; }
         [Display(Name = "Locatie")]
-        [Required]
-        public virtual Location Location { get; set; }
-        [Display(Name = "Afbeelding")]
-        public string Picture { get; set; }
+        [Required(ErrorMessageResourceType = typeof(Resources),
+            ErrorMessageResourceName = "LearningUtilityLocationRegex")]
+        public virtual Location Location {
+            get { return location; }
+            set
+            {
+                Validator.ValidateProperty(value,
+                    new ValidationContext(this, null, null) { MemberName = "Location" });
+                location = value;
+            }
+        }
 
+        /// <summary>
+        /// Sets the picture of the LearningUtility
+        /// Optional, Min 1 Character, Max 100 Characters, allows alphanumeric and null
+        /// <exception cref="ValidationException"></exception>
+        /// </summary>
+        [Display(Name = "Afbeelding")]
+        [RegularExpression(@"(?i).{0,250}",
+            ErrorMessageResourceType = typeof(Resources),
+            ErrorMessageResourceName = "LearningUtilityPictureRegex")]
+
+        public string Picture
+        {
+            get { return picture; }
+            set
+            {
+                Validator.ValidateProperty(value,
+                    new ValidationContext(this, null, null) { MemberName = "Picture" });
+                picture = value;
+            }
+        }
         [Display(Name = "Leermiddel")]
         public virtual ICollection<LearningUtility> LearningUtilities { get; set; }
         #endregion
@@ -163,8 +200,12 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         /// <param name="lendTo"></param>
         public void AddLearningUtilty(StateType stateType, User reservedBy, User lendTo)
         {
-            //throw new NotImplementedException();
-
+            LearningUtility newLearningUtility = new LearningUtility();
+            newLearningUtility.StateType = stateType;
+            newLearningUtility.ReservedBy = reservedBy;
+            newLearningUtility.LendTo = lendTo;
+            LearningUtilities.Add(newLearningUtility);
+            
             
         }
         #endregion

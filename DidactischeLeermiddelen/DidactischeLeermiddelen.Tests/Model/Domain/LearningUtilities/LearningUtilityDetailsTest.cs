@@ -597,7 +597,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
 
             #region Assert
-            Assert.AreEqual(251, url.Length);
+            Assert.AreEqual(250, url.Length);
             Assert.AreEqual(url, initiaLearningUtilityDetails.Picture);
             #endregion
         }
