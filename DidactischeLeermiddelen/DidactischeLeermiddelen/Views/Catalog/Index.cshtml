@@ -1,5 +1,7 @@
 ﻿@using DidactischeLeermiddelen.HtmlHelpers
+@using DidactischeLeermiddelen.Models
 @using DidactischeLeermiddelen.Models.Domain.Users
+@using Ninject.Infrastructure.Language
 @model IEnumerable<DidactischeLeermiddelen.Models.CatalogViewModel>
 
 @{
@@ -17,11 +19,15 @@
     else if (User.IsInRole(UserType.Lector.ToString()))
     {
         <div class="col-md-12">
-            @Html.Partial("_SearchCatalogAdvancedPartial")
+            @Html.Partial("_SearchCatalogAdvancedPartial", new CatalogViewModel())
         </div>
     }
 
 }
+<div class="col-md-12">
+    @Html.Partial("_SearchCatalogPartial", new CatalogViewModel())
+</div>
+
 <div id="search-results">
 
     @foreach (var item in Model)

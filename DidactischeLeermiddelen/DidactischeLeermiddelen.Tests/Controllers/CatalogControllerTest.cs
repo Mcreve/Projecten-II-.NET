@@ -23,6 +23,8 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         private User student;
         private User lector;
         private List<LearningUtilityDetails> searchResults;
+        private Mock<ITargetGroupRepository> targetGroupRepository;
+        private Mock<IFieldOfStudyRepository> fieldOfStudyRepository;
 
         [TestInitialize]
         public void TestInitialize()
@@ -33,6 +35,8 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             lector = UserFactory.CreateUserWithUserType(UserType.Lector);
             context = new DummyDataContext();
             itemRepository = new Mock<ILearningUtilityDetailsRepository>();
+            targetGroupRepository = new Mock<ITargetGroupRepository>();
+            fieldOfStudyRepository = new Mock<IFieldOfStudyRepository>();
             string searchInput = "bol";
             itemRepository.Setup(i => i.FindAll()).Returns(context.LearningUtilityDetailsList);
             itemRepository.Setup(i => i.Search(searchInput)).Returns(context.LearningUtilityDetailsList.Where(j => (j.Name).Contains(searchInput)).ToList());
@@ -40,7 +44,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             itemRepository.Setup(i => i.FindBy(1)).Returns(context.LearningUtilityDetails1);
             itemRepository.Setup(i => i.FindBy(2)).Returns(context.LearningUtilityDetails2);
             itemRepository.Setup(i => i.FindBy(3)).Returns(context.LearningUtilityDetails3);
-            catalogController = new CatalogController(itemRepository.Object);
+            catalogController = new CatalogController(itemRepository.Object, targetGroupRepository.Object, fieldOfStudyRepository.Object);
             
 
 
@@ -55,7 +59,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             student = context.Student1;
 
             //Act
-            ViewResult result = catalogController.Index(student) as ViewResult;
+            ViewResult result = catalogController.Index(student, null, null, null) as ViewResult;
             IEnumerable <CatalogViewModel> catalog = result.ViewData.Model as IEnumerable<DidactischeLeermiddelen.Models.CatalogViewModel>;
 
             //Assert
@@ -71,7 +75,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             lector = context.Lector1;
 
             //Act
-            ViewResult result = catalogController.Index(lector) as ViewResult;
+            ViewResult result = catalogController.Index(lector, null, null, null) as ViewResult;
             IEnumerable<CatalogViewModel> catalog = result.ViewData.Model as IEnumerable<DidactischeLeermiddelen.Models.CatalogViewModel>;
 
             //Assert

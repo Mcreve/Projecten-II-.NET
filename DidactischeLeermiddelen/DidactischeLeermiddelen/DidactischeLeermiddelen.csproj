@@ -199,6 +199,7 @@
     <Compile Include="HtmlHelpers\ImageHelper.cs" />
     <Compile Include="Infrastructure\UserModelBinder.cs" />
     <Compile Include="Infrastructure\WishlistModelBinder.cs" />
+    <Compile Include="Models\DAL\FieldOfStudyRepository.cs" />
     <Compile Include="Models\DAL\LearningUtilityDetailsRepository.cs" />
     <Compile Include="Models\DAL\Mapper\LearningUtilityDetailsMapper.cs" />
     <Compile Include="Models\DAL\Mapper\LearningUtilityMapper.cs" />
@@ -207,9 +208,12 @@
     <Compile Include="Models\DAL\Mapper\FieldOfStudyMapper.cs" />
     <Compile Include="Models\DAL\Mapper\LocationMapper.cs" />
     <Compile Include="Models\DAL\Mapper\UserMapper.cs" />
+    <Compile Include="Models\DAL\TargetGroupRepository.cs" />
     <Compile Include="Models\DAL\UserRepository.cs" />
     <Compile Include="Models\Domain\ApplicationUser.cs" />
+    <Compile Include="Models\Domain\IFieldOfStudyRepository.cs" />
     <Compile Include="Models\Domain\ILearningUtilityDetailsRepository.cs" />
+    <Compile Include="Models\Domain\ITargetGroupRepository.cs" />
     <Compile Include="Models\Domain\IUserRepository.cs" />
     <Compile Include="Models\Domain\LearningUtilities\Company.cs" />
     <Compile Include="Models\Domain\LearningUtilities\FieldOfStudy.cs" />

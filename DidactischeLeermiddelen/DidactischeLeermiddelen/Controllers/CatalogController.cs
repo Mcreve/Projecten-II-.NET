@@ -13,26 +13,32 @@ using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.Ajax.Utilities;
 using System.Text.RegularExpressions;
+using WebGrease.Css.Extensions;
 
 namespace DidactischeLeermiddelen.Controllers
 {
     public class CatalogController : Controller
     {
         private readonly ILearningUtilityDetailsRepository learningUtilityDetailsRepository;
+        private ITargetGroupRepository targetGroupRepository;
+        private IFieldOfStudyRepository fieldOfStudyRepository;
 
-        public CatalogController(ILearningUtilityDetailsRepository learningUtilityDetailsRepository)
+        public CatalogController(ILearningUtilityDetailsRepository learningUtilityDetailsRepository, ITargetGroupRepository targetGroupRepository, IFieldOfStudyRepository fieldOfStudyRepository)
         {
             this.learningUtilityDetailsRepository = learningUtilityDetailsRepository;
-
+            this.targetGroupRepository = targetGroupRepository;
+            this.fieldOfStudyRepository = fieldOfStudyRepository;
         }
 
 
 
         // GET: Catalog
-        public ActionResult Index(User user)
+        public ActionResult Index(User user,string searchString, int? fieldOfStudy, int? targetGroup)
         {
 
             IEnumerable<LearningUtilityDetails> catalog = null;
+            ViewBag.TargetGroups = GetTargetGroupsSelectList();
+            ViewBag.FieldsOfStudy = GetFieldOfStudySelectList();
 
             if (User.Identity.IsAuthenticated)
             {
@@ -41,6 +47,21 @@ namespace DidactischeLeermiddelen.Controllers
             else
             {
                 catalog = learningUtilityDetailsRepository.FindAll().Where(learningUtilityDetails => learningUtilityDetails.Loanable == true);
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                catalog = catalog.Where(l => l.Name.Contains(searchString) || l.Description.Contains(searchString));
+            }
+
+            if (fieldOfStudy != null)
+            {
+                catalog = catalog.Where(l => l.FieldsOfStudy.SingleOrDefault(f => f.Id == fieldOfStudy) != null);
+            }
+
+            if (targetGroup != null)
+            {
+                catalog = catalog.Where(l => l.TargetGroups.SingleOrDefault(t => t.Id == targetGroup) != null);
             }
 
             IEnumerable<CatalogViewModel> catalogViewModels =
@@ -74,7 +95,16 @@ namespace DidactischeLeermiddelen.Controllers
         {
             throw new NotImplementedException();
         }
-       
+
+        private SelectList GetTargetGroupsSelectList()
+        {
+            return new SelectList(targetGroupRepository.FindAll().OrderBy(f => f.Name), "Id", "Name");
+        }
+
+        private SelectList GetFieldOfStudySelectList()
+        {
+            return new SelectList(fieldOfStudyRepository.FindAll().OrderBy(f => f.Name), "Id", "Name");
+        }
 
     }
 

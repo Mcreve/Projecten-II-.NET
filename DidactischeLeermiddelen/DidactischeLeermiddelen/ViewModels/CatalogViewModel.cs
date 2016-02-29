@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates;
@@ -22,7 +23,15 @@ namespace DidactischeLeermiddelen.Models
         public string ArticleNumber { get; set; }
         [Display(Name = "Stock")]
         public int AmountInStock { get; set; }
+        [Display(Name = "Doelgroep")]
+        public string TargetGroup { get; set; }
+        [Display(Name = "Leergebied")]
+        public string FieldOfStudy { get; set; }
 
+        public CatalogViewModel()
+        {
+            
+        }
         /// <summary>
         /// Constructor
         /// </summary>
@@ -37,6 +46,8 @@ namespace DidactischeLeermiddelen.Models
             ArticleNumber = learningUtilityDetails.ArticleNumber;
             AmountInStock =
                 learningUtilityDetails.LearningUtilities.Count(learningUtility => learningUtility.StateType == StateType.Available);
+            TargetGroup = learningUtilityDetails.TargetGroups.First(f => f.Id >= 0).Name;
+            FieldOfStudy = learningUtilityDetails.FieldsOfStudy.First(f => f.Id >= 0).Name;
         }
         /// <summary>
         /// Returns the shortdescription of the LearningUtilityDetail, the first 250 characters.
@@ -47,7 +58,7 @@ namespace DidactischeLeermiddelen.Models
         {
             if (description.Length > 250)
             {
-                return description.Substring(0, 250);
+                return description.Substring(0, 247) + "...";
             }
             return description;
         }

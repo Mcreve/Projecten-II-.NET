@@ -24,6 +24,8 @@ namespace DidactischeLeermiddelen.Models.DAL
 
         public DbSet<User> UserList { get; set; }
         public DbSet<LearningUtilityDetails> LearningUtilityDetailsList { get; set; }
+        public DbSet<TargetGroup> TargetGroups { get; set; }
+        public DbSet<FieldOfStudy> FieldsOfStudy { get; set; }
 
         #endregion
 

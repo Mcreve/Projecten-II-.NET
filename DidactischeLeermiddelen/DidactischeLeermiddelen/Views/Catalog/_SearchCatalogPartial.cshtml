@@ -1,5 +1,11 @@
-﻿<div>
-    <h2>Catalogus dooroeken</h2>
-    @Html.TextBox("searchString")
-    <input type="submit" value="Search" class="btn btn-default" />
+﻿@model DidactischeLeermiddelen.Models.CatalogViewModel
+<div>
+    @using (Html.BeginForm())
+    {
+        <h2>Catalogus dooroeken</h2>
+        @Html.TextBox("SearchString")
+        @Html.DropDownListFor(model => model.FieldOfStudy, ViewBag.FieldsOfStudy as SelectList, "Alle", new { @class = "form-control"})
+        @Html.DropDownListFor(model => model.TargetGroup, ViewBag.TargetGroups as SelectList, "Alle", new { @class = "form-control"})
+        <input type="submit" value="Search" class="btn btn-default"/>
+    }
 </div>

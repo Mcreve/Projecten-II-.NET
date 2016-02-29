@@ -67,6 +67,8 @@ namespace DidactischeLeermiddelen.App_Start
             kernel.Bind<ILearningUtilityDetailsRepository>().To<LearningUtilityDetailsRepository>().InRequestScope();
             kernel.Bind<IUserRepository>().To<UserRepository>().InRequestScope();
             kernel.Bind<LeermiddelenContext>().ToSelf().InRequestScope();
+            kernel.Bind<ITargetGroupRepository>().To<TargetGroupRepository>().InRequestScope();
+            kernel.Bind<IFieldOfStudyRepository>().To<FieldOfStudyRepository>().InRequestScope();
 
         }
     }
