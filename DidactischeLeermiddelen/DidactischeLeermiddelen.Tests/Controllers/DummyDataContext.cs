@@ -22,6 +22,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         public LearningUtilityDetails LearningUtilityDetails1 { get; set; }
         public LearningUtilityDetails LearningUtilityDetails2 { get; set; }
         public LearningUtilityDetails LearningUtilityDetails3 { get; set; }
+        public List<LearningUtilityDetails> LearningSearchResult { get; set; }
 
         /// <summary>
         /// Default Constructor
@@ -46,7 +47,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 LearningUtilityDetails3
             }).ToList().AsQueryable();
         }
-
+       
         private void CreateTargetGroups()
         {
             TargetGroup1 = new TargetGroup("Kleuter");

@@ -12,12 +12,14 @@ using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.Ajax.Utilities;
+using System.Text.RegularExpressions;
 
 namespace DidactischeLeermiddelen.Controllers
 {
     public class CatalogController : Controller
     {
         private readonly ILearningUtilityDetailsRepository learningUtilityDetailsRepository;
+        private IUserRepository @object;
 
         public CatalogController(ILearningUtilityDetailsRepository learningUtilityDetailsRepository)
         {
@@ -26,10 +28,11 @@ namespace DidactischeLeermiddelen.Controllers
         }
 
 
+
         // GET: Catalog
         public ActionResult Index(User user)
         {
-            
+
             IEnumerable<LearningUtilityDetails> catalog = null;
 
             if (User.Identity.IsAuthenticated)
@@ -61,6 +64,21 @@ namespace DidactischeLeermiddelen.Controllers
             }
             return View(learningUtilityDetails);
         }
+
+        /// <summary>
+        /// Searches for a matching pattern in names and descriptions from the LearningUtilityDetailsRepository
+        /// </summary>
+        /// <param name="pattern"></param>
+        /// <returns></returns>
+        /// 
+        public ActionResult Search(string Pattern)
+        {
+            throw new NotImplementedException();
+        }
+       
+
     }
 
 }
+
+

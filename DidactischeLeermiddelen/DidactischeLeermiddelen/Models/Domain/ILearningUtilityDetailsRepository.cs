@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
+using System.Text.RegularExpressions;
 
 namespace DidactischeLeermiddelen.Models.Domain
 {

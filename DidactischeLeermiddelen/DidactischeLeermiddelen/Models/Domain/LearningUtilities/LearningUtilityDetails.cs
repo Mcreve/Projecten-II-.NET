@@ -89,17 +89,17 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         /// </summary>
         [Display(Name = "Prijs")]
         [DisplayFormat(DataFormatString = "{0:c}")]
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$",
-         ErrorMessageResourceType = typeof(Resources),
-         ErrorMessageResourceName = "LearningUtilityPriceRegex")]
+       // [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$",
+         //ErrorMessageResourceType = typeof(Resources),
+        // ErrorMessageResourceName = "LearningUtilityPriceRegex")]
         public decimal Price
         {
 
                 get { return price; }
                 set
                 {
-                Validator.ValidateProperty(value,
-                new ValidationContext(this, null, null) { MemberName = "Price" });
+               // Validator.ValidateProperty(value,
+               // new ValidationContext(this, null, null) { MemberName = "Price" });
                     price = value;
                 }
             
@@ -209,6 +209,11 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             LearningUtilities.Add(newLearningUtility);
             
             
+        }
+
+        public static implicit operator List<object>(LearningUtilityDetails v)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }
