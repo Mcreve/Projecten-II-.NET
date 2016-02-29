@@ -27,20 +27,18 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain
         [TestMethod]
         public void NewWishlistStartsEmpty()
         {
-            Assert.AreEqual(0, wishlist.WishlistLines.Count());
+            Assert.AreEqual(0, wishlist.NumberOfItems);
         }
 
         [TestMethod]
         public void WishlistItemsCanBeAdded()
         {
             //Act
-            wishlist.AddLine(item1);
-            wishlist.AddLine(item2);
+            wishlist.AddItem(item1);
+            wishlist.AddItem(item2);
 
             //Assert
             Assert.AreEqual(2, wishlist.NumberOfItems);
-            Assert.AreEqual(1, wishlist.WishlistLines.First(l => l.LearningUtility.Equals(item1)).Quantity);
-            Assert.AreEqual(1, wishlist.WishlistLines.First(l => l.LearningUtility.Equals(item2)).Quantity);
         }
 
         [TestMethod]
@@ -48,19 +46,19 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain
         public void WishlistThrowsExceptionWhenAllreadyAdded()
         {
             //Act
-            wishlist.AddLine(item1);
-            wishlist.AddLine(item1);
+            wishlist.AddItem(item1);
+            wishlist.AddItem(item1);
         }
 
         [TestMethod]
         public void WishlistItemCanBeDeleted()
         {
             //Arrange
-            wishlist.AddLine(item1);
-            wishlist.AddLine(item2);
+            wishlist.AddItem(item1);
+            wishlist.AddItem(item2);
 
             //Act
-            wishlist.RemoveLine(item1);
+            wishlist.RemoveItem(item1);
 
             //Assert
             Assert.AreEqual(1, wishlist.NumberOfItems);
@@ -71,62 +69,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain
         public void WishlistThrowsExceptionWhenRemoveDoesntFindItem()
         {
             //Arrange
-            wishlist.RemoveLine(item2);
-        }
-
-        [TestMethod]
-        public void WishlistIncreasesQuantityItem()
-        {
-            //Arrange
-            wishlist.AddLine(item1);
-            
-            //Act
-            wishlist.IncreaseQuantity(item1.Id);
-
-            //Assert
-            Assert.AreEqual(2, wishlist.WishlistLines.First(l => l.LearningUtility.Equals(item1)).Quantity);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (InvalidOperationException))]
-        public void WishlistIncreaseQuantityThrowsExceptionWhenNoItemFound()
-        {
-            //Act
-            wishlist.IncreaseQuantity(item1.Id);
-        }
-        [TestMethod]
-        public void WishlistDecreasesQuantityItem()
-        {
-            //Arrange
-            wishlist.AddLine(item1);
-            wishlist.IncreaseQuantity(item1.Id);
-
-            //Act
-            wishlist.DecreaseQuantity(item1.Id);
-
-            //Assert
-            Assert.AreEqual(1, wishlist.WishlistLines.First(l => l.LearningUtility.Equals(item1)).Quantity);
-        }
-
-        [TestMethod]
-        public void WishlistDecreasesQuantityItemBelowOneRemovesLine()
-        {
-            //Arrange
-            wishlist.AddLine(item1);
-
-            //Act
-            wishlist.DecreaseQuantity(item1.Id);
-
-            //Assert
-            Assert.IsNull(wishlist.WishlistLines.FirstOrDefault(l => l.LearningUtility.Equals(item1)));
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (InvalidOperationException))]
-        public void WishlistDecreaseQuantityThrowsExceptionWhenNoItemIsFound()
-        {
-            //Act
-            wishlist.DecreaseQuantity(item1.Id);
+            wishlist.RemoveItem(item2);
         }
     }
 }

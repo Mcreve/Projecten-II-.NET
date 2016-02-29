@@ -29,7 +29,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             itemRepository.Setup(i => i.FindBy(3)).Returns(context.LearningUtilityDetails3);
             wishlistController = new WishlistController(itemRepository.Object);
             wishlist = new Wishlist();
-            wishlist.AddLine(context.LearningUtilityDetails1);
+            wishlist.AddItem(context.LearningUtilityDetails1);
         }
 
         #region Index
@@ -117,57 +117,6 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             //Assert
             Assert.AreEqual(0, wishlist.NumberOfItems);
             itemRepository.Verify(l => l.FindBy(1), Times.Once);
-        }
-        #endregion
-
-        #region Plus
-        [TestMethod]
-        public void PlusRedirectsToIndex()
-        {
-            //Act
-            RedirectToRouteResult result = wishlistController.Plus(1, wishlist) as RedirectToRouteResult;
-
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("Index", result.RouteValues["action"]);
-            itemRepository.Verify(l => l.FindBy(1), Times.Once);
-        }
-
-        [TestMethod]
-        public void PlusWillIncreaseQuantity()
-        {
-            //Act
-            RedirectToRouteResult result = wishlistController.Plus(1, wishlist) as RedirectToRouteResult;
-            WishlistLine line = wishlist.WishlistLines.First();
-
-            //Assert
-            Assert.AreEqual(2, line.Quantity);
-        }
-        #endregion
-
-        #region Min
-        [TestMethod]
-        public void MinRedirectsToIndex()
-        {
-            //Act
-            RedirectToRouteResult result = wishlistController.Min(1, wishlist) as RedirectToRouteResult;
-
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("Index", result.RouteValues["action"]);
-            itemRepository.Verify(l => l.FindBy(1), Times.Once);
-        }
-
-        [TestMethod]
-        public void MinWillDecreaseQuantity()
-        {
-            //Act
-            wishlistController.Plus(1, wishlist);
-            RedirectToRouteResult result = wishlistController.Min(1, wishlist) as RedirectToRouteResult;
-            WishlistLine line = wishlist.WishlistLines.First();
-
-            //Assert
-            Assert.AreEqual(1, line.Quantity);
         }
         #endregion
     }
