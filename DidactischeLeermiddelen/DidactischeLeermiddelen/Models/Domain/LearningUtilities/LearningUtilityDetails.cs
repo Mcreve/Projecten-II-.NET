@@ -133,9 +133,9 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             }
         }
         [Display(Name = "Leergebied")]
-        public virtual FieldOfStudy FieldOfStudy { get; set; }    
+        public virtual ICollection<FieldOfStudy> FieldsOfStudy { get; set; }    
         [Display(Name = "Doelgroep")]
-        public virtual TargetGroup TargetGroup { get; set; }
+        public virtual ICollection<TargetGroup> TargetGroups { get; set; }
         [Display(Name = "Bedrijf")]
         public virtual Company Company { get; set; }
         [Display(Name = "Locatie")]
@@ -180,6 +180,8 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public LearningUtilityDetails()
         {
             LearningUtilities = new List<LearningUtility>();
+            FieldsOfStudy = new List<FieldOfStudy>();
+            TargetGroups = new List<TargetGroup>();
             Loanable = true;
             Price = 0;
         }

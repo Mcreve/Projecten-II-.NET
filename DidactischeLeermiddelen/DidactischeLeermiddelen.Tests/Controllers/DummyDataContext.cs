@@ -66,14 +66,14 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 Name = "Wereldbol",
                 Description = "Wereldbol met tectonische platen",
                 Company = Company1,
-                FieldOfStudy = FieldOfStudy1,
                 ArticleNumber = "Art1001",
                 Loanable = true,
                 Location = Location1,
-                TargetGroup = TargetGroup1,
                 Picture = @"\items\pictures\wereldbol.png",
                 Price = 75m
             };
+            LearningUtilityDetails1.FieldsOfStudy.Add(FieldOfStudy1);
+            LearningUtilityDetails1.TargetGroups.Add(TargetGroup1);
             LearningUtilityDetails2 = new LearningUtilityDetails
             {
                 Id = 2,
@@ -81,13 +81,13 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 ArticleNumber = "MH1447",
                 Company = Company1,
                 Description = "Koffertje met verschillende soorten dobbelstenen: blanco, met cijfers,...",
-                FieldOfStudy = FieldOfStudy1,
                 Loanable = true,
                 Location = Location1,
                 Picture = @"\items\pictures\dobbelsteen_schatkist_162-delig.jpg",
-                Price = 35m,
-                TargetGroup = TargetGroup1
+                Price = 35m
             };
+            LearningUtilityDetails1.FieldsOfStudy.Add(FieldOfStudy1);
+            LearningUtilityDetails1.TargetGroups.Add(TargetGroup1);
             LearningUtilityDetails3 = new LearningUtilityDetails
             {
                 Id = 3,
@@ -95,13 +95,13 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 ArticleNumber = "MX203510",
                 Company = Company1,
                 Description = "Spelbord op het opdrachtenboekje leggen > opdracht oplossen door het juiste cijfer van het spelbord op het juiste antwoord in het boekje te leggen > controle door het spelbord dicht te klappen en om te draaien > de patronen moeten overeen komen.",
-                FieldOfStudy = FieldOfStudy1,
                 Loanable = false,
                 Location = Location1,
                 Picture = @"\items\pictures\rekenspelletjes_optellen_en_aftrekken.gif",
-                Price = 10.9m,
-                TargetGroup = TargetGroup1
+                Price = 10.9m
             };
+            LearningUtilityDetails1.FieldsOfStudy.Add(FieldOfStudy1);
+            LearningUtilityDetails1.TargetGroups.Add(TargetGroup1);
 
         }
 

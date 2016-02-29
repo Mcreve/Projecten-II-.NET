@@ -19,7 +19,6 @@ namespace DidactischeLeermiddelen.Controllers
     public class CatalogController : Controller
     {
         private readonly ILearningUtilityDetailsRepository learningUtilityDetailsRepository;
-        private IUserRepository @object;
 
         public CatalogController(ILearningUtilityDetailsRepository learningUtilityDetailsRepository)
         {

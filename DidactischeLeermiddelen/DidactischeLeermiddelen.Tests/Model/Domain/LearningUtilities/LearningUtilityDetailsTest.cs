@@ -443,12 +443,12 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         {
             #region Act
 
-            initiaLearningUtilityDetails.FieldOfStudy = initialFieldOfStudy;
+            initiaLearningUtilityDetails.FieldsOfStudy.Add(initialFieldOfStudy);
 
             #endregion
 
             #region Assert
-            Assert.AreEqual(initialFieldOfStudy.Name,initiaLearningUtilityDetails.FieldOfStudy.Name);
+            Assert.AreEqual(initialFieldOfStudy,initiaLearningUtilityDetails.FieldsOfStudy.Single(f => f.Equals(initialFieldOfStudy)));
             #endregion
         }
 
@@ -459,12 +459,12 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         {
             #region Act
 
-            initiaLearningUtilityDetails.TargetGroup = initialTargetGroup;
+            initiaLearningUtilityDetails.TargetGroups.Add(initialTargetGroup);
 
             #endregion
 
             #region Assert
-            Assert.AreEqual(initialTargetGroup.Name,initiaLearningUtilityDetails.TargetGroup.Name);
+            Assert.AreEqual(initialTargetGroup,initiaLearningUtilityDetails.TargetGroups.Single(t => t.Equals(initialTargetGroup)));
             #endregion
         }
         #endregion

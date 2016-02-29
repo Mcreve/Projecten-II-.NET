@@ -14,7 +14,6 @@ namespace DidactischeLeermiddelen.Models.DAL.Mapper
         {
             #region Properties
             Property(fieldOfStudy => fieldOfStudy.Name).IsRequired().HasMaxLength(100);
-
             #endregion
         }
 

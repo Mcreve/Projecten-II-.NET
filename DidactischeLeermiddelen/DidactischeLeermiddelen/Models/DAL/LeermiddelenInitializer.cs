@@ -230,16 +230,17 @@ namespace DidactischeLeermiddelen.Models.DAL
                               " De voet is van massief hout en heeft een walnoothouten kleur, de kunststof meridiaan is koperkleurig. De bol zelf is van plexiglas." +
                               " De Nova Rico Colombo is voorzien van verlichting en wanneer u de lamp aanzet, lichten de landen in diverse kleuren prachtig op.",
                 Company = companies.FirstOrDefault(c => c.Name.Equals("Wolters")),
-                FieldOfStudy = fieldsOfStudy.FirstOrDefault(f => f.Name.Equals("Aardrijkskunde")),
                 ArticleNumber = "Art1001",
                 Loanable = true,
                 Location = locations.FirstOrDefault(),
-                TargetGroup = targetGroups.FirstOrDefault(t => t.Name.Equals("Lager")),
                 Picture = @"http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png",
                 Price = 75m
             };
             learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Available, null, null));
             learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Reserved, users.First(), null));
+            learningUtilityDetails.FieldsOfStudy.Add(fieldsOfStudy.Single(t => t.Name.Equals("Aardrijkskunde")));
+            learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
+            learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Middelbaar")));
             context.LearningUtilityDetailsList.Add(learningUtilityDetails);
 
             //Create dobbelsteenschatkist object
@@ -254,15 +255,17 @@ namespace DidactischeLeermiddelen.Models.DAL
                               " zal een van de zijden min of meer toevallig boven komen. Het aantal ogen op deze zijde wordt " +
                               "als uitkomst van de worp beschouwd. De dobbelsteen fungeert daarmee als toevalsgenerator die met " +
                               "gelijke kansen van 1/6 de getallen 1 t/m 6 voortbrengt.",
-                FieldOfStudy = fieldsOfStudy.FirstOrDefault(f => f.Name.Equals("Ontspanning")),
                 Loanable = true,
                 Location = locations.FirstOrDefault(),
                 Picture = @"http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png",
-                Price = 35m,
-                TargetGroup = targetGroups.FirstOrDefault(t => t.Name.Equals("Kleuter"))
+                Price = 35m
             };
             learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.HandedOut, null, users.ElementAtOrDefault(1)));
             learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Unavailable, null, null));
+            learningUtilityDetails.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Ontspanning")));
+            learningUtilityDetails.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
+            learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
+            learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
             context.LearningUtilityDetailsList.Add(learningUtilityDetails);
 
             //Create rekenspelletjes object
@@ -272,14 +275,15 @@ namespace DidactischeLeermiddelen.Models.DAL
                 ArticleNumber = "MX203510",
                 Company = companies.FirstOrDefault(c => c.Name.Contains("Texas")),
                 Description = "Spelbord op het opdrachtenboekje leggen > opdracht oplossen door het juiste cijfer van het spelbord op het juiste antwoord in het boekje te leggen > controle door het spelbord dicht te klappen en om te draaien > de patronen moeten overeen komen.",
-                FieldOfStudy = fieldsOfStudy.FirstOrDefault(f => f.Name.Equals("Wiskunde")),
                 Loanable = false,
                 Location = locations.ElementAtOrDefault(1),
                 Picture = @"http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png",
-                Price = 10.9m,
-                TargetGroup = targetGroups.FirstOrDefault(t => t.Name.Contains("Middelbaar"))
+                Price = 10.9m
             };
             learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Blocked, users.ElementAtOrDefault(5), null));
+            learningUtilityDetails.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
+            learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
+            learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
             context.LearningUtilityDetailsList.Add(learningUtilityDetails);
 
             context.SaveChanges();

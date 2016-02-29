@@ -14,6 +14,18 @@ namespace DidactischeLeermiddelen.Models.DAL.Mapper
             Property(l => l.Name).IsRequired().HasMaxLength(100);
             Property(l => l.Description).IsRequired().HasMaxLength(1000);
             Property(l => l.Picture).HasMaxLength(250);
+            HasMany(t => t.FieldsOfStudy).WithMany().Map(m =>
+            {
+                m.ToTable("LearningUtilityDetails_FieldOfStudy");
+                m.MapLeftKey("learningUtilityId");
+                m.MapRightKey("FieldOfStudyId");
+            });
+            HasMany(t => t.TargetGroups).WithMany().Map(m =>
+            {
+                m.ToTable("LearningUtilityDetails_TargetGroup");
+                m.MapLeftKey("learningUtilityId");
+                m.MapRightKey("targetGroupId");
+            });
         }
     }
 }
