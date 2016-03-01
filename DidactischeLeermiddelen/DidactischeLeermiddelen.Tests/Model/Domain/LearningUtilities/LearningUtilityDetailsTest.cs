@@ -313,11 +313,11 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
 
             #region Assert
-            Assert.AreEqual((decimal)price, initiaLearningUtilityDetails.Price);
+            Assert.AreEqual(price, initiaLearningUtilityDetails.Price);
             #endregion
         }
         [TestMethod]
-        [ExpectedException(typeof(ValidationException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void LearningUtilityDetailsPriceIsNegativeThrowsError()
         {
             #region Arrange
