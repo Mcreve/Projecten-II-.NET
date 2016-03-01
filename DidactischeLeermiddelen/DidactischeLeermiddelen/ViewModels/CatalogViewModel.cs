@@ -46,8 +46,8 @@ namespace DidactischeLeermiddelen.Models
             ArticleNumber = learningUtilityDetails.ArticleNumber;
             AmountInStock =
                 learningUtilityDetails.LearningUtilities.Count(learningUtility => learningUtility.StateType == StateType.Available);
-            TargetGroup = learningUtilityDetails.TargetGroups.First(f => f.Id >= 0).Name;
-            FieldOfStudy = learningUtilityDetails.FieldsOfStudy.First(f => f.Id >= 0).Name;
+            TargetGroup = null;
+            FieldOfStudy = null;
         }
         /// <summary>
         /// Returns the shortdescription of the LearningUtilityDetail, the first 250 characters.
