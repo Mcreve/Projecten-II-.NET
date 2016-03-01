@@ -3,6 +3,9 @@
     ViewBag.Title = "EmptyWishlist";
 }
 
-<h2>EmptyWishlist</h2>
-<p>Uw verlanglijstje is leeg. Ga naar de catalogus om items toe te voegen.</p>
+<h2>Verlanglijstje</h2>
+
+@Html.Partial("_notificationPartial")
+
+<p>Uw verlanglijstje is leeg. Ga naar de <a href="/Catalog">catalogus</a> om items toe te voegen.</p>
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DidactischeLeermiddelen.Models;
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 
@@ -22,7 +23,10 @@ namespace DidactischeLeermiddelen.Controllers
         {
             if (wishlist.NumberOfItems == 0)
                 return View("EmptyWishlist");
-            return View(wishlist.LearningUtilities);
+            IEnumerable<CatalogViewModel> catalogViewModel =
+                wishlist.LearningUtilities.Select(learningUtilityDetails => new CatalogViewModel(GetLearningUtilityDetails(learningUtilityDetails.Id)))
+                    .ToList();
+            return View(catalogViewModel);
         }
 
         public ActionResult Add(int id, Wishlist wishlist)

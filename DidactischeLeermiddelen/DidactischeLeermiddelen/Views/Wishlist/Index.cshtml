@@ -1,23 +1,46 @@
-﻿@model IEnumerable<DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityDetails>
+﻿@model IEnumerable<DidactischeLeermiddelen.Models.CatalogViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Verlanglijstje";
 }
 
-<h2>Index</h2>
-
+<h2>Verlanglijstje</h2>
+@Html.Partial("_notificationPartial")
 <table class="table">
     <tr>
-        <th>
+        <th class="col-md-4">
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountInStock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountBlocked)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountInCatalog)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountUnavailable)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountInStock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountBlocked)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountInCatalog)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountUnavailable)
         </td>
         <td>
             @Html.ActionLink("Delete", "Remove", new { id = item.Id })

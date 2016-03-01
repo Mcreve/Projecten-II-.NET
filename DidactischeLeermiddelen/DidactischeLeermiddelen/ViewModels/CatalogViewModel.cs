@@ -21,12 +21,18 @@ namespace DidactischeLeermiddelen.Models
         public decimal? Price { get; set; }
         [Display(Name = "Artikel Nr.")]
         public string ArticleNumber { get; set; }
-        [Display(Name = "Stock")]
+        [Display(Name = "Beschikbaar")]
         public int AmountInStock { get; set; }
         [Display(Name = "Doelgroep")]
         public string TargetGroup { get; set; }
         [Display(Name = "Leergebied")]
         public string FieldOfStudy { get; set; }
+        [Display(Name = "Totaal")]
+        public int AmountInCatalog { get; set; }
+        [Display(Name = "Tijdelijk onbeschikbaar")]
+        public int AmountUnavailable { get; set; }
+        [Display(Name = "Gereserveerd")]
+        public int AmountBlocked { get; set; }
 
         public CatalogViewModel()
         {
@@ -48,6 +54,12 @@ namespace DidactischeLeermiddelen.Models
                 learningUtilityDetails.LearningUtilities.Count(learningUtility => learningUtility.StateType == StateType.Available);
             TargetGroup = null;
             FieldOfStudy = null;
+            AmountBlocked =
+                learningUtilityDetails.LearningUtilities.Count(
+                    utility => utility.StateType == StateType.Blocked || utility.StateType == StateType.Reserved || utility.StateType == StateType.HandedOut);
+            AmountInCatalog = learningUtilityDetails.LearningUtilities.Count;
+            AmountUnavailable =
+                learningUtilityDetails.LearningUtilities.Count(utility => utility.StateType == StateType.Unavailable || utility.StateType == StateType.Late);
         }
         /// <summary>
         /// Returns the shortdescription of the LearningUtilityDetail, the first 250 characters.
