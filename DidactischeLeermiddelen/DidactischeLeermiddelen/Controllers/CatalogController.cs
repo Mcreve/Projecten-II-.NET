@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using DidactischeLeermiddelen.Models;
-using DidactischeLeermiddelen.Models.DAL;
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.Users;
-using Microsoft.Ajax.Utilities;
-using System.Text.RegularExpressions;
-using WebGrease.Css.Extensions;
 
 namespace DidactischeLeermiddelen.Controllers
 {

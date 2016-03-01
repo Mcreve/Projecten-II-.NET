@@ -314,6 +314,7 @@
     <Content Include="Views\Wishlist\EmptyWishlist.cshtml" />
     <Content Include="Views\Catalog\Search.cshtml" />
     <Content Include="Views\Catalog\_SearchResultsPartial.cshtml" />
+    <Content Include="Views\Shared\_notificationPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

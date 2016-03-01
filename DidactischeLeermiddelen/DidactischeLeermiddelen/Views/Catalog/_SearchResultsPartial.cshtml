@@ -1,6 +1,6 @@
 ﻿@using DidactischeLeermiddelen.HtmlHelpers
 @model IEnumerable<DidactischeLeermiddelen.Models.CatalogViewModel>
-
+@Html.Partial("_notificationPartial")
 @foreach (var item in Model)
 {
     <div class="col-md-6 learningUtilityDetails">
