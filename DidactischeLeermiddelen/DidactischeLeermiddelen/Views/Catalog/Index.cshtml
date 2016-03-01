@@ -1,67 +1,18 @@
-﻿@using DidactischeLeermiddelen.HtmlHelpers
-@using DidactischeLeermiddelen.Models
-@using DidactischeLeermiddelen.Models.Domain.Users
-@using Ninject.Infrastructure.Language
+﻿@using DidactischeLeermiddelen.Models
 @model IEnumerable<DidactischeLeermiddelen.Models.CatalogViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
 
-@{
-    // @Ward Dit zou eventueel in de user klasse kunnen? 
-    if (User.IsInRole(UserType.Student.ToString()))
-    {
-        <div class="col-md-12">
-            @Html.Partial("_SearchCatalogPartial")
-        </div>
-    }
-    else if (User.IsInRole(UserType.Lector.ToString()))
-    {
-        <div class="col-md-12">
-            @Html.Partial("_SearchCatalogAdvancedPartial", new CatalogViewModel())
-        </div>
-    }
-
-}
 <div class="col-md-12">
     @Html.Partial("_SearchCatalogPartial", new CatalogViewModel())
 </div>
 
 <div id="search-results">
-
-    @foreach (var item in Model)
-    {
-        <div class="col-md-6 learningUtilityDetails">
-            <div class="col-md-12"><strong><h3>@Html.DisplayFor(modelItem => item.Name)</h3></strong></div>
-
-
-            <div class="col-md-6 pull-right">
-                @Html.DisplayFor(modelItem => item.ShortDescription)
-                @Html.ActionLink("Details", "Details", new { id = item.Id })
-            </div>
-            <div class="col-md-6 pull-left">
-                @Html.Image(item.Picture, item.Name, "img-responsive")
-                <div class="col-md-6 pull-left">
-                    @Html.DisplayNameFor(model => model.Price)<br />
-                    @Html.DisplayNameFor(model => model.AmountInStock)<br />
-                    <input type="number" name="quantity" value="1" min="1" style="width:3em" class="form-control" />
-                </div>
-                <div class="col-md-6 pull-right ">
-                    @Html.DisplayFor(modelItem => item.Price)<br />
-                    @Html.DisplayFor(modelItem => item.AmountInStock)<br />
-                    @using (Html.BeginForm("Add", "Wishlist", new { id = item.Id }))
-                {<button type="submit" class="btn btn-default">
-                        <span class="glyphicon glyphicon-shopping-cart"></span> Reserveer
-                    </button>
-                    }
-                </div>
-                <div class="pull-right" style="clear: both;">
-
-                </div>
-            </div>
-
-        </div>
-
-    }
+    @Html.Partial("_SearchResultsPartial", Model)
 </div>
+@section scripts
+{
+    <script src="~/Scripts/CustomScripts/AjaxScripts.js"></script>
+}

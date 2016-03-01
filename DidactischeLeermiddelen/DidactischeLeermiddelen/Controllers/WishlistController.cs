@@ -32,11 +32,11 @@ namespace DidactischeLeermiddelen.Controllers
                 try
                 {
                     wishlist.AddItem(item);
-                    TempData["Info"] = item.Name + " werd toegevoegd aan uw verlanglijst.";
+                    TempData["info"] = item.Name + " werd toegevoegd aan uw verlanglijst.";
                 }
                 catch (InvalidOperationException e)
                 {
-                    TempData["Error"] = e.Message;
+                    TempData["error"] = e.Message;
                 }
             }
             return RedirectToAction("Index", "Catalog");
@@ -50,11 +50,11 @@ namespace DidactischeLeermiddelen.Controllers
                 try
                 {
                     wishlist.RemoveItem(item);
-                    TempData["Info"] = item.Name + " werd van uw verlanglijstje verwijderd";
+                    TempData["info"] = item.Name + " werd van uw verlanglijstje verwijderd";
                 }
                 catch (InvalidOperationException e)
                 {
-                    TempData["Error"] = e.Message;
+                    TempData["error"] = e.Message;
                 }
             }
             return RedirectToAction("Index");

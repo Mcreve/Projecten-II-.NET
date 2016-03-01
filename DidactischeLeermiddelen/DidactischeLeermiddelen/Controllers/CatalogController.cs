@@ -42,11 +42,11 @@ namespace DidactischeLeermiddelen.Controllers
 
             if (User.Identity.IsAuthenticated)
             {
-                catalog = user.GetLearningUtilities(learningUtilityDetailsRepository);
+                catalog = user.GetLearningUtilities(learningUtilityDetailsRepository).OrderBy(l => l.Name);
             }
             else
             {
-                catalog = learningUtilityDetailsRepository.FindAll().Where(learningUtilityDetails => learningUtilityDetails.Loanable == true);
+                catalog = learningUtilityDetailsRepository.FindAll();
             }
 
             if (!String.IsNullOrEmpty(searchString))
@@ -64,10 +64,11 @@ namespace DidactischeLeermiddelen.Controllers
                 catalog = catalog.Where(l => l.TargetGroups.SingleOrDefault(t => t.Id == targetGroup) != null);
             }
 
-            IEnumerable<CatalogViewModel> catalogViewModels =
+            IEnumerable<CatalogViewModel> catalogViewModel =
                 catalog.Select(learningUtilityDetails => new CatalogViewModel(learningUtilityDetails)).ToList();
-
-            return View(catalogViewModels);
+            if (Request.IsAjaxRequest())
+                return PartialView("_SearchResultsPartial", catalogViewModel);
+            return View(catalogViewModel);
         }
 
         // GET: Catalog/Details/5

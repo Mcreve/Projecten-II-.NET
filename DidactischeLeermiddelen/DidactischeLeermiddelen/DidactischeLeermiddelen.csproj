@@ -261,6 +261,7 @@
     <Content Include="Models\Domain\Domain.cd" />
     <Content Include="Models\DAL\DAL.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\CustomScripts\AjaxScripts.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -309,10 +310,10 @@
     <Content Include="Views\Catalog\Details.cshtml" />
     <Content Include="Views\Catalog\Index.cshtml" />
     <Content Include="Views\Catalog\_SearchCatalogPartial.cshtml" />
-    <Content Include="Views\Catalog\_SearchCatalogAdvancedPartial.cshtml" />
     <Content Include="Views\Wishlist\Index.cshtml" />
     <Content Include="Views\Wishlist\EmptyWishlist.cshtml" />
     <Content Include="Views\Catalog\Search.cshtml" />
+    <Content Include="Views\Catalog\_SearchResultsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
