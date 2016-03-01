@@ -10,6 +10,7 @@ using DidactischeLeermiddelen.Models.Domain.Users;
 
 namespace DidactischeLeermiddelen.Controllers
 {
+    [Authorize]
     public class CatalogController : Controller
     {
         private readonly ILearningUtilityDetailsRepository learningUtilityDetailsRepository;

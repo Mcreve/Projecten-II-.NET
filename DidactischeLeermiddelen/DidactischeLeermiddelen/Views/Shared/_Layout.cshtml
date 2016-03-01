@@ -20,12 +20,17 @@
                 @Html.ActionLink("Didactische leermiddelen", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                  <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Catalogus", "Index", "Catalog")</li>
                     <li>@Html.ActionLink("Verlanglijstje", "Index", "Wishlist")</li>
-                </ul>
+                 </ul>
+                }
                 @Html.Partial("_LoginPartial")
             </div>
+
         </div>
     </div>
     <div class="container body-content">

@@ -41,7 +41,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         [TestMethod]
-        public void companyNameIs50CharactersLongSetsTheName()
+        public void CompanyNameIs50CharactersLongSetsTheName()
         {
             #region Arrange
             const string companyName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
@@ -58,7 +58,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         [TestMethod]
-        public void companyNameIs100CharactersLongSetsTheName()
+        public void CompanyNameIs100CharactersLongSetsTheName()
         {
             #region Arrange
             const string companyName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
@@ -77,7 +77,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void companyNameIs101CharactersLongThrowsError()
+        public void CompanyNameIs101CharactersLongThrowsError()
         {
             #region Arrange
             const string companyName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
@@ -109,7 +109,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         }
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void companyNameHasIsNullThrowsError()
+        public void CompanyNameHasIsNullThrowsError()
         {
             #region Arrange
             string companyName = null;
@@ -121,7 +121,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         }
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void companyNameHasIsEmptyThrowsError()
+        public void CompanyNameHasIsEmptyThrowsError()
         {
             #region Arrange
             string companyName = string.Empty;
