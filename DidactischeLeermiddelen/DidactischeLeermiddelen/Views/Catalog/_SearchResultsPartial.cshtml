@@ -1,6 +1,12 @@
 ﻿@using DidactischeLeermiddelen.HtmlHelpers
-@model IEnumerable<DidactischeLeermiddelen.Models.CatalogViewModel>
+@using PagedList.Mvc
+@model PagedList.IPagedList<DidactischeLeermiddelen.Models.CatalogViewModel>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @Html.Partial("_notificationPartial")
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, currentFilter = ViewBag.CurrentFilter }))
 @foreach (var item in Model)
 {
     <div class="col-md-6 learningUtilityDetails">

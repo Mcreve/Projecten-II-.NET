@@ -6,7 +6,7 @@
         <div class="form-inline">
             <div class="form-group">
                 <label for="SearchString" class="control-label col-md-1">Zoekterm</label>
-                @Html.TextBox("SearchString", null, new {@class = "form-control"})
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new {@class = "form-control"})
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.FieldOfStudy, new {@class = "control-label col-md-1"})

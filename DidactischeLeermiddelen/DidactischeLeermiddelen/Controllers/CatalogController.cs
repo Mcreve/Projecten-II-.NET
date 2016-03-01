@@ -7,6 +7,7 @@ using DidactischeLeermiddelen.Models;
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.Users;
+using PagedList;
 
 namespace DidactischeLeermiddelen.Controllers
 {
@@ -27,21 +28,24 @@ namespace DidactischeLeermiddelen.Controllers
 
 
         // GET: Catalog
-        public ActionResult Index(User user,string searchString, int? fieldOfStudy, int? targetGroup)
+        public ActionResult Index(User user, string currentFilter, string searchString, int? fieldOfStudy, int? targetGroup, int? page)
         {
 
             IEnumerable<LearningUtilityDetails> catalog = null;
             ViewBag.TargetGroups = GetTargetGroupsSelectList();
             ViewBag.FieldsOfStudy = GetFieldOfStudySelectList();
+            catalog = user.GetLearningUtilities(learningUtilityDetailsRepository).OrderBy(l => l.Name);
 
-            if (User.Identity.IsAuthenticated)
+            if (searchString != null)
             {
-                catalog = user.GetLearningUtilities(learningUtilityDetailsRepository).OrderBy(l => l.Name);
+                page = 1;
             }
             else
             {
-                catalog = learningUtilityDetailsRepository.FindAll();
+                searchString = currentFilter;
             }
+
+            ViewBag.CurrentFilter = searchString;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -57,13 +61,18 @@ namespace DidactischeLeermiddelen.Controllers
             {
                 catalog = catalog.Where(l => l.TargetGroups.SingleOrDefault(t => t.Id == targetGroup) != null);
             }
+
             if (!catalog.Any())
                 TempData["info"] = "Geen items gevonden voor opgegeven zoekcriteria.";
+
             IEnumerable<CatalogViewModel> catalogViewModel =
                 catalog.Select(learningUtilityDetails => new CatalogViewModel(learningUtilityDetails)).ToList();
+            int pageSize = 2;
+            int pageNumber = (page ?? 1);
+
             if (Request.IsAjaxRequest())
-                return PartialView("_SearchResultsPartial", catalogViewModel);
-            return View(catalogViewModel);
+                return PartialView("_SearchResultsPartial", catalogViewModel.ToPagedList(pageNumber, pageSize));
+            return View(catalogViewModel.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Catalog/Details/5
