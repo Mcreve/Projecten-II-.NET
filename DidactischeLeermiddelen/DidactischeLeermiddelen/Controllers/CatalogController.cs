@@ -57,7 +57,8 @@ namespace DidactischeLeermiddelen.Controllers
             {
                 catalog = catalog.Where(l => l.TargetGroups.SingleOrDefault(t => t.Id == targetGroup) != null);
             }
-
+            if (!catalog.Any())
+                TempData["info"] = "Geen items gevonden voor opgegeven zoekcriteria.";
             IEnumerable<CatalogViewModel> catalogViewModel =
                 catalog.Select(learningUtilityDetails => new CatalogViewModel(learningUtilityDetails)).ToList();
             if (Request.IsAjaxRequest())
