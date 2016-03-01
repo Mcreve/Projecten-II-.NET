@@ -17,6 +17,7 @@ using WebGrease.Css.Extensions;
 
 namespace DidactischeLeermiddelen.Controllers
 {
+    [Authorize]
     public class CatalogController : Controller
     {
         private readonly ILearningUtilityDetailsRepository learningUtilityDetailsRepository;

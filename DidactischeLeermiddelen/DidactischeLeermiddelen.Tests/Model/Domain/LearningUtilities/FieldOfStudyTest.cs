@@ -41,7 +41,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         [TestMethod]
-        public void fieldOfStudyNameIs50CharactersLongSetsTheName()
+        public void FieldOfStudyNameIs50CharactersLongSetsTheName()
         {
             #region Arrange
             const string fieldOfStudyName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
@@ -58,7 +58,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         [TestMethod]
-        public void fieldOfStudyNameIs100CharactersLongSetsTheName()
+        public void FieldOfStudyNameIs100CharactersLongSetsTheName()
         {
             #region Arrange
             const string fieldOfStudyName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
@@ -77,7 +77,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void fieldOfStudyNameIs101CharactersLongThrowsError()
+        public void FieldOfStudyNameIs101CharactersLongThrowsError()
         {
             #region Arrange
             const string fieldOfStudyName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
@@ -93,7 +93,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         [TestMethod]
-        public void fieldOfStudyNameHasAlphaNumericNameCreatesIt()
+        public void FieldOfStudyNameHasAlphaNumericNameCreatesIt()
         {
             #region Arrange
             const string fieldOfStudyName = "GLEDE 1.011";
@@ -121,7 +121,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         }
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void fieldOfStudyNameHasIsEmptyThrowsError()
+        public void FieldOfStudyNameHasIsEmptyThrowsError()
         {
             #region Arrange
             string fieldOfStudyName = string.Empty;

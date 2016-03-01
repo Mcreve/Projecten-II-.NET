@@ -8,6 +8,7 @@ using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 
 namespace DidactischeLeermiddelen.Controllers
 {
+    [Authorize]
     public class WishlistController : Controller
     {
         private ILearningUtilityDetailsRepository learningUtilityDetailsRepository;

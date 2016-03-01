@@ -41,7 +41,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         [TestMethod]
-        public void targetGroupNameIs50CharactersLongSetsTheName()
+        public void TargetGroupNameIs50CharactersLongSetsTheName()
         {
             #region Arrange
             const string targetGroupName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
@@ -58,7 +58,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         [TestMethod]
-        public void targetGroupNameIs100CharactersLongSetsTheName()
+        public void TargetGroupNameIs100CharactersLongSetsTheName()
         {
             #region Arrange
             const string targetGroupName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
@@ -77,7 +77,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void targetGroupNameIs101CharactersLongThrowsError()
+        public void TargetGroupNameIs101CharactersLongThrowsError()
         {
             #region Arrange
             const string targetGroupName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
@@ -93,7 +93,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         [TestMethod]
-        public void targetGroupNameHasAlphaNumericNameCreatesIt()
+        public void TargetGroupNameHasAlphaNumericNameCreatesIt()
         {
             #region Arrange
             const string targetGroupName = "GLEDE 1.011";
@@ -109,7 +109,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         }
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void targetGroupNameHasIsNullThrowsError()
+        public void TargetGroupNameHasIsNullThrowsError()
         {
             #region Arrange
             string targetGroupName = null;
@@ -121,7 +121,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         }
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void targetGroupNameHasIsEmptyThrowsError()
+        public void TargetGroupNameHasIsEmptyThrowsError()
         {
             #region Arrange
             string targetGroupName = string.Empty;
