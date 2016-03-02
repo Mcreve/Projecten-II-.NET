@@ -17,15 +17,15 @@ namespace DidactischeLeermiddelen.Models.Domain
         /// The LearningUtilities stored in this object
         /// </summary>
         #region Properties
-        private IList<LearningUtilityDetails> learningUtilities = new List<LearningUtilityDetails>();
+        private IList<LearningUtilityDetails> learningUtilityDetails = new List<LearningUtilityDetails>();
         /// <summary>
         /// Getter for the lines field.
         /// </summary>
-        public IEnumerable<LearningUtilityDetails> LearningUtilities { get { return learningUtilities.AsEnumerable(); } }
+        public IEnumerable<LearningUtilityDetails> LearningUtilities { get { return learningUtilityDetails.AsEnumerable(); } }
         /// <summary>
         /// The number of WishlistLines (items) in this object.
         /// </summary>
-        public int NumberOfItems { get { return learningUtilities.Count(); } }
+        public int NumberOfItems { get { return learningUtilityDetails.Count(); } }
         #endregion
 
         #region Methods
@@ -38,7 +38,7 @@ namespace DidactischeLeermiddelen.Models.Domain
         {
             LearningUtilityDetails learningUtility = FindLearningUtility(item.Id);
             if (learningUtility == null)
-                learningUtilities.Add(item);
+                learningUtilityDetails.Add(item);
             else
                 throw new InvalidOperationException("Item werd reeds aan uw verlanglijstje toegevoegd.");
         }
@@ -52,14 +52,14 @@ namespace DidactischeLeermiddelen.Models.Domain
         {
             LearningUtilityDetails learningUtility = FindLearningUtility(item.Id);
             if (learningUtility != null)
-                learningUtilities.Remove(learningUtility);
+                learningUtilityDetails.Remove(learningUtility);
             else
                 throw new InvalidOperationException("Item werd niet in uw verlanglijstje terug gevonden.");
         }
 
         private LearningUtilityDetails FindLearningUtility(int id)
         {
-            return learningUtilities.SingleOrDefault(l => l.Id == id);
+            return learningUtilityDetails.SingleOrDefault(l => l.Id == id);
         }
         #endregion
     }
