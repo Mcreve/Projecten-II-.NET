@@ -8,6 +8,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using System.Collections.Generic;
+using System.Web;
+using System.Web.Routing;
 using DidactischeLeermiddelen.Models;
 
 
@@ -25,6 +27,8 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         private List<LearningUtilityDetails> searchResults;
         private Mock<ITargetGroupRepository> targetGroupRepository;
         private Mock<IFieldOfStudyRepository> fieldOfStudyRepository;
+        private Mock<HttpRequestBase> request;
+        private Mock<HttpContextBase> httpcontext;
 
         [TestInitialize]
         public void TestInitialize()
@@ -45,9 +49,12 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             itemRepository.Setup(i => i.FindBy(2)).Returns(context.LearningUtilityDetails2);
             itemRepository.Setup(i => i.FindBy(3)).Returns(context.LearningUtilityDetails3);
             catalogController = new CatalogController(itemRepository.Object, targetGroupRepository.Object, fieldOfStudyRepository.Object);
+
+            request = new Mock<HttpRequestBase>();
             
-
-
+            httpcontext = new Mock<HttpContextBase>();
+            httpcontext.SetupGet(x => x.Request).Returns(request.Object);
+            catalogController.ControllerContext = new ControllerContext(httpcontext.Object, new RouteData(), catalogController);
         }
 
         #region Index
@@ -57,10 +64,11 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
             //Arrange
             student = context.Student1;
+            request.SetupGet(x => x.Headers).Returns(new System.Net.WebHeaderCollection { { "X-Requested-With", "" } });
 
             //Act
-            ViewResult result = catalogController.Index(student, null, null, null) as ViewResult;
-            IEnumerable <CatalogViewModel> catalog = result.ViewData.Model as IEnumerable<DidactischeLeermiddelen.Models.CatalogViewModel>;
+            ViewResult result = catalogController.Index(student,null, null, null, null, null) as ViewResult;
+            IEnumerable <CatalogViewModel> catalog = result.ViewData.Model as IEnumerable<CatalogViewModel>;
 
             //Assert
             Assert.IsNotNull(result);
@@ -73,14 +81,29 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
             //Arrange
             lector = context.Lector1;
+            request.SetupGet(x => x.Headers).Returns(new System.Net.WebHeaderCollection { { "X-Requested-With", "" } });
 
             //Act
-            ViewResult result = catalogController.Index(lector, null, null, null) as ViewResult;
-            IEnumerable<CatalogViewModel> catalog = result.ViewData.Model as IEnumerable<DidactischeLeermiddelen.Models.CatalogViewModel>;
+            ViewResult result = catalogController.Index(lector, null, null, null, null, null) as ViewResult;
+            IEnumerable<CatalogViewModel> catalog = result.ViewData.Model as IEnumerable<CatalogViewModel>;
 
             //Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(3, catalog.Count());
+        }
+
+        [TestMethod]
+        public void IndexReturnPartialViewIfIsAjaxRequest()
+        {
+            //Arrange
+            lector = context.Lector1;
+            request.SetupGet(x => x.Headers).Returns(new System.Net.WebHeaderCollection { { "X-Requested-With", "XMLHttpRequest" } });
+
+            //Act
+            PartialViewResult result = catalogController.Index(lector, null, null, null, null, null) as PartialViewResult;
+
+            //Assert
+            Assert.IsNotNull(result);
         }
 
         #endregion
@@ -93,88 +116,36 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
             //Act
             ViewResult result = catalogController.Details(context.LearningUtilityDetails2.Id) as ViewResult;
-            LearningUtilityDetails catalog = result.ViewData.Model as DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityDetails;
+            LearningUtilityDetails learningUtilityDetails = result.ViewData.Model as LearningUtilityDetails;
 
             //Assert
-            Assert.AreEqual("Details", result.ViewName);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(context.LearningUtilityDetails2.Id, learningUtilityDetails.Id);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void ParameterCanNotBeNull()
         {
-
-
             //Act
-            ViewResult result = catalogController.Details(null) as ViewResult;
+            HttpNotFoundResult result = catalogController.Details(null) as HttpNotFoundResult;
+
+            //Assert
+            Assert.IsNotNull(result);
 
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void ParameterCanNotBeZero()
         {
 
             //Act
-            ViewResult result = catalogController.Details(0) as ViewResult;
-
-        }
-
-        #endregion
-
-        #region Search
-        [TestMethod]
-        public void SearchShowsResultsWithMatchingName()
-        {
-
-            
-            //Act
-            ViewResult result = catalogController.Search("steen") as ViewResult;
-            IEnumerable<CatalogViewModel> catalog = result.ViewData.Model as IEnumerable<DidactischeLeermiddelen.Models.CatalogViewModel>;
+            HttpNotFoundResult result = catalogController.Details(0) as HttpNotFoundResult;
 
             //Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(1, catalog.Count());
-            Assert.AreEqual(2, catalog.FirstOrDefault(i => i.Name.Equals("Dobbelsteen schatkist 162-delig")).Id);
-        }
-
-        
-        [TestMethod]
-        public void SearchShowsResultWithMatchingDescription()
-        {
-
-
-            //Act
-            ViewResult result = catalogController.Search("Spelbord") as ViewResult;
-            IEnumerable<CatalogViewModel> catalog = result.ViewData.Model as IEnumerable<DidactischeLeermiddelen.Models.CatalogViewModel>;
-
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(1, catalog.Count());
-        }
-        [TestMethod]
-        public void SearchShowsMultipleResultsWithMatchingDescription()
-        {
-
-            //Act
-            ViewResult result = catalogController.Search("met") as ViewResult;
-            IEnumerable<CatalogViewModel> catalog = result.ViewData.Model as IEnumerable<DidactischeLeermiddelen.Models.CatalogViewModel>;
-
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(2, catalog.Count());
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void NoResultsFoundException()
-        {
-
-
-            //Act
-            ViewResult result = catalogController.Search("Bal") as ViewResult;
 
         }
+
         #endregion
     }
 

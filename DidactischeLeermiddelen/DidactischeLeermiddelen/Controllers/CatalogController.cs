@@ -7,6 +7,7 @@ using DidactischeLeermiddelen.Models;
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.Users;
+using Microsoft.Ajax.Utilities;
 using PagedList;
 
 namespace DidactischeLeermiddelen.Controllers
@@ -27,14 +28,28 @@ namespace DidactischeLeermiddelen.Controllers
 
 
 
-        // GET: Catalog
+        /// <summary>
+        /// Index method returns the index view when no ajaxRequest was passed, if ajaxRequest is passed returns partialView.
+        /// Filters the objects on fieldOfStudy, targetGroup and/or searchString
+        /// </summary>
+        /// <param name="user">The user object</param>
+        /// <param name="currentFilter">Active searchfilter for paging purposes</param>
+        /// <param name="searchString">string to search in catalog</param>
+        /// <param name="fieldOfStudy">int to filter on field of study</param>
+        /// <param name="targetGroup">int to filter on target group</param>
+        /// <param name="page">current page</param>
+        /// <returns></returns>
         public ActionResult Index(User user, string currentFilter, string searchString, int? fieldOfStudy, int? targetGroup, int? page)
         {
 
             IEnumerable<LearningUtilityDetails> catalog = null;
             ViewBag.TargetGroups = GetTargetGroupsSelectList();
             ViewBag.FieldsOfStudy = GetFieldOfStudySelectList();
-            catalog = user.GetLearningUtilities(learningUtilityDetailsRepository).OrderBy(l => l.Name);
+            catalog = learningUtilityDetailsRepository.FindAll().OrderBy(l => l.Name);
+            if (user.GetType() == typeof(Student))
+            {
+                catalog = catalog.Where(l => l.Loanable == true);
+            }
 
             if (searchString != null)
             {
@@ -67,9 +82,9 @@ namespace DidactischeLeermiddelen.Controllers
 
             IEnumerable<CatalogViewModel> catalogViewModel =
                 catalog.Select(learningUtilityDetails => new CatalogViewModel(learningUtilityDetails)).ToList();
-            int pageSize = 2;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
-
+            
             if (Request.IsAjaxRequest())
                 return PartialView("_SearchResultsPartial", catalogViewModel.ToPagedList(pageNumber, pageSize));
             return View(catalogViewModel.ToPagedList(pageNumber, pageSize));
@@ -80,7 +95,7 @@ namespace DidactischeLeermiddelen.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return HttpNotFound();
             }
             LearningUtilityDetails learningUtilityDetails = learningUtilityDetailsRepository.FindBy((int)id);
             if (learningUtilityDetails == null)
@@ -88,17 +103,6 @@ namespace DidactischeLeermiddelen.Controllers
                 return HttpNotFound();
             }
             return View(learningUtilityDetails);
-        }
-
-        /// <summary>
-        /// Searches for a matching pattern in names and descriptions from the LearningUtilityDetailsRepository
-        /// </summary>
-        /// <param name="pattern"></param>
-        /// <returns></returns>
-        /// 
-        public ActionResult Search(string Pattern)
-        {
-            throw new NotImplementedException();
         }
 
         private SelectList GetTargetGroupsSelectList()
