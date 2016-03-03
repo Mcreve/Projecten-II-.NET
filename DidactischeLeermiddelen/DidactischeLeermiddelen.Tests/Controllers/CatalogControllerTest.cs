@@ -138,7 +138,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
             //Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(0, fieldOfStudy.Id);
+            Assert.AreEqual(1, fieldOfStudy.Id);
         }
         [TestMethod]
         public void IndexReturnsViewWithTargetGroupNotNull()
@@ -153,7 +153,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
             //Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(0, targetGroup.Id);
+            Assert.AreEqual(1, targetGroup.Id);
         }
         [TestMethod]
         public void IndexReturnPartialViewIfIsAjaxRequest()

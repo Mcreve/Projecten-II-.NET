@@ -50,12 +50,12 @@ namespace DidactischeLeermiddelen.Tests.Controllers
        
         private void CreateTargetGroups()
         {
-            TargetGroup1 = new TargetGroup("Kleuter");
+            TargetGroup1 = new TargetGroup {Id = 1, Name = "Kleuter"};
         }
 
         private void CreateCompanies()
         {
-            Company1 = new Company("Hasbro");
+            Company1 = new Company {Id = 1, Name = "Hasbro"};
         }
 
         private void CreateLearningUtilities()
@@ -86,8 +86,8 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 Picture = @"\items\pictures\dobbelsteen_schatkist_162-delig.jpg",
                 Price = 35m
             };
-            LearningUtilityDetails1.FieldsOfStudy.Add(FieldOfStudy1);
-            LearningUtilityDetails1.TargetGroups.Add(TargetGroup1);
+            LearningUtilityDetails2.FieldsOfStudy.Add(FieldOfStudy1);
+            LearningUtilityDetails2.TargetGroups.Add(TargetGroup1);
             LearningUtilityDetails3 = new LearningUtilityDetails
             {
                 Id = 3,
@@ -100,19 +100,19 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 Picture = @"\items\pictures\rekenspelletjes_optellen_en_aftrekken.gif",
                 Price = 10.9m
             };
-            LearningUtilityDetails1.FieldsOfStudy.Add(FieldOfStudy1);
-            LearningUtilityDetails1.TargetGroups.Add(TargetGroup1);
+            LearningUtilityDetails3.FieldsOfStudy.Add(FieldOfStudy1);
+            LearningUtilityDetails3.TargetGroups.Add(TargetGroup1);
 
         }
 
         private void CreateFieldOfStudies()
         {
-            FieldOfStudy1 = new FieldOfStudy("Aardrijkskunde");
+            FieldOfStudy1 = new FieldOfStudy {Id = 1, Name = "Aardrijkskunde"};
         }
 
         private void CreateLocations()
         {
-            Location1 = new Location("GLEDE 1.011");
+            Location1 = new Location {Id = 1, Name = "GLEDE 1.011"};
         }
 
         private void CreateUsers()
