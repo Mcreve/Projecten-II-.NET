@@ -273,49 +273,5 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
 
             #endregion
         }
-        
-        [TestMethod]
-        public void LectorGetLearningUtilityDetails()
-        {
-            #region Arrange
-            var expectedList = context.LearningUtilityDetailsList;
-            var expectedAmountFound = expectedList.Count();
-            #endregion
-
-            #region Act
-            var actualList = lector.GetLearningUtilities(mockLearningUtilityDetailsRepository.Object);
-            var actualAmountFound = actualList.Count();
-            #endregion
-
-            #region Assert
-            Assert.AreEqual(expectedAmountFound, actualAmountFound);
-            mockLearningUtilityDetailsRepository.Verify(m => m.FindAll(), Times.Once);
-            #endregion
-        }
-        
-        [TestMethod]
-        public void StudentGetLearningUtilityDetails()
-        {
-
-            #region Arrange
-
-            var expectedList =
-                context.LearningUtilityDetailsList.Where(utilityDetails => utilityDetails.Loanable);
-            var expectedAmountFound = expectedList.Count();
-            #endregion
-
-            #region Act
-            var actualList = student.GetLearningUtilities(mockLearningUtilityDetailsRepository.Object);
-            var actualAmountFound = actualList.Count();
-
-            #endregion
-
-            #region Assert
-            Assert.AreEqual(expectedAmountFound, actualAmountFound);
-            mockLearningUtilityDetailsRepository.Verify(m => m.FindAll(), Times.Once);
-
-            #endregion
-        }
-
     }
 }

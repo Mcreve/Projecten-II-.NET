@@ -1,57 +1,89 @@
-﻿@model DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityDetails
+﻿@using DidactischeLeermiddelen.HtmlHelpers
+@model DidactischeLeermiddelen.ViewModels.LearningUtilityDetailsViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Item details";
 }
-
-<h2>Details</h2>
-
+@Html.Partial("_notificationPartial")
+<h2>Item details</h2>
+<hr/>
 <div>
-    <h4>LearningUtilityDetails</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Picture)
-        </dt>
+    <div class="col-md-12">
+        <div class="col-md-3">
+            @Html.Image(Model.Picture, Model.Name, "img-responsive")
+        </div>
+        <div class="col-md-9">
+            <h2>@Html.DisplayFor(model => model.Name)</h2>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Description)
+                </strong>
+            </p>
+            <p>
+                @Html.DisplayFor(model => model.Description)
+            </p>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.FieldsOfStudy):
+                </strong>
 
-        <dd>
-            @Html.DisplayFor(model => model.Picture)
-        </dd>
+                @foreach (var item in Model.FieldsOfStudy)
+                {
+                    if (!Model.FieldsOfStudy.ElementAt(0).Equals(item))
+                    {
+                        @Html.Raw(", ")
+                    }
+                    @Html.DisplayFor(modelItem => item)
+                }
+            </p>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.TargetGroups):
+                </strong>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                @foreach (var item in Model.TargetGroups)
+                {
+                    if (!Model.TargetGroups.ElementAt(0).Equals(item))
+                    {
+                        @Html.Raw(", ")
+                    }
+                    @Html.DisplayFor(modelItem => item)
+                }
+            </p>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Company):
+                </strong>
+                @Html.DisplayFor(model => model.Company)
+            </p>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.ArticleNumber):
+                </strong>
+                @Html.DisplayFor(model => model.ArticleNumber)
+            </p>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Price):
+                </strong>
+                @Html.DisplayFor(model => model.Price)
+            </p>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.AmountInCatalog):
+                </strong>
+                @Html.DisplayFor(model => model.AmountInCatalog)
+            </p>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.AmountUnavailable):
+                </strong>
+                @Html.DisplayFor(model => model.AmountUnavailable)
+            </p>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Loanable)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Loanable)
-        </dd>
-
-    </dl>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Terug naar de catalogus", "Index", new {currentFilter = ViewBag.CurrentFilter, page = ViewBag.Page, currentFieldOfStudy = ViewBag.CurrentFieldOfStudy, currentTargetGroup = ViewBag.CurrentTargetGroup})
 </p>

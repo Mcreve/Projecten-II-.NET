@@ -7,6 +7,7 @@ using DidactischeLeermiddelen.Models;
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.Users;
+using DidactischeLeermiddelen.ViewModels;
 using Microsoft.Ajax.Utilities;
 using PagedList;
 
@@ -39,28 +40,33 @@ namespace DidactischeLeermiddelen.Controllers
         /// <param name="targetGroup">int to filter on target group</param>
         /// <param name="page">current page</param>
         /// <returns></returns>
-        public ActionResult Index(User user, string currentFilter, string searchString, int? fieldOfStudy, int? targetGroup, int? page)
+        public ActionResult Index(User user, string currentFilter, string searchString, int? fieldOfStudy, int? targetGroup, int? page, int? currentFieldOfStudy, int? currentTargetGroup)
         {
 
             IEnumerable<LearningUtilityDetails> catalog = null;
-            ViewBag.TargetGroups = GetTargetGroupsSelectList();
-            ViewBag.FieldsOfStudy = GetFieldOfStudySelectList();
             catalog = learningUtilityDetailsRepository.FindAll().OrderBy(l => l.Name);
             if (user.GetType() == typeof(Student))
             {
                 catalog = catalog.Where(l => l.Loanable == true);
             }
 
-            if (searchString != null)
+            if (searchString != null || fieldOfStudy != null || targetGroup != null)
             {
                 page = 1;
             }
             else
             {
                 searchString = currentFilter;
+                fieldOfStudy = currentFieldOfStudy;
+                targetGroup = currentTargetGroup;
             }
 
             ViewBag.CurrentFilter = searchString;
+            ViewBag.CurrentTargetGroup = targetGroup;
+            ViewBag.CurrentFieldOfStudy = fieldOfStudy;
+
+            ViewBag.TargetGroups = GetTargetGroupsSelectList(targetGroup);
+            ViewBag.FieldsOfStudy = GetFieldOfStudySelectList(fieldOfStudy);
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -91,7 +97,7 @@ namespace DidactischeLeermiddelen.Controllers
         }
 
         // GET: Catalog/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? page, string currentFilter, int? currentFieldOfStudy, int? currentTargetGroup)
         {
             if (id == null)
             {
@@ -102,17 +108,24 @@ namespace DidactischeLeermiddelen.Controllers
             {
                 return HttpNotFound();
             }
-            return View(learningUtilityDetails);
+
+            ViewBag.CurrentFilter = currentFilter;
+            ViewBag.Page = page;
+            ViewBag.CurrentFieldOfStudy = currentFieldOfStudy;
+            ViewBag.CurrentTargetGroup = currentTargetGroup;
+
+            LearningUtilityDetailsViewModel learningUtilityDetailsViewModel = new LearningUtilityDetailsViewModel(learningUtilityDetails);
+            return View(learningUtilityDetailsViewModel);
         }
 
-        private SelectList GetTargetGroupsSelectList()
+        private SelectList GetTargetGroupsSelectList(int? targetGroup)
         {
-            return new SelectList(targetGroupRepository.FindAll().OrderBy(f => f.Name), "Id", "Name");
+            return new SelectList(targetGroupRepository.FindAll().OrderBy(f => f.Name), "Id", "Name", targetGroup != null ? targetGroup.ToString() : "");
         }
 
-        private SelectList GetFieldOfStudySelectList()
+        private SelectList GetFieldOfStudySelectList(int? fieldOfStudy)
         {
-            return new SelectList(fieldOfStudyRepository.FindAll().OrderBy(f => f.Name), "Id", "Name");
+            return new SelectList(fieldOfStudyRepository.FindAll().OrderBy(f => f.Name), "Id", "Name", fieldOfStudy != null ? fieldOfStudy.ToString() : "");
         }
 
     }

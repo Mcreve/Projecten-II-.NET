@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Routing;
 using DidactischeLeermiddelen.Models;
+using DidactischeLeermiddelen.ViewModels;
 
 
 namespace DidactischeLeermiddelen.Tests.Controllers
@@ -67,7 +68,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             request.SetupGet(x => x.Headers).Returns(new System.Net.WebHeaderCollection { { "X-Requested-With", "" } });
 
             //Act
-            ViewResult result = catalogController.Index(student,null, null, null, null, null) as ViewResult;
+            ViewResult result = catalogController.Index(student,null, null, null, null, null, null, null) as ViewResult;
             IEnumerable <CatalogViewModel> catalog = result.ViewData.Model as IEnumerable<CatalogViewModel>;
 
             //Assert
@@ -84,7 +85,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             request.SetupGet(x => x.Headers).Returns(new System.Net.WebHeaderCollection { { "X-Requested-With", "" } });
 
             //Act
-            ViewResult result = catalogController.Index(lector, null, null, null, null, null) as ViewResult;
+            ViewResult result = catalogController.Index(lector, null, null, null, null, null, null, null) as ViewResult;
             IEnumerable<CatalogViewModel> catalog = result.ViewData.Model as IEnumerable<CatalogViewModel>;
 
             //Assert
@@ -100,7 +101,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             request.SetupGet(x => x.Headers).Returns(new System.Net.WebHeaderCollection { { "X-Requested-With", "XMLHttpRequest" } });
 
             //Act
-            PartialViewResult result = catalogController.Index(lector, null, null, null, null, null) as PartialViewResult;
+            PartialViewResult result = catalogController.Index(lector, null, null, null, null, null, null, null) as PartialViewResult;
 
             //Assert
             Assert.IsNotNull(result);
@@ -115,8 +116,8 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
 
             //Act
-            ViewResult result = catalogController.Details(context.LearningUtilityDetails2.Id) as ViewResult;
-            LearningUtilityDetails learningUtilityDetails = result.ViewData.Model as LearningUtilityDetails;
+            ViewResult result = catalogController.Details(context.LearningUtilityDetails2.Id, null, null, null, null) as ViewResult;
+            LearningUtilityDetailsViewModel learningUtilityDetails = result.ViewData.Model as LearningUtilityDetailsViewModel;
 
             //Assert
             Assert.IsNotNull(result);
@@ -127,7 +128,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         public void ParameterCanNotBeNull()
         {
             //Act
-            HttpNotFoundResult result = catalogController.Details(null) as HttpNotFoundResult;
+            HttpNotFoundResult result = catalogController.Details(null, null, null, null, null) as HttpNotFoundResult;
 
             //Assert
             Assert.IsNotNull(result);
@@ -139,7 +140,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         {
 
             //Act
-            HttpNotFoundResult result = catalogController.Details(0) as HttpNotFoundResult;
+            HttpNotFoundResult result = catalogController.Details(0, null, null, null, null) as HttpNotFoundResult;
 
             //Assert
             Assert.IsNotNull(result);
