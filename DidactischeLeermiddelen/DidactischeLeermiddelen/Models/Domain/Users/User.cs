@@ -33,19 +33,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
             this.EmailAddress = emailAddress;
         }
         #endregion
-        #region Methods
-
-        /// <summary>
-        /// Returns the LearningUtilityDetails in a IQueryable which a specific user can see
-        /// <seealso cref="Student"/>
-        /// <seealso cref="Lector"/>
-        /// </summary>
-        /// <param name="learningUtilityDetailsRepository"></param>
-        /// <returns>Returns the LearningUtilityDetails in a IQueryable which a specific user can see</returns>
-        public abstract IQueryable<LearningUtilityDetails> GetLearningUtilities(
-            ILearningUtilityDetailsRepository learningUtilityDetailsRepository);
-
-        #endregion
 
         #region Fields
 

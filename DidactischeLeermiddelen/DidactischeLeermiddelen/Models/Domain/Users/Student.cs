@@ -25,18 +25,5 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         }
         #endregion
 
-        #region Methods
-        /// <summary>
-        /// Returns the entire list of viewable LearningUtilityDetails which are Loanable
-        /// </summary>
-        /// <param name="leanringUtilityDetailsRepository"></param>
-        /// <returns>List of viewable LearningUtilityDetails which are Loanable</returns>
-        public override IQueryable<LearningUtilityDetails> GetLearningUtilities(
-            ILearningUtilityDetailsRepository leanringUtilityDetailsRepository)
-        {
-            return leanringUtilityDetailsRepository.FindAll().Where(learningUtilityDetails => learningUtilityDetails.Loanable == true);
-        }
-
-        #endregion
     }
 }

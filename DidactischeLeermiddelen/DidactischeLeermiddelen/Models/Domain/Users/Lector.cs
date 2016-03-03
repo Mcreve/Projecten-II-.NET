@@ -27,20 +27,5 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         {
         }
         #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Returns the entire list of viewable LearningUtilityDetails
-        /// </summary>
-        /// <param name="learningUtilityDetailsRepository"></param>
-        /// <returns>list of viewable LearningUtilityDetails</returns>
-        public override IQueryable<LearningUtilityDetails> GetLearningUtilities(
-            ILearningUtilityDetailsRepository learningUtilityDetailsRepository)
-        {
-            return learningUtilityDetailsRepository.FindAll();
-        }
-
-        #endregion
     }
 }
