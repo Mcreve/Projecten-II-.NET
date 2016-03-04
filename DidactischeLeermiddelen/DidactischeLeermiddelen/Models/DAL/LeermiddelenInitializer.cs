@@ -8,7 +8,6 @@ using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates;
 
 namespace DidactischeLeermiddelen.Models.DAL
 {
@@ -197,26 +196,6 @@ namespace DidactischeLeermiddelen.Models.DAL
         }
 
         /// <summary>
-        /// This method creates a new LearningUtility to be added to a learningUtilityDetails object. This method sets
-        /// the initial state and the properties ReservedBy and LendTo of the new instance.
-        /// </summary>
-        /// <param name="stateType">The initial state the learningUtility should be in</param>
-        /// <param name="reservedBy">The user that the item is reserved to</param>
-        /// <param name="lendTo">The user that the item is lend to</param>
-        /// <returns>A LearningUtility instance</returns>
-        private LearningUtility CreateLearningUtility(StateType stateType, User reservedBy, User lendTo)
-        {
-            LearningUtility learningUtility = new LearningUtility
-            {
-                ReservedBy = stateType == StateType.Unavailable || stateType == StateType.Available ? null : reservedBy,
-                LendTo = stateType == StateType.Late || stateType == StateType.HandedOut ? lendTo : null
-            };
-            learningUtility.ToState(StateFactory.CreateState(stateType, learningUtility));
-            return learningUtility;
-        }
-
-
-        /// <summary>
         /// This method creates some LearningUtilityDetails objects to seed the database
         /// </summary>
         private void CreateLearningUtilityDetails()
@@ -234,10 +213,10 @@ namespace DidactischeLeermiddelen.Models.DAL
                 Loanable = true,
                 Location = locations.FirstOrDefault(),
                 Picture = @"http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png",
-                Price = 75m
+                Price = 75m,
+                AmountInCatalog = 5,
+                AmountUnavailable = 1
             };
-            learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Available, null, null));
-            learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Reserved, users.First(), null));
             learningUtilityDetails.FieldsOfStudy.Add(fieldsOfStudy.Single(t => t.Name.Equals("Aardrijkskunde")));
             learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
             learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Middelbaar")));
@@ -258,10 +237,10 @@ namespace DidactischeLeermiddelen.Models.DAL
                 Loanable = true,
                 Location = locations.FirstOrDefault(),
                 Picture = @"http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png",
-                Price = 35m
+                Price = 35m,
+                AmountInCatalog = 2,
+                AmountUnavailable = 0
             };
-            learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.HandedOut, null, users.ElementAtOrDefault(1)));
-            learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Unavailable, null, null));
             learningUtilityDetails.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Ontspanning")));
             learningUtilityDetails.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
             learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
@@ -278,9 +257,10 @@ namespace DidactischeLeermiddelen.Models.DAL
                 Loanable = false,
                 Location = locations.ElementAtOrDefault(1),
                 Picture = @"http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png",
-                Price = 10.9m
+                Price = 10.9m,
+                AmountInCatalog = 12,
+                AmountUnavailable = 1
             };
-            learningUtilityDetails.LearningUtilities.Add(CreateLearningUtility(StateType.Blocked, users.ElementAtOrDefault(5), null));
             learningUtilityDetails.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
             learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
             learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));

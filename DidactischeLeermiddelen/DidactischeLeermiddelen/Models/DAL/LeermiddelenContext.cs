@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Web.Mvc;
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
-using DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -40,7 +39,6 @@ namespace DidactischeLeermiddelen.Models.DAL
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Configurations.AddFromAssembly(Assembly.GetExecutingAssembly());
-            modelBuilder.Ignore<LearningUtilityState>();
         }
 
         /// <summary>

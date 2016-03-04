@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Web;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
-using DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates;
 
 namespace DidactischeLeermiddelen.Models.Domain
 {

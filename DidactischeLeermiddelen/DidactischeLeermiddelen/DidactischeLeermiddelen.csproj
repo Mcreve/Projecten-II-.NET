@@ -210,7 +210,6 @@
     <Compile Include="Models\DAL\FieldOfStudyRepository.cs" />
     <Compile Include="Models\DAL\LearningUtilityDetailsRepository.cs" />
     <Compile Include="Models\DAL\Mapper\LearningUtilityDetailsMapper.cs" />
-    <Compile Include="Models\DAL\Mapper\LearningUtilityMapper.cs" />
     <Compile Include="Models\DAL\Mapper\TargetGroupMapper.cs" />
     <Compile Include="Models\DAL\Mapper\CompanyMapper.cs" />
     <Compile Include="Models\DAL\Mapper\FieldOfStudyMapper.cs" />
