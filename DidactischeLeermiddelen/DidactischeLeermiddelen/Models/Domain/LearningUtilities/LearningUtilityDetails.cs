@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using DidactischeLeermiddelen.Models.Domain.Users;
 
 namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 {
@@ -163,6 +165,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public int AmountInCatalog { get; set; }
         public int AmountUnavailable { get; set; }
         public virtual ICollection<LearningUtilityReservation> LearningUtilityReservations { get; set; }
+        public Byte[] TimeStamp { get; set; }
         #endregion
 
         #region Constructors
@@ -185,6 +188,25 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         #endregion
         #region Methods
 
+        public int AmountAvailableForWeek(int week, int currentWeek)
+        {
+            return AmountInCatalog - LearningUtilityReservations.Count(r => r.Week == week && r.Week < currentWeek) - AmountUnavailable;
+        }
+
+        public int AmountReservedForWeek(int week)
+        {
+            return LearningUtilityReservations.Count(r => r.Week == week && r.User.GetType() == typeof (Student));
+        }
+
+        public int AmountBlockedForWeek(int week)
+        {
+            return LearningUtilityReservations.Count(r => r.Week == week && r.User.GetType() == typeof (Lector));
+        }
+
+        public int AmountUnavailableForWeek(int week, int currentWeek)
+        {
+            return LearningUtilityReservations.Count(r => r.Week == week && r.Week < currentWeek) + AmountUnavailable;
+        }
         #endregion
     }
 }

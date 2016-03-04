@@ -8,7 +8,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 {
     public class LearningUtilityReservation
     {
-        public DateTime Week { get; set; }
+        public int Week { get; set; }
         public User User { get; set; }
         public int Amount { get; set; }
     }
