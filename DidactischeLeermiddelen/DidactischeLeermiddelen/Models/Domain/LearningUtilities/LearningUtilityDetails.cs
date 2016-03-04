@@ -166,15 +166,16 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
                 picture = value;
             }
         }
-        [Display(Name = "Leermiddel")]
-        public virtual ICollection<LearningUtility> LearningUtilities { get; set; }
+
+        public int AmountInCatalog { get; set; }
+        public int AmountUnavailable { get; set; }
+        public virtual ICollection<LearningUtilityReservation> LearningUtilityReservations { get; set; }
         #endregion
 
         #region Constructors
 
         public LearningUtilityDetails()
         {
-            LearningUtilities = new List<LearningUtility>();
             FieldsOfStudy = new List<FieldOfStudy>();
             TargetGroups = new List<TargetGroup>();
             Loanable = true;
@@ -191,27 +192,6 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         #endregion
         #region Methods
 
-        /// <summary>
-        /// Adds a new LearningUtility to the collection LearningUtilities
-        /// </summary>
-        /// <param name="stateType"></param>
-        /// <param name="reservedBy"></param>
-        /// <param name="lendTo"></param>
-        public void AddLearningUtilty(StateType stateType, User reservedBy, User lendTo)
-        {
-            LearningUtility newLearningUtility = new LearningUtility();
-            newLearningUtility.StateType = stateType;
-            newLearningUtility.ReservedBy = reservedBy;
-            newLearningUtility.LendTo = lendTo;
-            LearningUtilities.Add(newLearningUtility);
-            
-            
-        }
-
-        public static implicit operator List<object>(LearningUtilityDetails v)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
     }
 }
