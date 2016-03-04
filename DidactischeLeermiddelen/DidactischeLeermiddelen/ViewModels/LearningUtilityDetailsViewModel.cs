@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
-using DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates;
 
 namespace DidactischeLeermiddelen.ViewModels
 {
@@ -40,10 +39,10 @@ namespace DidactischeLeermiddelen.ViewModels
             ArticleNumber = learningUtilityDetails.ArticleNumber;
             TargetGroups = learningUtilityDetails.TargetGroups.OrderBy(t => t.Name).Select(t => t.Name = t.Name);
             FieldsOfStudy = learningUtilityDetails.FieldsOfStudy.OrderBy(f => f.Name).Select(f => f.Name = f.Name);
-            AmountInCatalog = learningUtilityDetails.LearningUtilities.Count;
+            //AmountInCatalog = learningUtilityDetails.LearningUtilities.Count;
             Company = learningUtilityDetails.Company.Name;
-            AmountUnavailable =
-                learningUtilityDetails.LearningUtilities.Count(utility => utility.StateType == StateType.Unavailable || utility.StateType == StateType.Late);
+           // AmountUnavailable =
+             
         }
     }
 }

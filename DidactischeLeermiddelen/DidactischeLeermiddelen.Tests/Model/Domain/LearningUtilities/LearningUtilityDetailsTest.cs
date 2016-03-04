@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
-using DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -40,7 +39,6 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Assert
             Assert.IsInstanceOfType(learningUtilityDetail, typeof(LearningUtilityDetails));
-            Assert.IsNotNull(learningUtilityDetail.LearningUtilities);
             Assert.IsTrue(learningUtilityDetail.Loanable);
             Assert.AreEqual(0,learningUtilityDetail.Price);
             #endregion
@@ -62,7 +60,6 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Assert
             Assert.IsInstanceOfType(learningUtilityDetail, typeof(LearningUtilityDetails));
-            Assert.IsNotNull(learningUtilityDetail.LearningUtilities);
             Assert.IsTrue(learningUtilityDetail.Loanable);
             Assert.AreEqual(name, learningUtilityDetail.Name);
             Assert.AreEqual(description, learningUtilityDetail.Description);
@@ -587,25 +584,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         #endregion
         #endregion
     #region Methods
-        #region AddLearningUtility
-
-        [TestMethod]
-        public void AddLearningUtilityWithStateAddsItToTheList()
-        {
-            #region Arrange
-            StateType stateType = StateType.Available;
-            #endregion
-
-            #region Act
-            initiaLearningUtilityDetails.AddLearningUtilty(stateType,null,null);
-            #endregion
-
-            #region Assert
-            Assert.AreEqual(1,initiaLearningUtilityDetails.LearningUtilities.Count);
-            Assert.IsInstanceOfType(initiaLearningUtilityDetails.LearningUtilities.First(),typeof(LearningUtility));
-            #endregion
-        }
-        #endregion
+       
     #endregion
     }
 }

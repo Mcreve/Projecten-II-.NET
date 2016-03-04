@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
-using DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityStates;
 
 namespace DidactischeLeermiddelen.Models
 {
@@ -50,16 +49,14 @@ namespace DidactischeLeermiddelen.Models
             Picture = learningUtilityDetails.Picture;
             Price = learningUtilityDetails.Price;
             ArticleNumber = learningUtilityDetails.ArticleNumber;
-            AmountInStock =
-                learningUtilityDetails.LearningUtilities.Count(learningUtility => learningUtility.StateType == StateType.Available);
+           // AmountInStock =
+               
             TargetGroup = null;
             FieldOfStudy = null;
-            AmountBlocked =
-                learningUtilityDetails.LearningUtilities.Count(
-                    utility => utility.StateType == StateType.Blocked || utility.StateType == StateType.Reserved || utility.StateType == StateType.HandedOut);
-            AmountInCatalog = learningUtilityDetails.LearningUtilities.Count;
-            AmountUnavailable =
-                learningUtilityDetails.LearningUtilities.Count(utility => utility.StateType == StateType.Unavailable || utility.StateType == StateType.Late);
+           // AmountBlocked =
+             
+           // AmountUnavailable =
+               
         }
         /// <summary>
         /// Returns the shortdescription of the LearningUtilityDetail, the first 250 characters.
