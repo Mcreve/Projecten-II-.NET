@@ -174,6 +174,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         {
             FieldsOfStudy = new List<FieldOfStudy>();
             TargetGroups = new List<TargetGroup>();
+            LearningUtilityReservations = new List<LearningUtilityReservation>();
             Loanable = true;
             Price = 0;
         }

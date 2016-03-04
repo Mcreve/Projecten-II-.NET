@@ -156,7 +156,11 @@ namespace DidactischeLeermiddelen.Models.DAL
 
         private LearningUtilityReservation CreateReservation(int week, User user, int quantity)
         {
-            return new LearningUtilityReservation {Week = week, User = user, Amount = quantity};
+            LearningUtilityReservation reservation = new LearningUtilityReservation();
+            reservation.Week = week;
+            reservation.User = user;
+            reservation.Amount = quantity;
+            return reservation;
         }
 
         /// <summary>
@@ -224,12 +228,12 @@ namespace DidactischeLeermiddelen.Models.DAL
                 AmountInCatalog = 5,
                 AmountUnavailable = 1
             };
-            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(12, users.First(u => u.GetType() == typeof(Lector)), 4));
-            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(15, users.First(u => u.GetType() == typeof(Student)), 1));
-            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(14, users.First(u => u.GetType() == typeof(Lector)), 2));
             learningUtilityDetails.FieldsOfStudy.Add(fieldsOfStudy.Single(t => t.Name.Equals("Aardrijkskunde")));
             learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
             learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Middelbaar")));
+            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(12, users.First(u => u.GetType() == typeof(Lector)), 4));
+            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(15, users.First(u => u.GetType() == typeof(Student)), 1));
+            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(14, users.First(u => u.GetType() == typeof(Lector)), 2));
             context.LearningUtilityDetailsList.Add(learningUtilityDetails);
 
             //Create dobbelsteenschatkist object
