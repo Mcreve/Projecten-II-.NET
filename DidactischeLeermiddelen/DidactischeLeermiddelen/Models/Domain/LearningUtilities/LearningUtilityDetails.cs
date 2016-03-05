@@ -191,22 +191,24 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 
         public int AmountAvailableForWeek(int week, int currentWeek)
         {
-            return AmountInCatalog - LearningUtilityReservations.Count(r => r.Week == week && r.Week < currentWeek) - AmountUnavailable;
+            IEnumerable<LearningUtilityReservation> reservations = LearningUtilityReservations.Where(r => r.Week == week || r.Week < currentWeek);
+            return AmountInCatalog - reservations.Sum(r => r.Amount) - AmountUnavailable;
         }
 
         public int AmountReservedForWeek(int week)
         {
-            return LearningUtilityReservations.Count(r => r.Week == week && r.User.GetType() == typeof (Student));
+            return LearningUtilityReservations.Where(r => r.Week == week && r.User.GetType() == typeof (Student)).Sum(r => r.Amount);
         }
 
         public int AmountBlockedForWeek(int week)
         {
-            return LearningUtilityReservations.Count(r => r.Week == week && r.User.GetType() == typeof (Lector));
+            return LearningUtilityReservations.Where(r => r.Week == week && r.User.GetType() == typeof (Lector)).Sum(r => r.Amount);
         }
 
         public int AmountUnavailableForWeek(int week, int currentWeek)
         {
-            return LearningUtilityReservations.Count(r => r.Week == week && r.Week < currentWeek) + AmountUnavailable;
+            IEnumerable<LearningUtilityReservation> reservations = LearningUtilityReservations.Where(r => r.Week == week || r.Week < currentWeek);
+            return reservations.Sum(r => r.Amount) + AmountUnavailable;
         }
         #endregion
     }

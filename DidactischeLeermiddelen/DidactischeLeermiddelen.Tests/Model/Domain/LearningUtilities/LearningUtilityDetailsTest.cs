@@ -16,6 +16,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         private FieldOfStudy initialFieldOfStudy;
         private TargetGroup initialTargetGroup;
         private Company initialCompany;
+        private LearningUtilityReservation reservation;
 
         #endregion
 
@@ -27,6 +28,10 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             initialFieldOfStudy = new FieldOfStudy("Geschiedenis");
             initialTargetGroup = new TargetGroup("1e leerjaar");
             initialCompany = new Company("Verbe");
+            reservation = new LearningUtilityReservation {Week = 1, Amount = 5};
+            initiaLearningUtilityDetails.LearningUtilityReservations.Add(reservation);
+            initiaLearningUtilityDetails.AmountInCatalog = 10;
+            initiaLearningUtilityDetails.AmountUnavailable = 5;
         }
 
         #region ConstructorTests
@@ -69,7 +74,9 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
         }
         #endregion
+
         #region Properties
+
         #region NameTests
         [TestMethod]
         public void LearningUtilityDetailsNameIs50CharactersLongSetsTheName()
@@ -151,6 +158,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         #endregion
+
         #region DescriptionTests
         [TestMethod]
         public void LearningUtilityDetailsDescriptionIs101CharactersLongSetsTheDescription()
@@ -235,6 +243,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         #endregion
+
         #region LocationTests
         [TestMethod]
         public void LearningUtilityDetailsLocationSetsIt()
@@ -261,6 +270,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         #endregion
+
         #region PriceTests
         [TestMethod]
         public void LearningUtilityDetailsPriceIs50SetsIt()
@@ -346,6 +356,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         #endregion
+
         #region ArticleNumberTests
         [TestMethod]
         public void LearningUtilityDetailsArticleNumberIs50CharactersLongSetsTheArticleNumber()
@@ -434,6 +445,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         #endregion
+
         #region FieldOfStudyTests
         [TestMethod]
         public void LearningUtilityDetailsFieldOfStudySetsIt()
@@ -450,6 +462,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         }
 
         #endregion
+
         #region TargetGroupTests
         [TestMethod]
         public void LearningUtilityDetailsTargetGroupSetsIt()
@@ -465,6 +478,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         #endregion
+
         #region CompanyTests
         [TestMethod]
         public void LearningUtilityDetailsCompanySetsIt()
@@ -480,6 +494,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         #endregion
+
         #region Loanable
         [TestMethod]
         public void LearningUtilityDetailsLoanableSetsIt()
@@ -508,6 +523,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         #endregion
+
         #region PictureTests
         [TestMethod]
         public void LearningUtilityDetailsPictureUrlSetsIt()
@@ -582,9 +598,172 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         #endregion
+
         #endregion
-    #region Methods
-       
-    #endregion
+
+        #region Methods
+
+        #region AmountAvailableForWeek
+        [TestMethod]
+        public void AmountAvailableForWeekWithReservationsReturnsCorrectValue()
+        {
+            //Act
+            int amount = initiaLearningUtilityDetails.AmountAvailableForWeek(1, 0);
+
+            //Assert
+            Assert.AreEqual(0, amount);
+        }
+
+        [TestMethod]
+        public void AmountAvailableForWeekWithoutReservationsReturnsCorrectValue()
+        {
+            //Act
+            int amount = initiaLearningUtilityDetails.AmountAvailableForWeek(2, 0);
+
+            //Assert
+            Assert.AreEqual(5, amount);
+        }
+
+        [TestMethod]
+        public void AmountAvailableForWeekWithCurrentWeekHigherThanReservedWeekReturnsCorrectValue()
+        {
+            //Act
+            int amount = initiaLearningUtilityDetails.AmountAvailableForWeek(5, 2);
+
+            //Assert
+            Assert.AreEqual(0, amount);
+        }
+        #endregion
+
+        #region AmountReservedForWeek
+        [TestMethod]
+        public void AmountReservedForWeekWithReservationsReturnsCorrectValue()
+        {
+            //Arrange
+            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Student();
+
+            //Act
+            int amount = initiaLearningUtilityDetails.AmountReservedForWeek(1);
+
+            //Assert
+            Assert.AreEqual(5, amount);
+        }
+
+        [TestMethod]
+        public void AmountReservedForWeekWithoutReservationsReturnsZero()
+        {
+            //Arrange
+            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Student();
+
+            //Act
+            int amount = initiaLearningUtilityDetails.AmountReservedForWeek(2);
+
+            //Assert
+            Assert.AreEqual(0, amount);
+        }
+
+        [TestMethod]
+        public void AmountReservedForWeekWithReservationsByLectorReturnsZero()
+        {
+            //Arrange
+            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Lector();
+
+            //Act
+            int amount = initiaLearningUtilityDetails.AmountReservedForWeek(1);
+
+            //Assert
+            Assert.AreEqual(0, amount);
+        }
+        #endregion
+
+        #region AmountBlockedForWeek
+        [TestMethod]
+        public void AmountBlockedForWeekWithReservationsReturnsCorrectValue()
+        {
+            //Arrange
+            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Lector();
+
+            //Act
+            int amount = initiaLearningUtilityDetails.AmountBlockedForWeek(1);
+
+            //Assert
+            Assert.AreEqual(5, amount);
+        }
+
+        [TestMethod]
+        public void AmountBlockedForWeekWithoutReservationsReturnsZero()
+        {
+            //Arrange
+            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Lector();
+
+            //Act
+            int amount = initiaLearningUtilityDetails.AmountBlockedForWeek(2);
+
+            //Assert
+            Assert.AreEqual(0, amount);
+        }
+
+        [TestMethod]
+        public void AmountBlockedForWeekWithReservationsByStudentReturnsZero()
+        {
+            //Arrange
+            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Student();
+
+            //Act
+            int amount = initiaLearningUtilityDetails.AmountBlockedForWeek(1);
+
+            //Assert
+            Assert.AreEqual(0, amount);
+        }
+        #endregion
+
+        #region AmountUnavailableForWeek
+        [TestMethod]
+        public void AmountUnavailableForWeekWithReservationsByStudentReturnsCorrectValue()
+        {
+            //Arrange
+            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Student();
+
+            //Act
+            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(1, 0);
+
+            //Assert
+            Assert.AreEqual(10, amount);
+        }
+
+        [TestMethod]
+        public void AmountUnavailableForWeekWithReservationsByLectorReturnsCorrectValue()
+        {
+            //Arrange
+            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Lector();
+
+            //Act
+            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(1, 0);
+
+            //Assert
+            Assert.AreEqual(10, amount);
+        }
+
+        [TestMethod]
+        public void AmountUnavailableForWeekWithoutReservationsReturnsCorrectValue()
+        {
+            //Act
+            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(5, 0);
+
+            //Assert
+            Assert.AreEqual(5, amount);
+        }
+
+        [TestMethod]
+        public void AmountUnavailableForWeekWithCurrentWeekHigherThanReservedWeekReturnsCorrectValue()
+        {
+            //Act
+            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(5, 2);
+
+            //Assert
+            Assert.AreEqual(10, amount);
+        }
+        #endregion
+        #endregion
     }
 }
