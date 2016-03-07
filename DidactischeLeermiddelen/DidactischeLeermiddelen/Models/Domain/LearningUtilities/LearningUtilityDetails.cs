@@ -212,6 +212,11 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             IEnumerable<LearningUtilityReservation> reservations = LearningUtilityReservations.Where(r => r.Week == week || r.Week < currentWeek);
             return reservations.Sum(r => r.Amount) + AmountUnavailable;
         }
+
+        public void AddReservation(LearningUtilityReservation reservation)
+        {
+            this.LearningUtilityReservations.Add(reservation);
+        }
         #endregion
     }
 }

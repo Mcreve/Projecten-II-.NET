@@ -8,13 +8,16 @@
 @Html.Partial("_notificationPartial")
 @using (Html.BeginForm()) { 
     @Html.LabelFor(model => model.First().Date)
-    @Html.EditorFor(model => model.First().Date, Model.First().Date = DateTime.Today)
-    <button type="submit" class="form-control col-md-1 btn btn-primary">wijzig datum</button>
+    @Html.EditorFor(model => model.First().Date, Model.First().Date)
+    <button type="submit" class="form-control btn btn-primary">wijzig datum</button>
 }
 <table class="table">
     <tr>
         <th class="col-md-4">
             @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountWanted)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.AmountInStock)
@@ -34,6 +37,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => item.AmountWanted)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AmountInStock)

@@ -14,6 +14,7 @@ namespace DidactischeLeermiddelen.ViewModels
         private int currentWeek;
         private Calendar calendar = new GregorianCalendar();
 
+        public int Week { get { return week; } set { week = value; } }
         public int Id { get; set; }
         [Display(Name = "Leermiddel")]
         public string Name { get; set; }
@@ -28,6 +29,8 @@ namespace DidactischeLeermiddelen.ViewModels
         [Display(Name = "Selecteer de datum wanneer u de items wenst te gebruiken")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? Date { get; set; }
+        [Display(Name = "Aantal gewenst")]
+        public int AmountWanted { get; set; }
 
         public WishlistViewModel()
         {
@@ -37,7 +40,7 @@ namespace DidactischeLeermiddelen.ViewModels
         {
             Id = learningUtilityDetails.Id;
             Name = learningUtilityDetails.Name;
-            Date = learningUtilityDetails.DateWanted;
+            Date = learningUtilityDetails.DateWanted ?? DateTime.Now;
             if(Date != null)
                 week = GetWeekOfYear((DateTime) Date);
             AmountInCatalog = learningUtilityDetails.AmountInCatalog;
