@@ -187,7 +187,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         #endregion
         #region Methods
 
-        public int AmountAvailableForWeek(int week, int currentWeek)
+        public int AmountAvailableForWeek(DateTime date)
         {
             int week = GetCurrentWeek(date);
             int currentWeek = GetCurrentWeek(DateTime.Now);
@@ -195,7 +195,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             return AmountInCatalog - reservations.Sum(r => r.Amount) - AmountUnavailable;
         }
 
-        public int AmountReservedForWeek(int week)
+        public int AmountReservedForWeek(DateTime date)
         {
             int week = GetCurrentWeek(date);
             return LearningUtilityReservations.Where(r => r.Week == week && r.User.GetType() == typeof (Student)).Sum(r => r.Amount);
