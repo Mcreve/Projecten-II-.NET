@@ -70,18 +70,8 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         }
 
         /// <summary>
-        /// Sets the price of the LearningUtility
-        /// Optional, if set allows Decimal.Zero has to be postive.
-        /// Null values is converted to Decimal.Zero
-        /// <exception cref="ValidationException"></exception>
-        /// ^           # Start of string.
-        /// [0-9]+      # Must have one or more numbers.
-        /// (           # Begin optional group.
-        /// \.          # The decimal point, . must be escaped, # or it is treated as "any character".
-        /// [0-9]{1,2}  # One or two numbers.
-        /// )?          # End group, signify it's optional with ?
-        /// $           # End of string.
-        /// </summary>
+        /// Sets the price of the LearningUtility, cannot be negative.
+        /// <exception cref="ArgumentException"></exception>
         public decimal Price
         {
 
@@ -89,11 +79,9 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
                 set
                 {
                     if(value < 0 )
-                        throw new ArgumentException("error");
+                        throw new ArgumentException(Resources.LearningUtilityPriceRegex);
                 price = value;
                 }
-            
-            
 
         }
         /// <summary>
@@ -170,7 +158,9 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         #endregion
 
         #region Constructors
-
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
         public LearningUtilityDetails()
         {
             FieldsOfStudy = new List<FieldOfStudy>();
@@ -179,7 +169,12 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             Loanable = true;
             Price = 0;
         }
-
+        /// <summary>
+        /// Constructor with parameters, calls default constructor
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="location"></param>
         public LearningUtilityDetails(string name, string description, Location location):this()
         {
             Name = name;
@@ -190,29 +185,52 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         #endregion
         #region Methods
 
+        /// <summary>
+        /// Calculates the Amount in catalog minus the reservations and minus the Unavailable(Blocked)
+        /// </summary>
+        /// <param name="week"></param>
+        /// <param name="currentWeek"></param>
+        /// <returns>Amount available</returns>
         public int AmountAvailableForWeek(int week, int currentWeek)
         {
             IEnumerable<LearningUtilityReservation> reservations = LearningUtilityReservations.Where(r => r.Week == week || r.Week < currentWeek);
             return AmountInCatalog - reservations.Sum(r => r.Amount) - AmountUnavailable;
         }
-
+        /// <summary>
+        /// Returns the amount reserved for a specific week by a student
+        /// </summary>
+        /// <param name="week"></param>
+        /// <returns>Amount Reserved in that week</returns>
         public int AmountReservedForWeek(int week)
         {
             return LearningUtilityReservations.Where(r => r.Week == week && r.User.GetType() == typeof (Student)).Sum(r => r.Amount);
         }
-
+        /// <summary>
+        /// Returns the amount reserved (blocked) by a lector
+        /// </summary>
+        /// <param name="week"></param>
+        /// <returns></returns>
         public int AmountBlockedForWeek(int week)
         {
             IEnumerable<LearningUtilityReservation> reservations =  LearningUtilityReservations.Where(r => r.Week == week && r.User.GetType() == typeof (Lector));
             return reservations.Sum(r => r.Amount);
         }
-
+        /// <summary>
+        /// Calculates the Amount that are unavailable, week equals the specific week or week < currentweek.
+        /// This Sum + the amount which are unavailable.
+        /// </summary>
+        /// <param name="week"></param>
+        /// <param name="currentWeek"></param>
+        /// <returns></returns>
         public int AmountUnavailableForWeek(int week, int currentWeek)
         {
             IEnumerable<LearningUtilityReservation> reservations = LearningUtilityReservations.Where(r => r.Week == week || r.Week < currentWeek);
             return reservations.Sum(r => r.Amount) + AmountUnavailable;
         }
-
+        /// <summary>
+        /// Create a reservation for the specific learningutility.
+        /// </summary>
+        /// <param name="reservation"></param>
         public void AddReservation(LearningUtilityReservation reservation)
         {
             this.LearningUtilityReservations.Add(reservation);
