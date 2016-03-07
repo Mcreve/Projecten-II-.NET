@@ -19,14 +19,14 @@ namespace DidactischeLeermiddelen.Models.DAL.Mapper
             HasMany(t => t.FieldsOfStudy).WithMany().Map(m =>
             {
                 m.ToTable("LearningUtilityDetails_FieldOfStudy");
-                m.MapLeftKey("learningUtilityId");
+                m.MapLeftKey("LearningUtilityId");
                 m.MapRightKey("FieldOfStudyId");
             });
             HasMany(t => t.TargetGroups).WithMany().Map(m =>
             {
                 m.ToTable("LearningUtilityDetails_TargetGroup");
-                m.MapLeftKey("learningUtilityId");
-                m.MapRightKey("targetGroupId");
+                m.MapLeftKey("LearningUtilityId");
+                m.MapRightKey("TargetGroupId");
             });
         }
     }
