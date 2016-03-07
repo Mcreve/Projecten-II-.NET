@@ -1,7 +1,9 @@
 ﻿using DidactischeLeermiddelen.Properties;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.Users;
 
@@ -190,25 +192,31 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         #endregion
         #region Methods
 
-        public int AmountAvailableForWeek(int week, int currentWeek)
+        public int AmountAvailableForWeek(DateTime date)
         {
+            int week = GetCurrentWeek(date);
+            int currentWeek = GetCurrentWeek(DateTime.Now);
             IEnumerable<LearningUtilityReservation> reservations = LearningUtilityReservations.Where(r => r.Week == week || r.Week < currentWeek);
             return AmountInCatalog - reservations.Sum(r => r.Amount) - AmountUnavailable;
         }
 
-        public int AmountReservedForWeek(int week)
+        public int AmountReservedForWeek(DateTime date)
         {
+            int week = GetCurrentWeek(date);
             return LearningUtilityReservations.Where(r => r.Week == week && r.User.GetType() == typeof (Student)).Sum(r => r.Amount);
         }
 
-        public int AmountBlockedForWeek(int week)
+        public int AmountBlockedForWeek(DateTime date)
         {
+            int week = GetCurrentWeek(date);
             IEnumerable<LearningUtilityReservation> reservations =  LearningUtilityReservations.Where(r => r.Week == week && r.User.GetType() == typeof (Lector));
             return reservations.Sum(r => r.Amount);
         }
 
-        public int AmountUnavailableForWeek(int week, int currentWeek)
+        public int AmountUnavailableForWeek(DateTime date)
         {
+            int week = GetCurrentWeek(date);
+            int currentWeek = GetCurrentWeek(DateTime.Now);
             IEnumerable<LearningUtilityReservation> reservations = LearningUtilityReservations.Where(r => r.Week == week || r.Week < currentWeek);
             return reservations.Sum(r => r.Amount) + AmountUnavailable;
         }
@@ -216,6 +224,12 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public void AddReservation(LearningUtilityReservation reservation)
         {
             this.LearningUtilityReservations.Add(reservation);
+        }
+
+        private int GetCurrentWeek(DateTime date)
+        {
+            Calendar calendar = new GregorianCalendar();
+            return calendar.GetWeekOfYear(date, CalendarWeekRule.FirstDay, DayOfWeek.Saturday);
         }
         #endregion
     }

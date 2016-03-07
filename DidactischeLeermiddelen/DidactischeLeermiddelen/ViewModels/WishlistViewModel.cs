@@ -28,30 +28,22 @@ namespace DidactischeLeermiddelen.ViewModels
         public int AmountBlocked { get; set; }
         [Display(Name = "Selecteer de datum wanneer u de items wenst te gebruiken")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
         [Display(Name = "Aantal gewenst")]
         public int AmountWanted { get; set; }
 
         public WishlistViewModel()
         {
-            currentWeek = GetWeekOfYear(DateTime.Now);
         }
         public WishlistViewModel(LearningUtilityDetails learningUtilityDetails) : this()
         {
             Id = learningUtilityDetails.Id;
             Name = learningUtilityDetails.Name;
             Date = learningUtilityDetails.DateWanted ?? DateTime.Now;
-            if(Date != null)
-                week = GetWeekOfYear((DateTime) Date);
             AmountInCatalog = learningUtilityDetails.AmountInCatalog;
-            AmountUnavailable = learningUtilityDetails.AmountUnavailableForWeek(week,currentWeek);
-            AmountBlocked = learningUtilityDetails.AmountBlockedForWeek(week);
-            AmountInStock = learningUtilityDetails.AmountAvailableForWeek(week, currentWeek);
-        }
-
-        private int GetWeekOfYear(DateTime date)
-        {
-            return calendar.GetWeekOfYear(date, CalendarWeekRule.FirstDay, DayOfWeek.Saturday);
+            AmountUnavailable = learningUtilityDetails.AmountUnavailableForWeek(Date);
+            AmountBlocked = learningUtilityDetails.AmountBlockedForWeek(Date);
+            AmountInStock = learningUtilityDetails.AmountAvailableForWeek(Date);
         }
     }
 }
