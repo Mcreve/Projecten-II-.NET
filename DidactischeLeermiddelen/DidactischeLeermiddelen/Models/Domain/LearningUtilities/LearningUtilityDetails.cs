@@ -72,18 +72,8 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         }
 
         /// <summary>
-        /// Sets the price of the LearningUtility
-        /// Optional, if set allows Decimal.Zero has to be postive.
-        /// Null values is converted to Decimal.Zero
-        /// <exception cref="ValidationException"></exception>
-        /// ^           # Start of string.
-        /// [0-9]+      # Must have one or more numbers.
-        /// (           # Begin optional group.
-        /// \.          # The decimal point, . must be escaped, # or it is treated as "any character".
-        /// [0-9]{1,2}  # One or two numbers.
-        /// )?          # End group, signify it's optional with ?
-        /// $           # End of string.
-        /// </summary>
+        /// Sets the price of the LearningUtility, cannot be negative.
+        /// <exception cref="ArgumentException"></exception>
         public decimal Price
         {
 
@@ -91,12 +81,10 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
                 set
                 {
                     if(value < 0 )
-                        throw new ArgumentException("error");
+                        throw new ArgumentException(Resources.LearningUtilityPriceRegex);
                 price = value;
                 }
             
-            
-
         }
         /// <summary>
         /// Sets the loanable status of the LearningUtility
@@ -172,7 +160,9 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         #endregion
 
         #region Constructors
-
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
         public LearningUtilityDetails()
         {
             FieldsOfStudy = new List<FieldOfStudy>();
@@ -181,7 +171,12 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             Loanable = true;
             Price = 0;
         }
-
+        /// <summary>
+        /// Constructor with parameters, calls default constructor
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="location"></param>
         public LearningUtilityDetails(string name, string description, Location location):this()
         {
             Name = name;
@@ -192,7 +187,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         #endregion
         #region Methods
 
-        public int AmountAvailableForWeek(DateTime date)
+        public int AmountAvailableForWeek(int week, int currentWeek)
         {
             int week = GetCurrentWeek(date);
             int currentWeek = GetCurrentWeek(DateTime.Now);
@@ -200,7 +195,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             return AmountInCatalog - reservations.Sum(r => r.Amount) - AmountUnavailable;
         }
 
-        public int AmountReservedForWeek(DateTime date)
+        public int AmountReservedForWeek(int week)
         {
             int week = GetCurrentWeek(date);
             return LearningUtilityReservations.Where(r => r.Week == week && r.User.GetType() == typeof (Student)).Sum(r => r.Amount);
@@ -220,7 +215,10 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             IEnumerable<LearningUtilityReservation> reservations = LearningUtilityReservations.Where(r => r.Week == week || r.Week < currentWeek);
             return reservations.Sum(r => r.Amount) + AmountUnavailable;
         }
-
+        /// <summary>
+        /// Create a reservation for the specific learningutility.
+        /// </summary>
+        /// <param name="reservation"></param>
         public void AddReservation(LearningUtilityReservation reservation)
         {
             this.LearningUtilityReservations.Add(reservation);
