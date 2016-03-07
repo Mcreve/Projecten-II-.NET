@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DidactischeLeermiddelen.Models;
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
+using DidactischeLeermiddelen.ViewModels;
 
 namespace DidactischeLeermiddelen.Controllers
 {
@@ -23,10 +24,25 @@ namespace DidactischeLeermiddelen.Controllers
         {
             if (wishlist.NumberOfItems == 0)
                 return View("EmptyWishlist");
-            IEnumerable<CatalogViewModel> catalogViewModel =
-                wishlist.LearningUtilities.Select(learningUtilityDetails => new CatalogViewModel(GetLearningUtilityDetails(learningUtilityDetails.Id)))
+            IEnumerable<WishlistViewModel> wishlistViewModels =
+                wishlist.LearningUtilities.Select(learningUtilityDetails => 
+                    new WishlistViewModel(GetLearningUtilityDetails(learningUtilityDetails.Id)))
                     .ToList();
-            return View(catalogViewModel);
+            return View(wishlistViewModels);
+        }
+
+        [HttpPost]
+        public ActionResult Index(Wishlist wishlist, WishlistViewModel wishlistViewModel)
+        {
+            foreach (var learningUtilityDetailse in wishlist.LearningUtilities)
+            {
+                LearningUtilityDetails learningUtilityDetails = GetLearningUtilityDetails(learningUtilityDetailse.Id);
+                learningUtilityDetails.DateWanted = wishlistViewModel.Date;
+            }
+            IEnumerable<WishlistViewModel> wishlistViewModels =
+                wishlist.LearningUtilities.Select(learningUtilityDetails =>
+                    new WishlistViewModel(GetLearningUtilityDetails(learningUtilityDetails.Id))).ToList();
+            return View(wishlistViewModels);
         }
 
         public ActionResult Add(int id, Wishlist wishlist)

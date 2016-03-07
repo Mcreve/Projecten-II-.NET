@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DidactischeLeermiddelen.Models.CatalogViewModel>
+﻿@model IEnumerable<DidactischeLeermiddelen.ViewModels.WishlistViewModel>
 
 @{
     ViewBag.Title = "Verlanglijstje";
@@ -6,6 +6,11 @@
 
 <h2>Verlanglijstje</h2>
 @Html.Partial("_notificationPartial")
+@using (Html.BeginForm()) { 
+    @Html.LabelFor(model => model.First().Date)
+    @Html.EditorFor(model => model.First().Date, Model.First().Date = DateTime.Today)
+    <button type="submit" class="form-control col-md-1 btn btn-primary">wijzig datum</button>
+}
 <table class="table">
     <tr>
         <th class="col-md-4">

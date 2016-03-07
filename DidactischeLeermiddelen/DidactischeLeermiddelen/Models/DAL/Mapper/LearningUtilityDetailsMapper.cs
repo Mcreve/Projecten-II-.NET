@@ -11,6 +11,7 @@ namespace DidactischeLeermiddelen.Models.DAL.Mapper
     {
         public LearningUtilityDetailsMapper()
         {
+            Ignore(l => l.DateWanted);
             Property(l => l.Name).IsRequired().HasMaxLength(100);
             Property(l => l.Description).IsRequired().HasMaxLength(1000);
             Property(l => l.Picture).HasMaxLength(250);

@@ -165,6 +165,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public int AmountInCatalog { get; set; }
         public int AmountUnavailable { get; set; }
         public virtual ICollection<LearningUtilityReservation> LearningUtilityReservations { get; set; }
+        public DateTime? DateWanted { get; set; }
         public Byte[] TimeStamp { get; set; }
         #endregion
 
@@ -202,7 +203,8 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 
         public int AmountBlockedForWeek(int week)
         {
-            return LearningUtilityReservations.Where(r => r.Week == week && r.User.GetType() == typeof (Lector)).Sum(r => r.Amount);
+            IEnumerable<LearningUtilityReservation> reservations =  LearningUtilityReservations.Where(r => r.Week == week && r.User.GetType() == typeof (Lector));
+            return reservations.Sum(r => r.Amount);
         }
 
         public int AmountUnavailableForWeek(int week, int currentWeek)

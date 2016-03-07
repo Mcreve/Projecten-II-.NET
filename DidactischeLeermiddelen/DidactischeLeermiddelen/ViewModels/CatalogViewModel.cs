@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 
@@ -7,6 +9,7 @@ namespace DidactischeLeermiddelen.Models
 {
     public class CatalogViewModel
     {
+        private int week;
 
         [Display(Name = "Omschrijving")]
         public string ShortDescription { get; set; }
@@ -15,23 +18,10 @@ namespace DidactischeLeermiddelen.Models
         public string Name { get; set; }
         [Display(Name = "Afbeelding")]
         public string Picture { get; set; }
-        [Display(Name = "Prijs")]
-        [DisplayFormat(DataFormatString = "{0:c}", NullDisplayText = "Onbekend")]
-        public decimal? Price { get; set; }
-        [Display(Name = "Artikel Nr.")]
-        public string ArticleNumber { get; set; }
-        [Display(Name = "Beschikbaar")]
-        public int AmountInStock { get; set; }
         [Display(Name = "Doelgroep")]
         public string TargetGroup { get; set; }
         [Display(Name = "Leergebied")]
         public string FieldOfStudy { get; set; }
-        [Display(Name = "Totaal")]
-        public int AmountInCatalog { get; set; }
-        [Display(Name = "Tijdelijk onbeschikbaar")]
-        public int AmountUnavailable { get; set; }
-        [Display(Name = "Gereserveerd")]
-        public int AmountBlocked { get; set; }
 
         public CatalogViewModel()
         {
@@ -47,16 +37,8 @@ namespace DidactischeLeermiddelen.Models
             ShortDescription = ConvertToShortDescription(learningUtilityDetails.Description);
             Name = learningUtilityDetails.Name;
             Picture = learningUtilityDetails.Picture;
-            Price = learningUtilityDetails.Price;
-            ArticleNumber = learningUtilityDetails.ArticleNumber;
-           // AmountInStock =
-               
             TargetGroup = null;
             FieldOfStudy = null;
-           // AmountBlocked =
-             
-           // AmountUnavailable =
-               
         }
         /// <summary>
         /// Returns the shortdescription of the LearningUtilityDetail, the first 250 characters.
