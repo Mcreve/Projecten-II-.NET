@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DidactischeLeermiddelen.ViewModels.WishlistViewModel>
+
+@{
+    ViewBag.Title = "Reservatie";
+}
+
+<h2>Reservatie geslaagd</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Week)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountInStock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountInCatalog)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountUnavailable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountBlocked)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountWanted)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Week)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountInStock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountInCatalog)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountUnavailable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountBlocked)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountWanted)
+        </td>
+    </tr>
+}
+
+</table>

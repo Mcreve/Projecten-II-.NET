@@ -215,16 +215,32 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             IEnumerable<LearningUtilityReservation> reservations = LearningUtilityReservations.Where(r => r.Week == week || r.Week < currentWeek);
             return reservations.Sum(r => r.Amount) + AmountUnavailable;
         }
+
+        private int AmountAvailableForWeek(int week)
+        {
+            int currentWeek = GetCurrentWeek(DateTime.Now);
+            IEnumerable<LearningUtilityReservation> reservations = LearningUtilityReservations.Where(r => r.Week == week || r.Week < currentWeek);
+            return AmountInCatalog - reservations.Sum(r => r.Amount) - AmountUnavailable;
+        }
+
         /// <summary>
         /// Create a reservation for the specific learningutility.
         /// </summary>
         /// <param name="reservation"></param>
         public void AddReservation(LearningUtilityReservation reservation)
         {
-            this.LearningUtilityReservations.Add(reservation);
+            if (reservation.Amount > AmountAvailableForWeek(reservation.Week))
+                throw new ArgumentOutOfRangeException();
+            if (reservation.Amount > 0)
+            {
+                this.LearningUtilityReservations.Add(reservation);
+            } else
+            {
+                throw new ArgumentNullException();
+            }      
         }
 
-        private int GetCurrentWeek(DateTime date)
+        public int GetCurrentWeek(DateTime date)
         {
             Calendar calendar = new GregorianCalendar();
             return calendar.GetWeekOfYear(date, CalendarWeekRule.FirstDay, DayOfWeek.Saturday);

@@ -21,15 +21,39 @@ namespace DidactischeLeermiddelen.Controllers
         }
         public ActionResult Add(User user, IEnumerable<WishlistViewModel> wishlistViewModels)
         {
-            wishlistViewModels.Select(w => new LearningUtilityReservation
-            {
-                Amount = w.AmountWanted,
-                Id = w.Id,
-                User = user,
-                Week = w.Week
-            });
-
+            bool save = true;
+            foreach (var wishlistViewModel in wishlistViewModels)
+            {                
+                LearningUtilityDetails learningUtilityDetails = GetLearningUtilityDetails(wishlistViewModel.Id);
+                LearningUtilityReservation reservation = new LearningUtilityReservation
+                {
+                    User = user,
+                    Week = learningUtilityDetails.GetCurrentWeek((DateTime)wishlistViewModel.Date),
+                    Amount = wishlistViewModel.AmountWanted
+                };
+                try { 
+                    learningUtilityDetails.AddReservation(reservation);
+                    
+                } catch (ArgumentOutOfRangeException e)
+                {
+                    save = false;
+                    TempData["error"] = "Er ging iets fout met je reservatie. Controleer je aantal gewenste items en probeer opnieuw.";
+                } catch (ArgumentNullException e)
+                {
+                    save = false;
+                    TempData["error"] = "Er ging iets fout met je reservatie. Je moet minstens 1 item reserveren voor " + learningUtilityDetails.Name;
+                }                               
+            }
+            if (save) { 
+                learningUtilityDetailsRepository.SaveChanges();
+                return View(wishlistViewModels);
+            }
             return RedirectToAction("Index", "Wishlist");
+        }
+
+        private LearningUtilityDetails GetLearningUtilityDetails(int id)
+        {
+            return learningUtilityDetailsRepository.FindBy(id);
         }
     }
 }

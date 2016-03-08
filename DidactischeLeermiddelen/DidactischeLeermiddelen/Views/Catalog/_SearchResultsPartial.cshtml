@@ -5,7 +5,7 @@
 @Html.Partial("_notificationPartial")
 <p>
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter, currentFieldOfStudy = ViewBag.CurrentFieldOfStudy, currentTargetGroup = ViewBag.CurrentTargetGroup }))
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) van @Model.PageCount
 </p>
 @foreach (var item in Model)
 {

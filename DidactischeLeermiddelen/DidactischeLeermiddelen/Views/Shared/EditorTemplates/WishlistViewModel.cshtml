@@ -1,0 +1,26 @@
+﻿@model DidactischeLeermiddelen.ViewModels.WishlistViewModel
+<tr>
+    <td>
+        @Html.DisplayFor(item => item.Name)
+    </td>
+    <td>
+        @Html.EditorFor(item => item.AmountWanted)
+    </td>
+    <td>
+        @Html.DisplayFor(item => item.AmountInStock)
+    </td>
+    <td>
+        @Html.DisplayFor(item => item.AmountBlocked)
+    </td>
+    <td>
+        @Html.DisplayFor(item => item.AmountInCatalog)
+    </td>
+    <td>
+        @Html.DisplayFor(item => item.AmountUnavailable)
+    </td>
+    <td>
+        @Html.ActionLink("Delete", "Remove", new { id = Model.Id })
+    </td>
+</tr>
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.Date)

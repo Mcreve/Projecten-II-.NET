@@ -33,30 +33,10 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.EditorFor(modelItem => item.AmountWanted)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AmountInStock)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AmountBlocked)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AmountInCatalog)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AmountUnavailable)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Remove", new { id = item.Id })
-        </td>
-    </tr>
-}
+    @using (Html.BeginForm("Add", "Reservation"))
+    {
+        @Html.EditorForModel()
 
+        <input type="submit" value="Reserveer items">
+    }
 </table>

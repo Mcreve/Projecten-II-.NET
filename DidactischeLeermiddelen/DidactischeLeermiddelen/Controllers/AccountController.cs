@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -392,6 +389,7 @@ namespace DidactischeLeermiddelen.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            //Session.Abandon() : clear session cookies
             Session.Abandon();
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Catalog");

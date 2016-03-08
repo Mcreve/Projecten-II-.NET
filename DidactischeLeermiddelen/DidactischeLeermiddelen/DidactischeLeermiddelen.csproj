@@ -316,11 +316,12 @@
     <Content Include="Views\Wishlist\EmptyWishlist.cshtml" />
     <Content Include="Views\Catalog\_SearchResultsPartial.cshtml" />
     <Content Include="Views\Shared\_notificationPartial.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\WishlistViewModel.cshtml" />
+    <Content Include="Views\Reservation\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Resources\" />
-    <Folder Include="Views\Reservation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
