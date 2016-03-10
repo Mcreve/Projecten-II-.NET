@@ -9,10 +9,10 @@
 <hr/>
 <div>
     <div class="col-md-12">
-        <div class="col-md-3">
+        <div class="col-md-4">
             @Html.Image(Model.Picture, Model.Name, "img-responsive")
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <h2>@Html.DisplayFor(model => model.Name)</h2>
             <p>
                 <strong>
@@ -22,68 +22,92 @@
             <p>
                 @Html.DisplayFor(model => model.Description)
             </p>
-            <p>
-                <strong>
-                    @Html.DisplayNameFor(model => model.FieldsOfStudy):
-                </strong>
-
-                @foreach (var item in Model.FieldsOfStudy)
-                {
-                    if (!Model.FieldsOfStudy.ElementAt(0).Equals(item))
-                    {
-                        @Html.Raw(", ")
-                    }
-                    @Html.DisplayFor(modelItem => item)
-                }
-            </p>
-            <p>
-                <strong>
-                    @Html.DisplayNameFor(model => model.TargetGroups):
-                </strong>
-
-                @foreach (var item in Model.TargetGroups)
-                {
-                    if (!Model.TargetGroups.ElementAt(0).Equals(item))
-                    {
-                        @Html.Raw(", ")
-                    }
-                    @Html.DisplayFor(modelItem => item)
-                }
-            </p>
-            <p>
-                <strong>
-                    @Html.DisplayNameFor(model => model.Company):
-                </strong>
-                @Html.DisplayFor(model => model.Company)
-            </p>
-            <p>
-                <strong>
-                    @Html.DisplayNameFor(model => model.ArticleNumber):
-                </strong>
-                @Html.DisplayFor(model => model.ArticleNumber)
-            </p>
-            <p>
-                <strong>
-                    @Html.DisplayNameFor(model => model.Price):
-                </strong>
-                @Html.DisplayFor(model => model.Price)
-            </p>
-            <p>
-                <strong>
-                    @Html.DisplayNameFor(model => model.AmountInCatalog):
-                </strong>
-                @Html.DisplayFor(model => model.AmountInCatalog)
-            </p>
-            <p>
-                <strong>
-                    @Html.DisplayNameFor(model => model.AmountUnavailable):
-                </strong>
-                @Html.DisplayFor(model => model.AmountUnavailable)
-            </p>
         </div>
     </div>
+    <div class="col-md-12">
+            <div class="col-md-4">
+                <p>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.FieldsOfStudy):
+                    </strong>
 
+                    @foreach (var item in Model.FieldsOfStudy)
+                    {
+                        if (!Model.FieldsOfStudy.ElementAt(0).Equals(item))
+                        {
+                            @Html.Raw(", ")
+                        }
+                        @Html.DisplayFor(modelItem => item)
+                    }
+                </p>
+                <p>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.TargetGroups):
+                    </strong>
+
+                    @foreach (var item in Model.TargetGroups)
+                    {
+                        if (!Model.TargetGroups.ElementAt(0).Equals(item))
+                        {
+                            @Html.Raw(", ")
+                        }
+                        @Html.DisplayFor(modelItem => item)
+                    }
+                </p>
+                <p>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.Price):
+                    </strong>
+                    @Html.DisplayFor(model => model.Price)
+                </p>
+                <p>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.AmountInCatalog):
+                    </strong>
+                    @Html.DisplayFor(model => model.AmountInCatalog)
+                </p>
+                <p>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.AmountUnavailable):
+                    </strong>
+                    @Html.DisplayFor(model => model.AmountUnavailable)
+                </p>
+            </div>
+            <div class="col-md-4">
+                <p>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.CompanyName):
+                    </strong>
+                    @Html.DisplayFor(model => model.CompanyName)
+                </p>
+                <p>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.CompanyWebsite):
+                    </strong>
+                    @Html.DisplayFor(model => model.CompanyWebsite)
+                </p>
+                <p>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.CompanyEmailAddress):
+                    </strong>
+                    @Html.DisplayFor(model => model.CompanyEmailAddress)
+                </p>
+                <p>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.CompanyContactPersonName):
+                    </strong>
+                    @Html.DisplayFor(model => model.CompanyContactPersonName)
+                </p>
+                <p>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.ArticleNumber):
+                    </strong>
+                    @Html.DisplayFor(model => model.ArticleNumber)
+                </p>
+                <p>
+                    @Html.ActionLink("Terug naar de catalogus", "Index", new { currentFilter = ViewBag.CurrentFilter, page = ViewBag.Page, currentFieldOfStudy = ViewBag.CurrentFieldOfStudy, currentTargetGroup = ViewBag.CurrentTargetGroup })
+                </p>
+            </div>
+
+        </div>
 </div>
-<p>
-    @Html.ActionLink("Terug naar de catalogus", "Index", new {currentFilter = ViewBag.CurrentFilter, page = ViewBag.Page, currentFieldOfStudy = ViewBag.CurrentFieldOfStudy, currentTargetGroup = ViewBag.CurrentTargetGroup})
-</p>

@@ -191,9 +191,9 @@ namespace DidactischeLeermiddelen.Models.DAL
         /// </summary>
         private void CreateCompanies()
         {
-            companies.Add(new Company("Wolters"));
-            companies.Add(new Company("Hasbro"));
-            companies.Add(new Company("Texas Instruments"));
+            companies.Add(new Company("Wolters","www.wolters.be","Wolters en Co", "info@wolters.be"));
+            companies.Add(new Company("Hasbro","www.hasbro.com","Kim Duchateau", "kim.duchateau@hasbro.com"));
+            companies.Add(new Company("Texas Instruments","www.texas-instruments.be","Willy Mortier", "willy.mortier@texas-instruments.com"));
         }
 
         /// <summary>

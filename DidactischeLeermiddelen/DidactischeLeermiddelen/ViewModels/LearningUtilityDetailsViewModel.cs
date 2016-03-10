@@ -26,8 +26,14 @@ namespace DidactischeLeermiddelen.ViewModels
         public int AmountUnavailable { get; set; }
         [Display(Name = "Omschrijving")]
         public string Description { get; set; }
-        [Display(Name = "Firma")]
-        public string Company { get; set; }
+        [Display(Name = "Bedrijf")]
+        public string CompanyName { get; set; }
+        [Display(Name = "Contactpersoon")]
+        public string CompanyContactPersonName { get; set; }
+        [Display(Name = "E-mail")]
+        public string CompanyEmailAddress { get; set; }
+        [Display(Name = "Website")]
+        public string CompanyWebsite { get; set; }
 
         public LearningUtilityDetailsViewModel(LearningUtilityDetails learningUtilityDetails)
         {
@@ -40,9 +46,12 @@ namespace DidactischeLeermiddelen.ViewModels
             TargetGroups = learningUtilityDetails.TargetGroups.OrderBy(t => t.Name).Select(t => t.Name = t.Name);
             FieldsOfStudy = learningUtilityDetails.FieldsOfStudy.OrderBy(f => f.Name).Select(f => f.Name = f.Name);
             //AmountInCatalog = learningUtilityDetails.LearningUtilities.Count;
-            Company = learningUtilityDetails.Company.Name;
-           // AmountUnavailable =
-             
+            CompanyName = learningUtilityDetails.Company.Name;
+            CompanyContactPersonName = learningUtilityDetails.Company.ContactPersonName;
+            CompanyEmailAddress = learningUtilityDetails.Company.EmailAddress;
+            CompanyWebsite = learningUtilityDetails.Company.Website;
+            // AmountUnavailable =
+
         }
     }
 }

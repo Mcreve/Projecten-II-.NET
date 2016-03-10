@@ -61,11 +61,38 @@ namespace DidactischeLeermiddelen.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bedrijf contactpersoon moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn..
+        /// </summary>
+        public static string CompanyContactPersonNameRegex {
+            get {
+                return ResourceManager.GetString("CompanyContactPersonNameRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bedrijf e-mail adres moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn..
+        /// </summary>
+        public static string CompanyEmailAddressRegex {
+            get {
+                return ResourceManager.GetString("CompanyEmailAddressRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bedrijf moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn..
         /// </summary>
         public static string CompanyNameRegex {
             get {
                 return ResourceManager.GetString("CompanyNameRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bedrijf website moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn..
+        /// </summary>
+        public static string CompanyWebsiteRegex {
+            get {
+                return ResourceManager.GetString("CompanyWebsiteRegex", resourceCulture);
             }
         }
         

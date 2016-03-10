@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CompanyContactPersonNameRegex" xml:space="preserve">
+    <value>Bedrijf contactpersoon moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn.</value>
+  </data>
+  <data name="CompanyEmailAddressRegex" xml:space="preserve">
+    <value>Bedrijf e-mail adres moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn.</value>
+  </data>
   <data name="CompanyNameRegex" xml:space="preserve">
     <value>Bedrijf moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn.</value>
+  </data>
+  <data name="CompanyWebsiteRegex" xml:space="preserve">
+    <value>Bedrijf website moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn.</value>
   </data>
   <data name="FieldOfStudyNameRegex" xml:space="preserve">
     <value>Leergebied moet ingevuld zijn en moet tussen de 1-100 karakters lang zijn.</value>
