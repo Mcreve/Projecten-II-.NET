@@ -25,8 +25,8 @@ namespace DidactischeLeermiddelen.ViewModels
         public int AmountUnavailable { get; set; }
         [Display(Name = "Gereserveerd")]
         public int AmountBlocked { get; set; }
-        [Display(Name = "Selecteer de datum wanneer u de items wenst te gebruiken")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Selecteer de week wanneer u de items wenst te reserveren")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? Date { get; set; }
         [Display(Name = "Aantal gewenst")]
         public int AmountWanted { get; set; }
@@ -36,9 +36,31 @@ namespace DidactischeLeermiddelen.ViewModels
         }
         public WishlistViewModel(LearningUtilityDetails learningUtilityDetails) : this()
         {
+            if(learningUtilityDetails.DateWanted != null)
+            {
+                Date = learningUtilityDetails.DateWanted;
+            } else
+            {
+                var date = DateTime.Now;
+                if(date.DayOfWeek == DayOfWeek.Friday && date.Hour > 17)
+                {
+                    Date = DateTime.Now.AddDays(3);
+                }
+                else if(date.DayOfWeek == DayOfWeek.Saturday)
+                {
+                    Date = DateTime.Now.AddDays(2);
+                }
+                else if(date.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    Date = DateTime.Now.AddDays(1);
+                }
+                else
+                {
+                    Date = DateTime.Now;
+                }
+            }
             Id = learningUtilityDetails.Id;
-            Name = learningUtilityDetails.Name;
-            Date = learningUtilityDetails.DateWanted ?? DateTime.Now;
+            Name = learningUtilityDetails.Name;            
             AmountInCatalog = learningUtilityDetails.AmountInCatalog;
             AmountUnavailable = learningUtilityDetails.AmountUnavailableForWeek((DateTime)Date);
             AmountBlocked = learningUtilityDetails.AmountBlockedForWeek((DateTime)Date);

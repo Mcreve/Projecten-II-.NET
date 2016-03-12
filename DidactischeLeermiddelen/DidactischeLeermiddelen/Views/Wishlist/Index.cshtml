@@ -5,38 +5,55 @@
 }
 
 <h2>Verlanglijstje</h2>
+<hr />
 @Html.Partial("_notificationPartial")
-@using (Html.BeginForm()) { 
-    @Html.LabelFor(model => model.First().Date)
-    @Html.EditorFor(model => model.First().Date, Model.First().Date)
-    <button type="submit" class="form-control btn btn-primary">wijzig datum</button>
-}
-<table class="table">
-    <tr>
-        <th class="col-md-4">
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AmountWanted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AmountInStock)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AmountBlocked)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AmountInCatalog)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AmountUnavailable)
-        </th>
-    </tr>
-
-    @using (Html.BeginForm("Add", "Reservation"))
+<div class="col-md-12">
+    <div class="col-md-3">
+    @using (Html.BeginForm())
     {
-        @Html.EditorForModel()
+        @Html.LabelFor(model => model.First().Date)
+        @Html.HiddenFor(model => model.First().Date, new { @id = "date" })
+        <div class="col-md-3" id="weekpicker" data-date="@Model.First().Date.Value.ToShortDateString()"></div>
+        <button type="submit" class="form-control btn btn-primary">kies geselecteerde week</button>
+    }</div>
 
-        <input type="submit" value="Reserveer items">
-    }
-</table>
+    
+        @using (Html.BeginForm("Add", "Reservation"))
+        {
+            <div class="col-md-9">
+                <table class="table">
+                    <tr>
+                        <th class="col-md-4">
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AmountWanted)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AmountInStock)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AmountBlocked)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AmountInCatalog)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AmountUnavailable)
+                        </th>
+                    </tr>
+                    @Html.EditorForModel()
+                </table>
+
+                <input type="submit" value="Reserveer items" class="btn btn-primary form-control pull-right">
+            </div>
+        }    
+</div>
+   
+
+@section scripts
+{
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/CustomScripts/WeekPicker.js"></script>
+}

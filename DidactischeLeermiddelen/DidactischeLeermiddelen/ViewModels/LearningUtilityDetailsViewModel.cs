@@ -49,7 +49,7 @@ namespace DidactischeLeermiddelen.ViewModels
             CompanyContactPersonName = learningUtilityDetails.Company.ContactPersonName;
             CompanyEmailAddress = learningUtilityDetails.Company.EmailAddress;
             CompanyWebsite = learningUtilityDetails.Company.Website;
-
+            AmountInCatalog = learningUtilityDetails.AmountInCatalog;
         }
     }
 }
