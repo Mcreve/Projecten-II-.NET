@@ -118,6 +118,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             Assert.AreEqual(0, wishlist.NumberOfItems);
             itemRepository.Verify(l => l.FindBy(1), Times.Once);
         }
+
         #endregion
     }
 }

@@ -45,12 +45,10 @@ namespace DidactischeLeermiddelen.ViewModels
             ArticleNumber = learningUtilityDetails.ArticleNumber;
             TargetGroups = learningUtilityDetails.TargetGroups.OrderBy(t => t.Name).Select(t => t.Name = t.Name);
             FieldsOfStudy = learningUtilityDetails.FieldsOfStudy.OrderBy(f => f.Name).Select(f => f.Name = f.Name);
-            //AmountInCatalog = learningUtilityDetails.LearningUtilities.Count;
             CompanyName = learningUtilityDetails.Company.Name;
             CompanyContactPersonName = learningUtilityDetails.Company.ContactPersonName;
             CompanyEmailAddress = learningUtilityDetails.Company.EmailAddress;
             CompanyWebsite = learningUtilityDetails.Company.Website;
-            // AmountUnavailable =
 
         }
     }

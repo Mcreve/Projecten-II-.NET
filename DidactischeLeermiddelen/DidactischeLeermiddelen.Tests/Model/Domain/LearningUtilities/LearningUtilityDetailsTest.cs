@@ -17,6 +17,9 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         private TargetGroup initialTargetGroup;
         private Company initialCompany;
         private LearningUtilityReservation reservation;
+        private DateTime date1;
+        private DateTime date2;
+        private DateTime date3;
 
         #endregion
 
@@ -28,10 +31,13 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             initialFieldOfStudy = new FieldOfStudy("Geschiedenis");
             initialTargetGroup = new TargetGroup("1e leerjaar");
             initialCompany = new Company("Verbe");
-            reservation = new LearningUtilityReservation {Week = 1, Amount = 5};
+            reservation = new LearningUtilityReservation {Week = 12, Amount = 5};
             initiaLearningUtilityDetails.LearningUtilityReservations.Add(reservation);
             initiaLearningUtilityDetails.AmountInCatalog = 10;
             initiaLearningUtilityDetails.AmountUnavailable = 5;
+            date1 = new DateTime(2016, 3, 15, 8, 30, 52);
+            date2 = new DateTime(2016, 4, 8, 8, 30, 52);
+            date3 = new DateTime(2016, 3, 8, 8, 30, 52);
         }
 
         #region ConstructorTests
@@ -608,7 +614,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountAvailableForWeekWithReservationsReturnsCorrectValue()
         {
             //Act
-            int amount = initiaLearningUtilityDetails.AmountAvailableForWeek(1, 0);
+            int amount = initiaLearningUtilityDetails.AmountAvailableForWeek(date1);
 
             //Assert
             Assert.AreEqual(0, amount);
@@ -618,7 +624,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountAvailableForWeekWithoutReservationsReturnsCorrectValue()
         {
             //Act
-            int amount = initiaLearningUtilityDetails.AmountAvailableForWeek(2, 0);
+            int amount = initiaLearningUtilityDetails.AmountAvailableForWeek(date2);
 
             //Assert
             Assert.AreEqual(5, amount);
@@ -628,10 +634,10 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountAvailableForWeekWithCurrentWeekHigherThanReservedWeekReturnsCorrectValue()
         {
             //Act
-            int amount = initiaLearningUtilityDetails.AmountAvailableForWeek(5, 2);
+            int amount = initiaLearningUtilityDetails.AmountAvailableForWeek(date2);
 
             //Assert
-            Assert.AreEqual(0, amount);
+            Assert.AreEqual(5, amount);
         }
         #endregion
 
@@ -643,7 +649,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Student();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountReservedForWeek(1);
+            int amount = initiaLearningUtilityDetails.AmountReservedForWeek(date1);
 
             //Assert
             Assert.AreEqual(5, amount);
@@ -656,7 +662,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Student();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountReservedForWeek(2);
+            int amount = initiaLearningUtilityDetails.AmountReservedForWeek(date2);
 
             //Assert
             Assert.AreEqual(0, amount);
@@ -669,7 +675,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Lector();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountReservedForWeek(1);
+            int amount = initiaLearningUtilityDetails.AmountReservedForWeek(date1);
 
             //Assert
             Assert.AreEqual(0, amount);
@@ -684,7 +690,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Lector();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountBlockedForWeek(1);
+            int amount = initiaLearningUtilityDetails.AmountBlockedForWeek(date1);
 
             //Assert
             Assert.AreEqual(5, amount);
@@ -697,7 +703,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Lector();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountBlockedForWeek(2);
+            int amount = initiaLearningUtilityDetails.AmountBlockedForWeek(date2);
 
             //Assert
             Assert.AreEqual(0, amount);
@@ -710,7 +716,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Student();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountBlockedForWeek(1);
+            int amount = initiaLearningUtilityDetails.AmountBlockedForWeek(date1);
 
             //Assert
             Assert.AreEqual(0, amount);
@@ -725,7 +731,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Student();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(1, 0);
+            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(date1);
 
             //Assert
             Assert.AreEqual(10, amount);
@@ -738,7 +744,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Lector();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(1, 0);
+            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(date1);
 
             //Assert
             Assert.AreEqual(10, amount);
@@ -748,7 +754,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountUnavailableForWeekWithoutReservationsReturnsCorrectValue()
         {
             //Act
-            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(5, 0);
+            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(date2);
 
             //Assert
             Assert.AreEqual(5, amount);
@@ -758,10 +764,10 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountUnavailableForWeekWithCurrentWeekHigherThanReservedWeekReturnsCorrectValue()
         {
             //Act
-            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(5, 2);
+            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(date3);
 
             //Assert
-            Assert.AreEqual(10, amount);
+            Assert.AreEqual(5, amount);
         }
         #endregion
         #endregion

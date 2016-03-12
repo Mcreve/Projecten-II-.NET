@@ -36,6 +36,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             CreateTargetGroups();
             CreateLearningUtilities();
             CreateLists();
+            
         }
 
         private void CreateLists()
@@ -47,7 +48,10 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 LearningUtilityDetails3
             }).ToList().AsQueryable();
         }
-       
+        private IEnumerable<LearningUtilityDetails> getList()
+        {
+            return LearningUtilityDetailsList;
+        }
         private void CreateTargetGroups()
         {
             TargetGroup1 = new TargetGroup {Id = 1, Name = "Kleuter"};
@@ -70,10 +74,19 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 Loanable = true,
                 Location = Location1,
                 Picture = @"\items\pictures\wereldbol.png",
-                Price = 75m
+                Price = 75m,
+                AmountInCatalog = 6,
+                AmountUnavailable = 0,
+                
             };
             LearningUtilityDetails1.FieldsOfStudy.Add(FieldOfStudy1);
             LearningUtilityDetails1.TargetGroups.Add(TargetGroup1);
+            LearningUtilityDetails1.LearningUtilityReservations.Add(new LearningUtilityReservation
+            {
+                User = Student1,
+                Amount = 2,
+                Week = 11
+            });
             LearningUtilityDetails2 = new LearningUtilityDetails
             {
                 Id = 2,
@@ -84,7 +97,9 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 Loanable = true,
                 Location = Location1,
                 Picture = @"\items\pictures\dobbelsteen_schatkist_162-delig.jpg",
-                Price = 35m
+                Price = 35m,
+                AmountInCatalog = 5,
+                AmountUnavailable = 2
             };
             LearningUtilityDetails2.FieldsOfStudy.Add(FieldOfStudy1);
             LearningUtilityDetails2.TargetGroups.Add(TargetGroup1);
@@ -98,7 +113,10 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 Loanable = false,
                 Location = Location1,
                 Picture = @"\items\pictures\rekenspelletjes_optellen_en_aftrekken.gif",
-                Price = 10.9m
+                Price = 10.9m,
+                AmountInCatalog = 10,
+                AmountUnavailable = 5
+                
             };
             LearningUtilityDetails3.FieldsOfStudy.Add(FieldOfStudy1);
             LearningUtilityDetails3.TargetGroups.Add(TargetGroup1);

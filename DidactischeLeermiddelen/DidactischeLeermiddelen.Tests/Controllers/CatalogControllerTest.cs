@@ -98,7 +98,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         [TestMethod]
         public void IndexReturnsViewWithSearchStringNotNull()
         {
-            //Arrange
+           
 
 
             //Act

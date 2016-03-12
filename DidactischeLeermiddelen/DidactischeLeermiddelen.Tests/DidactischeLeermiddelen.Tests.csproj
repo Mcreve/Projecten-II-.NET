@@ -106,6 +106,7 @@
   <ItemGroup>
     <Compile Include="Controllers\CatalogControllerTest.cs" />
     <Compile Include="Controllers\DummyDataContext.cs" />
+    <Compile Include="Controllers\ReservationControllerTest.cs" />
     <Compile Include="Controllers\WishlistControllerTest.cs" />
     <Compile Include="Model\Domain\LearningUtilities\TargetGroupTest.cs" />
     <Compile Include="Model\Domain\LearningUtilities\FieldOfStudyTest.cs" />
