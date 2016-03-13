@@ -37,11 +37,11 @@ namespace DidactischeLeermiddelen.Controllers
                 } catch (ArgumentOutOfRangeException e)
                 {
                     save = false;
-                    TempData["error"] = "Er ging iets fout met je reservatie. Controleer je aantal gewenste items en probeer opnieuw.";
+                    TempData["error"] = "Er ging iets fout met je reservatie. Controleer je aantal gewenste items met het aantal beschikbare items en probeer opnieuw.";
                 } catch (ArgumentNullException e)
                 {
                     save = false;
-                    TempData["error"] = "Er ging iets fout met je reservatie. Je moet minstens 1 item reserveren voor " + learningUtilityDetails.Name;
+                    TempData["error"] = "Er ging iets fout met je reservatie. Je moet minstens 1 item reserveren voor elk gewenst item. Controleer je gewenste aantallen en probeer opnieuw";
                 }                               
             }
             if (save) { 

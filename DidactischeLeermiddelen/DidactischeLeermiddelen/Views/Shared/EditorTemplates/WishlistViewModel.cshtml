@@ -1,7 +1,7 @@
 ﻿@model DidactischeLeermiddelen.ViewModels.WishlistViewModel
 <tr>
     <td>
-        @Html.DisplayFor(item => item.Name)
+        @Html.DisplayFor(model => model.Name)
     </td>
     <td>
         @Html.EditorFor(item => item.AmountWanted)
@@ -18,8 +18,11 @@
     <td>
         @Html.DisplayFor(item => item.AmountUnavailable)
     </td>
-    <td>
-        @Html.ActionLink("Delete", "Remove", new { id = Model.Id })
+</tr>
+<tr>
+    <td colspan="6">
+        @Html.ActionLink("Details", "Details", new { @id = Model.Id, @date = Model.Date }, new{@onclick = "window.open(this.href, 'mywin','left=20,top=20,width=1200,height=600,toolbar=1,resizable=0'); return false;"}) | 
+        @Html.ActionLink("Verwijder", "Remove", new { id = Model.Id })
     </td>
 </tr>
 @Html.HiddenFor(model => model.Id)

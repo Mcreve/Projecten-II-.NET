@@ -2,106 +2,126 @@
 @model DidactischeLeermiddelen.ViewModels.LearningUtilityDetailsViewModel
 
 @{
+    Layout = null;
     ViewBag.Title = "Item details";
 }
-@Html.Partial("_notificationPartial")
-<h2>Item details</h2>
-<hr/>
-<div>
-    <div class="col-md-12">
-        <div class="col-md-4">
-            @Html.Image(Model.Picture, Model.Name, "img-responsive")
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body>
+    <div class="container body-content">
+        @Html.Partial("_notificationPartial")
+        <h2>Item details</h2>
+        <hr />
+        <div>
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    @Html.Image(Model.Picture, Model.Name, "img-responsive")
+                </div>
+                <div class="col-md-8">
+                    <h2>@Html.DisplayFor(model => model.Name)</h2>
+                    <p>
+                        <strong>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </strong>
+                    </p>
+                    <p>
+                        @Html.DisplayFor(model => model.Description)
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <p>
+                        <strong>
+                            @Html.DisplayNameFor(model => model.FieldsOfStudy):
+                        </strong>
+
+                        @foreach (var item in Model.FieldsOfStudy)
+                        {
+                            if (!Model.FieldsOfStudy.ElementAt(0).Equals(item))
+                            {
+                                @Html.Raw(", ")
+                            }
+                            @Html.DisplayFor(modelItem => item)
+                        }
+                    </p>
+                    <p>
+                        <strong>
+                            @Html.DisplayNameFor(model => model.TargetGroups):
+                        </strong>
+
+                        @foreach (var item in Model.TargetGroups)
+                        {
+                            if (!Model.TargetGroups.ElementAt(0).Equals(item))
+                            {
+                                @Html.Raw(", ")
+                            }
+                            @Html.DisplayFor(modelItem => item)
+                        }
+                    </p>
+                    <p>
+                        <strong>
+                            @Html.DisplayNameFor(model => model.Price):
+                        </strong>
+                        @Html.DisplayFor(model => model.Price)
+                    </p>
+                    <p>
+                        <strong>
+                            @Html.DisplayNameFor(model => model.AmountInCatalog):
+                        </strong>
+                        @Html.DisplayFor(model => model.AmountInCatalog)
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <p>
+                        <strong>
+                            @Html.DisplayNameFor(model => model.CompanyName):
+                        </strong>
+                        @Html.DisplayFor(model => model.CompanyName)
+                    </p>
+                    <p>
+                        <strong>
+                            @Html.DisplayNameFor(model => model.CompanyWebsite):
+                        </strong>
+                        @Html.DisplayFor(model => model.CompanyWebsite)
+                    </p>
+                    <p>
+                        <strong>
+                            @Html.DisplayNameFor(model => model.CompanyEmailAddress):
+                        </strong>
+                        @Html.DisplayFor(model => model.CompanyEmailAddress)
+                    </p>
+                    <p>
+                        <strong>
+                            @Html.DisplayNameFor(model => model.CompanyContactPersonName):
+                        </strong>
+                        @Html.DisplayFor(model => model.CompanyContactPersonName)
+                    </p>
+                    <p>
+                        <strong>
+                            @Html.DisplayNameFor(model => model.ArticleNumber):
+                        </strong>
+                        @Html.DisplayFor(model => model.ArticleNumber)
+                    </p>
+                </div>
+
+            </div>
         </div>
-        <div class="col-md-8">
-            <h2>@Html.DisplayFor(model => model.Name)</h2>
-            <p>
-                <strong>
-                    @Html.DisplayNameFor(model => model.Description)
-                </strong>
-            </p>
-            <p>
-                @Html.DisplayFor(model => model.Description)
-            </p>
-        </div>
+    <hr style="clear: both;" />
+    <footer style="clear: both;">
+        <p>&copy; @DateTime.Now.Year - HoGent</p>
+    </footer>
     </div>
-    <div class="col-md-12">
-            <div class="col-md-4">
-                <p>
-                    <strong>
-                        @Html.DisplayNameFor(model => model.FieldsOfStudy):
-                    </strong>
 
-                    @foreach (var item in Model.FieldsOfStudy)
-                    {
-                        if (!Model.FieldsOfStudy.ElementAt(0).Equals(item))
-                        {
-                            @Html.Raw(", ")
-                        }
-                        @Html.DisplayFor(modelItem => item)
-                    }
-                </p>
-                <p>
-                    <strong>
-                        @Html.DisplayNameFor(model => model.TargetGroups):
-                    </strong>
-
-                    @foreach (var item in Model.TargetGroups)
-                    {
-                        if (!Model.TargetGroups.ElementAt(0).Equals(item))
-                        {
-                            @Html.Raw(", ")
-                        }
-                        @Html.DisplayFor(modelItem => item)
-                    }
-                </p>
-                <p>
-                    <strong>
-                        @Html.DisplayNameFor(model => model.Price):
-                    </strong>
-                    @Html.DisplayFor(model => model.Price)
-                </p>
-                <p>
-                    <strong>
-                        @Html.DisplayNameFor(model => model.AmountInCatalog):
-                    </strong>
-                    @Html.DisplayFor(model => model.AmountInCatalog)
-                </p>                
-            </div>
-            <div class="col-md-4">
-                <p>
-                    <strong>
-                        @Html.DisplayNameFor(model => model.CompanyName):
-                    </strong>
-                    @Html.DisplayFor(model => model.CompanyName)
-                </p>
-                <p>
-                    <strong>
-                        @Html.DisplayNameFor(model => model.CompanyWebsite):
-                    </strong>
-                    @Html.DisplayFor(model => model.CompanyWebsite)
-                </p>
-                <p>
-                    <strong>
-                        @Html.DisplayNameFor(model => model.CompanyEmailAddress):
-                    </strong>
-                    @Html.DisplayFor(model => model.CompanyEmailAddress)
-                </p>
-                <p>
-                    <strong>
-                        @Html.DisplayNameFor(model => model.CompanyContactPersonName):
-                    </strong>
-                    @Html.DisplayFor(model => model.CompanyContactPersonName)
-                </p>
-                <p>
-                    <strong>
-                        @Html.DisplayNameFor(model => model.ArticleNumber):
-                    </strong>
-                    @Html.DisplayFor(model => model.ArticleNumber)
-                </p>
-                <p>
-                    @Html.ActionLink("Terug naar de catalogus", "Index", new { currentFilter = ViewBag.CurrentFilter, page = ViewBag.Page, currentFieldOfStudy = ViewBag.CurrentFieldOfStudy, currentTargetGroup = ViewBag.CurrentTargetGroup })
-                </p>
-            </div>
-
-        </div>
-</div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

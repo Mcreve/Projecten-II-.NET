@@ -1,0 +1,32 @@
+﻿@model IEnumerable<DidactischeLeermiddelen.ViewModels.WishlistViewModel>
+@using (Html.BeginForm("Add", "Reservation"))
+{
+    <div class="col-md-9">
+        @Html.Partial("_notificationPartial")
+        <table class="table">
+            <tr>
+                <th class="col-md-4">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AmountWanted)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AmountInStock)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AmountBlocked)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AmountInCatalog)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AmountUnavailable)
+                </th>
+            </tr>
+            @Html.EditorForModel()
+        </table>
+
+        <input type="submit" value="Reserveer items" class="btn btn-primary form-control pull-right">
+    </div>
+}

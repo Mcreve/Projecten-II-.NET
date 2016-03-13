@@ -28,6 +28,8 @@ namespace DidactischeLeermiddelen.Controllers
                 wishlist.LearningUtilities.Select(learningUtilityDetails => 
                     new WishlistViewModel(GetLearningUtilityDetails(learningUtilityDetails.Id)))
                     .ToList();
+            if (Request.IsAjaxRequest())
+                return PartialView("_WishlistItemsPartial", wishlistViewModels);
             return View(wishlistViewModels);
         }
 
@@ -42,6 +44,10 @@ namespace DidactischeLeermiddelen.Controllers
             IEnumerable<WishlistViewModel> wishlistViewModels =
                 wishlist.LearningUtilities.Select(learningUtilityDetails =>
                     new WishlistViewModel(GetLearningUtilityDetails(learningUtilityDetails.Id))).ToList();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_WishlistItemsPartial", wishlistViewModels);
+            }
             return View(wishlistViewModels);
         }
 
@@ -78,7 +84,31 @@ namespace DidactischeLeermiddelen.Controllers
                     TempData["error"] = e.Message;
                 }
             }
+            if (Request.IsAjaxRequest())
+            {
+                IEnumerable<WishlistViewModel> wishlistViewModels =
+                    wishlist.LearningUtilities.Select(
+                        learningUtilityDetails => new WishlistViewModel(GetLearningUtilityDetails(learningUtilityDetails.Id)))
+                        .ToList();
+                return PartialView("_WishlistItemsPartial", wishlistViewModels);
+            }
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Details(int id, DateTime date)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            LearningUtilityDetails learningUtilityDetails = learningUtilityDetailsRepository.FindBy((int)id);
+            if (learningUtilityDetails == null)
+            {
+                return HttpNotFound();
+            }
+
+            LearningUtilityDetailsViewModel learningUtilityDetailsViewModel = new LearningUtilityDetailsViewModel(learningUtilityDetails);
+            return View(learningUtilityDetailsViewModel);
         }
 
         private LearningUtilityDetails GetLearningUtilityDetails(int id)

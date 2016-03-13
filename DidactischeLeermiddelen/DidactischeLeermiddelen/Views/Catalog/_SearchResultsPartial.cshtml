@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-6 pull-right">
             @Html.DisplayFor(modelItem => item.ShortDescription)
-            @Html.ActionLink("meer", "Details", new { id = item.Id, page = Model.PageNumber, currentFilter=ViewBag.CurrentFilter, currentFieldOfStudy = ViewBag.CurrentFieldOfStudy, currentTargetGroup = ViewBag.CurrentTargetGroup})<br /><br />
+            @Html.ActionLink("Details", "Details", new { @id = item.Id }, new { @onclick = "window.open(this.href, 'mywin','left=20,top=20,width=1200,height=600,toolbar=1,resizable=0'); return false;" })
             @using (Html.BeginForm("Add", "Wishlist", new { id = item.Id }))
                 {<button type="submit" class="btn btn-primary">
                     <span class="glyphicon glyphicon-plus"></span> Verlanglijstje
