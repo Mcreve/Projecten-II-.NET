@@ -46,6 +46,8 @@ namespace DidactischeLeermiddelen.Controllers
             }
             if (save) { 
                 learningUtilityDetailsRepository.SaveChanges();
+                TempData["info"] = "Reservatie geslaagd";
+
                 return View(wishlistViewModels);
             }
             return RedirectToAction("Index", "Wishlist");

@@ -25,7 +25,7 @@ namespace DidactischeLeermiddelen.ViewModels
         public int AmountUnavailable { get; set; }
         [Display(Name = "Gereserveerd")]
         public int AmountBlocked { get; set; }
-        [Display(Name = "Selecteer de week wanneer u de items wenst te reserveren")]
+        [Display(Name = "Reservatie week")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? Date { get; set; }
         [Display(Name = "Aantal gewenst")]
