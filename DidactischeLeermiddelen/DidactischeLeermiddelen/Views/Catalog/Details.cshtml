@@ -91,13 +91,13 @@
                         <strong>
                             @Html.DisplayNameFor(model => model.CompanyWebsite):
                         </strong>
-                        @Html.DisplayFor(model => model.CompanyWebsite)
+                        @Html.Url(Model.CompanyWebsite)
                     </p>
                     <p>
                         <strong>
                             @Html.DisplayNameFor(model => model.CompanyEmailAddress):
                         </strong>
-                        @Html.DisplayFor(model => model.CompanyEmailAddress)
+                        @Html.MailTo(Model.CompanyEmailAddress)
                     </p>
                     <p>
                         <strong>

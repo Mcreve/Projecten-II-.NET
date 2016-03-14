@@ -205,7 +205,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HtmlHelpers\ImageHelper.cs" />
+    <Compile Include="HtmlHelpers\HtmlHelpers.cs" />
     <Compile Include="Infrastructure\UserModelBinder.cs" />
     <Compile Include="Infrastructure\WishlistModelBinder.cs" />
     <Compile Include="Models\DAL\FieldOfStudyRepository.cs" />
