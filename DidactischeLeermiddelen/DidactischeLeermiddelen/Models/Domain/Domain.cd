@@ -14,7 +14,7 @@
       <FileName>Models\Domain\LearningUtilities\Location.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtilityDetails">
+  <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.LearningUtility">
     <Position X="7.75" Y="12.5" Width="5" />
     <Members>
       <Method Name="implicit operator List&lt;object&gt;" Hidden="true" />
@@ -68,7 +68,7 @@
     </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAADgACAAYAggIAAIAIIAAQiAAAEAAAIAAACBAAAAAA=</HashCode>
-      <FileName>Models\Domain\LearningUtilities\LearningUtilityDetails.cs</FileName>
+      <FileName>Models\Domain\LearningUtilities\LearningUtility.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="FieldOfStudy" />

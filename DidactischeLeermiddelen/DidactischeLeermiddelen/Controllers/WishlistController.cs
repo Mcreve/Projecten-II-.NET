@@ -13,11 +13,11 @@ namespace DidactischeLeermiddelen.Controllers
     [Authorize]
     public class WishlistController : Controller
     {
-        private ILearningUtilityDetailsRepository learningUtilityDetailsRepository;
+        private ILearningUtilityRepository learningUtilityRepository;
 
-        public WishlistController(ILearningUtilityDetailsRepository learningUtilityDetailsRepository)
+        public WishlistController(ILearningUtilityRepository learningUtilityRepository)
         {
-            this.learningUtilityDetailsRepository = learningUtilityDetailsRepository;
+            this.learningUtilityRepository = learningUtilityRepository;
         }
         
         public ActionResult Index(Wishlist wishlist)
@@ -25,8 +25,8 @@ namespace DidactischeLeermiddelen.Controllers
             if (wishlist.NumberOfItems == 0)
                 return View("EmptyWishlist");
             IEnumerable<WishlistViewModel> wishlistViewModels =
-                wishlist.LearningUtilities.Select(learningUtilityDetails => 
-                    new WishlistViewModel(GetLearningUtilityDetails(learningUtilityDetails.Id)))
+                wishlist.LearningUtilities.Select(learningUtility => 
+                    new WishlistViewModel(GetLearningUtility(learningUtility.Id)))
                     .ToList();
             if (Request.IsAjaxRequest())
                 return PartialView("_WishlistItemsPartial", wishlistViewModels);
@@ -36,14 +36,14 @@ namespace DidactischeLeermiddelen.Controllers
         [HttpPost]
         public ActionResult Index(Wishlist wishlist, WishlistViewModel wishlistViewModel)
         {
-            foreach (var learningUtilityDetailse in wishlist.LearningUtilities)
+            foreach (var learningUtilitye in wishlist.LearningUtilities)
             {
-                LearningUtilityDetails learningUtilityDetails = GetLearningUtilityDetails(learningUtilityDetailse.Id);
-                learningUtilityDetails.DateWanted = wishlistViewModel.Date;
+                LearningUtility learningUtility = GetLearningUtility(learningUtilitye.Id);
+                learningUtility.DateWanted = wishlistViewModel.Date;
             }
             IEnumerable<WishlistViewModel> wishlistViewModels =
-                wishlist.LearningUtilities.Select(learningUtilityDetails =>
-                    new WishlistViewModel(GetLearningUtilityDetails(learningUtilityDetails.Id))).ToList();
+                wishlist.LearningUtilities.Select(learningUtility =>
+                    new WishlistViewModel(GetLearningUtility(learningUtility.Id))).ToList();
             if (Request.IsAjaxRequest())
             {
                 return PartialView("_WishlistItemsPartial", wishlistViewModels);
@@ -53,7 +53,7 @@ namespace DidactischeLeermiddelen.Controllers
 
         public ActionResult Add(int id, Wishlist wishlist)
         {
-            LearningUtilityDetails item = GetLearningUtilityDetails(id);
+            LearningUtility item = GetLearningUtility(id);
             if (item != null)
             {
                 try
@@ -71,7 +71,7 @@ namespace DidactischeLeermiddelen.Controllers
 
         public ActionResult Remove(int id, Wishlist wishlist)
         {
-            LearningUtilityDetails item = GetLearningUtilityDetails(id);
+            LearningUtility item = GetLearningUtility(id);
             if (item != null)
             {
                 try
@@ -88,32 +88,32 @@ namespace DidactischeLeermiddelen.Controllers
             {
                 IEnumerable<WishlistViewModel> wishlistViewModels =
                     wishlist.LearningUtilities.Select(
-                        learningUtilityDetails => new WishlistViewModel(GetLearningUtilityDetails(learningUtilityDetails.Id)))
+                        learningUtility => new WishlistViewModel(GetLearningUtility(learningUtility.Id)))
                         .ToList();
                 return PartialView("_WishlistItemsPartial", wishlistViewModels);
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Details(int id, DateTime date)
+        public ActionResult Details(int? id, DateTime date)
         {
             if (id == null)
             {
                 return HttpNotFound();
             }
-            LearningUtilityDetails learningUtilityDetails = learningUtilityDetailsRepository.FindBy((int)id);
-            if (learningUtilityDetails == null)
+            LearningUtility learningUtility = learningUtilityRepository.FindBy((int)id);
+            if (learningUtility == null)
             {
                 return HttpNotFound();
             }
 
-            LearningUtilityDetailsViewModel learningUtilityDetailsViewModel = new LearningUtilityDetailsViewModel(learningUtilityDetails);
-            return View(learningUtilityDetailsViewModel);
+            LearningUtilityViewModel learningUtilityViewModel = new LearningUtilityViewModel(learningUtility);
+            return View(learningUtilityViewModel);
         }
 
-        private LearningUtilityDetails GetLearningUtilityDetails(int id)
+        private LearningUtility GetLearningUtility(int id)
         {
-            return learningUtilityDetailsRepository.FindBy(id);
+            return learningUtilityRepository.FindBy(id);
         }
     }
 }

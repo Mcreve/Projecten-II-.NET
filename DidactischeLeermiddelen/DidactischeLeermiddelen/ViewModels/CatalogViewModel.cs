@@ -9,8 +9,6 @@ namespace DidactischeLeermiddelen.Models
 {
     public class CatalogViewModel
     {
-        private int week;
-
         [Display(Name = "Omschrijving")]
         public string ShortDescription { get; set; }
         public int Id { get; set; }
@@ -30,13 +28,13 @@ namespace DidactischeLeermiddelen.Models
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="learningUtilityDetails"></param>
-        public CatalogViewModel(LearningUtilityDetails learningUtilityDetails)
+        /// <param name="learningUtility"></param>
+        public CatalogViewModel(LearningUtility learningUtility)
         {
-            Id = learningUtilityDetails.Id;
-            ShortDescription = ConvertToShortDescription(learningUtilityDetails.Description);
-            Name = learningUtilityDetails.Name;
-            Picture = learningUtilityDetails.Picture;
+            Id = learningUtility.Id;
+            ShortDescription = ConvertToShortDescription(learningUtility.Description);
+            Name = learningUtility.Name;
+            Picture = learningUtility.Picture;
             TargetGroup = null;
             FieldOfStudy = null;
         }

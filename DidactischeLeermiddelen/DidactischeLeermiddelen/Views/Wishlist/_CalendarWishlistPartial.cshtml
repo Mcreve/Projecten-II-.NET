@@ -3,6 +3,7 @@
     @using (Html.BeginForm("Index", "Wishlist", FormMethod.Post))
     {
         @Html.LabelFor(model => model.First().Date)
+        <br/>
         @Html.HiddenFor(model => model.First().Date, new { @id = "date" })
         <div class="col-md-3" id="weekpicker" data-date="@Model.First().Date.Value.ToShortDateString()"></div>
         <button type="submit" class="form-control btn btn-primary">kies geselecteerde week</button>

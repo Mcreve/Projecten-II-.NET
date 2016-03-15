@@ -8,11 +8,11 @@ using System.Text.RegularExpressions;
 
 namespace DidactischeLeermiddelen.Models.Domain
 {
-    public interface ILearningUtilityDetailsRepository
+    public interface ILearningUtilityRepository
     {
-        IQueryable<LearningUtilityDetails> FindAll();
-        LearningUtilityDetails FindBy(int id);
-        List<LearningUtilityDetails> Search(string query);
+        IQueryable<LearningUtility> FindAll();
+        LearningUtility FindBy(int id);
+        List<LearningUtility> Search(string query);
         void SaveChanges();
 
     }

@@ -11,8 +11,6 @@ namespace DidactischeLeermiddelen.ViewModels
     public class WishlistViewModel
     {
         private int week;
-        private Calendar calendar = new GregorianCalendar();
-
         public int Week { get { return week; } set { week = value; } }
         public int Id { get; set; }
         [Display(Name = "Leermiddel")]
@@ -34,11 +32,11 @@ namespace DidactischeLeermiddelen.ViewModels
         public WishlistViewModel()
         {
         }
-        public WishlistViewModel(LearningUtilityDetails learningUtilityDetails) : this()
+        public WishlistViewModel(LearningUtility learningUtility) : this()
         {
-            if(learningUtilityDetails.DateWanted != null)
+            if(learningUtility.DateWanted != null)
             {
-                Date = learningUtilityDetails.DateWanted;
+                Date = learningUtility.DateWanted;
             } else
             {
                 var date = DateTime.Now;
@@ -59,12 +57,12 @@ namespace DidactischeLeermiddelen.ViewModels
                     Date = DateTime.Now;
                 }
             }
-            Id = learningUtilityDetails.Id;
-            Name = learningUtilityDetails.Name;            
-            AmountInCatalog = learningUtilityDetails.AmountInCatalog;
-            AmountUnavailable = learningUtilityDetails.AmountUnavailableForWeek((DateTime)Date);
-            AmountBlocked = learningUtilityDetails.AmountBlockedForWeek((DateTime)Date);
-            AmountInStock = learningUtilityDetails.AmountAvailableForWeek((DateTime)Date);
+            Id = learningUtility.Id;
+            Name = learningUtility.Name;            
+            AmountInCatalog = learningUtility.AmountInCatalog;
+            AmountUnavailable = learningUtility.AmountUnavailableForWeek((DateTime)Date);
+            AmountBlocked = learningUtility.AmountBlockedForWeek((DateTime)Date);
+            AmountInStock = learningUtility.AmountAvailableForWeek((DateTime)Date);
         }
     }
 }

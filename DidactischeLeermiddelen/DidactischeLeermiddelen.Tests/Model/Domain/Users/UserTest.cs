@@ -16,7 +16,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
 
         private User student;
         private User lector;
-        private Mock<ILearningUtilityDetailsRepository> mockLearningUtilityDetailsRepository;
+        private Mock<ILearningUtilityRepository> mockLearningUtilityRepository;
         private DummyDataContext context;
         #endregion
 
@@ -27,9 +27,9 @@ namespace DidactischeLeermiddelen.Tests.Model.Users
             lector = UserFactory.CreateUserWithUserType(UserType.Lector);
 
             context = new DummyDataContext();
-            mockLearningUtilityDetailsRepository = new Mock<ILearningUtilityDetailsRepository>();
-            mockLearningUtilityDetailsRepository.Setup(repo => repo.FindAll())
-                .Returns(context.LearningUtilityDetailsList);
+            mockLearningUtilityRepository = new Mock<ILearningUtilityRepository>();
+            mockLearningUtilityRepository.Setup(repo => repo.FindAll())
+                .Returns(context.LearningUtilityList);
         }
 
         [TestMethod]

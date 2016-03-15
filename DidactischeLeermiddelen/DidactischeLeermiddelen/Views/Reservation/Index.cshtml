@@ -1,0 +1,15 @@
+﻿@model IEnumerable<DidactischeLeermiddelen.ViewModels.ReservationViewModel>
+
+@{
+    ViewBag.Title = "Reservaties";
+}
+@Html.Partial("_notificationPartial")
+
+<div class="col-md-12">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 reservations">
+            <div class="col-md-12"><strong>@Html.DisplayFor(modelItem => item.Name)</strong></div>
+        </div>
+    }
+</div>

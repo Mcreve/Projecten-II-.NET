@@ -11,16 +11,16 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain
     public class WishlistTest
     {
         private DummyDataContext context;
-        private LearningUtilityDetails item1;
-        private LearningUtilityDetails item2;
+        private LearningUtility item1;
+        private LearningUtility item2;
         private Wishlist wishlist;
 
         [TestInitialize]
         public void Initialize()
         {
             context = new DummyDataContext();
-            item1 = context.LearningUtilityDetails1;
-            item2 = context.LearningUtilityDetails2;
+            item1 = context.LearningUtility1;
+            item2 = context.LearningUtility2;
             wishlist = new Wishlist();
         }
 

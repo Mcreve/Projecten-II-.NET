@@ -14,15 +14,15 @@ namespace DidactischeLeermiddelen.Models.Domain
         /// The LearningUtilities stored in this object
         /// </summary>
         #region Properties
-        private IList<LearningUtilityDetails> learningUtilityDetails = new List<LearningUtilityDetails>();
+        private IList<LearningUtility> learningUtilities = new List<LearningUtility>();
         /// <summary>
         /// Getter for the lines field.
         /// </summary>
-        public IEnumerable<LearningUtilityDetails> LearningUtilities { get { return learningUtilityDetails.AsEnumerable(); } }
+        public IEnumerable<LearningUtility> LearningUtilities { get { return learningUtilities.AsEnumerable(); } }
         /// <summary>
         /// The number of WishlistLines (items) in this object.
         /// </summary>
-        public int NumberOfItems { get { return learningUtilityDetails.Count(); } }
+        public int NumberOfItems { get { return learningUtilities.Count(); } }
         #endregion
 
         #region Methods
@@ -31,11 +31,11 @@ namespace DidactischeLeermiddelen.Models.Domain
         /// </summary>
         /// <param name="item">The item that should be added to the list.</param>
         /// <exception cref="InvalidOperationException"></exception>
-        public void AddItem(LearningUtilityDetails item)
+        public void AddItem(LearningUtility item)
         {
-            LearningUtilityDetails learningUtility = FindLearningUtility(item.Id);
+            LearningUtility learningUtility = FindLearningUtility(item.Id);
             if (learningUtility == null)
-                learningUtilityDetails.Add(item);
+                learningUtilities.Add(item);
             else
                 throw new InvalidOperationException("Item werd reeds aan uw verlanglijstje toegevoegd.");
         }
@@ -45,18 +45,18 @@ namespace DidactischeLeermiddelen.Models.Domain
         /// </summary>
         /// <param name="item">The item that should be removed from the list.</param>
         /// <exception cref="InvalidOperationException"></exception>
-        public void RemoveItem(LearningUtilityDetails item)
+        public void RemoveItem(LearningUtility item)
         {
-            LearningUtilityDetails learningUtility = FindLearningUtility(item.Id);
+            LearningUtility learningUtility = FindLearningUtility(item.Id);
             if (learningUtility != null)
-                learningUtilityDetails.Remove(learningUtility);
+                learningUtilities.Remove(learningUtility);
             else
                 throw new InvalidOperationException("Item werd niet in uw verlanglijstje terug gevonden.");
         }
 
-        private LearningUtilityDetails FindLearningUtility(int id)
+        private LearningUtility FindLearningUtility(int id)
         {
-            return learningUtilityDetails.SingleOrDefault(l => l.Id == id);
+            return learningUtilities.SingleOrDefault(l => l.Id == id);
         }
         #endregion
     }

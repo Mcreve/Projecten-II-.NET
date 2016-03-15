@@ -9,7 +9,7 @@ using DidactischeLeermiddelen.Models.Domain.Users;
 
 namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 {
-    public class LearningUtilityDetails
+    public class LearningUtility
     {
 
         #region Fields
@@ -163,7 +163,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public LearningUtilityDetails()
+        public LearningUtility()
         {
             FieldsOfStudy = new List<FieldOfStudy>();
             TargetGroups = new List<TargetGroup>();
@@ -177,7 +177,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         /// <param name="name"></param>
         /// <param name="description"></param>
         /// <param name="location"></param>
-        public LearningUtilityDetails(string name, string description, Location location):this()
+        public LearningUtility(string name, string description, Location location):this()
         {
             Name = name;
             Description = description;

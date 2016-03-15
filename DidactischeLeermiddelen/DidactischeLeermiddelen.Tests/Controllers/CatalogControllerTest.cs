@@ -22,7 +22,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
         private CatalogController catalogController;
         private DummyDataContext context;
-        private Mock<ILearningUtilityDetailsRepository> itemRepository;
+        private Mock<ILearningUtilityRepository> itemRepository;
         private User student;
         private User lector;
         private Mock<ITargetGroupRepository> targetGroupRepository;
@@ -40,16 +40,16 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             student = UserFactory.CreateUserWithUserType(UserType.Student);
             lector = UserFactory.CreateUserWithUserType(UserType.Lector);
             context = new DummyDataContext();
-            itemRepository = new Mock<ILearningUtilityDetailsRepository>();
+            itemRepository = new Mock<ILearningUtilityRepository>();
             targetGroupRepository = new Mock<ITargetGroupRepository>();
             fieldOfStudyRepository = new Mock<IFieldOfStudyRepository>();
             string searchInput = "bol";
-            itemRepository.Setup(i => i.FindAll()).Returns(context.LearningUtilityDetailsList);
-            itemRepository.Setup(i => i.Search(searchInput)).Returns(context.LearningUtilityDetailsList.Where(j => (j.Name).Contains(searchInput)).ToList());
-            itemRepository.Setup(i => i.Search(searchInput)).Returns(context.LearningUtilityDetailsList.Where(j => (j.Description).Contains(searchInput)).ToList());
-            itemRepository.Setup(i => i.FindBy(1)).Returns(context.LearningUtilityDetails1);
-            itemRepository.Setup(i => i.FindBy(2)).Returns(context.LearningUtilityDetails2);
-            itemRepository.Setup(i => i.FindBy(3)).Returns(context.LearningUtilityDetails3);
+            itemRepository.Setup(i => i.FindAll()).Returns(context.LearningUtilityList);
+            itemRepository.Setup(i => i.Search(searchInput)).Returns(context.LearningUtilityList.Where(j => (j.Name).Contains(searchInput)).ToList());
+            itemRepository.Setup(i => i.Search(searchInput)).Returns(context.LearningUtilityList.Where(j => (j.Description).Contains(searchInput)).ToList());
+            itemRepository.Setup(i => i.FindBy(1)).Returns(context.LearningUtility1);
+            itemRepository.Setup(i => i.FindBy(2)).Returns(context.LearningUtility2);
+            itemRepository.Setup(i => i.FindBy(3)).Returns(context.LearningUtility3);
             targetGroupRepository.Setup(i => i.FindBy(1)).Returns(context.TargetGroup1);
             fieldOfStudyRepository.Setup(i => i.FindBy(1)).Returns(context.FieldOfStudy1);
             catalogController = new CatalogController(itemRepository.Object, targetGroupRepository.Object, fieldOfStudyRepository.Object);
@@ -178,12 +178,12 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
 
             //Act
-            ViewResult result = catalogController.Details(context.LearningUtilityDetails2.Id, null, null, null, null) as ViewResult;
-            LearningUtilityDetailsViewModel learningUtilityDetails = result.ViewData.Model as LearningUtilityDetailsViewModel;
+            ViewResult result = catalogController.Details(context.LearningUtility2.Id, null, null, null, null) as ViewResult;
+            LearningUtilityViewModel learningUtility = result.ViewData.Model as LearningUtilityViewModel;
 
             //Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(context.LearningUtilityDetails2.Id, learningUtilityDetails.Id);
+            Assert.AreEqual(context.LearningUtility2.Id, learningUtility.Id);
         }
 
         [TestMethod]
