@@ -10,19 +10,27 @@ namespace DidactischeLeermiddelen.Models.Domain
     /// </summary>
     public class Wishlist
     {
+        public Wishlist() {
+            LearningUtilities = new List<LearningUtility>();
+        }
+        public int Id { get; set; }
         /// <summary>
         /// The LearningUtilities stored in this object
         /// </summary>
         #region Properties
-        private IList<LearningUtility> learningUtilities = new List<LearningUtility>();
+        //private IList<LearningUtility> learningUtilities = new List<LearningUtility>();
         /// <summary>
         /// Getter for the lines field.
         /// </summary>
-        public IEnumerable<LearningUtility> LearningUtilities { get { return learningUtilities.AsEnumerable(); } }
+        public virtual List<LearningUtility> LearningUtilities
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// The number of WishlistLines (items) in this object.
         /// </summary>
-        public int NumberOfItems { get { return learningUtilities.Count(); } }
+        public int NumberOfItems { get { return LearningUtilities.Count(); } }
         #endregion
 
         #region Methods
@@ -35,7 +43,7 @@ namespace DidactischeLeermiddelen.Models.Domain
         {
             LearningUtility learningUtility = FindLearningUtility(item.Id);
             if (learningUtility == null)
-                learningUtilities.Add(item);
+                LearningUtilities.Add(item);
             else
                 throw new InvalidOperationException("Item werd reeds aan uw verlanglijstje toegevoegd.");
         }
@@ -49,14 +57,14 @@ namespace DidactischeLeermiddelen.Models.Domain
         {
             LearningUtility learningUtility = FindLearningUtility(item.Id);
             if (learningUtility != null)
-                learningUtilities.Remove(learningUtility);
+                LearningUtilities.Remove(learningUtility);
             else
                 throw new InvalidOperationException("Item werd niet in uw verlanglijstje terug gevonden.");
         }
 
         private LearningUtility FindLearningUtility(int id)
         {
-            return learningUtilities.SingleOrDefault(l => l.Id == id);
+            return LearningUtilities.SingleOrDefault(l => l.Id == id);
         }
         #endregion
     }

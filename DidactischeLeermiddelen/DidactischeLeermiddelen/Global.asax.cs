@@ -21,7 +21,6 @@ namespace DidactischeLeermiddelen
             db.Database.Initialize(true);
 
             ModelBinders.Binders.Add(typeof(User), new UserModelBinder());
-            ModelBinders.Binders.Add(typeof(Wishlist), new WishlistModelBinder());
         }
     }
 }

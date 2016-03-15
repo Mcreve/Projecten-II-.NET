@@ -42,7 +42,7 @@ namespace DidactischeLeermiddelen.Controllers
         /// <returns></returns>
         public ActionResult Index(User user, string currentFilter, string searchString, int? fieldOfStudy, int? targetGroup, int? page, int? currentFieldOfStudy, int? currentTargetGroup)
         {
-
+            
             IEnumerable<LearningUtility> catalog = null;
             catalog = learningUtilityRepository.FindAll().OrderBy(l => l.Name);
             if (user.GetType() == typeof(Student))

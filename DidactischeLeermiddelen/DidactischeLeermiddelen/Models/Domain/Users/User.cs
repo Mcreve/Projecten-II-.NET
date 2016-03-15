@@ -108,7 +108,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
                 emailAddress = value;
             }
         }
-
+        public virtual Wishlist Wishlist { get; set; }
         #endregion
     }
 }

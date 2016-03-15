@@ -207,7 +207,6 @@
     </Compile>
     <Compile Include="HtmlHelpers\HtmlHelpers.cs" />
     <Compile Include="Infrastructure\UserModelBinder.cs" />
-    <Compile Include="Infrastructure\WishlistModelBinder.cs" />
     <Compile Include="Models\DAL\FieldOfStudyRepository.cs" />
     <Compile Include="Models\DAL\LearningUtilityDetailsRepository.cs" />
     <Compile Include="Models\DAL\Mapper\LearningUtilityDetailsMapper.cs" />
@@ -216,6 +215,7 @@
     <Compile Include="Models\DAL\Mapper\FieldOfStudyMapper.cs" />
     <Compile Include="Models\DAL\Mapper\LocationMapper.cs" />
     <Compile Include="Models\DAL\Mapper\UserMapper.cs" />
+    <Compile Include="Models\DAL\Mapper\WishlistMapper.cs" />
     <Compile Include="Models\DAL\TargetGroupRepository.cs" />
     <Compile Include="Models\DAL\UserRepository.cs" />
     <Compile Include="Models\Domain\ApplicationUser.cs" />

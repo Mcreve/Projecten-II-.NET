@@ -7,6 +7,7 @@ using DidactischeLeermiddelen.Models;
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.ViewModels;
+using DidactischeLeermiddelen.Models.Domain.Users;
 
 namespace DidactischeLeermiddelen.Controllers
 {
@@ -14,15 +15,18 @@ namespace DidactischeLeermiddelen.Controllers
     public class WishlistController : Controller
     {
         private ILearningUtilityRepository learningUtilityRepository;
+        private IUserRepository userRepository;
 
-        public WishlistController(ILearningUtilityRepository learningUtilityRepository)
+        public WishlistController(ILearningUtilityRepository learningUtilityRepository, IUserRepository userRepository)
         {
             this.learningUtilityRepository = learningUtilityRepository;
+            this.userRepository = userRepository;
         }
         
-        public ActionResult Index(Wishlist wishlist)
+        public ActionResult Index(User user)
         {
-            if (wishlist.NumberOfItems == 0)
+            Wishlist wishlist = user.Wishlist;
+            if (wishlist == null||wishlist.NumberOfItems == 0)
                 return View("EmptyWishlist");
             IEnumerable<WishlistViewModel> wishlistViewModels =
                 wishlist.LearningUtilities.Select(learningUtility => 
@@ -34,8 +38,9 @@ namespace DidactischeLeermiddelen.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(Wishlist wishlist, WishlistViewModel wishlistViewModel)
+        public ActionResult Index(User user, WishlistViewModel wishlistViewModel)
         {
+            Wishlist wishlist = user.Wishlist;
             foreach (var learningUtilitye in wishlist.LearningUtilities)
             {
                 LearningUtility learningUtility = GetLearningUtility(learningUtilitye.Id);
@@ -51,15 +56,21 @@ namespace DidactischeLeermiddelen.Controllers
             return View(wishlistViewModels);
         }
 
-        public ActionResult Add(int id, Wishlist wishlist)
+        public ActionResult Add(int id, User user)
         {
+            if(user.Wishlist == null)
+            {
+                user.Wishlist = new Wishlist();
+                userRepository.SaveChanges();
+            }
             LearningUtility item = GetLearningUtility(id);
             if (item != null)
             {
                 try
                 {
-                    wishlist.AddItem(item);
+                    user.Wishlist.AddItem(item);
                     TempData["info"] = item.Name + " werd toegevoegd aan uw verlanglijst.";
+                    learningUtilityRepository.SaveChanges();
                 }
                 catch (InvalidOperationException e)
                 {
@@ -69,8 +80,9 @@ namespace DidactischeLeermiddelen.Controllers
             return RedirectToAction("Index", "Catalog");
         }
 
-        public ActionResult Remove(int id, Wishlist wishlist)
+        public ActionResult Remove(int id, User user)
         {
+            Wishlist wishlist = user.Wishlist;
             LearningUtility item = GetLearningUtility(id);
             if (item != null)
             {
@@ -78,6 +90,7 @@ namespace DidactischeLeermiddelen.Controllers
                 {
                     wishlist.RemoveItem(item);
                     TempData["info"] = item.Name + " werd van uw verlanglijstje verwijderd";
+                    userRepository.SaveChanges();
                 }
                 catch (InvalidOperationException e)
                 {
