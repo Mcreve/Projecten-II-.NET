@@ -36,7 +36,6 @@ namespace DidactischeLeermiddelen.Models.DAL
              learningUtilityList.Where(learningUtility => learningUtility.Name.Contains(query)).ToList();
             return resultName;
         }
-
         public void SaveChanges()
         {
             context.SaveChanges();

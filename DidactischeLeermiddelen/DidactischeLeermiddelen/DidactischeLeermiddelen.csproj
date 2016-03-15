@@ -326,6 +326,7 @@
     <Content Include="Views\Wishlist\_WishlistItemsPartial.cshtml" />
     <Content Include="Views\Wishlist\Details.cshtml" />
     <Content Include="Views\Reservation\Index.cshtml" />
+    <Content Include="Views\Reservation\EmptyReservations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

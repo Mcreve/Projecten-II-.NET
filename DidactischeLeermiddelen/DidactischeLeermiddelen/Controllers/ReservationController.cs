@@ -24,10 +24,12 @@ namespace DidactischeLeermiddelen.Controllers
 
         public ActionResult Index(User user)
         {
-            IEnumerable<LearningUtility> reservations = FindAllReservationsForUser(user);
+            IEnumerable<LearningUtility> reservations = FindAllLearningUtilitiesReservedByUser(user);
 
+            if (!reservations.Any())
+                return View("EmptyReservations");
 
-            IEnumerable < ReservationViewModel > reservationViewModels =
+            IEnumerable <ReservationViewModel> reservationViewModels =
                 reservations.Select(utility => new ReservationViewModel(utility)).ToList();
              
             return View(reservationViewModels);
@@ -74,7 +76,7 @@ namespace DidactischeLeermiddelen.Controllers
             return learningUtilityRepository.FindBy(id);
         }
 
-        private IEnumerable<LearningUtility> FindAllReservationsForUser(User user)
+        private IEnumerable<LearningUtility> FindAllLearningUtilitiesReservedByUser(User user)
         {
             IEnumerable<LearningUtility> result =
                 learningUtilityRepository.FindAll().Where(
@@ -85,5 +87,30 @@ namespace DidactischeLeermiddelen.Controllers
             return result;
 
         }
-    }
+        public ActionResult Delete(int learningUtilityId, int reservationId)
+        {
+            try
+            {
+                LearningUtility learningUtility = learningUtilityRepository.FindBy(learningUtilityId);
+                LearningUtilityReservation reservation =
+                    learningUtility.LearningUtilityReservations.FirstOrDefault(res => res.Id == reservationId);
+
+                if (reservation == null)
+                    return HttpNotFound();
+
+                learningUtility.RemoveReservation(reservationId);
+                learningUtilityRepository.SaveChanges();
+                TempData["info"] = String.Format("Reservatie van item {0} werd verwijderd", learningUtility.Name);
+            }
+            catch (Exception)
+            {
+                TempData["error"] = "Verwijderen reservatie mislukt. Probeer opnieuw. " +
+                           "Als de problemen zich blijven voordoen, contacteer de  administrator.";
+            }
+
+
+            return RedirectToAction("Index");
+        }
+
+       }
 }

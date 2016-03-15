@@ -154,7 +154,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 
         public int AmountInCatalog { get; set; }
         public int AmountUnavailable { get; set; }
-        public virtual ICollection<LearningUtilityReservation> LearningUtilityReservations { get; set; }
+        public virtual List<LearningUtilityReservation> LearningUtilityReservations { get; set; }
         public DateTime? DateWanted { get; set; }
         public Byte[] TimeStamp { get; set; }
         #endregion
@@ -239,6 +239,12 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
                 throw new ArgumentNullException();
             }      
         }
+
+        public void RemoveReservation(int id)
+        {
+            LearningUtilityReservations.RemoveAll(res => res.Id == id);
+        }
+
 
         public int GetCurrentWeek(DateTime date)
         {

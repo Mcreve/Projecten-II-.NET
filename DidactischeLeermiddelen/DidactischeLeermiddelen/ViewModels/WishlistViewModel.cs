@@ -64,5 +64,6 @@ namespace DidactischeLeermiddelen.ViewModels
             AmountBlocked = learningUtility.AmountBlockedForWeek((DateTime)Date);
             AmountInStock = learningUtility.AmountAvailableForWeek((DateTime)Date);
         }
+
     }
 }

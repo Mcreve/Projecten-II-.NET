@@ -231,9 +231,10 @@ namespace DidactischeLeermiddelen.Models.DAL
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(t => t.Name.Equals("Aardrijkskunde")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Middelbaar")));
-            learningUtility.LearningUtilityReservations.Add(CreateReservation(12, users.First(u => u.GetType() == typeof(Lector)), 4));
+            learningUtility.LearningUtilityReservations.Add(CreateReservation(12, users.First(u => u.GetType() == typeof(Lector)),4));
             learningUtility.LearningUtilityReservations.Add(CreateReservation(15, users.First(u => u.GetType() == typeof(Student)), 1));
             learningUtility.LearningUtilityReservations.Add(CreateReservation(14, users.First(u => u.GetType() == typeof(Lector)), 2));
+
             context.LearningUtilityList.Add(learningUtility);
 
             //Create dobbelsteenschatkist object
