@@ -7,9 +7,9 @@ using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 
 namespace DidactischeLeermiddelen.Models.DAL.Mapper
 {
-    public class LearningUtilityDetailsMapper : EntityTypeConfiguration<LearningUtilityDetails>
+    public class LearningUtilityMapper : EntityTypeConfiguration<LearningUtility>
     {
-        public LearningUtilityDetailsMapper()
+        public LearningUtilityMapper()
         {
             Ignore(l => l.DateWanted);
             Property(l => l.Name).IsRequired().HasMaxLength(100);
@@ -18,13 +18,13 @@ namespace DidactischeLeermiddelen.Models.DAL.Mapper
             Property(l => l.TimeStamp).HasColumnType("timestamp");
             HasMany(t => t.FieldsOfStudy).WithMany().Map(m =>
             {
-                m.ToTable("LearningUtilityDetails_FieldOfStudy");
+                m.ToTable("LearningUtility_FieldOfStudy");
                 m.MapLeftKey("LearningUtilityId");
                 m.MapRightKey("FieldOfStudyId");
             });
             HasMany(t => t.TargetGroups).WithMany().Map(m =>
             {
-                m.ToTable("LearningUtilityDetails_TargetGroup");
+                m.ToTable("LearningUtility_TargetGroup");
                 m.MapLeftKey("LearningUtilityId");
                 m.MapRightKey("TargetGroupId");
             });

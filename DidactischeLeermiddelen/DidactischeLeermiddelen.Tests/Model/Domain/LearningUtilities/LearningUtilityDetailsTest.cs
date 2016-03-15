@@ -8,10 +8,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 {
     [TestClass]
-    public class LearningUtilityDetailsTest
+    public class LearningUtilityTest
     {
         #region Arrange
-        private LearningUtilityDetails initiaLearningUtilityDetails;
+        private LearningUtility initiaLearningUtility;
         private Location initialLocation;
         private FieldOfStudy initialFieldOfStudy;
         private TargetGroup initialTargetGroup;
@@ -24,17 +24,17 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         #endregion
 
         [TestInitialize]
-        public void LearningUtilityDetailsTestInitialize()
+        public void LearningUtilityTestInitialize()
         {
-            initiaLearningUtilityDetails = new LearningUtilityDetails();
+            initiaLearningUtility = new LearningUtility();
             initialLocation = new Location("GELDE 1.001");
             initialFieldOfStudy = new FieldOfStudy("Geschiedenis");
             initialTargetGroup = new TargetGroup("1e leerjaar");
             initialCompany = new Company("Verbe");
             reservation = new LearningUtilityReservation {Week = 12, Amount = 5};
-            initiaLearningUtilityDetails.LearningUtilityReservations.Add(reservation);
-            initiaLearningUtilityDetails.AmountInCatalog = 10;
-            initiaLearningUtilityDetails.AmountUnavailable = 5;
+            initiaLearningUtility.LearningUtilityReservations.Add(reservation);
+            initiaLearningUtility.AmountInCatalog = 10;
+            initiaLearningUtility.AmountUnavailable = 5;
             date1 = new DateTime(2016, 3, 15, 8, 30, 52);
             date2 = new DateTime(2016, 4, 8, 8, 30, 52);
             date3 = new DateTime(2016, 3, 8, 8, 30, 52);
@@ -42,21 +42,21 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
         #region ConstructorTests
         [TestMethod]
-        public void LearningUtilityDetailsDefaultConstructorAnCreatesAnObjectAndList()
+        public void LearningUtilityDefaultConstructorAnCreatesAnObjectAndList()
         {
             #region Act
-            LearningUtilityDetails learningUtilityDetail = new LearningUtilityDetails();
+            LearningUtility learningUtilityDetail = new LearningUtility();
             #endregion
 
             #region Assert
-            Assert.IsInstanceOfType(learningUtilityDetail, typeof(LearningUtilityDetails));
+            Assert.IsInstanceOfType(learningUtilityDetail, typeof(LearningUtility));
             Assert.IsTrue(learningUtilityDetail.Loanable);
             Assert.AreEqual(0,learningUtilityDetail.Price);
             #endregion
         }
 
         [TestMethod]
-        public void LearningUtilityDetailsParameterConstructorCreatesAnObjectAndList()
+        public void LearningUtilityParameterConstructorCreatesAnObjectAndList()
         {
             #region Arrange
 
@@ -66,11 +66,11 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
 
             #region Act
-            LearningUtilityDetails learningUtilityDetail = new LearningUtilityDetails(name, description, location);
+            LearningUtility learningUtilityDetail = new LearningUtility(name, description, location);
             #endregion
 
             #region Assert
-            Assert.IsInstanceOfType(learningUtilityDetail, typeof(LearningUtilityDetails));
+            Assert.IsInstanceOfType(learningUtilityDetail, typeof(LearningUtility));
             Assert.IsTrue(learningUtilityDetail.Loanable);
             Assert.AreEqual(name, learningUtilityDetail.Name);
             Assert.AreEqual(description, learningUtilityDetail.Description);
@@ -85,7 +85,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
         #region NameTests
         [TestMethod]
-        public void LearningUtilityDetailsNameIs50CharactersLongSetsTheName()
+        public void LearningUtilityNameIs50CharactersLongSetsTheName()
         {
             #region Arrange
             const string name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
@@ -93,18 +93,18 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.Name = name;
+            initiaLearningUtility.Name = name;
             #endregion
 
             #region Assert
             Assert.AreEqual(50,name.Length);
-            Assert.AreEqual(name, initiaLearningUtilityDetails.Name);
+            Assert.AreEqual(name, initiaLearningUtility.Name);
             #endregion
         }
 
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void LearningUtilityDetailsNameIs101CharactersLongThrowsError()
+        public void LearningUtilityNameIs101CharactersLongThrowsError()
         {
             #region Arrange
             const string name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
@@ -112,7 +112,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.Name = name;
+            initiaLearningUtility.Name = name;
             #endregion
 
             #region Assert
@@ -120,7 +120,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         [TestMethod]
-        public void LearningUtilityDetailsNameHasAlphaNumericNameSetsIt()
+        public void LearningUtilityNameHasAlphaNumericNameSetsIt()
         {
             #region Arrange
             const string name = "Wereldkaart 1";
@@ -128,17 +128,17 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.Name = name;
+            initiaLearningUtility.Name = name;
             #endregion
 
             #region Assert
-            Assert.AreEqual(name, initiaLearningUtilityDetails.Name);
+            Assert.AreEqual(name, initiaLearningUtility.Name);
             #endregion
 
         }
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void LearningUtilityDetailsNameHasIsNullThrowsError()
+        public void LearningUtilityNameHasIsNullThrowsError()
         {
             #region Arrange
             const string name = null;
@@ -146,13 +146,13 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.Name = name;
+            initiaLearningUtility.Name = name;
             #endregion
 
         }
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void LearningUtilityDetailsNameHasIsEmptyThrowsError()
+        public void LearningUtilityNameHasIsEmptyThrowsError()
         {
             #region Arrange
             string name = String.Empty;
@@ -160,14 +160,14 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.Name = name;
+            initiaLearningUtility.Name = name;
             #endregion
         }
         #endregion
 
         #region DescriptionTests
         [TestMethod]
-        public void LearningUtilityDetailsDescriptionIs101CharactersLongSetsTheDescription()
+        public void LearningUtilityDescriptionIs101CharactersLongSetsTheDescription()
         {
             #region Arrange
             const string description = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
@@ -175,18 +175,18 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.Description = description;
+            initiaLearningUtility.Description = description;
             #endregion
 
             #region Assert
             Assert.AreEqual(101, description.Length);
-            Assert.AreEqual(description, initiaLearningUtilityDetails.Description);
+            Assert.AreEqual(description, initiaLearningUtility.Description);
             #endregion
         }
 
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void LearningUtilityDetailsDescriptionIs1001CharactersLongThrowsError()
+        public void LearningUtilityDescriptionIs1001CharactersLongThrowsError()
         {
             #region Act
 
@@ -206,7 +206,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.Description = description;
+            initiaLearningUtility.Description = description;
             #endregion
 
             #region Assert
@@ -214,7 +214,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         [TestMethod]
-        public void LearningUtilityDetailsDescriptionHasAlphaNumericDescriptionSetsIt()
+        public void LearningUtilityDescriptionHasAlphaNumericDescriptionSetsIt()
         {
             #region Arrange
             const string description = "Wereldkaart 1 die ...";
@@ -222,56 +222,56 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.Description = description;
+            initiaLearningUtility.Description = description;
             #endregion
 
             #region Assert
-            Assert.AreEqual(description, initiaLearningUtilityDetails.Description);
+            Assert.AreEqual(description, initiaLearningUtility.Description);
             #endregion
         }
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void LearningUtilityDetailsDescriptionHasIsNullThrowsError()
+        public void LearningUtilityDescriptionHasIsNullThrowsError()
         {
             #region Act
 
-            initiaLearningUtilityDetails.Description = null;
+            initiaLearningUtility.Description = null;
             #endregion
 
         }
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void LearningUtilityDetailsDescriptionHasIsEmptyThrowsError()
+        public void LearningUtilityDescriptionHasIsEmptyThrowsError()
         {
             #region Act
 
-            initiaLearningUtilityDetails.Description = String.Empty;
+            initiaLearningUtility.Description = String.Empty;
             #endregion
         }
         #endregion
 
         #region LocationTests
         [TestMethod]
-        public void LearningUtilityDetailsLocationSetsIt()
+        public void LearningUtilityLocationSetsIt()
         {
             #region Act
 
-            initiaLearningUtilityDetails.Location = initialLocation;
+            initiaLearningUtility.Location = initialLocation;
 
             #endregion
 
             #region Assert
-            Assert.AreEqual(initialLocation.Name,initiaLearningUtilityDetails.Location.Name);
+            Assert.AreEqual(initialLocation.Name,initiaLearningUtility.Location.Name);
             #endregion
         }
 
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void LearningUtilityDetailsLocationIsNullThrowsError()
+        public void LearningUtilityLocationIsNullThrowsError()
         {
             #region Act
 
-            initiaLearningUtilityDetails.Location = null;
+            initiaLearningUtility.Location = null;
 
             #endregion
         }
@@ -279,7 +279,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
         #region PriceTests
         [TestMethod]
-        public void LearningUtilityDetailsPriceIs50SetsIt()
+        public void LearningUtilityPriceIs50SetsIt()
         {
             #region Arrange
 
@@ -288,15 +288,15 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
 
             #region Act
-            initiaLearningUtilityDetails.Price = price;
+            initiaLearningUtility.Price = price;
             #endregion
 
             #region Assert
-            Assert.AreEqual((decimal)price,initiaLearningUtilityDetails.Price);
+            Assert.AreEqual((decimal)price,initiaLearningUtility.Price);
             #endregion
         }
         [TestMethod]
-        public void LearningUtilityDetailsPriceIsInt50SetsIt()
+        public void LearningUtilityPriceIsInt50SetsIt()
         {
             #region Arrange
 
@@ -305,15 +305,15 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
 
             #region Act
-            initiaLearningUtilityDetails.Price = price;
+            initiaLearningUtility.Price = price;
             #endregion
 
             #region Assert
-            Assert.AreEqual((decimal)price, initiaLearningUtilityDetails.Price);
+            Assert.AreEqual((decimal)price, initiaLearningUtility.Price);
             #endregion
         }
         [TestMethod]
-        public void LearningUtilityDetailsPriceIsDecimalSetsIt()
+        public void LearningUtilityPriceIsDecimalSetsIt()
         {
             #region Arrange
 
@@ -322,16 +322,16 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
 
             #region Act
-            initiaLearningUtilityDetails.Price = price;
+            initiaLearningUtility.Price = price;
             #endregion
 
             #region Assert
-            Assert.AreEqual(price, initiaLearningUtilityDetails.Price);
+            Assert.AreEqual(price, initiaLearningUtility.Price);
             #endregion
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void LearningUtilityDetailsPriceIsNegativeThrowsError()
+        public void LearningUtilityPriceIsNegativeThrowsError()
         {
             #region Arrange
 
@@ -340,12 +340,12 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
 
             #region Act
-            initiaLearningUtilityDetails.Price = price;
+            initiaLearningUtility.Price = price;
             #endregion
 
         }
         [TestMethod]
-        public void LearningUtilityDetailsPriceIsZeroSetsIt()
+        public void LearningUtilityPriceIsZeroSetsIt()
         {
             #region Arrange
 
@@ -354,18 +354,18 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
 
             #region Act
-            initiaLearningUtilityDetails.Price = price;
+            initiaLearningUtility.Price = price;
             #endregion
 
             #region Assert
-            Assert.AreEqual((decimal)price, initiaLearningUtilityDetails.Price);
+            Assert.AreEqual((decimal)price, initiaLearningUtility.Price);
             #endregion
         }
         #endregion
 
         #region ArticleNumberTests
         [TestMethod]
-        public void LearningUtilityDetailsArticleNumberIs50CharactersLongSetsTheArticleNumber()
+        public void LearningUtilityArticleNumberIs50CharactersLongSetsTheArticleNumber()
         {
             #region Arrange
             const string articleNr = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
@@ -373,18 +373,18 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.ArticleNumber = articleNr;
+            initiaLearningUtility.ArticleNumber = articleNr;
             #endregion
 
             #region Assert
             Assert.AreEqual(50, articleNr.Length);
-            Assert.AreEqual(articleNr, initiaLearningUtilityDetails.ArticleNumber);
+            Assert.AreEqual(articleNr, initiaLearningUtility.ArticleNumber);
             #endregion
         }
 
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void LearningUtilityDetailsArticleNumberIs101CharactersLongThrowsError()
+        public void LearningUtilityArticleNumberIs101CharactersLongThrowsError()
         {
             #region Arrange
             const string articleNr = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
@@ -392,16 +392,16 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.ArticleNumber = articleNr;
+            initiaLearningUtility.ArticleNumber = articleNr;
             #endregion
 
             #region Assert
             Assert.AreEqual(101, articleNr.Length);
-            Assert.AreEqual(articleNr, initiaLearningUtilityDetails.ArticleNumber);
+            Assert.AreEqual(articleNr, initiaLearningUtility.ArticleNumber);
             #endregion
         }
         [TestMethod]
-        public void LearningUtilityDetailsArticleNumberHasAlphaNumericArticleNumberSetsIt()
+        public void LearningUtilityArticleNumberHasAlphaNumericArticleNumberSetsIt()
         {
             #region Arrange
             const string articleNr = "FHZ.123";
@@ -409,15 +409,15 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.ArticleNumber = articleNr;
+            initiaLearningUtility.ArticleNumber = articleNr;
             #endregion
 
             #region Assert
-            Assert.AreEqual(articleNr, initiaLearningUtilityDetails.ArticleNumber);
+            Assert.AreEqual(articleNr, initiaLearningUtility.ArticleNumber);
             #endregion
         }
         [TestMethod]
-        public void LearningUtilityDetailsArticleNumberHasIsNullSetsIt()
+        public void LearningUtilityArticleNumberHasIsNullSetsIt()
         {
             #region Arrange
             const string articleNr = null;
@@ -425,16 +425,16 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.ArticleNumber = articleNr;
+            initiaLearningUtility.ArticleNumber = articleNr;
 
             #endregion
 
             #region Assert
-            Assert.AreEqual(articleNr, initiaLearningUtilityDetails.ArticleNumber);
+            Assert.AreEqual(articleNr, initiaLearningUtility.ArticleNumber);
             #endregion
         }
         [TestMethod]
-        public void LearningUtilityDetailsArticleNumberHasIsEmptySetsIt()
+        public void LearningUtilityArticleNumberHasIsEmptySetsIt()
         {
             #region Arrange
             string articleNr = String.Empty;
@@ -442,28 +442,28 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.ArticleNumber = articleNr;
+            initiaLearningUtility.ArticleNumber = articleNr;
 
             #endregion
 
             #region Assert
-            Assert.AreEqual(articleNr, initiaLearningUtilityDetails.ArticleNumber);
+            Assert.AreEqual(articleNr, initiaLearningUtility.ArticleNumber);
             #endregion
         }
         #endregion
 
         #region FieldOfStudyTests
         [TestMethod]
-        public void LearningUtilityDetailsFieldOfStudySetsIt()
+        public void LearningUtilityFieldOfStudySetsIt()
         {
             #region Act
 
-            initiaLearningUtilityDetails.FieldsOfStudy.Add(initialFieldOfStudy);
+            initiaLearningUtility.FieldsOfStudy.Add(initialFieldOfStudy);
 
             #endregion
 
             #region Assert
-            Assert.AreEqual(initialFieldOfStudy,initiaLearningUtilityDetails.FieldsOfStudy.Single(f => f.Equals(initialFieldOfStudy)));
+            Assert.AreEqual(initialFieldOfStudy,initiaLearningUtility.FieldsOfStudy.Single(f => f.Equals(initialFieldOfStudy)));
             #endregion
         }
 
@@ -471,99 +471,99 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
         #region TargetGroupTests
         [TestMethod]
-        public void LearningUtilityDetailsTargetGroupSetsIt()
+        public void LearningUtilityTargetGroupSetsIt()
         {
             #region Act
 
-            initiaLearningUtilityDetails.TargetGroups.Add(initialTargetGroup);
+            initiaLearningUtility.TargetGroups.Add(initialTargetGroup);
 
             #endregion
 
             #region Assert
-            Assert.AreEqual(initialTargetGroup,initiaLearningUtilityDetails.TargetGroups.Single(t => t.Equals(initialTargetGroup)));
+            Assert.AreEqual(initialTargetGroup,initiaLearningUtility.TargetGroups.Single(t => t.Equals(initialTargetGroup)));
             #endregion
         }
         #endregion
 
         #region CompanyTests
         [TestMethod]
-        public void LearningUtilityDetailsCompanySetsIt()
+        public void LearningUtilityCompanySetsIt()
         {
             #region Act
 
-            initiaLearningUtilityDetails.Company = initialCompany;
+            initiaLearningUtility.Company = initialCompany;
 
             #endregion
 
             #region Assert
-            Assert.AreEqual(initialCompany.Name, initiaLearningUtilityDetails.Company.Name);
+            Assert.AreEqual(initialCompany.Name, initiaLearningUtility.Company.Name);
             #endregion
         }
         #endregion
 
         #region Loanable
         [TestMethod]
-        public void LearningUtilityDetailsLoanableSetsIt()
+        public void LearningUtilityLoanableSetsIt()
         {
             #region Act
 
-            initiaLearningUtilityDetails.Loanable = true;
+            initiaLearningUtility.Loanable = true;
 
             #endregion
 
             #region Assert
-            Assert.AreEqual(true, initiaLearningUtilityDetails.Loanable);
+            Assert.AreEqual(true, initiaLearningUtility.Loanable);
             #endregion
         }
         [TestMethod]
-        public void LearningUtilityDetailsUnloanableSetsIt()
+        public void LearningUtilityUnloanableSetsIt()
         {
             #region Act
 
-            initiaLearningUtilityDetails.Loanable = false;
+            initiaLearningUtility.Loanable = false;
 
             #endregion
 
             #region Assert
-            Assert.AreEqual(false, initiaLearningUtilityDetails.Loanable);
+            Assert.AreEqual(false, initiaLearningUtility.Loanable);
             #endregion
         }
         #endregion
 
         #region PictureTests
         [TestMethod]
-        public void LearningUtilityDetailsPictureUrlSetsIt()
+        public void LearningUtilityPictureUrlSetsIt()
         {
             #region Arrange
             const string pictureUrl = "/items/pictures/wereldbol.jpg";
             #endregion
 
             #region Act
-            initiaLearningUtilityDetails.Picture = pictureUrl;
+            initiaLearningUtility.Picture = pictureUrl;
             #endregion
 
             #region Assert
-            Assert.AreEqual(pictureUrl, initiaLearningUtilityDetails.Picture);
+            Assert.AreEqual(pictureUrl, initiaLearningUtility.Picture);
             #endregion
         }
         [TestMethod]
-        public void LearningUtilityDetailsPictureUrlIsEmptySetsIt()
+        public void LearningUtilityPictureUrlIsEmptySetsIt()
         {
             #region Arrange
             string pictureUrl = string.Empty;
             #endregion
 
             #region Act
-            initiaLearningUtilityDetails.Picture = pictureUrl;
+            initiaLearningUtility.Picture = pictureUrl;
             #endregion
 
             #region Assert
-            Assert.AreEqual(pictureUrl, initiaLearningUtilityDetails.Picture);
+            Assert.AreEqual(pictureUrl, initiaLearningUtility.Picture);
             #endregion
         }
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]
-        public void LearningUtilityDetailsPictureURLIs251CharactersLongThrowsError()
+        public void LearningUtilityPictureURLIs251CharactersLongThrowsError()
         {
             #region Arrange
 
@@ -575,7 +575,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.Picture = url;
+            initiaLearningUtility.Picture = url;
             #endregion
 
             #region Assert
@@ -583,7 +583,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             #endregion
         }
         [TestMethod]
-        public void LearningUtilityDetailsPictureURLIs250CharactersLongSetsIt()
+        public void LearningUtilityPictureURLIs250CharactersLongSetsIt()
         {
             #region Arrange
 
@@ -595,12 +595,12 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
 
             #region Act
 
-            initiaLearningUtilityDetails.Picture = url;
+            initiaLearningUtility.Picture = url;
             #endregion
 
             #region Assert
             Assert.AreEqual(250, url.Length);
-            Assert.AreEqual(url, initiaLearningUtilityDetails.Picture);
+            Assert.AreEqual(url, initiaLearningUtility.Picture);
             #endregion
         }
         #endregion
@@ -614,7 +614,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountAvailableForWeekWithReservationsReturnsCorrectValue()
         {
             //Act
-            int amount = initiaLearningUtilityDetails.AmountAvailableForWeek(date1);
+            int amount = initiaLearningUtility.AmountAvailableForWeek(date1);
 
             //Assert
             Assert.AreEqual(0, amount);
@@ -624,7 +624,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountAvailableForWeekWithoutReservationsReturnsCorrectValue()
         {
             //Act
-            int amount = initiaLearningUtilityDetails.AmountAvailableForWeek(date2);
+            int amount = initiaLearningUtility.AmountAvailableForWeek(date2);
 
             //Assert
             Assert.AreEqual(5, amount);
@@ -634,7 +634,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountAvailableForWeekWithCurrentWeekHigherThanReservedWeekReturnsCorrectValue()
         {
             //Act
-            int amount = initiaLearningUtilityDetails.AmountAvailableForWeek(date2);
+            int amount = initiaLearningUtility.AmountAvailableForWeek(date2);
 
             //Assert
             Assert.AreEqual(5, amount);
@@ -646,10 +646,10 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountReservedForWeekWithReservationsReturnsCorrectValue()
         {
             //Arrange
-            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Student();
+            initiaLearningUtility.LearningUtilityReservations.First().User = new Student();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountReservedForWeek(date1);
+            int amount = initiaLearningUtility.AmountReservedForWeek(date1);
 
             //Assert
             Assert.AreEqual(5, amount);
@@ -659,10 +659,10 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountReservedForWeekWithoutReservationsReturnsZero()
         {
             //Arrange
-            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Student();
+            initiaLearningUtility.LearningUtilityReservations.First().User = new Student();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountReservedForWeek(date2);
+            int amount = initiaLearningUtility.AmountReservedForWeek(date2);
 
             //Assert
             Assert.AreEqual(0, amount);
@@ -672,10 +672,10 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountReservedForWeekWithReservationsByLectorReturnsZero()
         {
             //Arrange
-            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Lector();
+            initiaLearningUtility.LearningUtilityReservations.First().User = new Lector();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountReservedForWeek(date1);
+            int amount = initiaLearningUtility.AmountReservedForWeek(date1);
 
             //Assert
             Assert.AreEqual(0, amount);
@@ -687,10 +687,10 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountBlockedForWeekWithReservationsReturnsCorrectValue()
         {
             //Arrange
-            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Lector();
+            initiaLearningUtility.LearningUtilityReservations.First().User = new Lector();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountBlockedForWeek(date1);
+            int amount = initiaLearningUtility.AmountBlockedForWeek(date1);
 
             //Assert
             Assert.AreEqual(5, amount);
@@ -700,10 +700,10 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountBlockedForWeekWithoutReservationsReturnsZero()
         {
             //Arrange
-            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Lector();
+            initiaLearningUtility.LearningUtilityReservations.First().User = new Lector();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountBlockedForWeek(date2);
+            int amount = initiaLearningUtility.AmountBlockedForWeek(date2);
 
             //Assert
             Assert.AreEqual(0, amount);
@@ -713,10 +713,10 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountBlockedForWeekWithReservationsByStudentReturnsZero()
         {
             //Arrange
-            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Student();
+            initiaLearningUtility.LearningUtilityReservations.First().User = new Student();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountBlockedForWeek(date1);
+            int amount = initiaLearningUtility.AmountBlockedForWeek(date1);
 
             //Assert
             Assert.AreEqual(0, amount);
@@ -728,10 +728,10 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountUnavailableForWeekWithReservationsByStudentReturnsCorrectValue()
         {
             //Arrange
-            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Student();
+            initiaLearningUtility.LearningUtilityReservations.First().User = new Student();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(date1);
+            int amount = initiaLearningUtility.AmountUnavailableForWeek(date1);
 
             //Assert
             Assert.AreEqual(10, amount);
@@ -741,10 +741,10 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountUnavailableForWeekWithReservationsByLectorReturnsCorrectValue()
         {
             //Arrange
-            initiaLearningUtilityDetails.LearningUtilityReservations.First().User = new Lector();
+            initiaLearningUtility.LearningUtilityReservations.First().User = new Lector();
 
             //Act
-            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(date1);
+            int amount = initiaLearningUtility.AmountUnavailableForWeek(date1);
 
             //Assert
             Assert.AreEqual(10, amount);
@@ -754,7 +754,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountUnavailableForWeekWithoutReservationsReturnsCorrectValue()
         {
             //Act
-            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(date2);
+            int amount = initiaLearningUtility.AmountUnavailableForWeek(date2);
 
             //Assert
             Assert.AreEqual(5, amount);
@@ -764,7 +764,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountUnavailableForWeekWithCurrentWeekHigherThanReservedWeekReturnsCorrectValue()
         {
             //Act
-            int amount = initiaLearningUtilityDetails.AmountUnavailableForWeek(date3);
+            int amount = initiaLearningUtility.AmountUnavailableForWeek(date3);
 
             //Assert
             Assert.AreEqual(5, amount);

@@ -9,8 +9,8 @@
 </p>
 @foreach (var item in Model)
 {
-    <div class="col-md-6 learningUtilityDetails">
-        <div class="col-md-12"><strong><h3>@Html.DisplayFor(modelItem => item.Name)</h3></strong></div>
+    <div class="col-md-6 learningUtility">
+        <div class="col-md-12"><strong>@Html.DisplayFor(modelItem => item.Name)</strong></div>
 
         <div class="col-md-6 pull-left">
             @Html.Image(item.Picture, item.Name, "img-responsive")

@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DidactischeLeermiddelen.Models.DAL
 {
-    public class LeermiddelenInitializer : DropCreateDatabaseIfModelChanges<LeermiddelenContext>
+    public class LeermiddelenInitializer : DropCreateDatabaseAlways<LeermiddelenContext>
     {        
         #region Properties
         private LeermiddelenContext context;
@@ -60,7 +60,7 @@ namespace DidactischeLeermiddelen.Models.DAL
                 CreateCompanies();
                 CreateFieldsOfStudy();
                 CreateTargetGroups();
-                CreateLearningUtilityDetails();
+                CreateLearningUtility();
             }
             catch (DbEntityValidationException e)
             {
@@ -207,12 +207,12 @@ namespace DidactischeLeermiddelen.Models.DAL
         }
 
         /// <summary>
-        /// This method creates some LearningUtilityDetails objects to seed the database
+        /// This method creates some LearningUtility objects to seed the database
         /// </summary>
-        private void CreateLearningUtilityDetails()
+        private void CreateLearningUtility()
         {
             //Create worldglobe object
-            LearningUtilityDetails learningUtilityDetails = new LearningUtilityDetails
+            LearningUtility learningUtility = new LearningUtility
             {
                 Name = "Wereldbol",
                 Description = "De Colombo wereldbol van Nova Rico is een prachtige geografische globe met een beige/antiek bruine kleur." +
@@ -228,16 +228,16 @@ namespace DidactischeLeermiddelen.Models.DAL
                 AmountInCatalog = 5,
                 AmountUnavailable = 1
             };
-            learningUtilityDetails.FieldsOfStudy.Add(fieldsOfStudy.Single(t => t.Name.Equals("Aardrijkskunde")));
-            learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
-            learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Middelbaar")));
-            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(12, users.First(u => u.GetType() == typeof(Lector)), 4));
-            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(15, users.First(u => u.GetType() == typeof(Student)), 1));
-            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(14, users.First(u => u.GetType() == typeof(Lector)), 2));
-            context.LearningUtilityDetailsList.Add(learningUtilityDetails);
+            learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(t => t.Name.Equals("Aardrijkskunde")));
+            learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
+            learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Middelbaar")));
+            learningUtility.LearningUtilityReservations.Add(CreateReservation(12, users.First(u => u.GetType() == typeof(Lector)), 4));
+            learningUtility.LearningUtilityReservations.Add(CreateReservation(15, users.First(u => u.GetType() == typeof(Student)), 1));
+            learningUtility.LearningUtilityReservations.Add(CreateReservation(14, users.First(u => u.GetType() == typeof(Lector)), 2));
+            context.LearningUtilityList.Add(learningUtility);
 
             //Create dobbelsteenschatkist object
-            learningUtilityDetails = new LearningUtilityDetails
+            learningUtility = new LearningUtility
             {
                 Name = "Dobbelsteen schatkist 162-delig",
                 ArticleNumber = "MH1447",
@@ -255,17 +255,17 @@ namespace DidactischeLeermiddelen.Models.DAL
                 AmountInCatalog = 2,
                 AmountUnavailable = 0
             };
-            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(12, users.First(u => u.GetType() == typeof(Student)), 1));
-            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(15, users.First(u => u.GetType() == typeof(Student)), 2));
-            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(16, users.First(u => u.GetType() == typeof(Lector)), 1));
-            learningUtilityDetails.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Ontspanning")));
-            learningUtilityDetails.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
-            learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
-            learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
-            context.LearningUtilityDetailsList.Add(learningUtilityDetails);
+            learningUtility.LearningUtilityReservations.Add(CreateReservation(12, users.First(u => u.GetType() == typeof(Student)), 1));
+            learningUtility.LearningUtilityReservations.Add(CreateReservation(15, users.First(u => u.GetType() == typeof(Student)), 2));
+            learningUtility.LearningUtilityReservations.Add(CreateReservation(16, users.First(u => u.GetType() == typeof(Lector)), 1));
+            learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Ontspanning")));
+            learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
+            learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
+            learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
+            context.LearningUtilityList.Add(learningUtility);
 
             //Create rekenspelletjes object
-            learningUtilityDetails = new LearningUtilityDetails
+            learningUtility = new LearningUtility
             {
                 Name = "Rekenspelletjes optellen en aftrekken",
                 ArticleNumber = "MX203510",
@@ -278,13 +278,13 @@ namespace DidactischeLeermiddelen.Models.DAL
                 AmountInCatalog = 12,
                 AmountUnavailable = 1
             };
-            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(13, users.First(u => u.GetType() == typeof(Student)), 10));
-            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(12, users.First(u => u.GetType() == typeof(Student)), 8));
-            learningUtilityDetails.LearningUtilityReservations.Add(CreateReservation(18, users.First(u => u.GetType() == typeof(Lector)), 11));
-            learningUtilityDetails.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
-            learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
-            learningUtilityDetails.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
-            context.LearningUtilityDetailsList.Add(learningUtilityDetails);
+            learningUtility.LearningUtilityReservations.Add(CreateReservation(13, users.First(u => u.GetType() == typeof(Student)), 10));
+            learningUtility.LearningUtilityReservations.Add(CreateReservation(12, users.First(u => u.GetType() == typeof(Student)), 8));
+            learningUtility.LearningUtilityReservations.Add(CreateReservation(18, users.First(u => u.GetType() == typeof(Lector)), 11));
+            learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
+            learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
+            learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
+            context.LearningUtilityList.Add(learningUtility);
 
             context.SaveChanges();
         } 

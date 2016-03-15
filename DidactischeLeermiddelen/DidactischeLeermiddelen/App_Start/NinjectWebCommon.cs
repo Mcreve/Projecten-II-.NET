@@ -64,7 +64,7 @@ namespace DidactischeLeermiddelen.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<ILearningUtilityDetailsRepository>().To<LearningUtilityDetailsRepository>().InRequestScope();
+            kernel.Bind<ILearningUtilityRepository>().To<LearningUtilityRepository>().InRequestScope();
             kernel.Bind<IUserRepository>().To<UserRepository>().InRequestScope();
             kernel.Bind<LeermiddelenContext>().ToSelf().InRequestScope();
             kernel.Bind<ITargetGroupRepository>().To<TargetGroupRepository>().InRequestScope();

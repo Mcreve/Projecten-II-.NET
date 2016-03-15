@@ -15,21 +15,21 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         private Wishlist wishlist;
         private WishlistController wishlistController;
         private DummyDataContext context;
-        private Mock<ILearningUtilityDetailsRepository> itemRepository;
+        private Mock<ILearningUtilityRepository> itemRepository;
 
         [TestInitialize]
         public void TestInitialize()
         {
             //Arrange
             context = new DummyDataContext();
-            itemRepository = new Mock<ILearningUtilityDetailsRepository>();
-            itemRepository.Setup(i => i.FindAll()).Returns(context.LearningUtilityDetailsList);
-            itemRepository.Setup(i => i.FindBy(1)).Returns(context.LearningUtilityDetails1);
-            itemRepository.Setup(i => i.FindBy(2)).Returns(context.LearningUtilityDetails2);
-            itemRepository.Setup(i => i.FindBy(3)).Returns(context.LearningUtilityDetails3);
+            itemRepository = new Mock<ILearningUtilityRepository>();
+            itemRepository.Setup(i => i.FindAll()).Returns(context.LearningUtilityList);
+            itemRepository.Setup(i => i.FindBy(1)).Returns(context.LearningUtility1);
+            itemRepository.Setup(i => i.FindBy(2)).Returns(context.LearningUtility2);
+            itemRepository.Setup(i => i.FindBy(3)).Returns(context.LearningUtility3);
             wishlistController = new WishlistController(itemRepository.Object);
             wishlist = new Wishlist();
-            wishlist.AddItem(context.LearningUtilityDetails1);
+            wishlist.AddItem(context.LearningUtility1);
         }
 
         #region Index

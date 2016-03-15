@@ -11,7 +11,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 {
     class DummyDataContext
     {
-        public IQueryable<LearningUtilityDetails> LearningUtilityDetailsList { get; set; }
+        public IQueryable<LearningUtility> LearningUtilityList { get; set; }
         public User Lector1 { get; set; }
         public User Student1 { get; set; }
         public User Anonymous { get; set; }
@@ -19,10 +19,10 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         public FieldOfStudy FieldOfStudy1 { get; set; }
         public Company Company1 { get; set; }
         public TargetGroup TargetGroup1 { get; set; }
-        public LearningUtilityDetails LearningUtilityDetails1 { get; set; }
-        public LearningUtilityDetails LearningUtilityDetails2 { get; set; }
-        public LearningUtilityDetails LearningUtilityDetails3 { get; set; }
-        public List<LearningUtilityDetails> LearningSearchResult { get; set; }
+        public LearningUtility LearningUtility1 { get; set; }
+        public LearningUtility LearningUtility2 { get; set; }
+        public LearningUtility LearningUtility3 { get; set; }
+        public List<LearningUtility> LearningSearchResult { get; set; }
 
         /// <summary>
         /// Default Constructor
@@ -41,16 +41,16 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
         private void CreateLists()
         {
-            LearningUtilityDetailsList = (new LearningUtilityDetails[]
+            LearningUtilityList = (new LearningUtility[]
             {
-                LearningUtilityDetails1,
-                LearningUtilityDetails2,
-                LearningUtilityDetails3
+                LearningUtility1,
+                LearningUtility2,
+                LearningUtility3
             }).ToList().AsQueryable();
         }
-        private IEnumerable<LearningUtilityDetails> getList()
+        private IEnumerable<LearningUtility> getList()
         {
-            return LearningUtilityDetailsList;
+            return LearningUtilityList;
         }
         private void CreateTargetGroups()
         {
@@ -64,7 +64,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
         private void CreateLearningUtilities()
         {
-            LearningUtilityDetails1 = new LearningUtilityDetails
+            LearningUtility1 = new LearningUtility
             {
                 Id = 1,
                 Name = "Wereldbol",
@@ -79,15 +79,15 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 AmountUnavailable = 0,
                 
             };
-            LearningUtilityDetails1.FieldsOfStudy.Add(FieldOfStudy1);
-            LearningUtilityDetails1.TargetGroups.Add(TargetGroup1);
-            LearningUtilityDetails1.LearningUtilityReservations.Add(new LearningUtilityReservation
+            LearningUtility1.FieldsOfStudy.Add(FieldOfStudy1);
+            LearningUtility1.TargetGroups.Add(TargetGroup1);
+            LearningUtility1.LearningUtilityReservations.Add(new LearningUtilityReservation
             {
                 User = Student1,
                 Amount = 2,
                 Week = 11
             });
-            LearningUtilityDetails2 = new LearningUtilityDetails
+            LearningUtility2 = new LearningUtility
             {
                 Id = 2,
                 Name = "Dobbelsteen schatkist 162-delig",
@@ -101,9 +101,9 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 AmountInCatalog = 5,
                 AmountUnavailable = 2
             };
-            LearningUtilityDetails2.FieldsOfStudy.Add(FieldOfStudy1);
-            LearningUtilityDetails2.TargetGroups.Add(TargetGroup1);
-            LearningUtilityDetails3 = new LearningUtilityDetails
+            LearningUtility2.FieldsOfStudy.Add(FieldOfStudy1);
+            LearningUtility2.TargetGroups.Add(TargetGroup1);
+            LearningUtility3 = new LearningUtility
             {
                 Id = 3,
                 Name = "Rekenspelletjes optellen en aftrekken",
@@ -118,8 +118,8 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 AmountUnavailable = 5
                 
             };
-            LearningUtilityDetails3.FieldsOfStudy.Add(FieldOfStudy1);
-            LearningUtilityDetails3.TargetGroups.Add(TargetGroup1);
+            LearningUtility3.FieldsOfStudy.Add(FieldOfStudy1);
+            LearningUtility3.TargetGroups.Add(TargetGroup1);
 
         }
 

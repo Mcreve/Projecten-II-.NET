@@ -16,13 +16,13 @@ namespace DidactischeLeermiddelen.Controllers
     [Authorize]
     public class CatalogController : Controller
     {
-        private readonly ILearningUtilityDetailsRepository learningUtilityDetailsRepository;
+        private readonly ILearningUtilityRepository learningUtilityRepository;
         private ITargetGroupRepository targetGroupRepository;
         private IFieldOfStudyRepository fieldOfStudyRepository;
 
-        public CatalogController(ILearningUtilityDetailsRepository learningUtilityDetailsRepository, ITargetGroupRepository targetGroupRepository, IFieldOfStudyRepository fieldOfStudyRepository)
+        public CatalogController(ILearningUtilityRepository learningUtilityRepository, ITargetGroupRepository targetGroupRepository, IFieldOfStudyRepository fieldOfStudyRepository)
         {
-            this.learningUtilityDetailsRepository = learningUtilityDetailsRepository;
+            this.learningUtilityRepository = learningUtilityRepository;
             this.targetGroupRepository = targetGroupRepository;
             this.fieldOfStudyRepository = fieldOfStudyRepository;
         }
@@ -43,8 +43,8 @@ namespace DidactischeLeermiddelen.Controllers
         public ActionResult Index(User user, string currentFilter, string searchString, int? fieldOfStudy, int? targetGroup, int? page, int? currentFieldOfStudy, int? currentTargetGroup)
         {
 
-            IEnumerable<LearningUtilityDetails> catalog = null;
-            catalog = learningUtilityDetailsRepository.FindAll().OrderBy(l => l.Name);
+            IEnumerable<LearningUtility> catalog = null;
+            catalog = learningUtilityRepository.FindAll().OrderBy(l => l.Name);
             if (user.GetType() == typeof(Student))
             {
                 catalog = catalog.Where(l => l.Loanable == true);
@@ -87,7 +87,7 @@ namespace DidactischeLeermiddelen.Controllers
                 TempData["info"] = "Geen items gevonden voor opgegeven zoekcriteria.";
 
             IEnumerable<CatalogViewModel> catalogViewModel =
-                catalog.Select(learningUtilityDetails => new CatalogViewModel(learningUtilityDetails)).ToList();
+                catalog.Select(learningUtility => new CatalogViewModel(learningUtility)).ToList();
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             
@@ -103,8 +103,8 @@ namespace DidactischeLeermiddelen.Controllers
             {
                 return HttpNotFound();
             }
-            LearningUtilityDetails learningUtilityDetails = learningUtilityDetailsRepository.FindBy((int)id);
-            if (learningUtilityDetails == null)
+            LearningUtility learningUtility = learningUtilityRepository.FindBy((int)id);
+            if (learningUtility == null)
             {
                 return HttpNotFound();
             }
@@ -114,8 +114,8 @@ namespace DidactischeLeermiddelen.Controllers
             ViewBag.CurrentFieldOfStudy = currentFieldOfStudy;
             ViewBag.CurrentTargetGroup = currentTargetGroup;
 
-            LearningUtilityDetailsViewModel learningUtilityDetailsViewModel = new LearningUtilityDetailsViewModel(learningUtilityDetails);
-            return View(learningUtilityDetailsViewModel);
+            LearningUtilityViewModel learningUtilityViewModel = new LearningUtilityViewModel(learningUtility);
+            return View(learningUtilityViewModel);
         }
 
         private SelectList GetTargetGroupsSelectList(int? targetGroup)

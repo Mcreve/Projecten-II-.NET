@@ -22,7 +22,7 @@ namespace DidactischeLeermiddelen.Models.DAL
         #region Properties
 
         public DbSet<User> UserList { get; set; }
-        public DbSet<LearningUtilityDetails> LearningUtilityDetailsList { get; set; }
+        public DbSet<LearningUtility> LearningUtilityList { get; set; }
         public DbSet<TargetGroup> TargetGroups { get; set; }
         public DbSet<FieldOfStudy> FieldsOfStudy { get; set; }
 

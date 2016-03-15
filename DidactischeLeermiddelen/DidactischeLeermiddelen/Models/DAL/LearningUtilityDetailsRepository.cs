@@ -5,33 +5,35 @@ using System.Net;
 
 using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
+using DidactischeLeermiddelen.Models.Domain.Users;
+using WebGrease.Css.Extensions;
 
 namespace DidactischeLeermiddelen.Models.DAL
 {
-    public class LearningUtilityDetailsRepository : ILearningUtilityDetailsRepository
+    public class LearningUtilityRepository : ILearningUtilityRepository
     {
         private readonly LeermiddelenContext context;
-        private readonly DbSet<LearningUtilityDetails> learningUtilityDetailsList;
+        private readonly DbSet<LearningUtility> learningUtilityList;
 
-        public LearningUtilityDetailsRepository(LeermiddelenContext context)
+        public LearningUtilityRepository(LeermiddelenContext context)
         {
             this.context = context;
-            learningUtilityDetailsList = context.LearningUtilityDetailsList;
+            learningUtilityList = context.LearningUtilityList;
         }
-        public IQueryable<LearningUtilityDetails> FindAll()
+        public IQueryable<LearningUtility> FindAll()
         {
-            return learningUtilityDetailsList;
-        }
-
-        public LearningUtilityDetails FindBy(int id)
-        {
-            return learningUtilityDetailsList.Find(id);
+            return learningUtilityList;
         }
 
-        public List<LearningUtilityDetails> Search(string query)
+        public LearningUtility FindBy(int id)
         {
-            List<LearningUtilityDetails> resultName =
-             learningUtilityDetailsList.Where(learningUtilityDetails => learningUtilityDetails.Name.Contains(query)).ToList();
+            return learningUtilityList.Find(id);
+        }
+
+        public List<LearningUtility> Search(string query)
+        {
+            List<LearningUtility> resultName =
+             learningUtilityList.Where(learningUtility => learningUtility.Name.Contains(query)).ToList();
             return resultName;
         }
 

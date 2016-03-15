@@ -21,7 +21,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         IEnumerable<WishlistViewModel> wishlistViewModels;
         private ReservationController reservationController;
         private DummyDataContext context;
-        private Mock<ILearningUtilityDetailsRepository> itemRepository;
+        private Mock<ILearningUtilityRepository> itemRepository;
         private User student;
         private User lector;
         private Mock<HttpRequestBase> request;
@@ -38,11 +38,11 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             student = UserFactory.CreateUserWithUserType(UserType.Student);
             lector = UserFactory.CreateUserWithUserType(UserType.Lector);
             context = new DummyDataContext();
-            itemRepository = new Mock<ILearningUtilityDetailsRepository>();
-            itemRepository.Setup(i => i.FindAll()).Returns(context.LearningUtilityDetailsList);
-            itemRepository.Setup(i => i.FindBy(1)).Returns(context.LearningUtilityDetails1);
-            itemRepository.Setup(i => i.FindBy(2)).Returns(context.LearningUtilityDetails2);
-            itemRepository.Setup(i => i.FindBy(3)).Returns(context.LearningUtilityDetails3);
+            itemRepository = new Mock<ILearningUtilityRepository>();
+            itemRepository.Setup(i => i.FindAll()).Returns(context.LearningUtilityList);
+            itemRepository.Setup(i => i.FindBy(1)).Returns(context.LearningUtility1);
+            itemRepository.Setup(i => i.FindBy(2)).Returns(context.LearningUtility2);
+            itemRepository.Setup(i => i.FindBy(3)).Returns(context.LearningUtility3);
             reservationController = new ReservationController(itemRepository.Object);
             request = new Mock<HttpRequestBase>();
             httpcontext = new Mock<HttpContextBase>();
@@ -52,10 +52,10 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             student = context.Student1;
             lector = context.Lector1;
             wishlist = new Wishlist();
-            wishlist.AddItem(context.LearningUtilityDetails1);
+            wishlist.AddItem(context.LearningUtility1);
             wishlistViewModels =
-               wishlist.LearningUtilities.Select(learningUtilityDetails =>
-                  new WishlistViewModel(learningUtilityDetails))
+               wishlist.LearningUtilities.Select(learningUtility =>
+                  new WishlistViewModel(learningUtility))
                    .ToList();
 
 
@@ -86,7 +86,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         {
             //Act
             reservation = new LearningUtilityReservation { Week = 12, Amount = 3, User = lector };
-            context.LearningUtilityDetails1.LearningUtilityReservations.Add(reservation);
+            context.LearningUtility1.LearningUtilityReservations.Add(reservation);
 
             //Arrange
             ViewResult result = reservationController.Add(lector, wishlistViewModels) as ViewResult;
@@ -103,7 +103,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         {
             //Act
             reservation = new LearningUtilityReservation { Week = 11, Amount = 6, User = lector };
-            context.LearningUtilityDetails1.LearningUtilityReservations.Add(reservation);
+            context.LearningUtility1.LearningUtilityReservations.Add(reservation);
 
             //Arrange
             RedirectToRouteResult result = reservationController.Add(lector, wishlistViewModels) as RedirectToRouteResult;
@@ -117,7 +117,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         public void LectorEntersInvalidDay()
         {
             reservation = new LearningUtilityReservation { Week = 10, Amount = 3, User = lector };
-            context.LearningUtilityDetails1.LearningUtilityReservations.Add(reservation);
+            context.LearningUtility1.LearningUtilityReservations.Add(reservation);
 
             //Arrange
             RedirectToRouteResult result = reservationController.Add(lector, wishlistViewModels) as RedirectToRouteResult;
@@ -139,7 +139,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
             //Act
             reservation = new LearningUtilityReservation { Week = 11, Amount = 5, User = lector };
-            context.LearningUtilityDetails1.LearningUtilityReservations.Add(reservation);
+            context.LearningUtility1.LearningUtilityReservations.Add(reservation);
 
             //Arrange
             ViewResult result = reservationController.Add(lector, wishlistViewModels) as ViewResult;
@@ -148,7 +148,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             //Assert
             Assert.AreEqual(reservations.Week, 12);
             Assert.AreEqual(reservations.AmountBlocked, 5);
-            Assert.AreEqual(context.LearningUtilityDetails1.AmountReservedForWeek((new DateTime(2016, 3, 14))), 1);
+            Assert.AreEqual(context.LearningUtility1.AmountReservedForWeek((new DateTime(2016, 3, 14))), 1);
 
         }
 

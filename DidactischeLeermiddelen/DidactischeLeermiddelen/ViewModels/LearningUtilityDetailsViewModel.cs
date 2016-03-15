@@ -5,7 +5,7 @@ using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 
 namespace DidactischeLeermiddelen.ViewModels
 {
-    public class LearningUtilityDetailsViewModel
+    public class LearningUtilityViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -35,21 +35,21 @@ namespace DidactischeLeermiddelen.ViewModels
         [Display(Name = "Website")]
         public string CompanyWebsite { get; set; }
 
-        public LearningUtilityDetailsViewModel(LearningUtilityDetails learningUtilityDetails)
+        public LearningUtilityViewModel(LearningUtility learningUtility)
         {
-            Id = learningUtilityDetails.Id;
-            Description = learningUtilityDetails.Description;
-            Name = learningUtilityDetails.Name;
-            Picture = learningUtilityDetails.Picture;
-            Price = learningUtilityDetails.Price;
-            ArticleNumber = learningUtilityDetails.ArticleNumber;
-            TargetGroups = learningUtilityDetails.TargetGroups.OrderBy(t => t.Name).Select(t => t.Name = t.Name);
-            FieldsOfStudy = learningUtilityDetails.FieldsOfStudy.OrderBy(f => f.Name).Select(f => f.Name = f.Name);
-            CompanyName = learningUtilityDetails.Company.Name;
-            CompanyContactPersonName = learningUtilityDetails.Company.ContactPersonName;
-            CompanyEmailAddress = learningUtilityDetails.Company.EmailAddress;
-            CompanyWebsite = learningUtilityDetails.Company.Website;
-            AmountInCatalog = learningUtilityDetails.AmountInCatalog;
+            Id = learningUtility.Id;
+            Description = learningUtility.Description;
+            Name = learningUtility.Name;
+            Picture = learningUtility.Picture;
+            Price = learningUtility.Price;
+            ArticleNumber = learningUtility.ArticleNumber;
+            TargetGroups = learningUtility.TargetGroups.OrderBy(t => t.Name).Select(t => t.Name = t.Name);
+            FieldsOfStudy = learningUtility.FieldsOfStudy.OrderBy(f => f.Name).Select(f => f.Name = f.Name);
+            CompanyName = learningUtility.Company.Name;
+            CompanyContactPersonName = learningUtility.Company.ContactPersonName;
+            CompanyEmailAddress = learningUtility.Company.EmailAddress;
+            CompanyWebsite = learningUtility.Company.Website;
+            AmountInCatalog = learningUtility.AmountInCatalog;
         }
     }
 }
