@@ -15,7 +15,6 @@
 */
 .dl-horizontal dt {
     white-space: normal;
-
 }
 
 .btn-primary{
@@ -181,14 +180,14 @@ textarea {
 .datepicker table tr td.highlighted:hover {
   color: #000000;
   background-color: #afd9ee;
-  border-color: #00b690;
+  border-color: #52addb;
 }
 .datepicker table tr td.highlighted:active,
 .datepicker table tr td.highlighted.active,
 .open > .dropdown-toggle.datepicker table tr td.highlighted {
   color: #000000;
   background-color: #afd9ee;
-  border-color: #00b690;
+  border-color: #52addb;
 }
 .datepicker table tr td.highlighted:active:hover,
 .datepicker table tr td.highlighted.active:hover,
