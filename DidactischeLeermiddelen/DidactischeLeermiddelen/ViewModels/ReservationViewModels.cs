@@ -43,7 +43,7 @@ namespace DidactischeLeermiddelen.ViewModels
 
             DateTime firstThursday = jan1.AddDays(daysOffset);
             var cal = CultureInfo.CurrentCulture.Calendar;
-            int firstWeek = cal.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            int firstWeek = cal.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
 
             var weekNum = weekOfYear;
             if (firstWeek <= 1)
