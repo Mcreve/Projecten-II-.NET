@@ -11,21 +11,21 @@ namespace DidactischeLeermiddelen.Models.DAL
     public class FieldOfStudyRepository : IFieldOfStudyRepository
     {
         private LeermiddelenContext context;
-        private DbSet<FieldOfStudy> fieldsOfStudy;
+        private DbSet<FieldOfStudy> fieldsOfStudies;
 
         public FieldOfStudyRepository(LeermiddelenContext context)
         {
             this.context = context;
-            this.fieldsOfStudy = context.FieldsOfStudy;
+            this.fieldsOfStudies = context.FieldsOfStudies;
         }
         public IQueryable<FieldOfStudy> FindAll()
         {
-            return fieldsOfStudy;
+            return fieldsOfStudies;
         }
 
         public FieldOfStudy FindBy(int id)
         {
-            return fieldsOfStudy.Find(id);
+            return fieldsOfStudies.Find(id);
         }
     }
 }

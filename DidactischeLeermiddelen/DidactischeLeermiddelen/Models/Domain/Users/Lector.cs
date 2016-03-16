@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 
 namespace DidactischeLeermiddelen.Models.Domain.Users
@@ -25,6 +26,16 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         /// <param name="emailAddress"></param>
         public Lector(string firstName, string lastName, string emailAddress) : base(firstName, lastName, emailAddress)
         {
+        }
+
+        public override void AddReservation(int week, int amount, LearningUtility learningUtility)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RemoveReservation(Reservation reservation)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

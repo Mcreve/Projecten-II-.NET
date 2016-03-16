@@ -19,39 +19,13 @@ namespace DidactischeLeermiddelen.ViewModels
         [Display(Name = "Aantal gewenst")]
         public int AmountWanted { get; set; }
         public Reservation Reservation { get; set; }
+
+        /// <summary>
+        /// basic constructor
+        /// </summary>
         public ReservationViewModel()
         {
 
-        }
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="learningUtility"></param>
-        public ReservationViewModel(Reservation reservation) : this()
-        {
-            Reservation = reservation;
-            Id = reservation.LearningUtility.Id;
-            Name = reservation.LearningUtility.Name;
-            Picture = reservation.LearningUtility.Picture;
-            Date = FirstDateOfWeek(DateTime.Now.Year, reservation.Week);
-            AmountWanted = reservation.Amount;
-        }
-        private static DateTime FirstDateOfWeek(int year, int weekOfYear)
-        {
-            DateTime jan1 = new DateTime(year, 1, 1);
-            int daysOffset = DayOfWeek.Thursday - jan1.DayOfWeek;
-
-            DateTime firstThursday = jan1.AddDays(daysOffset);
-            var cal = CultureInfo.CurrentCulture.Calendar;
-            int firstWeek = cal.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
-
-            var weekNum = weekOfYear;
-            if (firstWeek <= 1)
-            {
-                weekNum -= 1;
-            }
-            var result = firstThursday.AddDays(weekNum * 7);
-            return result.AddDays(-3);
         }
     }
 }
