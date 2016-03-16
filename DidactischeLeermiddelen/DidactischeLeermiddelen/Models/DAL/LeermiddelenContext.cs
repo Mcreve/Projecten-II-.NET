@@ -6,6 +6,7 @@ using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Linq;
 
 namespace DidactischeLeermiddelen.Models.DAL
 {
@@ -39,6 +40,7 @@ namespace DidactischeLeermiddelen.Models.DAL
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Configurations.AddFromAssembly(Assembly.GetExecutingAssembly());
+
         }
 
         /// <summary>
@@ -49,7 +51,7 @@ namespace DidactischeLeermiddelen.Models.DAL
         {
             return DependencyResolver.Current.GetService<LeermiddelenContext>();
         }
-
+   
         #endregion
     }
 }

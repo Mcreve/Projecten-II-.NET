@@ -240,9 +240,9 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             }      
         }
 
-        public void RemoveReservation(int id)
+        public void RemoveReservation(LearningUtilityReservation reservation)
         {
-            LearningUtilityReservations.RemoveAll(res => res.Id == id);
+            LearningUtilityReservations.Remove(reservation);
         }
 
 

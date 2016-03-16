@@ -17,42 +17,46 @@ namespace DidactischeLeermiddelen.Controllers
     public class ReservationController : Controller
     {
         private ILearningUtilityRepository learningUtilityRepository;
-        public ReservationController(ILearningUtilityRepository learningUtilityRepository)
+        private IUserRepository userRepository;
+
+
+        public ReservationController(ILearningUtilityRepository learningUtilityRepository,IUserRepository userRepository)
         {
             this.learningUtilityRepository = learningUtilityRepository;
+            this.userRepository = userRepository;
         }
 
         public ActionResult Index(User user)
         {
-            IEnumerable<LearningUtility> reservations = FindAllLearningUtilitiesReservedByUser(user);
-
+            ICollection<LearningUtilityReservation> reservations = user.Reservations;
+            
             if (!reservations.Any())
                 return View("EmptyReservations");
 
+
+
             IEnumerable <ReservationViewModel> reservationViewModels =
-                reservations.Select(utility => new ReservationViewModel(utility)).ToList();
+               reservations.Select(res => new ReservationViewModel(res)).ToList();
              
             return View(reservationViewModels);
         }
-
-
 
         public ActionResult Add(User user, IEnumerable<WishlistViewModel> wishlistViewModels)
         {
             bool save = true;
             foreach (var wishlistViewModel in wishlistViewModels)
             {                
-                LearningUtility learningUtility = GetLearningUtility(wishlistViewModel.Id);
-                LearningUtilityReservation reservation = new LearningUtilityReservation
+                LearningUtility learningUtility = learningUtilityRepository.FindBy(wishlistViewModel.Id);
+
+                int week = learningUtility.GetCurrentWeek((DateTime)wishlistViewModel.Date);
+                int amount = wishlistViewModel.AmountWanted;
+
+                try
                 {
-                    User = user,
-                    Week = learningUtility.GetCurrentWeek((DateTime)wishlistViewModel.Date),
-                    Amount = wishlistViewModel.AmountWanted
-                };
-                try { 
-                    learningUtility.AddReservation(reservation);
-                    
-                } catch (ArgumentOutOfRangeException)
+                    user.AddReservation(week, amount, learningUtility);
+                    user.Wishlist.RemoveItem(learningUtility);
+                }
+                catch (ArgumentOutOfRangeException)
                 {
                     save = false;
                     TempData["error"] = "Er ging iets fout met je reservatie. Controleer je aantal gewenste items met het aantal beschikbare items en probeer opnieuw.";
@@ -64,6 +68,7 @@ namespace DidactischeLeermiddelen.Controllers
             }
             if (save) { 
                 learningUtilityRepository.SaveChanges();
+                userRepository.SaveChanges();
                 TempData["info"] = "Reservatie geslaagd";
 
                 return View(wishlistViewModels);
@@ -71,36 +76,22 @@ namespace DidactischeLeermiddelen.Controllers
             return RedirectToAction("Index", "Wishlist");
         }
 
-        private LearningUtility GetLearningUtility(int id)
-        {
-            return learningUtilityRepository.FindBy(id);
-        }
-
-        private IEnumerable<LearningUtility> FindAllLearningUtilitiesReservedByUser(User user)
-        {
-            IEnumerable<LearningUtility> result =
-                learningUtilityRepository.FindAll().Where(
-                    (
-                        learningUtility =>
-                            learningUtility.LearningUtilityReservations.Any(
-                                reservation => reservation.User.EmailAddress == user.EmailAddress)));
-            return result;
-
-        }
-        public ActionResult Delete(int learningUtilityId, int reservationId)
+        public ActionResult Delete(User user, int reservationId)
         {
             try
             {
-                LearningUtility learningUtility = learningUtilityRepository.FindBy(learningUtilityId);
-                LearningUtilityReservation reservation =
-                    learningUtility.LearningUtilityReservations.FirstOrDefault(res => res.Id == reservationId);
+                LearningUtilityReservation reservation =  user.FindReservation(reservationId);
+                LearningUtility learningUtility = reservation.LearningUtility;
 
                 if (reservation == null)
                     return HttpNotFound();
 
-                learningUtility.RemoveReservation(reservationId);
+
+                user.RemoveReservation(reservation);
+                userRepository.SaveChanges();
                 learningUtilityRepository.SaveChanges();
-                TempData["info"] = String.Format("Reservatie van item {0} werd verwijderd", learningUtility.Name);
+
+                TempData["info"] = String.Format("Reservatie van item {0} werd verwijderd", reservation.LearningUtility.Name);
             }
             catch (Exception)
             {
