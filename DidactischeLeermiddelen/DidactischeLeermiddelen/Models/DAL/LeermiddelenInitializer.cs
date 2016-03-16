@@ -311,7 +311,7 @@ namespace DidactischeLeermiddelen.Models.DAL
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
             context.LearningUtilityList.Add(learningUtility);
 
-            //Create dobbelsteenschatkist object
+            //Create Gradenboog
             learningUtility = new LearningUtility
             {
                 Name = "Gradenboog",

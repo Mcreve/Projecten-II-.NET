@@ -9,6 +9,8 @@ namespace DidactischeLeermiddelen.ViewModels
     public class ReservationViewModel
     {
         public int Id { get; set; }
+
+        public string Picture { get; set; }
         [Display(Name = "Leermiddel")]
         public string Name { get; set; }
         [Display(Name = "Reservatie week")]
@@ -30,6 +32,7 @@ namespace DidactischeLeermiddelen.ViewModels
             Reservation = reservation;
             Id = reservation.LearningUtility.Id;
             Name = reservation.LearningUtility.Name;
+            Picture = reservation.LearningUtility.Picture;
             Date = FirstDateOfWeek(DateTime.Now.Year, reservation.Week);
             AmountWanted = reservation.Amount;
         }

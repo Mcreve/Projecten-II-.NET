@@ -1,9 +1,7 @@
 ﻿@model DidactischeLeermiddelen.Models.CatalogViewModel
-<h2>Catalogus doorzoeken</h2>
-
     @using (Html.BeginForm("Index", "Catalog", FormMethod.Post, new {id="formSearch"}))
     {
-        <div class="form-inline">
+        <div class="form-inline center">
             <div class="form-group">
                 <label for="SearchString" class="control-label col-md-1">Zoekterm</label>
                 @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new {@class = "form-control"})

@@ -249,7 +249,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public int GetCurrentWeek(DateTime date)
         {
             Calendar calendar = new GregorianCalendar();
-            return calendar.GetWeekOfYear(date, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Saturday);
+            return calendar.GetWeekOfYear(date, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
         }
         #endregion
     }

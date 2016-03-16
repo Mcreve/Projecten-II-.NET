@@ -5,8 +5,11 @@
     ViewBag.Title = "Catalogus";
 }
 
-<div class="col-md-12">
+<div class="col-md-12 text-center">
+    <p>&nbsp;</p>
     @Html.Partial("_SearchCatalogPartial", new CatalogViewModel())
+    <p>&nbsp;</p>
+    <hr />
 </div>
 
 <div id="ajax-result">
