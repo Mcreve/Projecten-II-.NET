@@ -235,7 +235,7 @@ namespace DidactischeLeermiddelen.Models.DAL
             learningUtility.Reservations.Add(CreateReservation(15, users.First(u => u.GetType() == typeof(Student)), 1));
             learningUtility.Reservations.Add(CreateReservation(14, users.First(u => u.GetType() == typeof(Lector)), 2));
 
-            context.LearningUtilityList.Add(learningUtility);
+            context.LearningUtilities.Add(learningUtility);
 
             //Create dobbelsteenschatkist object
             learningUtility = new LearningUtility
@@ -263,7 +263,7 @@ namespace DidactischeLeermiddelen.Models.DAL
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
-            context.LearningUtilityList.Add(learningUtility);
+            context.LearningUtilities.Add(learningUtility);
 
             //Create rekenspelletjes object
             learningUtility = new LearningUtility
@@ -285,7 +285,7 @@ namespace DidactischeLeermiddelen.Models.DAL
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
-            context.LearningUtilityList.Add(learningUtility);
+            context.LearningUtilities.Add(learningUtility);
 
             //Create Micoscoop object
             learningUtility = new LearningUtility
@@ -309,7 +309,7 @@ namespace DidactischeLeermiddelen.Models.DAL
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
-            context.LearningUtilityList.Add(learningUtility);
+            context.LearningUtilities.Add(learningUtility);
 
             //Create Gradenboog
             learningUtility = new LearningUtility
@@ -331,7 +331,7 @@ namespace DidactischeLeermiddelen.Models.DAL
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
-            context.LearningUtilityList.Add(learningUtility);
+            context.LearningUtilities.Add(learningUtility);
 
 
             context.SaveChanges();

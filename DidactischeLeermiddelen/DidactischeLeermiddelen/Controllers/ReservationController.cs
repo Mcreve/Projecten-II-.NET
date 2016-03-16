@@ -18,38 +18,76 @@ namespace DidactischeLeermiddelen.Controllers
     public class ReservationController : Controller
     {
         private ILearningUtilityRepository learningUtilityRepository;
-        private IUserRepository userRepository;
+        private IReservationRepository reservationRepository;
 
-
-        public ReservationController(ILearningUtilityRepository learningUtilityRepository,IUserRepository userRepository)
+        /// <summary>
+        /// Parameter constructor
+        /// </summary>
+        /// <param name="reservationRepository"></param>
+        /// <param name="learningUtilityRepository"></param>
+        public ReservationController(IReservationRepository reservationRepository,ILearningUtilityRepository learningUtilityRepository)
         {
+            this.reservationRepository = reservationRepository;
             this.learningUtilityRepository = learningUtilityRepository;
-            this.userRepository = userRepository;
         }
 
+        /// <summary>
+        /// Returns all the reservations for a specific user in the future, sorted by Date (asc). 
+        /// If the list is empty, returns the empty reservation screen.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public ActionResult Index(User user)
         {
-            ICollection<Reservation> reservations = user.Reservations;
+
+            IQueryable<Reservation> reservations = reservationRepository.FindAllForUser(user.EmailAddress);
             
             if (!reservations.Any())
                 return View("EmptyReservations");
 
             reservations = sortReservations(reservations);
 
-            IEnumerable<ReservationViewModel> reservationViewModels =
-               reservations.Select(res => new ReservationViewModel(res)).ToList();
-             
+            IEnumerable<ReservationViewModel> reservationViewModels = MapToViewModels(reservations);
+
             return View(reservationViewModels);
         }
 
-        private ICollection<Reservation> sortReservations(ICollection<Reservation> reservations)
+        /// <summary>
+        /// Maps the reservations to the ReservationViewModel
+        /// Beware : Date is not correct yet!!
+        /// </summary>
+        /// <param name="reservations"></param>
+        /// <returns></returns>
+        private IEnumerable<ReservationViewModel> MapToViewModels(IQueryable<Reservation> reservations)
         {
-            GregorianCalendar cal = new GregorianCalendar(GregorianCalendarTypes.Localized);
-            ICollection<Reservation> unsortedResult = reservations.Where(res => res.Week >= cal.GetWeekOfYear(DateTime.Today, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday)).ToList();
-            ICollection<Reservation> sortedResult = unsortedResult.OrderBy(res => res.Week).ToList() ;
-            return sortedResult;
+            return (from reservation in reservations
+             select new ReservationViewModel
+             {
+                 Reservation = reservation,
+                 Id = reservation.LearningUtility.Id,
+                 Name = reservation.LearningUtility.Name,
+                 Picture = reservation.LearningUtility.Picture,
+                 Date = DateTime.Now,
+                 AmountWanted = reservation.Amount
+             }).ToList();
         }
 
+        /// <summary>
+        /// Sorts the reservations ascending by week
+        /// </summary>
+        /// <param name="reservations"></param>
+        /// <returns></returns>
+        private IQueryable<Reservation> sortReservations(IQueryable<Reservation> reservations)
+        {
+            return reservations.OrderBy(res => res.Week);
+        }
+
+        /// <summary>
+        /// Adds a reservation for a learning utility by a specific user, clears the old wishlist.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="wishlistViewModels"></param>
+        /// <returns></returns>
         public ActionResult Add(User user, IEnumerable<WishlistViewModel> wishlistViewModels)
         {
             bool save = true;
@@ -77,7 +115,6 @@ namespace DidactischeLeermiddelen.Controllers
             }
             if (save) { 
                 learningUtilityRepository.SaveChanges();
-                userRepository.SaveChanges();
                 TempData["info"] = "Reservatie geslaagd";
 
                 return RedirectToAction("Index");
@@ -85,24 +122,50 @@ namespace DidactischeLeermiddelen.Controllers
             return RedirectToAction("Index", "Wishlist");
         }
 
-        public ActionResult Delete(User user, int reservationId)
+        /// <summary>
+        /// Deletes a reservation
+        /// </summary>
+        /// <param name="reservationId"></param>
+        /// <returns></returns>
+        public ActionResult Delete(int reservationId)
         {
-
-                Reservation reservation =  user.FindReservation(reservationId);
-                LearningUtility learningUtility = reservation.LearningUtility;
+            try
+            {
+                Reservation reservation = reservationRepository.FindBy(reservationId);
 
                 if (reservation == null)
                     return HttpNotFound();
 
-                learningUtility.RemoveReservation(reservation);
-                user.RemoveReservation(reservation);
-                userRepository.SaveChanges();
-                learningUtilityRepository.SaveChanges();
+                reservationRepository.Delete(reservation);
+                reservationRepository.SaveChanges();
 
-                TempData["info"] = String.Format("Reservatie werd verwijderd.");
+                TempData["info"] = String.Format("Reservatie werd succesvol verwijderd.");
 
+            }
+            catch (Exception)
+            {
+                TempData["error"] = "Verwijderen van de reservatie is mislukt, gelieve opnieuw te proberen. " +
+                           "Indien de problemen zich blijven voordoen, contacteer de  administrator.";
+            }
             return RedirectToAction("Index");
-        }
 
-       }
+        }
+        /*private static DateTime FirstDateOfWeek(int year, int weekOfYear)
+        {
+            DateTime jan1 = new DateTime(year, 1, 1);
+            int daysOffset = DayOfWeek.Thursday - jan1.DayOfWeek;
+
+            DateTime firstThursday = jan1.AddDays(daysOffset);
+            var cal = CultureInfo.CurrentCulture.Calendar;
+            int firstWeek = cal.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+
+            var weekNum = weekOfYear;
+            if (firstWeek <= 1)
+            {
+                weekNum -= 1;
+            }
+            var result = firstThursday.AddDays(weekNum * 7);
+            return result.AddDays(-3);
+        }*/
+    }
 }

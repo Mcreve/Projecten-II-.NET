@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -13,27 +14,27 @@ namespace DidactischeLeermiddelen.Models.DAL
     public class LearningUtilityRepository : ILearningUtilityRepository
     {
         private readonly LeermiddelenContext context;
-        private readonly DbSet<LearningUtility> learningUtilityList;
+        private readonly DbSet<LearningUtility> learningUtilities;
 
         public LearningUtilityRepository(LeermiddelenContext context)
         {
             this.context = context;
-            learningUtilityList = context.LearningUtilityList;
+            learningUtilities = context.LearningUtilities;
         }
         public IQueryable<LearningUtility> FindAll()
         {
-            return learningUtilityList;
+            return learningUtilities;
         }
 
         public LearningUtility FindBy(int id)
         {
-            return learningUtilityList.Find(id);
+            return learningUtilities.Find(id);
         }
 
         public List<LearningUtility> Search(string query)
         {
             List<LearningUtility> resultName =
-             learningUtilityList.Where(learningUtility => learningUtility.Name.Contains(query)).ToList();
+             learningUtilities.Where(learningUtility => learningUtility.Name.Contains(query)).ToList();
             return resultName;
         }
         public void SaveChanges()
