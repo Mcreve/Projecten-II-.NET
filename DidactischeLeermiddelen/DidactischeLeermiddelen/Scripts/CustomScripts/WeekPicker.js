@@ -28,4 +28,20 @@ $('#weekpicker').datepicker({
     $('#weekpicker').datepicker('update', startDate);
     $('#weekpicker').val(startDate.getDate() + '/' + (startDate.getMonth() + 1) + '/' + startDate.getFullYear() + ' - ' + endDate.getDate() + '/' + (endDate.getMonth() + 1) + '/' + endDate.getFullYear());
     $('#date').val($('#weekpicker').datepicker('getFormattedDate'));
+    $("#dateForm").submit();
+});
+
+var dateformView = {
+    init: function() {
+        $("#dateForm").submit(function() {
+            $.post(this.action, $(this).serialize(), function(data) {
+                $("#ajax-result").html(data);
+            });
+            return false;
+        });
+    }
+}
+
+$(function () {
+    dateformView.init();
 });
