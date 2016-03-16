@@ -22,6 +22,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         private ReservationController reservationController;
         private DummyDataContext context;
         private Mock<ILearningUtilityRepository> itemRepository;
+        private Mock<IUserRepository> userRepository;
         private User student;
         private User lector;
         private Mock<HttpRequestBase> request;
@@ -43,7 +44,9 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             itemRepository.Setup(i => i.FindBy(1)).Returns(context.LearningUtility1);
             itemRepository.Setup(i => i.FindBy(2)).Returns(context.LearningUtility2);
             itemRepository.Setup(i => i.FindBy(3)).Returns(context.LearningUtility3);
-            reservationController = new ReservationController(itemRepository.Object);
+            userRepository = new Mock<IUserRepository>();
+            userRepository.Setup(i => i.FindBy("Benjamin.vertonghen@student.hogent.be")).Returns(context.Student1);
+            reservationController = new ReservationController(itemRepository.Object, userRepository.Object);
             request = new Mock<HttpRequestBase>();
             httpcontext = new Mock<HttpContextBase>();
             httpcontext.SetupGet(x => x.Request).Returns(request.Object);
@@ -54,9 +57,9 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             wishlist = new Wishlist();
             wishlist.AddItem(context.LearningUtility1);
             wishlistViewModels =
-               wishlist.LearningUtilities.Select(learningUtility =>
-                  new WishlistViewModel(learningUtility))
-                   .ToList();
+              wishlist.LearningUtilities.Select(learningUtility =>
+                 new WishlistViewModel(learningUtility))
+                  .ToList();
 
 
         }
@@ -85,48 +88,83 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         public void LectorBlocksMaterial()
         {
             //Act
-            reservation = new LearningUtilityReservation { Week = 12, Amount = 3, User = lector };
-            context.LearningUtility1.LearningUtilityReservations.Add(reservation);
+
+            wishlistViewModels.FirstOrDefault().AmountWanted = 5;
+            wishlistViewModels.FirstOrDefault().Week = 12;
 
             //Arrange
             ViewResult result = reservationController.Add(lector, wishlistViewModels) as ViewResult;
-            WishlistViewModel reservations = result.ViewData.Model as WishlistViewModel;
+            IEnumerable<WishlistViewModel> reservations = result.ViewData.Model as IEnumerable<WishlistViewModel>;
 
             //Assert
-            Assert.AreEqual(reservations.Week, 12);
-            Assert.AreEqual(reservations.AmountBlocked, 3);
+            Assert.AreEqual(1, reservations.Count());
+
         }
 
+        /// <summary>
+        /// De lector geeft een te groot aantal van het te blokkeren materiaal en op welke dagen hij het materiaal nodig heeft.
+        /// Het systeem valideert deze input en geeft de gepaste foutmelding
+        /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void LectorEntersInvalidAmountOfMaterial()
         {
             //Act
-            reservation = new LearningUtilityReservation { Week = 11, Amount = 6, User = lector };
-            context.LearningUtility1.LearningUtilityReservations.Add(reservation);
+            wishlistViewModels.FirstOrDefault().AmountWanted = 7;
+            wishlistViewModels.FirstOrDefault().Week = 12;
 
             //Arrange
             RedirectToRouteResult result = reservationController.Add(lector, wishlistViewModels) as RedirectToRouteResult;
 
             //Assert
             Assert.IsNotNull(reservationController.TempData["error"]);
+        }
+
+
+
+        [TestMethod]
+        /// <summary>
+        /// De lector geeft geen aantal van het te blokkeren materiaal en op welke dagen hij het materiaal nodig heeft.
+        /// Het systeem valideert deze input en geeft de gepaste foutmelding
+        /// </summary>
+        public void LectorEntersNoAmountOfMaterial()
+        {
+            wishlistViewModels.FirstOrDefault().AmountWanted = 0;
+            wishlistViewModels.FirstOrDefault().Week = 12;
+
+            //Arrange
+            RedirectToRouteResult result = reservationController.Add(lector, wishlistViewModels) as RedirectToRouteResult;
+
+            //Assert
+            Assert.IsNotNull(reservationController.TempData["error"]);
+        }
+
+
+        [TestMethod]
+        public void IndexShowsEmptyReservationsIfReservationsAreEmpty()
+        {
+
+            //Act
+            ViewResult result = reservationController.Index(student) as ViewResult;
+
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("EmptyReservations", result.ViewName);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void LectorEntersInvalidDay()
+        public void IndexShowsReservations()
         {
-            reservation = new LearningUtilityReservation { Week = 10, Amount = 3, User = lector };
-            context.LearningUtility1.LearningUtilityReservations.Add(reservation);
-
             //Arrange
-            RedirectToRouteResult result = reservationController.Add(lector, wishlistViewModels) as RedirectToRouteResult;
+            reservation = new LearningUtilityReservation { Week = 11, Amount = 5, User = student };
+            context.LearningUtility1.AddReservation(reservation);
+
+            //Act
+            ViewResult result = reservationController.Index(student) as ViewResult;
+            IEnumerable<ReservationViewModel> rvm = result.ViewData.Model as IEnumerable<ReservationViewModel>;
 
             //Assert
-            Assert.IsNotNull(reservationController.TempData["error"]);
+            Assert.AreEqual(rvm.Count(), 1);
         }
-
-
 
         /// <summary>
         /// Het systeem detecteert dat onvoldoende aantallen van het materiaal reserveerbaarzijn in de geselecteerde week. Het systeem past de reservering(en) aan. 
@@ -152,46 +190,5 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             Assert.AreEqual(context.LearningUtility1.AmountReservedForWeek((new DateTime(2016, 3, 14))), 1);
 
         }
-
-        [TestMethod]
-        public void NotifyUserOfChangeInReservation()
-        {
-            //Het systeem stuurt een e-mail bericht naar de persoon, of personen, wiens reservatie werd aangepast 
-
-        }
-
-        /// <summary>
-        /// De lector kan op elk moment de reservatie info van een materiaal opvragen voor de geselecteerde week 
-        /// Het systeem toont de materiaal info
-        /// </summary>
-        [TestMethod]
-        public void GetLearningUtilityReservationDetailsForSelectedWeek()
-        {
-            //Dit is bij ons al het geval? of moet dit nog meer in detail?
-        }
-
-        /// <summary>
-        /// De lector kan op elk moment de reservatie info van een gebruiker die een reservatie heeft. voor de geselecteerde week. 
-        /// Het systeem toont de naam student/lector, aantal gereserveerd/geblokkeerd. 
-        /// Indien materiaal geblokkeerd door lector dan zijn ook de weekdagen blokkering zichtbaar.
-
-        /// </summary>
-        [TestMethod]
-        public void GetUserDetailsForSelectedWeek()
-        {
-            //TODO
-        }
-
-        /// <summary>
-        /// Het systeem toont de gereserveerde en reserveerbare aantallen van dit materiaal voor de komende weken.
-        /// </summary>
-        public void ShowReservationsSummary()
-
-        {
-            //TODO
-        }
-
     }
-
-}
-
+    }
