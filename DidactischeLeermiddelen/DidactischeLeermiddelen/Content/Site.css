@@ -29,7 +29,6 @@ textarea {
 }
 .learningUtility{ 
     overflow: hidden;
-    border-bottom:0.1em solid lightgray;
     padding-bottom: 1.5em;
     }
 

@@ -7,7 +7,7 @@ using System.Web;
 
 namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 {
-    public class LearningUtilityReservation
+    public class Reservation
     {
         public int Id { get; set; }
         public int Week { get; set; }

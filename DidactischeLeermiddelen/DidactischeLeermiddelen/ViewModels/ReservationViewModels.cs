@@ -16,7 +16,7 @@ namespace DidactischeLeermiddelen.ViewModels
         public DateTime? Date { get; set; }
         [Display(Name = "Aantal gewenst")]
         public int AmountWanted { get; set; }
-        public LearningUtilityReservation Reservation { get; set; }
+        public Reservation Reservation { get; set; }
         public ReservationViewModel()
         {
 
@@ -25,7 +25,7 @@ namespace DidactischeLeermiddelen.ViewModels
         /// Constructor
         /// </summary>
         /// <param name="learningUtility"></param>
-        public ReservationViewModel(LearningUtilityReservation reservation) : this()
+        public ReservationViewModel(Reservation reservation) : this()
         {
             Reservation = reservation;
             Id = reservation.LearningUtility.Id;

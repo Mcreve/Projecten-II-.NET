@@ -28,7 +28,7 @@ namespace DidactischeLeermiddelen.Controllers
 
         public ActionResult Index(User user)
         {
-            ICollection<LearningUtilityReservation> reservations = user.Reservations;
+            ICollection<Reservation> reservations = user.Reservations;
             
             if (!reservations.Any())
                 return View("EmptyReservations");
@@ -78,27 +78,19 @@ namespace DidactischeLeermiddelen.Controllers
 
         public ActionResult Delete(User user, int reservationId)
         {
-            try
-            {
-                LearningUtilityReservation reservation =  user.FindReservation(reservationId);
+
+                Reservation reservation =  user.FindReservation(reservationId);
                 LearningUtility learningUtility = reservation.LearningUtility;
 
                 if (reservation == null)
                     return HttpNotFound();
 
-
+                learningUtility.RemoveReservation(reservation);
                 user.RemoveReservation(reservation);
                 userRepository.SaveChanges();
                 learningUtilityRepository.SaveChanges();
 
-                TempData["info"] = String.Format("Reservatie van item {0} werd verwijderd", reservation.LearningUtility.Name);
-            }
-            catch (Exception)
-            {
-                TempData["error"] = "Verwijderen reservatie mislukt. Probeer opnieuw. " +
-                           "Als de problemen zich blijven voordoen, contacteer de  administrator.";
-            }
-
+                TempData["info"] = String.Format("Reservatie werd verwijderd.");
 
             return RedirectToAction("Index");
         }

@@ -130,7 +130,8 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
         /// <summary>
         /// Het systeem detecteert dat onvoldoende aantallen van het materiaal reserveerbaarzijn in de geselecteerde week. Het systeem past de reservering(en) aan. 
-        /// De bestaande reservaties worden aangepast op basis van LIFO-principe ( aantal wordt verminderd en indien aantal=0 dan wordt reservatie geschrapt)
+        /// De bestaande reservaties worden aangepast op basis van LIFO-principe ( aantal wordt verminderd en indien aantal=0 dan wordt reservatie gesc
+        /// apt)
 
         /// </summary>
         [TestMethod]

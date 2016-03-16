@@ -154,7 +154,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 
         public int AmountInCatalog { get; set; }
         public int AmountUnavailable { get; set; }
-        public virtual List<LearningUtilityReservation> LearningUtilityReservations { get; set; }
+        public virtual List<Reservation> Reservations { get; set; }
         public DateTime? DateWanted { get; set; }
         public Byte[] TimeStamp { get; set; }
         #endregion
@@ -167,7 +167,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         {
             FieldsOfStudy = new List<FieldOfStudy>();
             TargetGroups = new List<TargetGroup>();
-            LearningUtilityReservations = new List<LearningUtilityReservation>();
+            Reservations = new List<Reservation>();
             Loanable = true;
             Price = 0;
         }
@@ -191,20 +191,20 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         {
             int week = GetCurrentWeek(date);
             int currentWeek = GetCurrentWeek(DateTime.Now);
-            IEnumerable<LearningUtilityReservation> reservations = LearningUtilityReservations.Where(r => r.Week == week || r.Week < currentWeek);
+            IEnumerable<Reservation> reservations = Reservations.Where(r => r.Week == week || r.Week < currentWeek);
             return AmountInCatalog - reservations.Sum(r => r.Amount) - AmountUnavailable;
         }
 
         public int AmountReservedForWeek(DateTime date)
         {
             int week = GetCurrentWeek(date);
-            return LearningUtilityReservations.Where(r => r.Week == week && r.User.GetType() == typeof (Student)).Sum(r => r.Amount);
+            return Reservations.Where(r => r.Week == week && r.User.GetType() == typeof (Student)).Sum(r => r.Amount);
         }
 
         public int AmountBlockedForWeek(DateTime date)
         {
             int week = GetCurrentWeek(date);
-            IEnumerable<LearningUtilityReservation> reservations =  LearningUtilityReservations.Where(r => r.Week == week && r.User.GetType() == typeof (Lector));
+            IEnumerable<Reservation> reservations =  Reservations.Where(r => r.Week == week && r.User.GetType() == typeof (Lector));
             return reservations.Sum(r => r.Amount);
         }
 
@@ -212,14 +212,14 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         {
             int week = GetCurrentWeek(date);
             int currentWeek = GetCurrentWeek(DateTime.Now);
-            IEnumerable<LearningUtilityReservation> reservations = LearningUtilityReservations.Where(r => r.Week == week || r.Week < currentWeek);
+            IEnumerable<Reservation> reservations = Reservations.Where(r => r.Week == week || r.Week < currentWeek);
             return reservations.Sum(r => r.Amount) + AmountUnavailable;
         }
 
         private int AmountAvailableForWeek(int week)
         {
             int currentWeek = GetCurrentWeek(DateTime.Now);
-            IEnumerable<LearningUtilityReservation> reservations = LearningUtilityReservations.Where(r => r.Week == week || r.Week < currentWeek);
+            IEnumerable<Reservation> reservations = Reservations.Where(r => r.Week == week || r.Week < currentWeek);
             return AmountInCatalog - reservations.Sum(r => r.Amount) - AmountUnavailable;
         }
 
@@ -227,22 +227,22 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         /// Create a reservation for the specific learningutility.
         /// </summary>
         /// <param name="reservation"></param>
-        public void AddReservation(LearningUtilityReservation reservation)
+        public void AddReservation(Reservation reservation)
         {
             if (reservation.Amount > AmountAvailableForWeek(reservation.Week))
                 throw new ArgumentOutOfRangeException();
             if (reservation.Amount > 0)
             {
-                this.LearningUtilityReservations.Add(reservation);
+                this.Reservations.Add(reservation);
             } else
             {
                 throw new ArgumentNullException();
             }      
         }
 
-        public void RemoveReservation(LearningUtilityReservation reservation)
+        public void RemoveReservation(Reservation reservation)
         {
-            LearningUtilityReservations.Remove(reservation);
+            Reservations.Remove(reservation);
         }
 
 

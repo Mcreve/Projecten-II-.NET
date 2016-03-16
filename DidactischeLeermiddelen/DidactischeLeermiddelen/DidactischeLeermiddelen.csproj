@@ -229,7 +229,7 @@
     <Compile Include="Models\Domain\LearningUtilities\LearningUtility.cs" />
     <Compile Include="Models\DAL\LeermiddelenContext.cs" />
     <Compile Include="Models\DAL\LeermiddelenInitializer.cs" />
-    <Compile Include="Models\Domain\LearningUtilities\LearningUtilityReservation.cs" />
+    <Compile Include="Models\Domain\LearningUtilities\Reservation.cs" />
     <Compile Include="Models\Domain\LearningUtilities\Location.cs" />
     <Compile Include="Models\Domain\LearningUtilities\TargetGroup.cs" />
     <Compile Include="Models\Domain\Users\Lector.cs" />

@@ -16,7 +16,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         private FieldOfStudy initialFieldOfStudy;
         private TargetGroup initialTargetGroup;
         private Company initialCompany;
-        private LearningUtilityReservation reservation;
+        private Reservation reservation;
         private DateTime date1;
         private DateTime date2;
         private DateTime date3;
@@ -31,8 +31,8 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             initialFieldOfStudy = new FieldOfStudy("Geschiedenis");
             initialTargetGroup = new TargetGroup("1e leerjaar");
             initialCompany = new Company("Verbe");
-            reservation = new LearningUtilityReservation {Week = 12, Amount = 5};
-            initiaLearningUtility.LearningUtilityReservations.Add(reservation);
+            reservation = new Reservation {Week = 12, Amount = 5};
+            initiaLearningUtility.Reservations.Add(reservation);
             initiaLearningUtility.AmountInCatalog = 10;
             initiaLearningUtility.AmountUnavailable = 5;
             date1 = new DateTime(2016, 3, 15, 8, 30, 52);
@@ -646,7 +646,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountReservedForWeekWithReservationsReturnsCorrectValue()
         {
             //Arrange
-            initiaLearningUtility.LearningUtilityReservations.First().User = new Student();
+            initiaLearningUtility.Reservations.First().User = new Student();
 
             //Act
             int amount = initiaLearningUtility.AmountReservedForWeek(date1);
@@ -659,7 +659,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountReservedForWeekWithoutReservationsReturnsZero()
         {
             //Arrange
-            initiaLearningUtility.LearningUtilityReservations.First().User = new Student();
+            initiaLearningUtility.Reservations.First().User = new Student();
 
             //Act
             int amount = initiaLearningUtility.AmountReservedForWeek(date2);
@@ -672,7 +672,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountReservedForWeekWithReservationsByLectorReturnsZero()
         {
             //Arrange
-            initiaLearningUtility.LearningUtilityReservations.First().User = new Lector();
+            initiaLearningUtility.Reservations.First().User = new Lector();
 
             //Act
             int amount = initiaLearningUtility.AmountReservedForWeek(date1);
@@ -687,7 +687,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountBlockedForWeekWithReservationsReturnsCorrectValue()
         {
             //Arrange
-            initiaLearningUtility.LearningUtilityReservations.First().User = new Lector();
+            initiaLearningUtility.Reservations.First().User = new Lector();
 
             //Act
             int amount = initiaLearningUtility.AmountBlockedForWeek(date1);
@@ -700,7 +700,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountBlockedForWeekWithoutReservationsReturnsZero()
         {
             //Arrange
-            initiaLearningUtility.LearningUtilityReservations.First().User = new Lector();
+            initiaLearningUtility.Reservations.First().User = new Lector();
 
             //Act
             int amount = initiaLearningUtility.AmountBlockedForWeek(date2);
@@ -713,7 +713,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountBlockedForWeekWithReservationsByStudentReturnsZero()
         {
             //Arrange
-            initiaLearningUtility.LearningUtilityReservations.First().User = new Student();
+            initiaLearningUtility.Reservations.First().User = new Student();
 
             //Act
             int amount = initiaLearningUtility.AmountBlockedForWeek(date1);
@@ -728,7 +728,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountUnavailableForWeekWithReservationsByStudentReturnsCorrectValue()
         {
             //Arrange
-            initiaLearningUtility.LearningUtilityReservations.First().User = new Student();
+            initiaLearningUtility.Reservations.First().User = new Student();
 
             //Act
             int amount = initiaLearningUtility.AmountUnavailableForWeek(date1);
@@ -741,7 +741,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         public void AmountUnavailableForWeekWithReservationsByLectorReturnsCorrectValue()
         {
             //Arrange
-            initiaLearningUtility.LearningUtilityReservations.First().User = new Lector();
+            initiaLearningUtility.Reservations.First().User = new Lector();
 
             //Act
             int amount = initiaLearningUtility.AmountUnavailableForWeek(date1);

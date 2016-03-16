@@ -109,13 +109,13 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
             }
         }
         public virtual Wishlist Wishlist { get; set; }
-        public virtual ICollection<LearningUtilityReservation>  Reservations { get; set; }
+        public virtual ICollection<Reservation>  Reservations { get; set; }
         #endregion
 
         #region methods
         public void AddReservation(int week, int amount, LearningUtility learningUtility)
         {
-            LearningUtilityReservation reservation = new LearningUtilityReservation()
+            Reservation reservation = new Reservation()
             {
                 User = this,
                 Week = week,
@@ -124,12 +124,12 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
             };
             Reservations.Add(reservation);
         }
-        public LearningUtilityReservation FindReservation(int reservationId)
+        public Reservation FindReservation(int reservationId)
         {
             return Reservations.FirstOrDefault(res => res.Id == reservationId);
         }
 
-        public void RemoveReservation(LearningUtilityReservation reservation)
+        public void RemoveReservation(Reservation reservation)
         {
             Reservations.Remove(reservation);
         }
