@@ -29,6 +29,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         private Mock<HttpContextBase> httpcontext;
         private Wishlist wishlist;
         private Reservation reservation;
+        
 
 
         [TestInitialize]
@@ -60,7 +61,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
               wishlist.LearningUtilities.Select(learningUtility =>
                  new WishlistViewModel(learningUtility))
                   .ToList();
-
+        
 
         }
 
@@ -90,7 +91,9 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             //Act
 
             wishlistViewModels.FirstOrDefault().AmountWanted = 5;
-            wishlistViewModels.FirstOrDefault().Week = 12;
+            wishlistViewModels.FirstOrDefault().Date = new DateTime(2016, 3, 16, 8, 30, 52);
+            
+
 
             //Arrange
             ViewResult result = reservationController.Add(lector, wishlistViewModels) as ViewResult;
