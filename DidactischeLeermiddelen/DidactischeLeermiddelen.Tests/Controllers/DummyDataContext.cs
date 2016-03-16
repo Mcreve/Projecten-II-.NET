@@ -81,12 +81,6 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             };
             LearningUtility1.FieldsOfStudy.Add(FieldOfStudy1);
             LearningUtility1.TargetGroups.Add(TargetGroup1);
-            LearningUtility1.LearningUtilityReservations.Add(new LearningUtilityReservation
-            {
-                User = Student1,
-                Amount = 2,
-                Week = 11
-            });
             LearningUtility2 = new LearningUtility
             {
                 Id = 2,

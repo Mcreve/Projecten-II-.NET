@@ -109,7 +109,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
             }
         }
         public virtual Wishlist Wishlist { get; set; }
-        public virtual ICollection<LearningUtilityReservation>  Reservations { get; set; }
+        public virtual ICollection<LearningUtilityReservation> Reservations { get; set; }
         #endregion
 
         #region methods
