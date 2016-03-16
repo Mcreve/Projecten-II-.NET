@@ -10,6 +10,7 @@ using DidactischeLeermiddelen.Models.Domain;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using DidactischeLeermiddelen.Models.Domain.Users;
 using DidactischeLeermiddelen.ViewModels;
+using System.Globalization;
 
 namespace DidactischeLeermiddelen.Controllers
 {
@@ -33,12 +34,20 @@ namespace DidactischeLeermiddelen.Controllers
             if (!reservations.Any())
                 return View("EmptyReservations");
 
+            reservations = sortReservations(reservations);
 
-
-            IEnumerable <ReservationViewModel> reservationViewModels =
+            IEnumerable<ReservationViewModel> reservationViewModels =
                reservations.Select(res => new ReservationViewModel(res)).ToList();
              
             return View(reservationViewModels);
+        }
+
+        private ICollection<Reservation> sortReservations(ICollection<Reservation> reservations)
+        {
+            GregorianCalendar cal = new GregorianCalendar(GregorianCalendarTypes.Localized);
+            ICollection<Reservation> unsortedResult = reservations.Where(res => res.Week >= cal.GetWeekOfYear(DateTime.Today, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday)).ToList();
+            ICollection<Reservation> sortedResult = unsortedResult.OrderBy(res => res.Week).ToList() ;
+            return sortedResult;
         }
 
         public ActionResult Add(User user, IEnumerable<WishlistViewModel> wishlistViewModels)
