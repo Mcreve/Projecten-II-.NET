@@ -13,7 +13,7 @@ namespace DidactischeLeermiddelen.Models.DAL.Mapper
         {
             HasMany(l => l.LearningUtilities).WithMany().Map(m =>
             {
-                m.ToTable("Wishlist_LearningUtiltiy");
+                m.ToTable("Wishlist_LearningUtility");
                 m.MapLeftKey("WishlistId");
                 m.MapRightKey("LearningUtilityId");
             });

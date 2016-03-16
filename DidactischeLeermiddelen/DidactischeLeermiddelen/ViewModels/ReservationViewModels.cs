@@ -25,14 +25,13 @@ namespace DidactischeLeermiddelen.ViewModels
         /// Constructor
         /// </summary>
         /// <param name="learningUtility"></param>
-        public ReservationViewModel(LearningUtility learningUtility) : this()
+        public ReservationViewModel(LearningUtilityReservation reservation) : this()
         {
-           
-            Id = learningUtility.Id;
-            Name = learningUtility.Name;
-            Reservation = learningUtility.LearningUtilityReservations.FirstOrDefault();
-            Date = FirstDateOfWeek(DateTime.Now.Year, Reservation.Week);
-            AmountWanted = Reservation.Amount;
+            Reservation = reservation;
+            Id = reservation.LearningUtility.Id;
+            Name = reservation.LearningUtility.Name;
+            Date = FirstDateOfWeek(DateTime.Now.Year, reservation.Week);
+            AmountWanted = reservation.Amount;
         }
         private static DateTime FirstDateOfWeek(int year, int weekOfYear)
         {

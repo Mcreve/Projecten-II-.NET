@@ -10,6 +10,13 @@ namespace DidactischeLeermiddelen.Models.DAL.Mapper
         {
             #region Keys
             HasKey(user => user.EmailAddress);
+            HasMany(l => l.Reservations).WithMany().Map(m =>
+            {
+                m.ToTable("User_Reservation");
+                m.MapLeftKey("UserId");
+                m.MapRightKey("ReservationId");
+            });
+            
             #endregion
 
             #region Properties
