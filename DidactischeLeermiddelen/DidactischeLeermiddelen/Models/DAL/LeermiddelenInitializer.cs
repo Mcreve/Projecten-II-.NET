@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DidactischeLeermiddelen.Models.DAL
 {
-    public class LeermiddelenInitializer : DropCreateDatabaseIfModelChanges<LeermiddelenContext>
+    public class LeermiddelenInitializer : DropCreateDatabaseAlways<LeermiddelenContext>
     {        
         #region Properties
         private LeermiddelenContext context;
