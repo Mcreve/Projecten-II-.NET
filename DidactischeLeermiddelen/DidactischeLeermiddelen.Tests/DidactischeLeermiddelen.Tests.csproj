@@ -112,7 +112,7 @@
     <Compile Include="Model\Domain\LearningUtilities\FieldOfStudyTest.cs" />
     <Compile Include="Model\Domain\LearningUtilities\CompanyTest.cs" />
     <Compile Include="Model\Domain\LearningUtilities\LocationTest.cs" />
-    <Compile Include="Model\Domain\LearningUtilities\LearningUtilityDetailsTest.cs" />
+    <Compile Include="Model\Domain\LearningUtilities\LearningUtilityTest.cs" />
     <Compile Include="Model\Domain\Users\UserFactoryTest.cs" />
     <Compile Include="Model\Domain\Users\UserTest.cs" />
     <Compile Include="Model\Domain\WishlistTest.cs" />
