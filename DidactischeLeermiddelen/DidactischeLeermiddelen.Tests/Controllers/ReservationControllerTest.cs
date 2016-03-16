@@ -28,7 +28,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         private Mock<HttpRequestBase> request;
         private Mock<HttpContextBase> httpcontext;
         private Wishlist wishlist;
-        private LearningUtilityReservation reservation;
+        private Reservation reservation;
 
 
         [TestInitialize]
@@ -155,7 +155,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         public void IndexShowsReservations()
         {
             //Arrange
-            reservation = new LearningUtilityReservation { Week = 11, Amount = 5, User = student };
+            reservation = new Reservation { Week = 11, Amount = 5, User = student };
             context.LearningUtility1.AddReservation(reservation);
 
             //Act
@@ -177,8 +177,8 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         {
 
             //Act
-            reservation = new LearningUtilityReservation { Week = 11, Amount = 5, User = lector };
-            context.LearningUtility1.LearningUtilityReservations.Add(reservation);
+            reservation = new Reservation { Week = 11, Amount = 5, User = lector };
+            context.LearningUtility1.Reservations.Add(reservation);
 
             //Arrange
             ViewResult result = reservationController.Add(lector, wishlistViewModels) as ViewResult;
