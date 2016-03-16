@@ -31,11 +31,11 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             initialFieldOfStudy = new FieldOfStudy("Geschiedenis");
             initialTargetGroup = new TargetGroup("1e leerjaar");
             initialCompany = new Company("Verbe");
-            reservation = new LearningUtilityReservation {Week = 11, Amount = 5};
+            reservation = new LearningUtilityReservation {Week = 12, Amount = 5};
             initiaLearningUtility.LearningUtilityReservations.Add(reservation);
             initiaLearningUtility.AmountInCatalog = 10;
             initiaLearningUtility.AmountUnavailable = 5;
-            date1 = new DateTime(2016, 3, 16, 8, 30, 52);
+            date1 = new DateTime(2016, 3, 15, 8, 30, 52);
             date2 = new DateTime(2016, 4, 8, 8, 30, 52);
             date3 = new DateTime(2016, 3, 8, 8, 30, 52);
         }
