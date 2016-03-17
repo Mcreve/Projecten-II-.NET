@@ -232,7 +232,7 @@ namespace DidactischeLeermiddelen.Models.DAL
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(t => t.Name.Equals("Aardrijkskunde")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Middelbaar")));
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,12), users.First(u => u.GetType() == typeof(Lector)),4));
+            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,3,12), users.First(u => u.GetType() == typeof(Lector)),4));
             learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,15), users.First(u => u.GetType() == typeof(Student)), 1));
             learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,14), users.First(u => u.GetType() == typeof(Lector)), 2));
 

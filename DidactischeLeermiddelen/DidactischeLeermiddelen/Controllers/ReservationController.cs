@@ -58,18 +58,9 @@ namespace DidactischeLeermiddelen.Controllers
         /// </summary>
         /// <param name="reservations"></param>
         /// <returns></returns>
-        private IEnumerable<ReservationViewModel> MapToViewModels(IQueryable<Reservation> reservations)
+        private IEnumerable<ReservationViewModel> MapToViewModels(IEnumerable<Reservation> reservations)
         {
-            return (from reservation in reservations
-             select new ReservationViewModel
-             {
-                 Reservation = reservation,
-                 Id = reservation.LearningUtility.Id,
-                 Name = reservation.LearningUtility.Name,
-                 Picture = reservation.LearningUtility.Picture,
-                 Date = reservation.DateWanted,
-                 AmountWanted = reservation.Amount
-             }).ToList();
+            return reservations.Select(r => new ReservationViewModel(reservationRepository.FindBy(r.Id))).ToList();
         }
 
         /// <summary>

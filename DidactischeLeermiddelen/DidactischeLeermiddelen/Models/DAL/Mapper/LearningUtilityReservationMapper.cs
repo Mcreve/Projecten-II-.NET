@@ -10,6 +10,9 @@ namespace DidactischeLeermiddelen.Models.DAL.Mapper
 {
     public class ReservationMapper : EntityTypeConfiguration<Reservation>
     {
-
+        public ReservationMapper()
+        {
+         
+        }
     }
 }

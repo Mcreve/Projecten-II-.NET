@@ -1,5 +1,6 @@
 ﻿using DidactischeLeermiddelen.Models.Domain.Users;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -16,5 +17,22 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public virtual LearningUtility LearningUtility { get;  set; }
         public DateTime ReservationDate { get; set; }
         public string DaysBlocked { get; set; }
+
+
+        public string GetState()
+        {
+            int currentWeek = LearningUtility.GetCurrentWeek(DateTime.Now);
+            int weekReserved = LearningUtility.GetCurrentWeek(DateWanted);
+            if (currentWeek > weekReserved)
+            {
+                return "Te laat";
+            }
+            var userType = User as Student;
+            if (userType != null)
+            {
+                return "Gereserveerd";
+            }
+            return "Geblokkeerd";
+        }
     }
 }

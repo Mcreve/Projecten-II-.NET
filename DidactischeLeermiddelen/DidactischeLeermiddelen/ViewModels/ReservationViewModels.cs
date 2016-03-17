@@ -1,7 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Globalization;
-using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 
 namespace DidactischeLeermiddelen.ViewModels
@@ -18,14 +16,27 @@ namespace DidactischeLeermiddelen.ViewModels
         public DateTime? Date { get; set; }
         [Display(Name = "Aantal gewenst")]
         public int AmountWanted { get; set; }
+        [Display(Name = "Huidige status")]
         public Reservation Reservation { get; set; }
+        public string State { get; set; }
 
         /// <summary>
         /// basic constructor
         /// </summary>
         public ReservationViewModel()
         {
+            
+        }
 
+        public ReservationViewModel(Reservation reservation)
+        {
+            Id = reservation.LearningUtility.Id;
+            Picture = reservation.LearningUtility.Picture;
+            Name = reservation.LearningUtility.Name;
+            Date = reservation.DateWanted;
+            AmountWanted = reservation.Amount;
+            Reservation = reservation;
+            State = reservation.GetState();
         }
     }
 }
