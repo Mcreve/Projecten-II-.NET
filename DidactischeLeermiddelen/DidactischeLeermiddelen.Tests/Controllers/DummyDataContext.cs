@@ -142,12 +142,13 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
         private void createReservation()
         {
-            
+
             reservation1 = new Reservation
             {
                 User = Student1,
                 Amount = 2,
-               ReservationDate = new DateTime(2016, 3, 22, 8, 30, 52)
+                DateWanted = new DateTime(2016, 3, 22, 8, 30, 52),
+                LearningUtility = LearningUtility1,
             };
           
         }
