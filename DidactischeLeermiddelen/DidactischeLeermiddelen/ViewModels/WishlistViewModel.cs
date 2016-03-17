@@ -21,7 +21,7 @@ namespace DidactischeLeermiddelen.ViewModels
         public int AmountInCatalog { get; set; }
         [Display(Name = "Tijdelijk onbeschikbaar")]
         public int AmountUnavailable { get; set; }
-        [Display(Name = "Gereserveerd")]
+        [Display(Name = "Geblokkeerd")]
         public int AmountBlocked { get; set; }
         [Display(Name = "Reservatie week")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]

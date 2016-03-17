@@ -226,7 +226,7 @@ namespace DidactischeLeermiddelen.Models.DAL
                 Location = locations.FirstOrDefault(),
                 Picture = @"/Images/wereldbol.jpg",
                 Price = 75m,
-                AmountInCatalog = 5,
+                AmountInCatalog = 15,
                 AmountUnavailable = 1
             };
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(t => t.Name.Equals("Aardrijkskunde")));
@@ -234,7 +234,7 @@ namespace DidactischeLeermiddelen.Models.DAL
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Middelbaar")));
             learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,3,12), users.First(u => u.GetType() == typeof(Lector)),4));
             learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,15), users.First(u => u.GetType() == typeof(Student)), 1));
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,14), users.First(u => u.GetType() == typeof(Lector)), 2));
+            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,5,14), users.First(u => u.GetType() == typeof(Lector)), 2));
 
             context.LearningUtilities.Add(learningUtility);
 
@@ -254,12 +254,12 @@ namespace DidactischeLeermiddelen.Models.DAL
                 Location = locations.FirstOrDefault(),
                 Picture = @"/Images/dobbelsteenschatkist.jpg",
                 Price = 35m,
-                AmountInCatalog = 2,
+                AmountInCatalog = 20,
                 AmountUnavailable = 0
             };
             learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,12), users.First(u => u.GetType() == typeof(Student)), 1));
             learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,15), users.First(u => u.GetType() == typeof(Student)), 2));
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,16), users.First(u => u.GetType() == typeof(Lector)), 1));
+            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,5,16), users.First(u => u.GetType() == typeof(Lector)), 1));
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Ontspanning")));
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
