@@ -29,6 +29,12 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 
         #endregion
         #region Methods
+        /// <summary>
+        /// Adds the reservation to the Student Role subclass of User, calls the Learning Utility to add it to it's reservationlist aswell.
+        /// </summary>
+        /// <param name="dateWanted"></param>
+        /// <param name="amount"></param>
+        /// <param name="learningUtility"></param>
         public override void AddReservation(DateTime dateWanted, int amount, LearningUtility learningUtility)
         {
             Reservation reservation = new Reservation
@@ -39,11 +45,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
                 ReservationDate = DateTime.Now
             };
             learningUtility.AddReservation(reservation);
-        }
-
-        public override void RemoveReservation(Reservation reservation)
-        {
-            throw new NotImplementedException();
         }
         #endregion
 

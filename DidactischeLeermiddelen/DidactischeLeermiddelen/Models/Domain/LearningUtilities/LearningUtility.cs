@@ -186,7 +186,11 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 
         #endregion
         #region Methods
-
+        /// <summary>
+        /// Gets the amount of items availble for the specific week. 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public int AmountAvailableForWeek(DateTime date)
         {
             int week = GetCurrentWeek(date);
@@ -194,13 +198,21 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             IEnumerable<Reservation> reservations = Reservations.Where(r =>GetCurrentWeek(r.DateWanted) == week ||GetCurrentWeek(r.DateWanted) < currentWeek);
             return AmountInCatalog - reservations.Sum(r => r.Amount) - AmountUnavailable;
         }
-
+        /// <summary>
+        /// Gets the amount of the items that are reserved(by student) for a specific week.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public int AmountReservedForWeek(DateTime date)
         {
             int week = GetCurrentWeek(date);
             return Reservations.Where(r =>GetCurrentWeek(r.DateWanted) == week && r.User.GetType() == typeof (Student)).Sum(r => r.Amount);
         }
-
+        /// <summary>
+        /// Gets the amount of the items that are blocked(by lector) for a specific week.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public int AmountBlockedForWeek(DateTime date)
         {
             int week = GetCurrentWeek(date);
@@ -208,7 +220,11 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             IEnumerable<Reservation> reservations =  Reservations.Where(r =>GetCurrentWeek(r.DateWanted) == week && r.User.GetType() == typeof (Lector));
             return reservations.Sum(r => r.Amount);
         }
-
+        /// <summary>
+        /// Gets the amount of the items that are unavailble for a specific week.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public int AmountUnavailableForWeek(DateTime date)
         {
             int week = GetCurrentWeek(date);
@@ -230,16 +246,22 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
                 this.Reservations.Add(reservation);
             } else
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("Meer dan 1 item nodig om te reserveren");
             }      
         }
-
+        /// <summary>
+        /// Removes the reservation from the reservations for the Learning Utility
+        /// </summary>
+        /// <param name="reservation"></param>
         public void RemoveReservation(Reservation reservation)
         {
             Reservations.Remove(reservation);
         }
-
-
+        /// <summary>
+        /// Returns the integer of the current week.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public int GetCurrentWeek(DateTime date)
         {
             Calendar calendar = new GregorianCalendar();

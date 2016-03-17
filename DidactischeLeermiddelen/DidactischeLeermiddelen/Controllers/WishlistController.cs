@@ -17,12 +17,22 @@ namespace DidactischeLeermiddelen.Controllers
         private ILearningUtilityRepository learningUtilityRepository;
         private IUserRepository userRepository;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="learningUtilityRepository"></param>
+        /// <param name="userRepository"></param>
         public WishlistController(ILearningUtilityRepository learningUtilityRepository, IUserRepository userRepository)
         {
             this.learningUtilityRepository = learningUtilityRepository;
             this.userRepository = userRepository;
         }
-        
+
+        /// <summary>
+        /// Basic index screen, which generates 2 partialviews.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public ActionResult Index(User user)
         {
             Wishlist wishlist = user.Wishlist;
@@ -36,7 +46,12 @@ namespace DidactischeLeermiddelen.Controllers
                 return PartialView("_WishlistItemsPartial", wishlistViewModels);
             return View(wishlistViewModels);
         }
-
+        /// <summary>
+        /// Basic index screen, which generates 2 partialviews. [POST]
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="wishlistViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Index(User user, WishlistViewModel wishlistViewModel)
         {
@@ -55,7 +70,12 @@ namespace DidactischeLeermiddelen.Controllers
             }
             return View(wishlistViewModels);
         }
-
+        /// <summary>
+        /// Adds an item to the wishlist
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public ActionResult Add(int id, User user)
         {
             if(user.Wishlist == null)
@@ -80,6 +100,12 @@ namespace DidactischeLeermiddelen.Controllers
             return RedirectToAction("Index", "Catalog");
         }
 
+        /// <summary>
+        /// Removes the item from the Wishlist
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public ActionResult Remove(int id, User user)
         {
             Wishlist wishlist = user.Wishlist;
@@ -108,6 +134,12 @@ namespace DidactischeLeermiddelen.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Detailscreen of the Learning Utility
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public ActionResult Details(int? id, DateTime date)
         {
             if (id == null)
@@ -124,6 +156,11 @@ namespace DidactischeLeermiddelen.Controllers
             return View(learningUtilityViewModel);
         }
 
+        /// <summary>
+        /// Returns the learningUtility
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private LearningUtility GetLearningUtility(int id)
         {
             return learningUtilityRepository.FindBy(id);
