@@ -20,20 +20,6 @@ namespace DidactischeLeermiddelen.ViewModels
         public Reservation Reservation { get; set; }
         public string State { get; set; }
 
-        /// <summary>
-        /// basic constructor
-        /// </summary>
-        public ReservationViewModel(Reservation reservation)
-        {
-            AmountWanted = reservation.Amount;
-            Reservation = reservation;
-            Id = reservation.LearningUtility.Id;
-            Name = reservation.LearningUtility.Name;
-            Picture = reservation.LearningUtility.Picture;
-            Date = DateTime.Now;
-            AmountWanted = reservation.Amount;
-
-        }
         public ReservationViewModel()
         {
             
