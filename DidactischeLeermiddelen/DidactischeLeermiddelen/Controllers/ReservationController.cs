@@ -116,7 +116,6 @@ namespace DidactischeLeermiddelen.Controllers
             if (save) { 
                 learningUtilityRepository.SaveChanges();
                 TempData["info"] = "Reservatie geslaagd";
-
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index", "Wishlist");

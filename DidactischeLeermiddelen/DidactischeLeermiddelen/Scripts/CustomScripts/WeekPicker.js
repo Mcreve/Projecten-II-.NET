@@ -39,6 +39,12 @@ var dateformView = {
             });
             return false;
         });
+        $("#dateForm").onload(function () {
+            $.post(this.action, $(this).serialize(), function (data) {
+                $("#ajax-result").html(data);
+            });
+            return false;
+        });
     }
 }
 
