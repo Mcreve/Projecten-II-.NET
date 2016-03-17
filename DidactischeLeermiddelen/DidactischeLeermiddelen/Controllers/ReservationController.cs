@@ -67,7 +67,7 @@ namespace DidactischeLeermiddelen.Controllers
                  Id = reservation.LearningUtility.Id,
                  Name = reservation.LearningUtility.Name,
                  Picture = reservation.LearningUtility.Picture,
-                 Date = DateTime.Now,
+                 Date = reservation.DateWanted,
                  AmountWanted = reservation.Amount
              }).ToList();
         }
