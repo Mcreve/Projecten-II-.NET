@@ -23,6 +23,9 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         public LearningUtility LearningUtility2 { get; set; }
         public LearningUtility LearningUtility3 { get; set; }
         public List<LearningUtility> LearningSearchResult { get; set; }
+        public Reservation reservation1 { get; set; }
+
+        public IQueryable<Reservation> reservationList { get; set; }
 
         /// <summary>
         /// Default Constructor
@@ -36,7 +39,9 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             CreateTargetGroups();
             CreateLearningUtilities();
             CreateLists();
-            
+            createReservation();
+            CreateReservationList();
+
         }
 
         private void CreateLists()
@@ -54,12 +59,12 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         }
         private void CreateTargetGroups()
         {
-            TargetGroup1 = new TargetGroup {Id = 1, Name = "Kleuter"};
+            TargetGroup1 = new TargetGroup { Id = 1, Name = "Kleuter" };
         }
 
         private void CreateCompanies()
         {
-            Company1 = new Company {Id = 1, Name = "Hasbro"};
+            Company1 = new Company { Id = 1, Name = "Hasbro" };
         }
 
         private void CreateLearningUtilities()
@@ -77,10 +82,12 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 Price = 75m,
                 AmountInCatalog = 6,
                 AmountUnavailable = 0,
-                
+
             };
             LearningUtility1.FieldsOfStudy.Add(FieldOfStudy1);
             LearningUtility1.TargetGroups.Add(TargetGroup1);
+
+
             LearningUtility2 = new LearningUtility
             {
                 Id = 2,
@@ -110,7 +117,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 Price = 10.9m,
                 AmountInCatalog = 10,
                 AmountUnavailable = 5
-                
+
             };
             LearningUtility3.FieldsOfStudy.Add(FieldOfStudy1);
             LearningUtility3.TargetGroups.Add(TargetGroup1);
@@ -119,18 +126,35 @@ namespace DidactischeLeermiddelen.Tests.Controllers
 
         private void CreateFieldOfStudies()
         {
-            FieldOfStudy1 = new FieldOfStudy {Id = 1, Name = "Aardrijkskunde"};
+            FieldOfStudy1 = new FieldOfStudy { Id = 1, Name = "Aardrijkskunde" };
         }
 
         private void CreateLocations()
         {
-            Location1 = new Location {Id = 1, Name = "GLEDE 1.011"};
+            Location1 = new Location { Id = 1, Name = "GLEDE 1.011" };
         }
 
         private void CreateUsers()
         {
             Lector1 = UserFactory.CreateUserWithParameters("Sonja", "Vandermeersch", "Sonja.vandermeersch@hogent.be");
             Student1 = UserFactory.CreateUserWithParameters("Benjamin", "Vertonghen", "Benjamin.vertonghen@student.hogent.be");
+        }
+
+        private void createReservation()
+        {
+            
+            reservation1 = new Reservation
+            {
+                User = Student1,
+                Amount = 2,
+                Week = 12
+            };
+          
+        }
+        private void CreateReservationList()
+        {
+            reservationList = (new Reservation[] { reservation1 }).ToList().AsQueryable();
+
         }
     }
 }
