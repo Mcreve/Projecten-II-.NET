@@ -226,6 +226,7 @@
     <Compile Include="Models\Domain\IReservationRepository.cs" />
     <Compile Include="Models\Domain\ITargetGroupRepository.cs" />
     <Compile Include="Models\Domain\IUserRepository.cs" />
+    <Compile Include="Models\Domain\LearningUtilities\ReservationStateType.cs" />
     <Compile Include="Models\Domain\LearningUtilities\Company.cs" />
     <Compile Include="Models\Domain\LearningUtilities\FieldOfStudy.cs" />
     <Compile Include="Models\Domain\LearningUtilities\LearningUtility.cs" />

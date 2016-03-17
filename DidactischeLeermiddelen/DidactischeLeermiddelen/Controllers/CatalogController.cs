@@ -20,6 +20,12 @@ namespace DidactischeLeermiddelen.Controllers
         private ITargetGroupRepository targetGroupRepository;
         private IFieldOfStudyRepository fieldOfStudyRepository;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="learningUtilityRepository"></param>
+        /// <param name="targetGroupRepository"></param>
+        /// <param name="fieldOfStudyRepository"></param>
         public CatalogController(ILearningUtilityRepository learningUtilityRepository, ITargetGroupRepository targetGroupRepository, IFieldOfStudyRepository fieldOfStudyRepository)
         {
             this.learningUtilityRepository = learningUtilityRepository;
@@ -96,6 +102,15 @@ namespace DidactischeLeermiddelen.Controllers
             return View(catalogViewModel.ToPagedList(pageNumber, pageSize));
         }
 
+        /// <summary>
+        /// Details view of the learning utility, creates the catalogviewmodels and returns it.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="page"></param>
+        /// <param name="currentFilter"></param>
+        /// <param name="currentFieldOfStudy"></param>
+        /// <param name="currentTargetGroup"></param>
+        /// <returns></returns>
         // GET: Catalog/Details/5
         public ActionResult Details(int? id, int? page, string currentFilter, int? currentFieldOfStudy, int? currentTargetGroup)
         {

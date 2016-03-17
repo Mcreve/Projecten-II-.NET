@@ -62,6 +62,11 @@ namespace DidactischeLeermiddelen.Models.Domain
                 throw new InvalidOperationException("Item werd niet in uw verlanglijstje terug gevonden.");
         }
 
+        /// <summary>
+        /// Finds the learning utility by id in wishlist.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Specific LearningUtility in wishlist</returns>
         private LearningUtility FindLearningUtility(int id)
         {
             return LearningUtilities.SingleOrDefault(l => l.Id == id);
