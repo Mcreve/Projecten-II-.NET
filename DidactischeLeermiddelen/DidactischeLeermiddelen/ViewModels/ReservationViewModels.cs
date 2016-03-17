@@ -11,10 +11,10 @@ namespace DidactischeLeermiddelen.ViewModels
         public string Picture { get; set; }
         [Display(Name = "Leermiddel")]
         public string Name { get; set; }
-        [Display(Name = "Reservatie week")]
+        [Display(Name = "Week van")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? Date { get; set; }
-        [Display(Name = "Aantal gewenst")]
+        [Display(Name = "Aantal gereserveerd")]
         public int AmountWanted { get; set; }
         [Display(Name = "Huidige status")]
         public Reservation Reservation { get; set; }
@@ -23,6 +23,17 @@ namespace DidactischeLeermiddelen.ViewModels
         /// <summary>
         /// basic constructor
         /// </summary>
+        public ReservationViewModel(Reservation reservation)
+        {
+            AmountWanted = reservation.Amount;
+            Reservation = reservation;
+            Id = reservation.LearningUtility.Id;
+            Name = reservation.LearningUtility.Name;
+            Picture = reservation.LearningUtility.Picture;
+            Date = DateTime.Now;
+            AmountWanted = reservation.Amount;
+
+        }
         public ReservationViewModel()
         {
             
