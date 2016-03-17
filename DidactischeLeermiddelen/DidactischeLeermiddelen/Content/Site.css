@@ -849,3 +849,21 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 input[type="number"] {
     width: 3em;
 }
+
+.navbar {
+    background-image: url("/Images/Hogent-woordmerk.png");
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+    background-position:150px 10px;
+}
+
+.navbar-brand {
+    color: #009c7c;
+}
+.nav.navbar-nav li a {
+    color: #009C7C;
+}
+
+.nav.navbar-nav li a:hover {
+    color: #000000;
+}

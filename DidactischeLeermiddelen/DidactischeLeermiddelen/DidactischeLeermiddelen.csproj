@@ -262,6 +262,12 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\dobbelsteenschatkist.jpg" />
+    <Content Include="Images\gradenboog.jpg" />
+    <Content Include="Images\HoGent-woordmerk.png" />
+    <Content Include="Images\microscoop.jpg" />
+    <Content Include="Images\rekenspelletjes.jpg" />
+    <Content Include="Images\wereldbol.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Models\Domain\Domain.cd" />

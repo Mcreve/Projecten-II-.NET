@@ -224,7 +224,7 @@ namespace DidactischeLeermiddelen.Models.DAL
                 ArticleNumber = "Art1001",
                 Loanable = true,
                 Location = locations.FirstOrDefault(),
-                Picture = @"http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png",
+                Picture = @"/Images/wereldbol.jpg",
                 Price = 75m,
                 AmountInCatalog = 5,
                 AmountUnavailable = 1
@@ -252,7 +252,7 @@ namespace DidactischeLeermiddelen.Models.DAL
                               "gelijke kansen van 1/6 de getallen 1 t/m 6 voortbrengt.",
                 Loanable = true,
                 Location = locations.FirstOrDefault(),
-                Picture = @"http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png",
+                Picture = @"/Images/dobbelsteenschatkist.jpg",
                 Price = 35m,
                 AmountInCatalog = 2,
                 AmountUnavailable = 0
@@ -275,7 +275,7 @@ namespace DidactischeLeermiddelen.Models.DAL
                 Description = "Spelbord op het opdrachtenboekje leggen > opdracht oplossen door het juiste cijfer van het spelbord op het juiste antwoord in het boekje te leggen > controle door het spelbord dicht te klappen en om te draaien > de patronen moeten overeen komen.",
                 Loanable = false,
                 Location = locations.ElementAtOrDefault(1),
-                Picture = @"http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png",
+                Picture = @"/Images/rekenspelletjes.jpg",
                 Price = 10.9m,
                 AmountInCatalog = 12,
                 AmountUnavailable = 1
@@ -299,7 +299,7 @@ namespace DidactischeLeermiddelen.Models.DAL
                 "360° draaibaar.Tubuslengte 160 mm",
                 Loanable = true,
                 Location = locations.ElementAtOrDefault(1),
-                Picture = @"http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png",
+                Picture = @"/Images/microscoop.jpg",
                 Price = 10.9m,
                 AmountInCatalog = 100,
                 AmountUnavailable = 5
@@ -321,7 +321,7 @@ namespace DidactischeLeermiddelen.Models.DAL
                 Description = "Gradenboog 180 graden met dubbele gradenaanduiding. Materiaal : Polystyreen. (duurzame kunststof, met krasvaste opdruk)",
                 Loanable = true,
                 Location = locations.FirstOrDefault(),
-                Picture = @"http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png",
+                Picture = @"/Images/gradenboog.jpg",
                 Price = 35m,
                 AmountInCatalog = 76,
                 AmountUnavailable = 0

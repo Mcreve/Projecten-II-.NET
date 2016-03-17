@@ -18,6 +18,7 @@ namespace DidactischeLeermiddelen.ViewModels
         public int AmountWanted { get; set; }
         [Display(Name = "Huidige status")]
         public Reservation Reservation { get; set; }
+        [Display(Name = "Reservatie status")]
         public string State { get; set; }
 
         public ReservationViewModel()
