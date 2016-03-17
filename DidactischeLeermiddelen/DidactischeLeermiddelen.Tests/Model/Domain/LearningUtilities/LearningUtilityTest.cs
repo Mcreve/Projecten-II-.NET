@@ -31,7 +31,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             initialFieldOfStudy = new FieldOfStudy("Geschiedenis");
             initialTargetGroup = new TargetGroup("1e leerjaar");
             initialCompany = new Company("Verbe");
-            reservation = new Reservation {Week = 11, Amount = 5};
+            reservation = new Reservation {DateWanted = new DateTime(2016, 3, 16, 8, 30, 52), Amount = 5};
             initiaLearningUtility.Reservations.Add(reservation);
             initiaLearningUtility.AmountInCatalog = 10;
             initiaLearningUtility.AmountUnavailable = 5;
@@ -629,7 +629,6 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             //Assert
             Assert.AreEqual(5, amount);
         }
-
         [TestMethod]
         public void AmountAvailableForWeekWithCurrentWeekHigherThanReservedWeekReturnsCorrectValue()
         {
@@ -769,6 +768,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             //Assert
             Assert.AreEqual(5, amount);
         }
+
         #endregion
         #endregion
     }

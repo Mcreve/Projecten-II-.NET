@@ -147,7 +147,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             {
                 User = Student1,
                 Amount = 2,
-                Week = 12
+               ReservationDate = new DateTime(2016, 3, 22, 8, 30, 52)
             };
           
         }

@@ -19,7 +19,6 @@ namespace DidactischeLeermiddelen.Tests.Controllers
     public class ReservationControllerTest
     {
         IEnumerable<WishlistViewModel> wishlistViewModels;
-        IEnumerable<WishlistViewModel> reservationViewModels;
         private ReservationController reservationController;
         private DummyDataContext context;
         private Mock<ILearningUtilityRepository> itemRepository;
@@ -28,7 +27,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         private User lector;
         private Mock<HttpRequestBase> request;
         private Mock<HttpContextBase> httpcontext;
-        private Reservation reservation;
+       
       
 
 
