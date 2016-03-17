@@ -191,20 +191,20 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         {
             int week = GetCurrentWeek(date);
             int currentWeek = GetCurrentWeek(DateTime.Now);
-            IEnumerable<Reservation> reservations = Reservations.Where(r => r.Week == week || r.Week < currentWeek);
+            IEnumerable<Reservation> reservations = Reservations.Where(r =>GetCurrentWeek(r.DateWanted) == week ||GetCurrentWeek(r.DateWanted) < currentWeek);
             return AmountInCatalog - reservations.Sum(r => r.Amount) - AmountUnavailable;
         }
 
         public int AmountReservedForWeek(DateTime date)
         {
             int week = GetCurrentWeek(date);
-            return Reservations.Where(r => r.Week == week && r.User.GetType() == typeof (Student)).Sum(r => r.Amount);
+            return Reservations.Where(r =>GetCurrentWeek(r.DateWanted) == week && r.User.GetType() == typeof (Student)).Sum(r => r.Amount);
         }
 
         public int AmountBlockedForWeek(DateTime date)
         {
             int week = GetCurrentWeek(date);
-            IEnumerable<Reservation> reservations =  Reservations.Where(r => r.Week == week && r.User.GetType() == typeof (Lector));
+            IEnumerable<Reservation> reservations =  Reservations.Where(r =>GetCurrentWeek(r.DateWanted) == week && r.User.GetType() == typeof (Lector));
             return reservations.Sum(r => r.Amount);
         }
 
@@ -212,15 +212,8 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         {
             int week = GetCurrentWeek(date);
             int currentWeek = GetCurrentWeek(DateTime.Now);
-            IEnumerable<Reservation> reservations = Reservations.Where(r => r.Week == week || r.Week < currentWeek);
+            IEnumerable<Reservation> reservations = Reservations.Where(r => GetCurrentWeek(r.DateWanted) == week ||GetCurrentWeek(r.DateWanted) < currentWeek);
             return reservations.Sum(r => r.Amount) + AmountUnavailable;
-        }
-
-        private int AmountAvailableForWeek(int week)
-        {
-            int currentWeek = GetCurrentWeek(DateTime.Now);
-            IEnumerable<Reservation> reservations = Reservations.Where(r => r.Week == week || r.Week < currentWeek);
-            return AmountInCatalog - reservations.Sum(r => r.Amount) - AmountUnavailable;
         }
 
         /// <summary>
@@ -229,7 +222,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         /// <param name="reservation"></param>
         public void AddReservation(Reservation reservation)
         {
-            if (reservation.Amount > AmountAvailableForWeek(reservation.Week))
+            if (reservation.Amount > AmountAvailableForWeek(reservation.DateWanted))
                 throw new ArgumentOutOfRangeException();
             if (reservation.Amount > 0)
             {

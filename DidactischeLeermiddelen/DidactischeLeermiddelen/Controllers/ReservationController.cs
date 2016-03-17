@@ -79,7 +79,7 @@ namespace DidactischeLeermiddelen.Controllers
         /// <returns></returns>
         private IQueryable<Reservation> sortReservations(IQueryable<Reservation> reservations)
         {
-            return reservations.OrderBy(res => res.Week);
+            return reservations.OrderBy(res => res.DateWanted);
         }
 
         /// <summary>
@@ -95,12 +95,12 @@ namespace DidactischeLeermiddelen.Controllers
             {                
                 LearningUtility learningUtility = learningUtilityRepository.FindBy(wishlistViewModel.Id);
 
-                int week = learningUtility.GetCurrentWeek((DateTime)wishlistViewModel.Date);
+                DateTime dateWanted = (DateTime)wishlistViewModel.Date;
                 int amount = wishlistViewModel.AmountWanted;
 
                 try
                 {
-                    user.AddReservation(week, amount, learningUtility);
+                    user.AddReservation(dateWanted, amount, learningUtility);
                     user.Wishlist.RemoveItem(learningUtility);
                 }
                 catch (ArgumentOutOfRangeException)

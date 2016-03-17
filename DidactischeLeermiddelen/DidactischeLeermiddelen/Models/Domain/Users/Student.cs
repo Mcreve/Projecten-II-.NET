@@ -29,13 +29,14 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 
         #endregion
         #region Methods
-        public override void AddReservation(int week, int amount, LearningUtility learningUtility)
+        public override void AddReservation(DateTime dateWanted, int amount, LearningUtility learningUtility)
         {
-            Reservation reservation = new Reservation()
+            Reservation reservation = new Reservation
             {
                 User = this,
-                Week = week,
-                Amount = amount
+                DateWanted = dateWanted,
+                Amount = amount,
+                ReservationDate = DateTime.Now
             };
             learningUtility.AddReservation(reservation);
         }

@@ -112,7 +112,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         #endregion
 
         #region methods
-        public abstract void AddReservation(int week, int amount, LearningUtility learningUtility);
+        public abstract void AddReservation(DateTime dateWanted, int amount, LearningUtility learningUtility);
         public abstract void RemoveReservation(Reservation reservation);
         #endregion
     }

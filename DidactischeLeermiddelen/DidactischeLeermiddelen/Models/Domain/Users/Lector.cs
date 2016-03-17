@@ -28,7 +28,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         {
         }
 
-        public override void AddReservation(int week, int amount, LearningUtility learningUtility)
+        public override void AddReservation(DateTime dateWanted, int amount, LearningUtility learningUtility)
         {
             throw new NotImplementedException();
         }
