@@ -10,9 +10,11 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
     public class Reservation
     {
         public int Id { get; set; }
-        public int Week { get; set; }
+        public DateTime DateWanted { get; set; }
         public virtual User User { get; set; }
         public int Amount { get; set; }
         public virtual LearningUtility LearningUtility { get;  set; }
+        public DateTime ReservationDate { get; set; }
+        public string DaysBlocked { get; set; }
     }
 }
