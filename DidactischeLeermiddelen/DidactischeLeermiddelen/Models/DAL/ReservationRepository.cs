@@ -6,7 +6,6 @@ using System.Web;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
 using System.Data.Entity;
 
-
 namespace DidactischeLeermiddelen.Models.DAL
 {
     public class ReservationRepository : IReservationRepository
@@ -38,10 +37,6 @@ namespace DidactischeLeermiddelen.Models.DAL
         public Reservation FindBy(int id)
         {
             return reservations.FirstOrDefault(res => res.Id == id);
-        }
-        public void Add(Reservation reservation)
-        {
-            reservations.Add(reservation);
         }
 
         public void SaveChanges()

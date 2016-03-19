@@ -109,7 +109,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
             }
         }
         public virtual Wishlist Wishlist { get; set; }
-        
         #endregion
 
         #region Abstract methods

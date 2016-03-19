@@ -156,26 +156,12 @@ namespace DidactischeLeermiddelen.Models.DAL
 
         private Reservation CreateReservation(DateTime dateWanted, User user, int quantity)
         {
-            if (user.Equals(typeof(Student)))
-            {
-                StudentReservation reservation = new StudentReservation();
-                reservation.DateWanted = dateWanted;
-                reservation.ReservationDate = DateTime.Now;
-                reservation.User = user;
-                reservation.Amount = quantity;
-                return reservation;
-            }
-            else
-            {
-                LectorReservation reservation = new LectorReservation();
-                reservation.DateWanted = dateWanted;
-                reservation.ReservationDate = DateTime.Now;
-                reservation.User = user;
-                reservation.Amount = quantity;
-                return reservation;
-            }
-                
-            
+            Reservation reservation = new Reservation();
+            reservation.DateWanted = dateWanted;
+            reservation.ReservationDate = DateTime.Now;
+            reservation.User = user;
+            reservation.Amount = quantity;
+            return reservation;
         }
 
         /// <summary>

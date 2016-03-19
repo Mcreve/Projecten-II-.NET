@@ -14,7 +14,5 @@ namespace DidactischeLeermiddelen.Models.Domain
         IQueryable<Reservation> FindAllForUser(string userId);
         void Delete(Reservation reservation);
         void SaveChanges();
-        void Add(Reservation reservation);
-
     }
 }

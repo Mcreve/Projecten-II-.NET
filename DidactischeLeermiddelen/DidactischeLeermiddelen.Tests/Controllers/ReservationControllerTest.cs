@@ -48,9 +48,9 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             itemRepository.Setup(i => i.FindBy(3)).Returns(context.LearningUtility3);
             reservationRepository = new Mock<IReservationRepository>();
             reservationRepository.Setup(i => i.FindAll()).Returns(context.reservationList);
-            reservationRepository.Setup(i => i.FindAllForUser("Benjamin.vertonghen@student.hogent.be")).Returns(context.reservationList.Where(reservation => reservation.User.EmailAddress == "Benjamin.vertonghen@student.hogent.be"));
+            reservationRepository.Setup(i => i.FindAllForUser("Benjamin.vertonghen@student.hogent.be")).Returns(context.reservationList);
             reservationController = new ReservationController(reservationRepository.Object, itemRepository.Object);
-            reservationRepository.Setup(i => i.FindBy(0)).Returns(context.LearningUtility1.Reservations.FirstOrDefault());
+            reservationRepository.Setup(i => i.FindBy(0)).Returns(context.reservation1);
             request = new Mock<HttpRequestBase>();
             httpcontext = new Mock<HttpContextBase>();
             httpcontext.SetupGet(x => x.Request).Returns(request.Object);
@@ -68,13 +68,27 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         }
 
 
+
+
+   
+        [TestMethod]
+        public void IndexShowsStartDateNextWeek()
+
+
+        {
+
+            //Deze methode misschien beter in de wishlistControllerTest invoegen? Daar we de date van het Viewmodel moeten instellen op het begin van volgende week
+
+        }
+
+
         [TestMethod]
         public void StudentReservesMaterial()
         {
             //Act
 
             wishlistViewModels.FirstOrDefault().AmountWanted = 2;
-            wishlistViewModels.FirstOrDefault().Date = new DateTime(2016, 3, 22);
+            wishlistViewModels.FirstOrDefault().Date = new DateTime(2016, 3, 16);
 
 
 
@@ -119,42 +133,6 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         }
 
 
-
-        [TestMethod]
-        public void LectorBlocksMaterial()
-        {
-            //Act
-
-            wishlistViewModels.FirstOrDefault().AmountWanted = 2;
-            wishlistViewModels.FirstOrDefault().Date = new DateTime(2016, 3, 16);
-
-
-
-            //Arrange
-            RedirectToRouteResult result = reservationController.Add(lector, wishlistViewModels) as RedirectToRouteResult;
-
-            //Assert
-            Assert.AreEqual("Index", result.RouteValues["action"]);
-
-        }
-
-        [TestMethod]
-        public void LectorBlocksWhenMaterialReserved()
-        {
-            //Act
-
-            wishlistViewModels.FirstOrDefault().AmountWanted = 3;
-            wishlistViewModels.FirstOrDefault().Date = new DateTime(2016, 3, 22);
-
-
-
-            //Arrange
-            RedirectToRouteResult result = reservationController.Add(lector, wishlistViewModels) as RedirectToRouteResult;
-
-            //Assert
-            Assert.AreEqual("Index", result.RouteValues["action"]);
-
-        }
         [TestMethod]
         public void IndexShowsEmptyReservationsIfReservationsAreEmpty()
         {
@@ -168,7 +146,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         }
 
         [TestMethod]
-        public void IndexShowsReservationsForStudents()
+        public void IndexShowsReservations()
         {
    
             //Act

@@ -239,7 +239,6 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         /// <param name="reservation"></param>
         public void AddReservation(Reservation reservation)
         {
-            
             if (reservation.Amount > AmountAvailableForWeek(reservation.DateWanted))
                 throw new ArgumentOutOfRangeException();
             if (reservation.Amount > 0)
