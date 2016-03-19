@@ -128,7 +128,7 @@ namespace DidactischeLeermiddelen.Controllers
                 if (reservation == null)
                     return HttpNotFound();
 
-                learningUtility.RemoveReservation(reservation);
+                user.RemoveReservation(learningUtility, reservation);
                 reservationRepository.SaveChanges();
 
                 TempData["info"] = String.Format("Reservatie werd succesvol verwijderd.");

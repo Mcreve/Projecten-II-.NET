@@ -33,10 +33,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
             throw new NotImplementedException();
         }
 
-        public override void RemoveReservation(Reservation reservation)
-        {
-            throw new NotImplementedException();
-        }
+
         #endregion
     }
 }

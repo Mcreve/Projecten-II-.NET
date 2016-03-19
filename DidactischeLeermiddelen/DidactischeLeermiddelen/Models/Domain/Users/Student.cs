@@ -41,10 +41,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
             learningUtility.AddReservation(reservation);
         }
 
-        public override void RemoveReservation(Reservation reservation)
-        {
-            throw new NotImplementedException();
-        }
+      
         #endregion
 
     }
