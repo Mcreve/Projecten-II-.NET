@@ -53,8 +53,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
                                                        "Error: Parameter is not a type of the UserType Enum");
             }
         }
-    
-
         /// <summary>
         ///     Determines the type of the user based on his/hers e-mailaddress
         /// </summary>
