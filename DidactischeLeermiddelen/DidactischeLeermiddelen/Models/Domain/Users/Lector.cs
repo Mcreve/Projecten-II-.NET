@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
+using System.Collections.Generic;
 
 namespace DidactischeLeermiddelen.Models.Domain.Users
 {
@@ -28,14 +29,55 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         {
         }
 
+
+
+
+        /// <summary>
+        /// Blocks material for Lector. If there is not enough available material, but there is enough blockable material,
+        /// the reservations for students get adjusted. If the amount required by the lector surpasses the amount in a student's
+        /// reservation this reservation get deleted.
+        /// </summary>
+        /// <param name="dateWanted"></param>
+        /// <param name="amount"></param>
+        /// <param name="learningUtility"></param>
         public override void AddReservation(DateTime dateWanted, int amount, LearningUtility learningUtility)
         {
-            throw new NotImplementedException();
+
+            int amountAvailable = learningUtility.AmountAvailableForWeek(dateWanted);
+            if (amount > amountAvailable)
+            {
+               if(amount <= learningUtility.AmountReservedForWeek(dateWanted) + amountAvailable)
+                {
+                   var studentReservations = learningUtility.Reservations.Where(res => res.User is Student);
+                    studentReservations.OrderBy(res => res.ReservationDate);
+                    if(amount <= studentReservations.FirstOrDefault().Amount)
+                    {
+                        studentReservations.FirstOrDefault().Amount = studentReservations.FirstOrDefault().Amount - amount;
+                        if(studentReservations.FirstOrDefault().Amount == 0)
+                        {
+                            studentReservations.FirstOrDefault().LearningUtility.RemoveReservation(studentReservations.FirstOrDefault());
+                        }
+
+                    }
+              
+                }
+            }
+
+            Reservation reservation = new LectorReservation
+            {
+                User = this,
+                DateWanted = dateWanted,
+                Amount = amount,
+                ReservationDate = DateTime.Now
+            };
+            learningUtility.AddReservation(reservation);
+
         }
+       
 
         public override void RemoveReservation(Reservation reservation)
         {
-            throw new NotImplementedException();
+            reservation.LearningUtility.RemoveReservation(reservation);
         }
         #endregion
     }

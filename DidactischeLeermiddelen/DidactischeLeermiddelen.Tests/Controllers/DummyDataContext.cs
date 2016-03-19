@@ -24,6 +24,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         public LearningUtility LearningUtility3 { get; set; }
         public List<LearningUtility> LearningSearchResult { get; set; }
         public Reservation reservation1 { get; set; }
+        public Reservation reservation2 { get; set; }
 
         public IQueryable<Reservation> reservationList { get; set; }
 
@@ -39,7 +40,8 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             CreateTargetGroups();
             CreateLearningUtilities();
             CreateLists();
-            createReservation();
+            createStudentReservation();
+            createLectorReservation();
             CreateReservationList();
 
         }
@@ -82,6 +84,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
                 Price = 75m,
                 AmountInCatalog = 6,
                 AmountUnavailable = 0,
+
 
             };
             LearningUtility1.FieldsOfStudy.Add(FieldOfStudy1);
@@ -140,21 +143,23 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             Student1 = UserFactory.CreateUserWithParameters("Benjamin", "Vertonghen", "Benjamin.vertonghen@student.hogent.be");
         }
 
-        private void createReservation()
+        private void createStudentReservation()
         {
 
-            reservation1 = new Reservation
-            {
-                User = Student1,
-                Amount = 2,
-                DateWanted = new DateTime(2016, 3, 22, 8, 30, 52),
-                LearningUtility = LearningUtility1,
-            };
-          
+            Student1.AddReservation(new DateTime(2016, 3, 22, 8, 30, 52), 3, LearningUtility1);
+
+
+        }
+        private void createLectorReservation()
+        {
+
+            Lector1.AddReservation(new DateTime(2016, 3, 22, 8, 30, 52), 3, LearningUtility1);
+              
+        
         }
         private void CreateReservationList()
         {
-            reservationList = (new Reservation[] { reservation1 }).ToList().AsQueryable();
+            reservationList = LearningUtility1.Reservations.AsQueryable();
 
         }
     }

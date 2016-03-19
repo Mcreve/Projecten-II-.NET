@@ -74,8 +74,7 @@ namespace DidactischeLeermiddelen.Controllers
         }
 
         /// <summary>
-        /// Adds a reservation for a learning utility by a specific user, clears the old wishlist.
-        /// </summary>
+        /// Adds a reservation for a learning utility by a specific user
         /// <param name="user"></param>
         /// <param name="wishlistViewModels"></param>
         /// <returns></returns>
@@ -92,7 +91,7 @@ namespace DidactischeLeermiddelen.Controllers
                 try
                 {
                     user.AddReservation(dateWanted, amount, learningUtility);
-                    user.Wishlist.RemoveItem(learningUtility);
+                    
                 }
                 catch (ArgumentOutOfRangeException)
                 {
@@ -105,6 +104,7 @@ namespace DidactischeLeermiddelen.Controllers
                 }                               
             }
             if (save) { 
+                
                 learningUtilityRepository.SaveChanges();
                 TempData["info"] = "Reservatie geslaagd";
                 return RedirectToAction("Index");

@@ -8,7 +8,7 @@ using System.Web;
 
 namespace DidactischeLeermiddelen.Models.DAL.Mapper
 {
-    public class ReservationMapper : EntityTypeConfiguration<Reservation>
+    public class ReservationMapper : EntityTypeConfiguration<StudentReservation>
     {
         public ReservationMapper()
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
+using System.Collections.Generic;
 
 namespace DidactischeLeermiddelen.Models.Domain.Users
 {
@@ -25,25 +26,30 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
             
         }
 
-
-
         #endregion
+
         #region Methods
         public override void AddReservation(DateTime dateWanted, int amount, LearningUtility learningUtility)
         {
-            Reservation reservation = new Reservation
+            StudentReservation reservation = new StudentReservation
             {
                 User = this,
                 DateWanted = dateWanted,
                 Amount = amount,
-                ReservationDate = DateTime.Now
+                ReservationDate = DateTime.Now,
+                LearningUtility = learningUtility
+                
             };
             learningUtility.AddReservation(reservation);
+            
+
         }
 
         public override void RemoveReservation(Reservation reservation)
         {
-            throw new NotImplementedException();
+            reservation.LearningUtility.RemoveReservation(reservation);
+          
+
         }
         #endregion
 
