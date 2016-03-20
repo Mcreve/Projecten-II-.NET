@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
+using System.Collections.Generic;
 
 namespace DidactischeLeermiddelen.Models.Domain.Users
 {
@@ -9,7 +10,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
     /// </summary>
     public class Lector : User
     {
-
         #region Constructor
         /// <summary>
         /// Constructor without parameters, calls the base constructor of User (superclass)
@@ -37,8 +37,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         public override void AddReservation(DateTime dateWanted, int amount, LearningUtility learningUtility)
         {
 
-
-
             int amountAvailable = learningUtility.AmountAvailableForWeek(dateWanted);
             
             if (amount <= amountAvailable)
@@ -52,7 +50,8 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
                     LearningUtility = learningUtility
 
                 };
-                this.Reservations.Add(reservation);
+                Reservations.Add(reservation);
+                learningUtility.Reservations.Add(reservation);
 
             }
 
@@ -64,34 +63,52 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
                     var studentReservations = learningUtility.Reservations.Where(res => res.User.GetType() == typeof(Student));
                     studentReservations.OrderBy(res => res.ReservationDate);
 
-                    
-                    if (amount <= studentReservations.FirstOrDefault().Amount)
-                    {
-                        studentReservations.FirstOrDefault().Amount = studentReservations.FirstOrDefault().Amount - amount;
-                        if (studentReservations.FirstOrDefault().Amount == 0)
+                    var amountNeededFromReservations = amount - amountAvailable;
+                    while (amountNeededFromReservations > 0)
+                    { 
+
+                        foreach( Reservation res in studentReservations)
                         {
-                            studentReservations.FirstOrDefault().LearningUtility.RemoveReservation(studentReservations.FirstOrDefault());
+                            if( amountNeededFromReservations > res.Amount)
+                            {
+                                var reservationAmount = res.Amount;
+                                res.Amount =- amountNeededFromReservations;
+                                if(res.Amount == 0)
+                                {
+                                    this.Reservations.Remove(res);
+                                }
+                                amountNeededFromReservations =-reservationAmount;
+
+                            }
+
                         }
+                            
 
                     }
-                    if (amount > 0)
+                    Reservation reservation = new Reservation
                     {
-                        
-                    }
-                } 
-            
-               
-            else
-            {
+                        User = this,
+                        DateWanted = dateWanted,
+                        Amount = amount,
+                        ReservationDate = DateTime.Now,
+                        LearningUtility = learningUtility
+
+                    };
+                    this.Reservations.Add(reservation);
+
+                }
+                else
+                {
+                        throw new ArgumentOutOfRangeException();
+                }
+
+                
+
                 throw new ArgumentNullException("Meer dan 1 item nodig om te reserveren");
             }
 
         }
 
-  
-
-
-        }
-        #endregion
     }
+    #endregion
 }

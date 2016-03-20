@@ -19,6 +19,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
     public class ReservationControllerTest
     {
         IEnumerable<WishlistViewModel> wishlistViewModels;
+        IEnumerable<WishlistViewModel> wishlistViewModels2;
         private ReservationController reservationController;
         private DummyDataContext context;
         private Mock<ILearningUtilityRepository> itemRepository;
@@ -47,10 +48,10 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             itemRepository.Setup(i => i.FindBy(2)).Returns(context.LearningUtility2);
             itemRepository.Setup(i => i.FindBy(3)).Returns(context.LearningUtility3);
             reservationRepository = new Mock<IReservationRepository>();
-            reservationRepository.Setup(i => i.FindAll()).Returns(context.reservationList);
-            reservationRepository.Setup(i => i.FindAllForUser("Benjamin.vertonghen@student.hogent.be")).Returns(context.reservationList);
+            reservationRepository.Setup(i => i.FindAll()).Returns(context.reservationList.AsQueryable());
+            reservationRepository.Setup(i => i.FindAllForUser("Benjamin.vertonghen@student.hogent.be")).Returns(context.reservationList.Where(res => res.User.EmailAddress == "Benjamin.vertonghen@student.hogent.be").AsQueryable());
             reservationController = new ReservationController(reservationRepository.Object, itemRepository.Object);
-            reservationRepository.Setup(i => i.FindBy(0)).Returns(context.reservation1);
+            reservationRepository.Setup(i => i.FindBy(2)).Returns(context.reservationList.Single(res => res.Id == 2));
             request = new Mock<HttpRequestBase>();
             httpcontext = new Mock<HttpContextBase>();
             httpcontext.SetupGet(x => x.Request).Returns(request.Object);
@@ -58,12 +59,19 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             reservationController.ControllerContext = new ControllerContext(httpcontext.Object, new RouteData(), reservationController);
             student = context.Student1;
             lector = context.Lector1;
+            lector.Wishlist = new Wishlist();
+            lector.Wishlist.AddItem(context.LearningUtility1);
+            wishlistViewModels2 = lector.Wishlist.LearningUtilities.Select(learningUtility =>
+                 new WishlistViewModel(learningUtility))
+                  .ToList();
             student.Wishlist = new Wishlist();
             student.Wishlist.AddItem(context.LearningUtility1);
             wishlistViewModels = student.Wishlist.LearningUtilities.Select(learningUtility =>
                  new WishlistViewModel(learningUtility))
                   .ToList();
-          ;
+
+            
+
 
         }
 
@@ -88,7 +96,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             //Act
 
             wishlistViewModels.FirstOrDefault().AmountWanted = 2;
-            wishlistViewModels.FirstOrDefault().Date = new DateTime(2016, 3, 16);
+            wishlistViewModels.FirstOrDefault().Date = new DateTime(2016, 3, 22);
 
 
 
@@ -106,7 +114,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         {
             //Act
             wishlistViewModels.FirstOrDefault().AmountWanted = 7;
-            wishlistViewModels.FirstOrDefault().Week = 12;
+            wishlistViewModels.FirstOrDefault().Date = new DateTime(2016, 3, 22);
 
             //Arrange
             RedirectToRouteResult result = reservationController.Add(student, wishlistViewModels) as RedirectToRouteResult;
@@ -122,7 +130,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
         public void StudentsNoAmountOfMaterial()
         {
             wishlistViewModels.FirstOrDefault().AmountWanted = 0;
-            wishlistViewModels.FirstOrDefault().Week = 12;
+            wishlistViewModels.FirstOrDefault().Date = new DateTime(2016, 3, 22);
 
             //Arrange
             RedirectToRouteResult result = reservationController.Add(student, wishlistViewModels) as RedirectToRouteResult;
@@ -132,6 +140,41 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             Assert.AreEqual("Index", result.RouteValues["action"]);
         }
 
+        [TestMethod]
+        public void LectorBlocksMaterial()
+        {
+            //Act
+
+            wishlistViewModels2.FirstOrDefault().AmountWanted = 2;
+            wishlistViewModels2.FirstOrDefault().Date = new DateTime(2016, 3, 20);
+
+
+
+            //Arrange
+            RedirectToRouteResult result = reservationController.Add(lector, wishlistViewModels2) as RedirectToRouteResult;
+
+            //Assert
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+
+        }
+
+        [TestMethod]
+        public void LectorBlocksWhenMaterialReserved()
+        {
+            //Act
+
+            wishlistViewModels.FirstOrDefault().AmountWanted = 3;
+            wishlistViewModels.FirstOrDefault().Date = new DateTime(2016, 3, 22);
+
+
+
+            //Arrange
+            RedirectToRouteResult result = reservationController.Add(lector, wishlistViewModels) as RedirectToRouteResult;
+
+            //Assert
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+
+        }
 
         [TestMethod]
         public void IndexShowsEmptyReservationsIfReservationsAreEmpty()

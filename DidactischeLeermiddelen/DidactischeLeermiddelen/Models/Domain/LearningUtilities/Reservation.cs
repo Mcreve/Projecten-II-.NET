@@ -18,21 +18,26 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public DateTime? ReservationDate { get; set; }
         public string DaysBlocked { get; set; }
 
-
+        #region Methods
+        /// <summary>
+        /// Gets the state of the reservation in essence of the current week and the reservation date of the reservation.
+        /// </summary>
+        /// <returns>The state of the reservation </returns>
         public string GetState()
         {
             int currentWeek = LearningUtility.GetCurrentWeek(DateTime.Now);
             int weekReserved = LearningUtility.GetCurrentWeek(DateWanted);
             if (currentWeek > weekReserved)
             {
-                return "Te laat";
+                return ReservationStateType.Late.ToString();
             }
             var userType = User as Student;
             if (userType != null)
             {
-                return "Gereserveerd";
+                return ReservationStateType.Reserved.ToString();
             }
-            return "Geblokkeerd";
+            return ReservationStateType.Blocked.ToString();
         }
+        #endregion
     }
 }

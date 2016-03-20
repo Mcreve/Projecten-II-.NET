@@ -17,7 +17,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         /// </summary>
         protected User()
         {
-            
+            Reservations = new List<Reservation>();
         }
         /// <summary>
         /// Constructor with 3 parameter, calls default constructor
@@ -109,10 +109,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
             }
         }
         public virtual Wishlist Wishlist { get; set; }
-
         public virtual List<Reservation> Reservations { get; set; }
-        #endregion
-
         #region Abstract methods
         public abstract void AddReservation(DateTime dateWanted, int amount, LearningUtility learningUtility);
         #endregion
@@ -122,7 +119,8 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
             learningUtility.Reservations.Remove(reservation);
             Reservations.Remove(reservation);
         }
-        #endregion
 
+        #endregion
+        #endregion
     }
 }

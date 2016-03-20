@@ -39,8 +39,7 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             CreateTargetGroups();
             CreateLearningUtilities();
             CreateLists();
-            createReservation();
-            CreateReservationList();
+            CreateReservationUser();
 
         }
 
@@ -140,22 +139,24 @@ namespace DidactischeLeermiddelen.Tests.Controllers
             Student1 = UserFactory.CreateUserWithParameters("Benjamin", "Vertonghen", "Benjamin.vertonghen@student.hogent.be");
         }
 
-        private void createReservation()
-        {
-
-            reservation1 = new Reservation
+        private void CreateReservationUser()
             {
-                User = Student1,
+            reservation1 = new Reservation { 
+                DateWanted = new DateTime(2016, 3, 23, 8, 30, 52),
                 Amount = 2,
-                DateWanted = new DateTime(2016, 3, 22, 8, 30, 52),
                 LearningUtility = LearningUtility1,
+                ReservationDate =  new DateTime(2016, 3, 22, 8, 30, 52),
+                Id = 2,
+                User = Student1
             };
-          
-        }
-        private void CreateReservationList()
-        {
-            reservationList = (new Reservation[] { reservation1 }).ToList().AsQueryable();
 
+
+            reservationList = (new Reservation[] { reservation1 }).ToList().AsQueryable();
+            Student1.Reservations = reservationList.ToList();
+            LearningUtility1.Reservations = reservationList.ToList();
         }
+
+   
+ 
     }
 }

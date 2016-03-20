@@ -93,6 +93,7 @@ namespace DidactischeLeermiddelen.Controllers
                 try
                 {
                     user.AddReservation(dateWanted, amount, learningUtility);
+
                 }
                     
             
@@ -109,6 +110,7 @@ namespace DidactischeLeermiddelen.Controllers
             if (save) {
                
                 reservationRepository.SaveChanges();
+                learningUtilityRepository.SaveChanges();
                 TempData["info"] = "Reservatie geslaagd";
                 return RedirectToAction("Index");
             }

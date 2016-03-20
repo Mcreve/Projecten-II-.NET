@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
+using System.Collections.Generic;
 
 namespace DidactischeLeermiddelen.Models.Domain.Users
 {
@@ -22,10 +23,8 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         /// <param name="emailAddress"></param>
         public Student(string firstName, string lastName, string emailAddress) : base(firstName, lastName, emailAddress)
         {
-            
+           
         }
-
-
 
         #endregion
         #region Methods
@@ -46,7 +45,8 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
                     LearningUtility = learningUtility
 
                 };
-                this.Reservations.Add(reservation);
+                Reservations.Add(reservation);
+                learningUtility.Reservations.Add(reservation);
             }
             else
             {
@@ -56,7 +56,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 
         }
 
-      
         #endregion
 
     }
