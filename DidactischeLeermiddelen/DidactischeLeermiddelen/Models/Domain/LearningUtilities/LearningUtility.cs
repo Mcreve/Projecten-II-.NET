@@ -216,7 +216,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         {
             int week = GetCurrentWeek(date);
             
-            IEnumerable<Reservation> reservations =  Reservations.Where(r =>GetCurrentWeek(r.DateWanted) == week && r.User.GetType() == typeof (Lector));
+            IEnumerable<Reservation> reservations =  Reservations.Where(r =>GetCurrentWeek(r.DateWanted) == week || GetCurrentWeek(r.DateWanted) < week && r.User.GetType() == typeof (Lector));
             return reservations.Sum(r => r.Amount);
         }
         /// <summary>
