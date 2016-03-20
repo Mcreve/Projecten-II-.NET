@@ -109,15 +109,18 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
             }
         }
         public virtual Wishlist Wishlist { get; set; }
+
+        public virtual List<Reservation> Reservations { get; set; }
         #endregion
 
         #region Abstract methods
-        public abstract void AddReservation(DateTime dateWanted, int amount, LearningUtility learningUtility);
+        public abstract void AddReservation(Reservation reservation);
         #endregion
         #region Concrete Methods
         public void RemoveReservation(LearningUtility learningUtility, Reservation reservation)
         {
-            learningUtility.RemoveReservation(reservation);
+            learningUtility.Reservations.Remove(reservation);
+            Reservations.Remove(reservation);
         }
         #endregion
 

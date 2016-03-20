@@ -156,7 +156,6 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public int AmountUnavailable { get; set; }
         public virtual List<Reservation> Reservations { get; set; }
         public DateTime? DateWanted { get; set; }
-        public Byte[] TimeStamp { get; set; }
         #endregion
 
         #region Constructors

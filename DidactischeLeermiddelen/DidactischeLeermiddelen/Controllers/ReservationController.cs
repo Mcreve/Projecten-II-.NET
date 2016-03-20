@@ -91,8 +91,19 @@ namespace DidactischeLeermiddelen.Controllers
 
                 try
                 {
-                    user.AddReservation(dateWanted, amount, learningUtility);
-                    user.Wishlist.RemoveItem(learningUtility);
+                    Reservation reservation = new Reservation
+                    {
+                        User = user,
+                        DateWanted = dateWanted,
+                        Amount = amount,
+                        LearningUtility = learningUtility,
+                        ReservationDate = DateTime.Now,
+                        
+                    };
+                    user.AddReservation(reservation);
+                   
+               
+
                 }
                 catch (ArgumentOutOfRangeException)
                 {
@@ -104,8 +115,9 @@ namespace DidactischeLeermiddelen.Controllers
                     TempData["error"] = "Er ging iets fout met je reservatie. Je moet minstens 1 item reserveren voor elk gewenst item. Controleer je gewenste aantallen en probeer opnieuw";
                 }                               
             }
-            if (save) { 
-                learningUtilityRepository.SaveChanges();
+            if (save) {
+               
+                reservationRepository.SaveChanges();
                 TempData["info"] = "Reservatie geslaagd";
                 return RedirectToAction("Index");
             }
@@ -129,6 +141,7 @@ namespace DidactischeLeermiddelen.Controllers
                     return HttpNotFound();
 
                 user.RemoveReservation(learningUtility, reservation);
+                reservationRepository.Delete(reservation);
                 reservationRepository.SaveChanges();
 
                 TempData["info"] = String.Format("Reservatie werd succesvol verwijderd.");
