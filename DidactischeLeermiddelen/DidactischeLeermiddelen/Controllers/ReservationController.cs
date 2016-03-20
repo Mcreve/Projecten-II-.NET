@@ -89,22 +89,13 @@ namespace DidactischeLeermiddelen.Controllers
                 DateTime dateWanted = (DateTime)wishlistViewModel.Date;
                 int amount = wishlistViewModel.AmountWanted;
 
+
                 try
                 {
-                    Reservation reservation = new Reservation
-                    {
-                        User = user,
-                        DateWanted = dateWanted,
-                        Amount = amount,
-                        LearningUtility = learningUtility,
-                        ReservationDate = DateTime.Now,
-                        
-                    };
-                    user.AddReservation(reservation);
-                   
-               
-
+                    user.AddReservation(dateWanted, amount, learningUtility);
                 }
+                    
+            
                 catch (ArgumentOutOfRangeException)
                 {
                     save = false;

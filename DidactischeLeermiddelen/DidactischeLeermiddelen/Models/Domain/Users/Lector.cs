@@ -28,12 +28,70 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         {
         }
 
-        public override void AddReservation(Reservation reservation)
+        /// <summary>		
+        /// Blocks material for Lector. If there is not enough available material, but there is enough blockable material,		
+        /// the reservations for students get adjusted. If the amount required by the lector surpasses the amount in a student's		
+        /// reservation this reservation get deleted.		
+        /// </summary>		
+        /// <param name="learningUtility"></param>	
+        public override void AddReservation(DateTime dateWanted, int amount, LearningUtility learningUtility)
         {
-            throw new NotImplementedException();
+
+
+
+            int amountAvailable = learningUtility.AmountAvailableForWeek(dateWanted);
+            
+            if (amount <= amountAvailable)
+            {
+                Reservation reservation = new Reservation
+                {
+                    User = this,
+                    DateWanted = dateWanted,
+                    Amount = amount,
+                    ReservationDate = DateTime.Now,
+                    LearningUtility = learningUtility
+
+                };
+                this.Reservations.Add(reservation);
+
+            }
+
+
+            else
+            {
+                if (amount <= learningUtility.AmountReservedForWeek(dateWanted) + amountAvailable)
+                {
+                    var studentReservations = learningUtility.Reservations.Where(res => res.User.GetType() == typeof(Student));
+                    studentReservations.OrderBy(res => res.ReservationDate);
+
+                    
+                    if (amount <= studentReservations.FirstOrDefault().Amount)
+                    {
+                        studentReservations.FirstOrDefault().Amount = studentReservations.FirstOrDefault().Amount - amount;
+                        if (studentReservations.FirstOrDefault().Amount == 0)
+                        {
+                            studentReservations.FirstOrDefault().LearningUtility.RemoveReservation(studentReservations.FirstOrDefault());
+                        }
+
+                    }
+                    if (amount > 0)
+                    {
+                        
+                    }
+                } 
+            
+               
+            else
+            {
+                throw new ArgumentNullException("Meer dan 1 item nodig om te reserveren");
+            }
+
         }
 
+  
 
+
+        }
         #endregion
     }
 }

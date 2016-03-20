@@ -29,13 +29,23 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 
         #endregion
         #region Methods
-        public override void AddReservation(Reservation reservation)
+        public override void AddReservation(DateTime dateWanted, int amount, LearningUtility learningUtility)
         {
 
-            if (reservation.Amount > reservation.LearningUtility.AmountAvailableForWeek(reservation.DateWanted))
+
+            if ( amount > learningUtility.AmountAvailableForWeek(dateWanted))
                 throw new ArgumentOutOfRangeException();
-            if (reservation.Amount > 0)
+            if (amount > 0)
             {
+                Reservation reservation = new Reservation
+                {
+                    User = this,
+                    DateWanted = dateWanted,
+                    Amount = amount,
+                    ReservationDate = DateTime.Now,
+                    LearningUtility = learningUtility
+
+                };
                 this.Reservations.Add(reservation);
             }
             else

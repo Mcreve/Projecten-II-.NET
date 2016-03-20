@@ -114,7 +114,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         #endregion
 
         #region Abstract methods
-        public abstract void AddReservation(Reservation reservation);
+        public abstract void AddReservation(DateTime dateWanted, int amount, LearningUtility learningUtility);
         #endregion
         #region Concrete Methods
         public void RemoveReservation(LearningUtility learningUtility, Reservation reservation)
