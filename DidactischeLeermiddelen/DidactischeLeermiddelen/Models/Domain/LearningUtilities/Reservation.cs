@@ -15,8 +15,6 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public virtual User User { get; set; }
         public int Amount { get; set; }
         public virtual LearningUtility LearningUtility { get;  set; }
-        public string UserEmail { get; set; }
-        public int LearningUtilityId { get; set; }
         public DateTime? ReservationDate { get; set; }
         public string DaysBlocked { get; set; }
 

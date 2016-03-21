@@ -43,13 +43,11 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
                     Amount = amount,
                     ReservationDate = DateTime.Now,
                     LearningUtility = learningUtility,
-                    UserEmail = this.EmailAddress,
-                    LearningUtilityId = learningUtility.Id
 
 
                 };
                 this.Reservations.Add(reservation);
-                //learningUtility.Reservations.Add(reservation);
+                
             }
             else
             {
@@ -62,6 +60,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         public override void RemoveReservation(Reservation reservation)
         {
             this.Reservations.Remove(reservation);
+            reservation.LearningUtility.Reservations.Remove(reservation);
         }
 
         #endregion

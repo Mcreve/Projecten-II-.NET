@@ -134,7 +134,7 @@ namespace DidactischeLeermiddelen.Controllers
                     return HttpNotFound();
 
                 user.RemoveReservation(reservation);
-                //reservationRepository.Delete(reservation);
+                reservationRepository.Delete(reservation);
                 reservationRepository.SaveChanges();
 
                 TempData["info"] = String.Format("Reservatie werd succesvol verwijderd.");
@@ -142,7 +142,6 @@ namespace DidactischeLeermiddelen.Controllers
             }
             catch (Exception e)
             {
-                e.Message.ToString();
                 TempData["error"] = "Verwijderen van de reservatie is mislukt, gelieve opnieuw te proberen. " +
                            "Indien de problemen zich blijven voordoen, contacteer de  administrator.";
             }
