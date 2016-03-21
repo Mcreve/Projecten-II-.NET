@@ -109,6 +109,10 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 
         }
 
+        public override void RemoveReservation(Reservation reservation)
+        {
+            this.Reservations.Remove(reservation);
+        }
     }
     #endregion
 }

@@ -11,7 +11,6 @@ namespace DidactischeLeermiddelen.Models.DAL.Mapper
             #region Keys
             HasKey(user => user.EmailAddress);
             #endregion
-
             #region Properties
             Property(user => user.EmailAddress).IsRequired().HasMaxLength(100);
             Property(user => user.FirstName).IsRequired().HasMaxLength(100);

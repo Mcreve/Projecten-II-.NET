@@ -232,10 +232,7 @@ namespace DidactischeLeermiddelen.Models.DAL
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(t => t.Name.Equals("Aardrijkskunde")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Middelbaar")));
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,3,12), users.First(u => u.GetType() == typeof(Lector)),4));
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,15), users.First(u => u.GetType() == typeof(Student)), 1));
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,5,14), users.First(u => u.GetType() == typeof(Lector)), 2));
-
+       
             context.LearningUtilities.Add(learningUtility);
 
             //Create dobbelsteenschatkist object
@@ -257,9 +254,9 @@ namespace DidactischeLeermiddelen.Models.DAL
                 AmountInCatalog = 20,
                 AmountUnavailable = 0
             };
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,12), users.First(u => u.GetType() == typeof(Student)), 1));
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,15), users.First(u => u.GetType() == typeof(Student)), 2));
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,5,16), users.First(u => u.GetType() == typeof(Lector)), 1));
+            users.First(u => u.GetType() == typeof(Student)).AddReservation(new DateTime(2016, 4, 22), 1, learningUtility);
+            users.First(u => u.GetType() == typeof(Student)).AddReservation(new DateTime(2016, 4, 13), 2, learningUtility);
+            users.First(u => u.GetType() == typeof(Lector)).AddReservation(new DateTime(2016, 5, 16), 1, learningUtility);
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Ontspanning")));
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
@@ -280,9 +277,9 @@ namespace DidactischeLeermiddelen.Models.DAL
                 AmountInCatalog = 12,
                 AmountUnavailable = 1
             };
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,13), users.First(u => u.GetType() == typeof(Student)), 10));
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,12), users.First(u => u.GetType() == typeof(Student)), 8));
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,18), users.First(u => u.GetType() == typeof(Lector)), 11));
+            users.First(u => u.GetType() == typeof(Student)).AddReservation(new DateTime(2016, 4, 18), 10, learningUtility);
+            users.First(u => u.GetType() == typeof(Student)).AddReservation(new DateTime(2016, 4, 14), 8, learningUtility);
+            users.First(u => u.GetType() == typeof(Lector)).AddReservation(new DateTime(2016, 4, 18), 11, learningUtility);
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
@@ -304,9 +301,9 @@ namespace DidactischeLeermiddelen.Models.DAL
                 AmountInCatalog = 100,
                 AmountUnavailable = 5
             };
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,13), users.First(u => u.GetType() == typeof(Student)), 10));
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,12), users.First(u => u.GetType() == typeof(Student)), 8));
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,18), users.First(u => u.GetType() == typeof(Lector)), 11));
+            users.First(u => u.GetType() == typeof(Student)).AddReservation(new DateTime(2016, 4, 13), 1, learningUtility);
+            users.First(u => u.GetType() == typeof(Student)).AddReservation(new DateTime(2016, 4, 16), 2, learningUtility);
+            users.First(u => u.GetType() == typeof(Lector)).AddReservation(new DateTime(2016, 5, 16), 1, learningUtility);
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));
@@ -326,9 +323,9 @@ namespace DidactischeLeermiddelen.Models.DAL
                 AmountInCatalog = 76,
                 AmountUnavailable = 0
             };
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,12), users.First(u => u.GetType() == typeof(Student)), 1));
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,15), users.First(u => u.GetType() == typeof(Student)), 2));
-            learningUtility.Reservations.Add(CreateReservation(new DateTime(2016,4,16), users.First(u => u.GetType() == typeof(Lector)), 1));
+            users.First(u => u.GetType() == typeof(Student)).AddReservation(new DateTime(2016, 4, 12), 1, learningUtility);
+            users.First(u => u.GetType() == typeof(Student)).AddReservation(new DateTime(2016, 4, 15), 2, learningUtility);
+            users.First(u => u.GetType() == typeof(Lector)).AddReservation(new DateTime(2016, 5, 16), 1, learningUtility);
             learningUtility.FieldsOfStudy.Add(fieldsOfStudy.Single(f => f.Name.Equals("Wiskunde")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Kleuter")));
             learningUtility.TargetGroups.Add(targetGroups.Single(t => t.Name.Equals("Lager")));

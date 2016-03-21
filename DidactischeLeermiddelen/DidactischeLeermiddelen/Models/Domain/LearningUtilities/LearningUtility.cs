@@ -154,7 +154,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
 
         public int AmountInCatalog { get; set; }
         public int AmountUnavailable { get; set; }
-        public virtual List<Reservation> Reservations { get; set; }
+        public virtual ICollection<Reservation> Reservations { get; set; }
         public DateTime? DateWanted { get; set; }
         #endregion
 
