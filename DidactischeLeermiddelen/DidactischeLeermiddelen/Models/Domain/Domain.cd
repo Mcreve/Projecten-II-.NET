@@ -97,13 +97,21 @@
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.Users.User">
     <Position X="7.5" Y="3" Width="5.5" />
+    <AssociationLine Name="Reservations" Type="DidactischeLeermiddelen.Models.Domain.LearningUtilities.Reservation">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.087" Y="0.355" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>ACAAAEAAAABAAAAAAAAAAAABAAAAAAACAAAACgAAAAg=</HashCode>
+      <HashCode>ACAAAEAAAABAAAAAEAAAAAABAAAAAAACAAAACgAAAAg=</HashCode>
       <FileName>Models\Domain\Users\User.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Wishlist" />
     </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Reservations" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.LearningUtilities.Reservation">
     <Position X="15" Y="10.75" Width="3.25" />

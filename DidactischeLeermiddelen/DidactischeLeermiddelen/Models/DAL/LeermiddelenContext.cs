@@ -41,6 +41,7 @@ namespace DidactischeLeermiddelen.Models.DAL
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Configurations.AddFromAssembly(Assembly.GetExecutingAssembly());
 
+
         }
 
         /// <summary>
