@@ -205,7 +205,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public int AmountReservedForWeek(DateTime date)
         {
             int week = GetCurrentWeek(date);
-            return Reservations.Where(r =>GetCurrentWeek(r.DateWanted) == week && r.User.GetType() == typeof (Student)).Sum(r => r.Amount);
+            return Reservations.Where(r =>GetCurrentWeek(r.DateWanted) == week && r.User is Student).Sum(r => r.Amount);
         }
         /// <summary>
         /// Gets the amount of the items that are blocked(by lector) for a specific week.
@@ -215,8 +215,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public int AmountBlockedForWeek(DateTime date)
         {
             int week = GetCurrentWeek(date);
-            
-            IEnumerable<Reservation> reservations =  Reservations.Where(r =>GetCurrentWeek(r.DateWanted) == week || GetCurrentWeek(r.DateWanted) < week && r.User.GetType() == typeof (Lector));
+            IEnumerable<Reservation> reservations =  Reservations.Where(r => GetCurrentWeek(r.DateWanted) == week  && r.User is Lector);
             return reservations.Sum(r => r.Amount);
         }
         /// <summary>
@@ -230,6 +229,17 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             int currentWeek = GetCurrentWeek(DateTime.Now);
             IEnumerable<Reservation> reservations = Reservations.Where(r => GetCurrentWeek(r.DateWanted) == week ||GetCurrentWeek(r.DateWanted) < currentWeek);
             return reservations.Sum(r => r.Amount) + AmountUnavailable;
+        }
+
+        /// <summary>
+        /// Returns a list of reservations by students for a specific week.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public IEnumerable<Reservation> GetStudentReserverationsForWeek(DateTime date)
+        {
+            int week = GetCurrentWeek(date);
+            return Reservations.Where(r => GetCurrentWeek(r.DateWanted) == week && r.User is Student);
         }
 
         /// <summary>

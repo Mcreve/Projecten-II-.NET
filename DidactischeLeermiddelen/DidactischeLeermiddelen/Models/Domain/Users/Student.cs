@@ -47,6 +47,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 
                 };
                 this.Reservations.Add(reservation);
+                learningUtility.AddReservation(reservation);
                 
             }
             else
@@ -60,7 +61,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
         public override void RemoveReservation(Reservation reservation)
         {
             this.Reservations.Remove(reservation);
-            reservation.LearningUtility.Reservations.Remove(reservation);
+            reservation.LearningUtility.RemoveReservation(reservation);
         }
 
         #endregion

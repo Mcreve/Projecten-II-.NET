@@ -21,8 +21,8 @@
     <Position X="7" Y="11" Width="5" />
     <AssociationLine Name="Company" Type="DidactischeLeermiddelen.Models.Domain.LearningUtilities.Company" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="12" Y="14.039" />
-        <Point X="15.916" Y="14.039" />
+        <Point X="12" Y="14.133" />
+        <Point X="15.916" Y="14.133" />
         <Point X="15.916" Y="15" />
       </Path>
       <MemberNameLabel ManuallyPlaced="true">
@@ -31,8 +31,8 @@
     </AssociationLine>
     <AssociationLine Name="Location" Type="DidactischeLeermiddelen.Models.Domain.LearningUtilities.Location" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="7" Y="14.039" />
-        <Point X="5.438" Y="14.039" />
+        <Point X="7" Y="14.133" />
+        <Point X="5.438" Y="14.133" />
         <Point X="5.438" Y="15" />
       </Path>
       <MemberNameLabel ManuallyPlaced="true">
@@ -56,14 +56,14 @@
   <Class Name="DidactischeLeermiddelen.Models.Domain.Users.Lector" BaseTypeListCollapsed="true">
     <Position X="0.5" Y="7.75" Width="7" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAgAAAAA=</HashCode>
       <FileName>Models\Domain\Users\Lector.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DidactischeLeermiddelen.Models.Domain.Users.Student" BaseTypeListCollapsed="true">
     <Position X="8" Y="7.75" Width="7.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAgAAAAA=</HashCode>
       <FileName>Models\Domain\Users\Student.cs</FileName>
     </TypeIdentifier>
   </Class>

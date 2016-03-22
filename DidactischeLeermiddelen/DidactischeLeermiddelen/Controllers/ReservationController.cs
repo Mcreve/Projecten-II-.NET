@@ -110,7 +110,7 @@ namespace DidactischeLeermiddelen.Controllers
             if (save) {
                
                 reservationRepository.SaveChanges();
-                //learningUtilityRepository.SaveChanges();
+                learningUtilityRepository.SaveChanges();
                 TempData["info"] = "Reservatie geslaagd";
                 return RedirectToAction("Index");
             }
@@ -136,11 +136,12 @@ namespace DidactischeLeermiddelen.Controllers
                 user.RemoveReservation(reservation);
                 reservationRepository.Delete(reservation);
                 reservationRepository.SaveChanges();
+                learningUtilityRepository.SaveChanges();
 
                 TempData["info"] = String.Format("Reservatie werd succesvol verwijderd.");
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 TempData["error"] = "Verwijderen van de reservatie is mislukt, gelieve opnieuw te proberen. " +
                            "Indien de problemen zich blijven voordoen, contacteer de  administrator.";

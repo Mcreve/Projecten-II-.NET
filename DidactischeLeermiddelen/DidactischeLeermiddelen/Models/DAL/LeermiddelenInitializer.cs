@@ -274,7 +274,7 @@ namespace DidactischeLeermiddelen.Models.DAL
                 Location = locations.ElementAtOrDefault(1),
                 Picture = @"/Images/rekenspelletjes.jpg",
                 Price = 10.9m,
-                AmountInCatalog = 12,
+                AmountInCatalog = 50,
                 AmountUnavailable = 1
             };
             users.First(u => u.GetType() == typeof(Student)).AddReservation(new DateTime(2016, 4, 18), 10, learningUtility);

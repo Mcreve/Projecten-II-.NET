@@ -13,7 +13,7 @@ namespace DidactischeLeermiddelen.Models.DAL.Mapper
         public ReservationMapper()
         {
             HasKey(res => res.Id);
-
+            
         }
     }
 }
