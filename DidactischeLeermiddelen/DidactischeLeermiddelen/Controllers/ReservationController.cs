@@ -93,6 +93,10 @@ namespace DidactischeLeermiddelen.Controllers
                 try
                 {
                     user.AddReservation(dateWanted, amount, learningUtility);
+                    if(user is Lector && amount > learningUtility.AmountAvailableForWeek(dateWanted))
+                    {
+                        DeleteStudentReservations(learningUtility);
+                    }
 
                 }
                     
@@ -108,7 +112,7 @@ namespace DidactischeLeermiddelen.Controllers
                 }                               
             }
             if (save) {
-               
+
                 reservationRepository.SaveChanges();
                 learningUtilityRepository.SaveChanges();
                 TempData["info"] = "Reservatie geslaagd";
@@ -148,6 +152,20 @@ namespace DidactischeLeermiddelen.Controllers
             }
             return RedirectToAction("Index");
 
+        }
+
+        private void DeleteStudentReservations(LearningUtility learningUtility)
+        {
+            var ReservationsToDelete = learningUtility.Reservations.Where(res => res.Amount <= 0);
+
+            foreach( Reservation r in ReservationsToDelete.ToList())
+            {
+                r.LearningUtility.Reservations.Remove(r);
+                r.User.Reservations.Remove(r);
+                reservationRepository.Delete(r);
+
+                
+            }
         }
     }
 }

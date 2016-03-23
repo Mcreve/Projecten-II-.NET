@@ -72,11 +72,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 
                             var reservationAmount = res.Amount;
                             res.Amount -= amountNeededFromReservations;
-                            if (res.Amount <= 0)
-                            {
-                                res.User.Reservations.Remove(res);
-                                learningUtility.Reservations.Remove(res);
-                            }
                             amountNeededFromReservations -= reservationAmount;
                         }
                     }
@@ -116,6 +111,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
             this.Reservations.Remove(reservation);
             reservation.LearningUtility.Reservations.Remove(reservation);
         }
+
     }
     #endregion
 }
