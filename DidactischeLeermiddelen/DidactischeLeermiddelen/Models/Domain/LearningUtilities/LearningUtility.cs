@@ -195,8 +195,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public int AmountAvailableForWeek(DateTime date)
         {
             int week = GetCurrentWeek(date);
-            int currentWeek = GetCurrentWeek(DateTime.Now);
-            IEnumerable<Reservation> reservations = Reservations.Where(r =>GetCurrentWeek(r.DateWanted) == week ||GetCurrentWeek(r.DateWanted) < currentWeek);
+            IEnumerable<Reservation> reservations = Reservations.Where(r =>GetCurrentWeek(r.DateWanted) == week);
             return AmountInCatalog - reservations.Sum(r => r.Amount) - AmountUnavailable;
         }
         /// <summary>
@@ -228,8 +227,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public int AmountUnavailableForWeek(DateTime date)
         {
             int week = GetCurrentWeek(date);
-            int currentWeek = GetCurrentWeek(DateTime.Now);
-            IEnumerable<Reservation> reservations = Reservations.Where(r => GetCurrentWeek(r.DateWanted) == week ||GetCurrentWeek(r.DateWanted) < currentWeek);
+            IEnumerable<Reservation> reservations = Reservations.Where(r => GetCurrentWeek(r.DateWanted) == week);
             return reservations.Sum(r => r.Amount) + AmountUnavailable;
         }
 

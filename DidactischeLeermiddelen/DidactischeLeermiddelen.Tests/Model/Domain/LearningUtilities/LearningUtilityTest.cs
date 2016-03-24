@@ -36,8 +36,8 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             initiaLearningUtility.AmountInCatalog = 10;
             initiaLearningUtility.AmountUnavailable = 5;
             date1 = new DateTime(2016, 3, 16, 8, 30, 52);
-            date2 = new DateTime(2016, 4, 8, 8, 30, 52);
-            date3 = new DateTime(2016, 3, 8, 8, 30, 52);
+            date2 = new DateTime(2016, 8, 8, 8, 30, 52);
+            
         }
 
         #region ConstructorTests
@@ -629,15 +629,7 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             //Assert
             Assert.AreEqual(5, amount);
         }
-        [TestMethod]
-        public void AmountAvailableForWeekWithCurrentWeekHigherThanReservedWeekReturnsCorrectValue()
-        {
-            //Act
-            int amount = initiaLearningUtility.AmountAvailableForWeek(date2);
-
-            //Assert
-            Assert.AreEqual(5, amount);
-        }
+ 
         #endregion
 
         #region AmountReservedForWeek
@@ -759,15 +751,6 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
             Assert.AreEqual(5, amount);
         }
 
-        [TestMethod]
-        public void AmountUnavailableForWeekWithCurrentWeekHigherThanReservedWeekReturnsCorrectValue()
-        {
-            //Act
-            int amount = initiaLearningUtility.AmountUnavailableForWeek(date3);
-
-            //Assert
-            Assert.AreEqual(5, amount);
-        }
 
         #endregion
         #endregion

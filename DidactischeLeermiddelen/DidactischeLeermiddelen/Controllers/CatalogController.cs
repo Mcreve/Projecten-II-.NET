@@ -128,7 +128,7 @@ namespace DidactischeLeermiddelen.Controllers
             ViewBag.Page = page;
             ViewBag.CurrentFieldOfStudy = currentFieldOfStudy;
             ViewBag.CurrentTargetGroup = currentTargetGroup;
-
+            learningUtility.DateWanted = DateTime.Now;
             LearningUtilityViewModel learningUtilityViewModel = new LearningUtilityViewModel(learningUtility);
             return View(learningUtilityViewModel);
         }
