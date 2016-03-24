@@ -155,7 +155,6 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         public int AmountInCatalog { get; set; }
         public int AmountUnavailable { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }
-
         [Display(Name = "Op Datum")]
         public DateTime? DateWanted { get; set; }
         #endregion
@@ -243,7 +242,7 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
         }
 
         /// <summary>
-        /// Returns a list of reservations by students for a specific week.
+        /// Returns a list of reservations for a specific week.
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>

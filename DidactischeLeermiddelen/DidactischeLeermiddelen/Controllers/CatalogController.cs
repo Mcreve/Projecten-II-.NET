@@ -133,11 +133,21 @@ namespace DidactischeLeermiddelen.Controllers
             return View(learningUtilityViewModel);
         }
 
+        /// <summary>
+        /// Returns a SelectList containing all Targetgroups
+        /// </summary>
+        /// <param name="targetGroup"></param>
+        /// <returns></returns>
         private SelectList GetTargetGroupsSelectList(int? targetGroup)
         {
             return new SelectList(targetGroupRepository.FindAll().OrderBy(f => f.Name), "Id", "Name", targetGroup != null ? targetGroup.ToString() : "");
         }
 
+        /// <summary>
+        /// Returns a SelectList containing all FieldsofStudy
+        /// </summary>
+        /// <param name="fieldOfStudy"></param>
+        /// <returns></returns>
         private SelectList GetFieldOfStudySelectList(int? fieldOfStudy)
         {
             return new SelectList(fieldOfStudyRepository.FindAll().OrderBy(f => f.Name), "Id", "Name", fieldOfStudy != null ? fieldOfStudy.ToString() : "");

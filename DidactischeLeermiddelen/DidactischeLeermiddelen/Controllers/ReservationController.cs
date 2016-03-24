@@ -74,7 +74,7 @@ namespace DidactischeLeermiddelen.Controllers
         }
 
         /// <summary>
-        /// Adds a reservation for a learning utility by a specific user, clears the old wishlist.
+        /// Adds a reservation for a learning utility by a specific user
         /// </summary>
         /// <param name="user"></param>
         /// <param name="wishlistViewModels"></param>
@@ -154,6 +154,13 @@ namespace DidactischeLeermiddelen.Controllers
 
         }
 
+
+
+        /// <summary>
+        /// For the given learningUtlity, delete reservations made by students where the amount has become 0 after 
+        /// a lector has blocked their material.
+        /// </summary>
+        /// <param name="learningUtility"></param>
         private void DeleteStudentReservations(LearningUtility learningUtility)
         {
             var ReservationsToDelete = learningUtility.Reservations.Where(res => res.Amount <= 0);
