@@ -152,6 +152,7 @@ namespace DidactischeLeermiddelen.Controllers
                 return HttpNotFound();
             }
 
+            learningUtility.DateWanted = date;
             LearningUtilityViewModel learningUtilityViewModel = new LearningUtilityViewModel(learningUtility);
             return View(learningUtilityViewModel);
         }

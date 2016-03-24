@@ -2,6 +2,7 @@
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -11,8 +12,10 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
     public class Reservation
     {
         public int Id { get; set; }
+        [Display(Name = "Op Datum")] 
         public DateTime DateWanted { get; set; }
         public virtual User User { get; set; }
+        [Display(Name = "Aantal stuks")]
         public int Amount { get; set; }
         public virtual LearningUtility LearningUtility { get;  set; }
         public DateTime? ReservationDate { get; set; }

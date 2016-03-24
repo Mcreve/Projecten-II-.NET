@@ -47,7 +47,6 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 
                 };
                 this.Reservations.Add(reservation);
-                learningUtility.AddReservation(reservation);
                 
             }
             else

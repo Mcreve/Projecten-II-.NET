@@ -51,7 +51,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 
                 };
                 Reservations.Add(reservation);
-                learningUtility.Reservations.Add(reservation);
+               
 
             }
 
@@ -88,7 +88,7 @@ namespace DidactischeLeermiddelen.Models.Domain.Users
 
                     };
                     this.Reservations.Add(reservation);
-                    learningUtility.Reservations.Add(reservation);
+
 
                 }
                 else {

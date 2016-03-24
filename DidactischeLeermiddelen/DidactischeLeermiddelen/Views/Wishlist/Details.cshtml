@@ -110,6 +110,39 @@
                     </strong>
                     @Html.DisplayFor(model => model.ArticleNumber)
                 </p>
+                @if (User.IsInRole("Lector") && Model.Reservations.Any() == true)
+                {
+                  <p>
+                       <strong>
+                           @Html.DisplayNameFor(model => model.Reservations):
+                       </strong>
+                   </p>
+                       <div>
+                           <table class="table-responsive">
+                               <tr>
+                                   <th>Gebruiker</th>
+                                   <th>Aantal</th>
+                                   <th>Op datum</th>
+                               </tr>
+                               @foreach (var item in Model.Reservations)
+                               {
+
+                                   <tr>
+                                       <td>@Html.DisplayFor(model => item.User.EmailAddress)</td>
+                                       <td>@Html.DisplayFor(model => item.Amount)</td>
+                                       <td>@Html.ValueFor(model => item.DateWanted, "{0:dd/MM/yyyy}")</td>
+
+                                   </tr>
+                               }
+
+
+
+
+                           </table>
+                       </div>      
+                }
+ 
+                
             </div>
         </div>
     </div>

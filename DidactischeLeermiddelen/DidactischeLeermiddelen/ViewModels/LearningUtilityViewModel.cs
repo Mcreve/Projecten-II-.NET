@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using DidactischeLeermiddelen.Models.Domain.LearningUtilities;
+using System;
 
 namespace DidactischeLeermiddelen.ViewModels
 {
@@ -34,9 +35,12 @@ namespace DidactischeLeermiddelen.ViewModels
         public string CompanyEmailAddress { get; set; }
         [Display(Name = "Website")]
         public string CompanyWebsite { get; set; }
+        [Display(Name = "Reservaties")]
+        public IEnumerable<Reservation> Reservations{ get; set; }
 
         public LearningUtilityViewModel(LearningUtility learningUtility)
         {
+
             Id = learningUtility.Id;
             Description = learningUtility.Description;
             Name = learningUtility.Name;
@@ -50,6 +54,7 @@ namespace DidactischeLeermiddelen.ViewModels
             CompanyEmailAddress = learningUtility.Company.EmailAddress;
             CompanyWebsite = learningUtility.Company.Website;
             AmountInCatalog = learningUtility.AmountInCatalog;
+            Reservations = learningUtility.GetReservationsForSelectedWeek((DateTime)learningUtility.DateWanted);
         }
     }
 }
