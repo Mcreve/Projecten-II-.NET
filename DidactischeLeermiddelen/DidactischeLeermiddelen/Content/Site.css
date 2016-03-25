@@ -851,10 +851,20 @@ input[type="number"] {
 }
 
 .navbar {
-    background-image: url("/Images/Hogent-woordmerk.png");
+    
     background-repeat: no-repeat;
     background-color: #ffffff;
-    background-position:150px 10px;
+    
+}
+
+.navlogo{
+    background: url("/Images/Hogent-woordmerk.png") no-repeat top left;
+    padding-right: 1em;
+    margin-top: 0.5em;
+    margin-left:0.5em;
+    height:50px;
+    width: 140px;
+    text-indent: -9999px;
 }
 
 .navbar-brand {
