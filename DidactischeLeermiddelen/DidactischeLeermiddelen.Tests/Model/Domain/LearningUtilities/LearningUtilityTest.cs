@@ -19,7 +19,6 @@ namespace DidactischeLeermiddelen.Tests.Model.Domain.LearningUtilities
         private Reservation reservation;
         private DateTime date1;
         private DateTime date2;
-        private DateTime date3;
 
         #endregion
 

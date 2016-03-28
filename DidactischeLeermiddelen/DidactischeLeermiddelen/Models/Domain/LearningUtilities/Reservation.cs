@@ -32,14 +32,14 @@ namespace DidactischeLeermiddelen.Models.Domain.LearningUtilities
             int weekReserved = LearningUtility.GetCurrentWeek(DateWanted);
             if (currentWeek > weekReserved)
             {
-                return ReservationStateType.Late.ToString();
+                return ReservationStateType.Laat.ToString();
             }
             var userType = User as Student;
             if (userType != null)
             {
-                return ReservationStateType.Reserved.ToString();
+                return ReservationStateType.Gereserveerd.ToString();
             }
-            return ReservationStateType.Blocked.ToString();
+            return ReservationStateType.Geblockeerd.ToString();
         }
         #endregion
     }
