@@ -84,7 +84,7 @@ namespace DidactischeLeermiddelen.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Gebruikersnaam of wachtwoord is niet correct.");
                     return View(model);
             }
         }
@@ -127,7 +127,7 @@ namespace DidactischeLeermiddelen.Controllers
                     return View("Lockout");
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid code.");
+                    ModelState.AddModelError("", "Gebruikersnaam of wachtwoord is niet correct.");
                     return View(model);
             }
         }
