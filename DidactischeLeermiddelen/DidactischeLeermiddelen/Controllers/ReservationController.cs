@@ -40,7 +40,7 @@ namespace DidactischeLeermiddelen.Controllers
         public ActionResult Index(User user)
         {
 
-            IQueryable<Reservation> reservations = reservationRepository.FindAllForUser(user.EmailAddress);
+            IEnumerable<Reservation> reservations = reservationRepository.FindAllForUser(user.EmailAddress);
             
             if (!reservations.Any())
                 return View("EmptyReservations");
@@ -68,7 +68,7 @@ namespace DidactischeLeermiddelen.Controllers
         /// </summary>
         /// <param name="reservations"></param>
         /// <returns></returns>
-        private IQueryable<Reservation> sortReservations(IQueryable<Reservation> reservations)
+        private IEnumerable<Reservation> sortReservations(IEnumerable<Reservation> reservations)
         {
             return reservations.OrderBy(res => res.DateWanted);
         }
